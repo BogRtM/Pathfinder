@@ -1,7 +1,7 @@
 ﻿using BepInEx.Configuration;
 using UnityEngine;
 
-namespace PathfinderMod.Modules
+namespace Pathfinder.Modules
 {
     public static class Config
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PathfinderMod.Modules
+namespace Pathfinder.Modules
 {
     internal static class StaticValues
     {

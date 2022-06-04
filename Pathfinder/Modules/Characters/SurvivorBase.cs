@@ -1,12 +1,12 @@
 ﻿using BepInEx.Configuration;
 using RoR2;
 using System;
-using PathfinderMod.Modules.Characters;
+using Pathfinder.Modules.Characters;
 using UnityEngine;
 using System.Collections.Generic;
 using RoR2.Skills;
 
-namespace PathfinderMod.Modules.Survivors
+namespace Pathfinder.Modules.Survivors
 {
     internal abstract class SurvivorBase : CharacterBase
     {

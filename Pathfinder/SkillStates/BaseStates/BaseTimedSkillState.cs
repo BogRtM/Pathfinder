@@ -1,7 +1,7 @@
 ﻿using EntityStates;
 using System;
 
-namespace PathfinderMod.SkillStates.BaseStates
+namespace Pathfinder.SkillStates.BaseStates
 {
     //see example skills below
     public class BaseTimedSkillState : BaseSkillState

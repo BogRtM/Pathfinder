@@ -3,14 +3,15 @@ using RoR2;
 using RoR2.Skills;
 using System;
 using System.Collections.Generic;
-using PathfinderMod;
+using Pathfinder;
 using UnityEngine;
 
-namespace PathfinderMod.Modules
+namespace Pathfinder.Modules
 {
 
     internal static class Skills
     {
+        public static SkillFamily empowerFamily;
         #region genericskills
         public static void CreateSkillFamilies(GameObject targetPrefab, bool destroyExisting = true)
         {
@@ -24,10 +25,23 @@ namespace PathfinderMod.Modules
 
             SkillLocator skillLocator = targetPrefab.GetComponent<SkillLocator>();
 
+            //Create empower skill family
+            GenericSkill empowerGeneric = targetPrefab.AddComponent<GenericSkill>();
+            /*
+            empowerFamily = ScriptableObject.CreateInstance<SkillFamily>();
+            (empowerFamily as ScriptableObject).name = targetPrefab.name + "EmpowerFamily";
+            //Debug.Log(empowerFamily.name);
+            empowerFamily.variants = new SkillFamily.Variant[0];
+            empowerGeneric._skillFamily = empowerFamily;
+            */
+
+            empowerGeneric = CreateGenericSkillWithSkillFamily(targetPrefab, "Empower");
             skillLocator.primary = CreateGenericSkillWithSkillFamily(targetPrefab, "Primary");
             skillLocator.secondary = CreateGenericSkillWithSkillFamily(targetPrefab, "Secondary");
             skillLocator.utility = CreateGenericSkillWithSkillFamily(targetPrefab, "Utility");
             skillLocator.special = CreateGenericSkillWithSkillFamily(targetPrefab, "Special");
+
+            empowerFamily = empowerGeneric.skillFamily;
         }
 
         public static GenericSkill CreateGenericSkillWithSkillFamily(GameObject targetPrefab, string familyName, bool hidden = false)
@@ -42,7 +56,7 @@ namespace PathfinderMod.Modules
 
             skill._skillFamily = newFamily;
 
-            PathfinderMod.Modules.Content.AddSkillFamily(newFamily);
+            Pathfinder.Modules.Content.AddSkillFamily(newFamily);
             return skill;
         }
         #endregion
@@ -70,6 +84,10 @@ namespace PathfinderMod.Modules
             }
         }
 
+        public static void AddEmpowerSkills(GameObject targetPrefab, params SkillDef[] skillDefs)
+        {
+            AddSkillsToFamily(empowerFamily, skillDefs);
+        }
         public static void AddPrimarySkills(GameObject targetPrefab, params SkillDef[] skillDefs)
         {
             AddSkillsToFamily(targetPrefab.GetComponent<SkillLocator>().primary.skillFamily, skillDefs);
@@ -140,7 +158,7 @@ namespace PathfinderMod.Modules
 
             skillDef.keywordTokens = skillDefInfo.keywordTokens;
 
-            PathfinderMod.Modules.Content.AddSkillDef(skillDef);
+            Pathfinder.Modules.Content.AddSkillDef(skillDef);
 
 
             return skillDef;

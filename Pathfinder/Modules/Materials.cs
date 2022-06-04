@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace PathfinderMod.Modules
+namespace Pathfinder.Modules
 {
     internal static class Materials
     {
@@ -34,6 +34,7 @@ namespace PathfinderMod.Modules
                 return tempMat;
 
             float? bumpScale = null;
+            float? cutOff = null;
             Color? emissionColor = null;
 
             //grab values before the shader changes
@@ -44,6 +45,10 @@ namespace PathfinderMod.Modules
             if (tempMat.IsKeywordEnabled("_EMISSION"))
             {
                 emissionColor = tempMat.GetColor("_EmissionColor");
+            }
+            if (tempMat.IsKeywordEnabled("CUTOUT"))
+            {
+                cutOff = tempMat.GetFloat("_Cutoff");
             }
 
             //set shader
@@ -63,6 +68,12 @@ namespace PathfinderMod.Modules
             {
                 tempMat.SetColor("_EmColor", (Color)emissionColor);
                 tempMat.SetFloat("_EmPower", 1);
+            }
+            if(cutOff != null)
+            {
+                tempMat.EnableKeyword("CUTOUT");
+                Log.Message(cutOff);
+                tempMat.SetFloat("_Cutoff", 0.9f);
             }
 
             //set this keyword in unity if you want your model to show backfaces

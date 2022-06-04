@@ -1,6 +1,6 @@
 ﻿using RoR2;
 
-namespace PathfinderMod.Modules
+namespace Pathfinder.Modules
 {
     public abstract class BaseMasteryUnlockable : GenericModdedUnlockable
     {

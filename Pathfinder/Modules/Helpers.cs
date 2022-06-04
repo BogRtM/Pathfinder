@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PathfinderMod.Modules
+namespace Pathfinder.Modules
 {
     internal static class Helpers
     {

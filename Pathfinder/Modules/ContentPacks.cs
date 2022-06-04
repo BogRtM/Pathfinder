@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PathfinderMod.Modules
+namespace Pathfinder.Modules
 {
     internal class ContentPacks : IContentPackProvider
     {

@@ -1,9 +1,9 @@
-﻿using PathfinderMod.SkillStates;
-using PathfinderMod.SkillStates.BaseStates;
+﻿using Pathfinder.SkillStates;
+using Pathfinder.SkillStates.BaseStates;
 using System.Collections.Generic;
 using System;
 
-namespace PathfinderMod.Modules
+namespace Pathfinder.Modules
 {
     public static class States
     {

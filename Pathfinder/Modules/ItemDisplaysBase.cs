@@ -1,7 +1,7 @@
 ﻿using RoR2;
 using System.Collections.Generic;
 
-namespace PathfinderMod.Modules.Characters {
+namespace Pathfinder.Modules.Characters {
     public abstract class ItemDisplaysBase {
 
         public void SetItemDisplays(ItemDisplayRuleSet itemDisplayRuleSet) {

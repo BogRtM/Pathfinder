@@ -2,9 +2,9 @@
 using RoR2;
 using System.Collections.Generic;
 using UnityEngine;
-using PathfinderMod.Modules.Characters;
+using Pathfinder.Modules.Characters;
 
-namespace PathfinderMod.Modules {
+namespace Pathfinder.Modules {
     // module for creating body prefabs and whatnot
     // recommended to simply avoid touching this unless you REALLY need to
     // oh boy do I need to

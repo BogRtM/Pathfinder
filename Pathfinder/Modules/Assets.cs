@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using RoR2.UI;
 using System;
 
-namespace PathfinderMod.Modules
+namespace Pathfinder.Modules
 {
     internal static class Assets
     {
@@ -30,9 +30,9 @@ namespace PathfinderMod.Modules
         private static string[] assetNames = new string[0];
 
         // CHANGE THIS
-        private const string assetbundleName = "myassetbundle";
+        private const string assetbundleName = "pathfinderassets";
         //change this to your project's name if/when you've renamed it
-        private const string csProjName = "HenryMod";
+        private const string csProjName = "Pathfinder";
         
         internal static void Initialize()
         {

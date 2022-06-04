@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using R2API;
 
-namespace PathfinderMod.Modules
+namespace Pathfinder.Modules
 {
     public abstract class GenericModdedUnlockable : ModdedUnlockable
     {

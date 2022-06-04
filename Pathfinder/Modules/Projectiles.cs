@@ -4,7 +4,7 @@ using RoR2.Projectile;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace PathfinderMod.Modules
+namespace Pathfinder.Modules
 {
     internal static class Projectiles
     {

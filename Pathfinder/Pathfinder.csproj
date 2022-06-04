@@ -16,6 +16,8 @@
     <None Remove="HenryBank.bnk" />
     <None Remove="Modules\Characters\Henry.cs~RF6221a098.TMP" />
     <None Remove="myassetbundle" />
+    <None Remove="pathfinderassets" />
+    <None Remove="pathfinderbundle" />
   </ItemGroup>
 
 	<ItemGroup>
@@ -31,6 +33,7 @@
   <ItemGroup>
     <EmbeddedResource Include="HenryBank.bnk" />
     <EmbeddedResource Include="myassetbundle" />
+    <EmbeddedResource Include="pathfinderassets" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,7 +46,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="if &quot;$(Username)&quot; == &quot;MyPCUsername(don't dox yourself)&quot; copy &quot;$(TargetPath)&quot; &quot;C:\[PATH_TO_MY_R2MODMAN_PROFILE]\BepInEx\plugins&quot;" />
+    <Exec Command="if &quot;$(Username)&quot; == &quot;rtmbo&quot; copy &quot;$(TargetPath)&quot; &quot;C:\Users\rtmbo\AppData\Roaming\r2modmanPlus-local\RiskOfRain2\profiles\Modding\BepInEx\plugins\Test&quot;" />
   </Target>
 
 </Project>

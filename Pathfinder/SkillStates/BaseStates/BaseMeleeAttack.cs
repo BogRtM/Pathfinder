@@ -5,7 +5,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace PathfinderMod.SkillStates.BaseStates
+namespace Pathfinder.SkillStates.BaseStates
 {
     public class BaseMeleeAttack : BaseSkillState
     {

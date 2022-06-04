@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-namespace PathfinderMod.Modules.Achievements
+namespace Pathfinder.Modules.Achievements
 {
     internal class MasteryAchievement : BaseMasteryUnlockable
     {

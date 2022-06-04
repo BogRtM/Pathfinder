@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PathfinderMod.Modules.Characters
+namespace Pathfinder.Modules.Characters
 {
     internal abstract class CharacterBase
     {
@@ -42,7 +42,7 @@ namespace PathfinderMod.Modules.Characters
             InitializeHurtboxes();
 
             InitializeSkins();
-            InitializeItemDisplays();
+            //InitializeItemDisplays();
 
             InitializeDoppelganger("Merc");
         }
