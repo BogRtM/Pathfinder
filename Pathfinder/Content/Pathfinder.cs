@@ -1,5 +1,6 @@
 ﻿using BepInEx.Configuration;
 using Pathfinder.Modules.Characters;
+using Pathfinder.Misc;
 using RoR2;
 using RoR2.Skills;
 using System;
@@ -8,7 +9,7 @@ using UnityEngine;
 
 namespace Pathfinder.Modules.Survivors
 {
-    internal class Pathfinder : SurvivorBase
+    internal class PathfinderINIT : SurvivorBase
     {
         public override string bodyName => "Pathfinder";
 
@@ -91,6 +92,11 @@ namespace Pathfinder.Modules.Survivors
             //Modules.Prefabs.SetupHitbox(model, hitboxTransform, "Sword");
         }
 
+        public override void AddMyComponents()
+        {
+            bodyPrefab.AddComponent<EmpowerComponent>();
+        }
+
         public override void InitializeSkills()
         {
             Modules.Skills.CreateSkillFamilies(bodyPrefab);
@@ -103,7 +109,7 @@ namespace Pathfinder.Modules.Survivors
                 skillNameToken = prefix + "_PATHFINDER_BODY_EMPOWER_JAVELIN_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_EMPOWER_JAVELIN_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.ThrowJavelin)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Empower.JavelinToss)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 0f,
@@ -128,7 +134,7 @@ namespace Pathfinder.Modules.Survivors
                 skillNameToken = prefix + "_PATHFINDER_BODY_EMPOWER_COMBO_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_EMPOWER_COMBO_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.TriCombo)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Empower.TriCombo)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 0f,
@@ -147,15 +153,38 @@ namespace Pathfinder.Modules.Survivors
                 keywordTokens = new string[] { "KEYWORD_EMPOWER" }
             });
 
-            
+            SkillDef lungeSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "_PATHFINDER_BODY_EMPOWER_LUNGE_NAME",
+                skillNameToken = prefix + "_PATHFINDER_BODY_EMPOWER_LUNGE_NAME",
+                skillDescriptionToken = prefix + "_PATHFINDER_BODY_EMPOWER_LUNGE_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Empower.Lunge)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 0f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = true,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_EMPOWER" }
+            });
 
-            Modules.Skills.AddEmpowerSkills(bodyPrefab, javelinSkillDef, comboSkilllDef); //, rapidJabSkillDef);
+            Modules.Skills.AddEmpowerSkills(bodyPrefab, javelinSkillDef, comboSkilllDef, lungeSkillDef);
             #endregion
 
             #region Primary
             //Creates a skilldef for a typical primary 
-            SkillDef primarySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo(prefix + "_PATHFINDER_BODY_PRIMARY_SLASH_NAME",
-                                                                                      prefix + "_PATHFINDER_BODY_PRIMARY_SLASH_DESCRIPTION",
+            SkillDef primarySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo(prefix + "_PATHFINDER_BODY_PRIMARY_THRUST_NAME",
+                                                                                      prefix + "_PATHFINDER_BODY_PRIMARY_THRUST_DESCRIPTION",
                                                                                       Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
                                                                                       new EntityStates.SerializableEntityStateType(typeof(SkillStates.Thrust)),
                                                                                       "Weapon",

@@ -10,25 +10,25 @@ namespace Pathfinder.SkillStates
     {
         private Animator animator;
 
-        public static float baseDuration = 0.5f;
+        public static float baseDuration = 0.7f;
         public float duration;
         public override void OnEnter()
         {
+            Log.Warning("Thrust");
             base.OnEnter();
             duration = baseDuration / base.attackSpeedStat;
             base.StartAimMode(baseDuration + 0.1f, false);
-            animator = GetComponent<Animator>();
+            animator = base.GetModelAnimator();
 
-            if(animator)
+            if (!animator.GetBool("isMoving") && animator.GetBool("isGrounded"))
             {
-                if (!animator.GetBool("isMoving") && animator.GetBool("isGrounded"))
-                {
-                    base.PlayAnimation("Gesture, Override", "Thrust");
-                }
-                else
-                {
-                    base.PlayAnimation("FullBody, Override", "Thrust");
-                }
+                Log.Warning("FullBody");
+                base.PlayAnimation("FullBody, Override", "Thrust", "Thrust.playbackRate", duration);
+            }
+            else
+            {
+                Log.Warning("Gesture");
+                base.PlayAnimation("Gesture, Override", "Thrust", "Thrust.playbackRate", duration);
             }
         }
 

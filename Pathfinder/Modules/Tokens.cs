@@ -46,7 +46,10 @@ namespace Pathfinder.Modules
             LanguageAPI.Add(prefix + "EMPOWER_JAVELIN_DESCRIPTION", "Throw a <style=cIsUtility>piercing</style> javelin for <style=cIsDamage>400% damage</style>.");
 
             LanguageAPI.Add(prefix + "EMPOWER_COMBO_NAME", "Rending Talons");
-            LanguageAPI.Add(prefix + "EMPOWER_COMBO_DESCRIPTION", "Perform a 3-hit combo for <style=cIsDamage>2x150% + 1x200% damage</style>.");
+            LanguageAPI.Add(prefix + "EMPOWER_COMBO_DESCRIPTION", "Perform a 3-hit combo for <style=cIsDamage>2x200% + 1x300% damage</style>.");
+
+            LanguageAPI.Add(prefix + "EMPOWER_LUNGE_NAME", "Impale");
+            LanguageAPI.Add(prefix + "EMPOWER_LUNGE_DESCRIPTION", "Swiftly lunge forward for <style=cIsDamage>500% damage</style>.");
             #endregion
 
             #region Secondary

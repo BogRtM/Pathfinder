@@ -27,15 +27,16 @@ namespace Pathfinder.Modules
 
             //Create empower skill family
             GenericSkill empowerGeneric = targetPrefab.AddComponent<GenericSkill>();
-            /*
+            empowerGeneric.skillName = "EmpowerSkill";
             empowerFamily = ScriptableObject.CreateInstance<SkillFamily>();
             (empowerFamily as ScriptableObject).name = targetPrefab.name + "EmpowerFamily";
             //Debug.Log(empowerFamily.name);
             empowerFamily.variants = new SkillFamily.Variant[0];
             empowerGeneric._skillFamily = empowerFamily;
-            */
+            Log.Warning(empowerFamily.name);
+            
 
-            empowerGeneric = CreateGenericSkillWithSkillFamily(targetPrefab, "Empower");
+            //empowerGeneric = CreateGenericSkillWithSkillFamily(targetPrefab, "Empower");
             skillLocator.primary = CreateGenericSkillWithSkillFamily(targetPrefab, "Primary");
             skillLocator.secondary = CreateGenericSkillWithSkillFamily(targetPrefab, "Secondary");
             skillLocator.utility = CreateGenericSkillWithSkillFamily(targetPrefab, "Utility");
