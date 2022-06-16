@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f80b3670d294eb343a951749fbd5ce82
+guid: c1ff0dfd4cf89e34da2920730b5e0970
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable:
@@ -28,12 +28,6 @@ ModelImporter:
       74: -7555895893386714477
     second: Rig|BasicThrust
   - first:
-      74: 8731682053508498072
-    second: Rig|BasicThrust Down
-  - first:
-      74: -5551774573020906258
-    second: Rig|BasicThrust Gesture
-  - first:
       74: 1148223507562202717
     second: Rig|BasicThrust Gesture Down
   - first:
@@ -43,8 +37,8 @@ ModelImporter:
       74: -1289661824701736160
     second: Rig|BasicThrust New
   - first:
-      74: -1539716188938089743
-    second: Rig|BasicThrust Up
+      74: 608015535286258552
+    second: Rig|BasicThrust2
   - first:
       74: -1290377267327084909
     second: Rig|ComboSlash1
@@ -67,6 +61,9 @@ ModelImporter:
       74: 1819541441999894131
     second: Rig|GroundDashF
   - first:
+      74: 1732553231713185110
+    second: Rig|GroundDashF.001
+  - first:
       74: 4950275335156227797
     second: Rig|IdleIn
   - first:
@@ -81,9 +78,6 @@ ModelImporter:
   - first:
       74: -2280664048464269527
     second: Rig|Lunge
-  - first:
-      74: 5472612083692928397
-    second: Rig|MenuIdleIn
   - first:
       74: -8477686084571986334
     second: Rig|MenuIdlle
@@ -100,17 +94,29 @@ ModelImporter:
       74: -6986224915103115039
     second: Rig|Polevault
   - first:
+      74: 5181327436320596019
+    second: Rig|PolevaultKick
+  - first:
+      74: 4649982978840883146
+    second: Rig|PolevaultTwirl
+  - first:
       74: -9028930080473200540
     second: Rig|Rest
   - first:
       74: -2080606337418561767
     second: Rig|Rest.001
   - first:
+      74: 4590784889217845664
+    second: Rig|SpinSweep
+  - first:
       74: -7500021426160318536
     second: Rig|SprintF
   - first:
       74: -3894903646712143502
     second: Rig|Sweep
+  - first:
+      74: -5140278854152774368
+    second: Rig|Sweep1H
   - first:
       74: 8837341304710638068
     second: Rig|Tri-Combo
@@ -129,6 +135,9 @@ ModelImporter:
   - first:
       74: -9132706148026830890
     second: Rig|WalkR
+  - first:
+      74: -4349585662865553131
+    second: Poncho Uncut|_Idle New USE
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -249,7 +258,7 @@ ModelImporter:
       takeName: Rig|AirDash
       internalID: 0
       firstFrame: 0
-      lastFrame: 9
+      lastFrame: 14
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -277,8 +286,8 @@ ModelImporter:
       name: Rig|AirFlip
       takeName: Rig|AirFlip
       internalID: 0
-      firstFrame: 10
-      lastFrame: 50
+      firstFrame: 0
+      lastFrame: 29
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -307,7 +316,7 @@ ModelImporter:
       takeName: Rig|AirFlip2
       internalID: 0
       firstFrame: 0
-      lastFrame: 40
+      lastFrame: 16
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -365,65 +374,7 @@ ModelImporter:
       takeName: Rig|BasicThrust
       internalID: 0
       firstFrame: 0
-      lastFrame: 23
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Rig|BasicThrust Down
-      takeName: Rig|BasicThrust Down
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 23
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Rig|BasicThrust Gesture
-      takeName: Rig|BasicThrust Gesture
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 23
+      lastFrame: 32
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -452,7 +403,7 @@ ModelImporter:
       takeName: Rig|BasicThrust Gesture Down
       internalID: 0
       firstFrame: 0
-      lastFrame: 23
+      lastFrame: 32
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -481,7 +432,7 @@ ModelImporter:
       takeName: Rig|BasicThrust Gesture Up
       internalID: 0
       firstFrame: 0
-      lastFrame: 23
+      lastFrame: 32
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -510,7 +461,7 @@ ModelImporter:
       takeName: Rig|BasicThrust New
       internalID: 0
       firstFrame: 0
-      lastFrame: 19
+      lastFrame: 1
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -535,11 +486,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Rig|BasicThrust Up
-      takeName: Rig|BasicThrust Up
+      name: Rig|BasicThrust2
+      takeName: Rig|BasicThrust2
       internalID: 0
       firstFrame: 0
-      lastFrame: 23
+      lastFrame: 32
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -568,7 +519,7 @@ ModelImporter:
       takeName: Rig|ComboSlash1
       internalID: 0
       firstFrame: 0
-      lastFrame: 20
+      lastFrame: 11
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -597,7 +548,7 @@ ModelImporter:
       takeName: Rig|ComboSlash2
       internalID: 0
       firstFrame: 0
-      lastFrame: 20
+      lastFrame: 11
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -684,7 +635,7 @@ ModelImporter:
       takeName: Rig|Descend Fast
       internalID: 0
       firstFrame: 0
-      lastFrame: 39
+      lastFrame: 38
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -742,6 +693,35 @@ ModelImporter:
       takeName: Rig|GroundDashF
       internalID: 0
       firstFrame: 0
+      lastFrame: 27
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Rig|GroundDashF.001
+      takeName: Rig|GroundDashF.001
+      internalID: 0
+      firstFrame: 0
       lastFrame: 14
       wrapMode: 0
       orientationOffsetY: 0
@@ -771,7 +751,7 @@ ModelImporter:
       takeName: Rig|IdleIn
       internalID: 0
       firstFrame: 0
-      lastFrame: 29
+      lastFrame: 19
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -887,36 +867,7 @@ ModelImporter:
       takeName: Rig|Lunge
       internalID: 0
       firstFrame: 0
-      lastFrame: 23
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Rig|MenuIdleIn
-      takeName: Rig|MenuIdleIn
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 29
+      lastFrame: 14
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1032,7 +983,7 @@ ModelImporter:
       takeName: Rig|Point
       internalID: 0
       firstFrame: 0
-      lastFrame: 10
+      lastFrame: 19
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1062,6 +1013,64 @@ ModelImporter:
       internalID: 0
       firstFrame: 0
       lastFrame: 39
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Rig|PolevaultKick
+      takeName: Rig|PolevaultKick
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 19
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Rig|PolevaultTwirl
+      takeName: Rig|PolevaultTwirl
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 22
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1144,6 +1153,35 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
+      name: Rig|SpinSweep
+      takeName: Rig|SpinSweep
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 19
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
       name: Rig|SprintF
       takeName: Rig|SprintF
       internalID: 0
@@ -1177,7 +1215,36 @@ ModelImporter:
       takeName: Rig|Sweep
       internalID: 0
       firstFrame: 0
-      lastFrame: 29
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Rig|Sweep1H
+      takeName: Rig|Sweep1H
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 19
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1206,7 +1273,7 @@ ModelImporter:
       takeName: Rig|Tri-Combo
       internalID: 0
       firstFrame: 0
-      lastFrame: 39
+      lastFrame: 37
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1235,7 +1302,7 @@ ModelImporter:
       takeName: Rig|UnderhandThrow
       internalID: 0
       firstFrame: 0
-      lastFrame: 29
+      lastFrame: 36
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1349,6 +1416,35 @@ ModelImporter:
     - serializedVersion: 16
       name: Rig|WalkR
       takeName: Rig|WalkR
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 39
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Poncho Uncut|_Idle New USE
+      takeName: Poncho Uncut|_Idle New USE
       internalID: 0
       firstFrame: 0
       lastFrame: 39

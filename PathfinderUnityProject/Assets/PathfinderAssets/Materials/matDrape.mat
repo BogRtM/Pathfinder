@@ -127,7 +127,7 @@ Material:
     - _BumpScale: 1
     - _ColorsOn: 0
     - _Cull: 2
-    - _Cutoff: 0.906
+    - _Cutoff: 0.94
     - _DecalLayer: 0
     - _Depth: 0.2
     - _DetailNormalMapScale: 1

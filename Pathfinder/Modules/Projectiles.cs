@@ -1,7 +1,9 @@
 ﻿using R2API;
 using RoR2;
 using RoR2.Projectile;
+using System;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
 
 namespace Pathfinder.Modules
@@ -9,12 +11,32 @@ namespace Pathfinder.Modules
     internal static class Projectiles
     {
         internal static GameObject bombPrefab;
+        internal static GameObject javelinPrefab;
 
         internal static void RegisterProjectiles()
         {
             CreateBomb();
+            CreateJavelin();
 
             AddProjectile(bombPrefab);
+        }
+
+        private static void CreateJavelin()
+        {
+            javelinPrefab = CloneProjectilePrefab("FMJ", "JavelinProjectile");
+            ProjectileController controllerComponent = javelinPrefab.GetComponent<ProjectileController>();
+            ProjectileOverlapAttack overlapComponent = javelinPrefab.GetComponent<ProjectileOverlapAttack>();
+
+            //prefabs/projectileghosts/ArrowGhost
+            controllerComponent.ghostPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Junk/Huntress/ArrowGhost.prefab").WaitForCompletion();
+
+            javelinPrefab.GetComponent<Rigidbody>().useGravity = true;
+            javelinPrefab.GetComponent<ProjectileDamage>().damageType = DamageType.Generic;
+            UnityEngine.Object.Destroy(javelinPrefab.transform.Find("SweetSpotBehavior").gameObject);
+
+            overlapComponent.impactEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Merc/ImpactMercFocusedAssault.prefab").WaitForCompletion();
+
+            javelinPrefab.transform.GetChild(0).transform.localScale = new Vector3(2, 2, 2);
         }
 
         internal static void AddProjectile(GameObject projectileToAdd)

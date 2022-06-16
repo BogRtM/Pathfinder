@@ -1,6 +1,9 @@
 ﻿using EntityStates;
 using UnityEngine;
 using Pathfinder.Misc;
+using Pathfinder.Modules;
+using RoR2.Projectile;
+using RoR2;
 
 namespace Pathfinder.SkillStates.Empower
 {
@@ -8,23 +11,34 @@ namespace Pathfinder.SkillStates.Empower
     {
         private Animator animator;
         private ChildLocator childLocator;
-        private GameObject javelin;
+        private GameObject shaft;
+        private GameObject spearhead;
         private EmpowerComponent empowerComponent;
+        private Ray aimRay;
+        private Transform leftHand;
 
-        public static float baseDuration = 0.5f;
+        private float fireTime;
+        private float throwForce = 150f;
+        private bool hasFired = false;
+
+        public static float baseDuration = 0.8f;
         public float duration;
         public override void OnEnter()
         {
-            Log.Warning("JavelinToss");
             base.OnEnter();
             duration = baseDuration / base.attackSpeedStat;
-            base.StartAimMode(baseDuration + 0.1f, false);
+            fireTime = duration * 0.2f;
+            base.StartAimMode(baseDuration + 0.1f, true);
+
             animator = base.GetModelAnimator();
+            aimRay = base.GetAimRay();
             childLocator = base.GetModelChildLocator();
             empowerComponent = base.GetComponent<EmpowerComponent>();
 
-            javelin = childLocator.FindChild("Spear").gameObject;
-            javelin.SetActive(false);
+            leftHand = childLocator.FindChild("HandL");
+
+            shaft = childLocator.FindChild("Shaft").gameObject;
+            spearhead = childLocator.FindChild("Spearhead").gameObject;
 
             if (animator)
             {
@@ -37,23 +51,44 @@ namespace Pathfinder.SkillStates.Empower
                     base.PlayAnimation("Gesture, Override", "JavelinToss", "Hand.playbackRate", duration);
                 }
             }
-
-            empowerComponent.ResetPrimary(base.skillLocator);
         }
 
         public override void FixedUpdate()
         {
             base.FixedUpdate();
 
+            if(base.fixedAge >= fireTime && !hasFired)
+            {
+                shaft.SetActive(false);
+                spearhead.SetActive(false);
+                this.FireJavelin();
+            }
+
             if (base.fixedAge >= this.duration)
             {
-                this.outer.SetNextStateToMain();
+                base.outer.SetNextStateToMain();
             }
+        }
+
+        private void FireJavelin()
+        {
+            hasFired = true;
+            FireProjectileInfo fireProjectileInfo = new FireProjectileInfo();
+            fireProjectileInfo.crit = base.RollCrit();
+            fireProjectileInfo.damage = 8f * base.damageStat;
+            fireProjectileInfo.force = throwForce;
+            fireProjectileInfo.owner = base.gameObject;
+            fireProjectileInfo.position = leftHand.position;
+            fireProjectileInfo.rotation = Util.QuaternionSafeLookRotation(aimRay.direction);
+            fireProjectileInfo.projectilePrefab = Pathfinder.Modules.Projectiles.javelinPrefab;
+            ProjectileManager.instance.FireProjectile(fireProjectileInfo);
         }
 
         public override void OnExit()
         {
-            javelin.SetActive(true);
+            empowerComponent.ResetPrimary(base.skillLocator);
+            shaft.SetActive(true);
+            spearhead.SetActive(true);
             base.OnExit();
         }
 

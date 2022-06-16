@@ -13,12 +13,12 @@ AvatarMask:
     m_Weight: 1
   - m_Path: Drape
     m_Weight: 0
+  - m_Path: Pathfinder
+    m_Weight: 0
   - m_Path: Poncho Uncut
     m_Weight: 0
-  - m_Path: Ranger2
-    m_Weight: 0
   - m_Path: Rig
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: Rig/Elbow.l
     m_Weight: 0
   - m_Path: Rig/Elbow.l/Elbow.l_end
@@ -124,10 +124,13 @@ AvatarMask:
   - m_Path: Rig/ROOT/base/stomach/chest/clavicle.l/upper_arm.l/lower_arm.l/hand.l/Spear
     m_Weight: 1
   - m_Path: Rig/ROOT/base/stomach/chest/clavicle.l/upper_arm.l/lower_arm.l/hand.l/Spear/Speartip
+      1
     m_Weight: 1
-  - m_Path: Rig/ROOT/base/stomach/chest/clavicle.l/upper_arm.l/lower_arm.l/hand.l/Spear/Speartip/Speartip.001
+  - m_Path: Rig/ROOT/base/stomach/chest/clavicle.l/upper_arm.l/lower_arm.l/hand.l/Spear/Speartip
+      1/Speartip.001
     m_Weight: 1
-  - m_Path: Rig/ROOT/base/stomach/chest/clavicle.l/upper_arm.l/lower_arm.l/hand.l/Spear/Speartip/Speartip.001/Speartip.001_end
+  - m_Path: Rig/ROOT/base/stomach/chest/clavicle.l/upper_arm.l/lower_arm.l/hand.l/Spear/Speartip
+      1/Speartip.001/Speartip.001_end
     m_Weight: 1
   - m_Path: Rig/ROOT/base/stomach/chest/clavicle.l/upper_arm.l/lower_arm.l/hand.l/thumb.1.l
     m_Weight: 1
@@ -191,7 +194,9 @@ AvatarMask:
     m_Weight: 1
   - m_Path: Rig/ROOT/base/stomach/Drape1/Drape2/Drape2_end
     m_Weight: 1
-  - m_Path: Spear.001
+  - m_Path: Shaft
+    m_Weight: 0
+  - m_Path: Speartip
     m_Weight: 0
   - m_Path: Vest
     m_Weight: 0

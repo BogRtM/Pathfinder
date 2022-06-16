@@ -1,0 +1,142 @@
+fileFormatVersion: 2
+guid: a127589d8e0804c468e9f4b3d51bd80e
+ModelImporter:
+  serializedVersion: 19301
+  internalIDToNameTable:
+  - first:
+      74: -192535549862929315
+    second: Armature|MenuIdleBird
+  - first:
+      74: 6084959839581626305
+    second: Armature|MenuIdleIn
+  - first:
+      74: 6408290246347017081
+    second: Armature|MenuIdleInBird
+  - first:
+      74: 6561512115207703567
+    second: Drape|MenuIdleBird
+  - first:
+      74: 4275363532223600019
+    second: Drape|MenuIdleInBird
+  - first:
+      74: -6925887985446018636
+    second: Pathfinder|MenuIdleBird
+  - first:
+      74: -5322472437874854323
+    second: Pathfinder|MenuIdleInBird
+  - first:
+      74: -5991492008330559235
+    second: Poncho Uncut|MenuIdleBird
+  - first:
+      74: -66280132420474799
+    second: Poncho Uncut|MenuIdleInBird
+  - first:
+      74: 7754454806276208820
+    second: Rig|_Idle New USE
+  - first:
+      74: 757695486584026520
+    second: Rig|MenuIdleBird
+  - first:
+      74: 5472612083692928397
+    second: Rig|MenuIdleIn
+  - first:
+      74: -8765173887304756703
+    second: Rig|MenuIdleInBird
+  - first:
+      74: -4896894282539987584
+    second: Spear.001|MenuIdleBird
+  - first:
+      74: 3218356639733273563
+    second: Spear.001|MenuIdleInBird
+  externalObjects: {}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

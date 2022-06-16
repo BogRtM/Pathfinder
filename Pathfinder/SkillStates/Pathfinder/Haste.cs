@@ -7,8 +7,10 @@ namespace Pathfinder.SkillStates
 {
     internal class Haste : BaseState
     {
-        public static float baseDuration = 0.3f;
-        public static float speedCoefficient = 1.8f;
+        public static float baseDuration = 0.2f;
+        public static float speedCoefficient = 11f;
+
+        private bool startedGrounded;
 
         private EmpowerComponent empowerComponent;
         private Vector3 dashVector;
@@ -19,15 +21,10 @@ namespace Pathfinder.SkillStates
             base.OnEnter();
             empowerComponent = base.gameObject.GetComponent<EmpowerComponent>();
             animator = base.GetModelAnimator();
-            dashVector = (base.inputBank.moveVector == Vector3.zero) ? base.characterDirection.forward : base.inputBank.moveVector;
+            dashVector = ((base.inputBank.moveVector == Vector3.zero) ? base.characterDirection.forward : base.inputBank.moveVector).normalized;
+            base.characterDirection.forward = dashVector;
 
-            if(Vector3.Dot(dashVector, base.inputBank.moveVector.normalized) < 0)
-            {
-                PlayAnimation("FullBody, Override", "GroundDashB", "Dash.playbackRate", baseDuration);
-            } else
-            {
-                PlayAnimation("FullBody, Override", "GroundDashF", "Dash.playbackRate", baseDuration);
-            }
+            PlayAnimation("FullBody, Override", "GroundDashF", "Dash.playbackRate", baseDuration);
 
             empowerComponent.SetPrimary(base.skillLocator);
         }
@@ -36,10 +33,11 @@ namespace Pathfinder.SkillStates
         {
             base.FixedUpdate();
 
-            if(base.characterMotor && base.isAuthority)
+            if(base.isAuthority)
             {
-                base.characterMotor.velocity.y = 0f;
+                base.characterDirection.forward = dashVector;
                 base.characterMotor.rootMotion += dashVector * (speedCoefficient * base.moveSpeedStat * Time.fixedDeltaTime);
+                base.characterMotor.velocity.y = 0f;
             }
 
             if(base.fixedAge >= baseDuration)
@@ -50,6 +48,7 @@ namespace Pathfinder.SkillStates
 
         public override void OnExit()
         {
+            PlayCrossfade("FullBody, Override", "BufferEmpty", 0.2f);
             base.OnExit();
         }
 

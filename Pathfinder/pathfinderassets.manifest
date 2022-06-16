@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3444982102
+CRC: 486835907
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: df739f3fefa039e2332013a3507632a6
+    Hash: 53ef3676eb9cf490c2eba1f733d6deca
   TypeTreeHash:
     serializedVersion: 2
-    Hash: b1d41b4ec996528312e21a381b437070
+    Hash: ed7dcb5778c100c64f9cc501954a7b4f
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -31,8 +31,6 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 11500000, guid: 261c50d8a80898e4ebf2e8e415ea6766, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 751bd37d2e55f5f448dbb0d97812d9ba, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 136
@@ -43,67 +41,71 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/PathfinderAssets/Animation/clips/Rig_MenuIdleIn.anim
-- Assets/PathfinderAssets/FBX/Pathfinder.fbx
-- Assets/PathfinderAssets/Textures/PathfinderVest.png
-- Assets/PathfinderAssets/Animation/clips/Rig_Jump.anim
-- Assets/PathfinderAssets/Animation/clips/Rig_Sweep.anim
-- Assets/PathfinderAssets/Animation/clips/Rig_ComboSlash2.anim
-- Assets/PathfinderAssets/Animation/GestureMask.mask
-- Assets/PathfinderAssets/Animation/clips/Rig_BasicThrust Down.anim
-- Assets/PathfinderAssets/Animation/clips/Rig_AirDash.anim
-- Assets/PathfinderAssets/Animation/clips/Rig_UnderhandThrow.anim
-- Assets/PathfinderAssets/Animation/clips/Rig_Rest.anim
-- Assets/PathfinderAssets/Animation/clips/Rig_BasicThrust Gesture Down.anim
+- Assets/PathfinderAssets/Materials/HitboxTest.mat
 - Assets/PathfinderAssets/Animation/clips/Rig_Point.anim
-- Assets/PathfinderAssets/Animation/clips/Rig_GroundDashF.anim
-- Assets/PathfinderAssets/Animation/clips/Rig_AimYaw New USE.anim
-- Assets/PathfinderAssets/Animation/animPFMenu.controller
-- Assets/PathfinderAssets/Animation/clips/Rig_Rest.001.anim
-- Assets/PathfinderAssets/Animation/clips/Rig_GroundDashB.anim
+- Assets/PathfinderAssets/Textures/PathfinderVest.png
+- Assets/PathfinderAssets/Animation/clips/Rig_AimPitch New USE.anim
+- Assets/PathfinderAssets/Animation/clips/Display/Rig_MenuIdle.anim
+- Assets/PathfinderAssets/Animation/clips/Rig_Sweep.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_OverhandThrow.anim
-- Assets/PathfinderAssets/Animation/clips/Rig_Tri-Combo.anim
-- Assets/PathfinderAssets/Animation/clips/Rig_Ascend USE.anim
+- Assets/PathfinderAssets/Animation/clips/Rig_AirFlip.anim
+- Assets/PathfinderAssets/Animation/clips/Rig_BasicThrust Gesture Up.anim
+- Assets/PathfinderAssets/Animation/GestureMask.mask
+- Assets/PathfinderAssets/Animation/clips/Rig_JavelinToss Gesture.anim
+- Assets/PathfinderAssets/Animation/clips/Display/Bird_MenuIdleIn.anim
+- Assets/PathfinderAssets/Animation/clips/Rig_WalkF.anim
+- Assets/PathfinderAssets/Animation/clips/Rig_AirDash.anim
+- Assets/PathfinderAssets/Animation/animPFMenu.controller
+- Assets/PathfinderAssets/Textures/tex_bird_diffuse.png
+- Assets/PathfinderAssets/Animation/clips/Rig_SpinSweep.anim
+- Assets/PathfinderAssets/Animation/clips/Rig_Polevault.anim
 - Assets/PathfinderAssets/Textures/DefaultMaterial_Normal_OpenGL.png
 - Assets/PathfinderAssets/Textures/PathfinderSkin.png
 - Assets/PathfinderAssets/Animation/clips/Rig_JavelinToss.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_BasicThrust.anim
+- Assets/PathfinderAssets/FBX/MenuIdleLoop.fbx
+- Assets/PathfinderAssets/Animation/clips/Rig_PolevaultKick.anim
 - Assets/PathfinderAssets/mdlPathfinder.prefab
-- Assets/PathfinderAssets/Animation/clips/Rig_ComboSlash1.anim
 - Assets/PathfinderAssets/Materials/hgstandard.shader
-- Assets/PathfinderAssets/Animation/clips/Rig_WalkL.anim
-- Assets/PathfinderAssets/Animation/clips/Rig_ComboSlash3.anim
-- Assets/PathfinderAssets/Animation/clips/Rig_AirFlip.anim
-- Assets/PathfinderAssets/Animation/clips/Rig_BasicThrust Gesture.anim
+- Assets/PathfinderAssets/Animation/clips/Rig_GroundDashF.001.anim
+- Assets/PathfinderAssets/Animation/clips/Rig_Sweep1H.anim
 - Assets/PathfinderAssets/Textures/z - Copy.png
-- Assets/PathfinderAssets/Animation/clips/Rig_BasicThrust Gesture Up.anim
-- Assets/PathfinderAssets/Animation/clips/Rig_Lunge.anim
-- Assets/PathfinderAssets/Animation/clips/Rig_IdleIn.anim
-- Assets/PathfinderAssets/PathfinderDisplay.prefab
+- Assets/PathfinderAssets/Animation/clips/Rig_WalkR.anim
+- Assets/PathfinderAssets/Animation/clips/Rig_Ascend USE.anim
+- Assets/PathfinderAssets/Animation/clips/Rig_AirFlip2.anim
+- Assets/PathfinderAssets/Animation/clips/Rig_WalkL.anim
+- Assets/PathfinderAssets/Animation/clips/Display/Bird_MenuIdle.anim
 - Assets/PathfinderAssets/Materials/matVest.mat
-- Assets/PathfinderAssets/Animation/clips/Rig_SprintF.anim
-- Assets/PathfinderAssets/Animation/clips/Rig__Idle New USE.anim
+- Assets/PathfinderAssets/Animation/clips/Rig_Jump.anim
+- Assets/PathfinderAssets/Animation/clips/Rig_Rest.001.anim
+- Assets/PathfinderAssets/Animation/clips/Rig_Tri-Combo.anim
+- Assets/PathfinderAssets/Materials/matBird.mat
+- Assets/PathfinderAssets/Animation/clips/Rig_Rest.anim
+- Assets/PathfinderAssets/Animation/clips/Rig_GroundDashB.anim
+- Assets/PathfinderAssets/PathfinderDisplay.prefab
+- Assets/PathfinderAssets/ThrustCenter.prefab
 - Assets/PathfinderAssets/Animation/clips/Rig_Descend Fast.anim
-- Assets/PathfinderAssets/Animation/clips/Rig_OLD_Idle.anim
-- Assets/PathfinderAssets/Animation/clips/Rig_AimPitch New USE.anim
 - Assets/PathfinderAssets/Materials/matDrape.mat
 - Assets/PathfinderAssets/Animation/RightArm.mask
 - Assets/PathfinderAssets/Textures/z.png
-- Assets/PathfinderAssets/Animation/clips/Rig_AirFlip2.anim
-- Assets/PathfinderAssets/Animation/clips/Rig_JavelinToss Gesture.anim
-- Assets/PathfinderAssets/Animation/clips/Rig_BasicThrust Up.anim
+- Assets/PathfinderAssets/Animation/clips/Rig_IdleIn.anim
+- Assets/PathfinderAssets/Animation/clips/Display/Rig_MenuIdleIn.anim
+- Assets/PathfinderAssets/Animation/clips/Rig_WalkB.anim
+- Assets/PathfinderAssets/Animation/clips/Rig_BasicThrust Gesture Down.anim
 - Assets/PathfinderAssets/Animation/animPF.controller
 - Assets/PathfinderAssets/Textures/PathfinderC.png
-- Assets/PathfinderAssets/Animation/clips/Rig_BasicThrust New.anim
+- Assets/PathfinderAssets/Animation/clips/Rig_Lunge.anim
 - Assets/PathfinderAssets/Textures/DefaultMaterial_Base_color.png
-- Assets/PathfinderAssets/Animation/AimMask.mask
-- Assets/PathfinderAssets/Animation/clips/Rig_WalkF.anim
-- Assets/PathfinderAssets/Materials/matPathfinder.mat
-- Assets/PathfinderAssets/Animation/clips/Rig_Polevault.anim
-- Assets/PathfinderAssets/Animation/clips/Rig_WalkR.anim
-- Assets/PathfinderAssets/Animation/clips/Rig_MenuIdlle.anim
-- Assets/PathfinderAssets/Animation/clips/Rig_WalkB.anim
-- Assets/PathfinderAssets/Textures/spearEm.png
 - Assets/PathfinderAssets/Animation/clips/Rig_Descend.anim
+- Assets/PathfinderAssets/Animation/clips/Rig_SprintF.anim
+- Assets/PathfinderAssets/Animation/AimMask.mask
+- Assets/PathfinderAssets/FBX/MenuIdleIn.fbx
+- Assets/PathfinderAssets/Materials/matPathfinder.mat
+- Assets/PathfinderAssets/FBX/Pathfinder.fbx
+- Assets/PathfinderAssets/Textures/spearEm.png
+- Assets/PathfinderAssets/Animation/clips/Rig_AimYaw New USE.anim
+- Assets/PathfinderAssets/Animation/clips/Rig_GroundDashF.anim
+- Assets/PathfinderAssets/Animation/clips/Rig_UnderhandThrow.anim
 - Assets/PathfinderAssets/Materials/matSpear.mat
+- Assets/PathfinderAssets/Animation/clips/Rig__Idle New USE.anim
 Dependencies: []
