@@ -15,40 +15,37 @@ namespace Pathfinder.SkillStates
         private OverlapAttack airSpinAttack;
         private OverlapAttack groundSpinAttack;
 
+        public static float flipBaseDuration = 0.3f;
+        public static float spinBaseDuration = 1f;
+        public static float forwardVelocity = 4f;
+        public static float upwardVelocity = 20f;
+        public static float hopVelocity = 5.5f;
+
         private bool isCrit;
-        private bool inAirSpin;
-        private bool inGroundSpin;
         private bool flipFinished;
+        private bool hasHopped;
+
+        private float flipStopwatch;
+        private float flipDuration;
         private float spinStopwatch;
         private float spinDuration;
         private float spinFinishTime;
-        private float previousAirControl;
-
-        private bool isInHitPause;
-        private BaseState.HitStopCachedState hitStopCachedState;
-        private float hitPauseTimer;
-
-        public static float flipBaseDuration = 0.2f;
-        public static float spinBaseDuration = 1f;
-        public static float forwardVelocity = 3f;
-        public static float upwardVelocity = 20f;
         public override void OnEnter()
         {
             base.OnEnter();
             animator = base.GetModelAnimator();
+
+            flipDuration = flipBaseDuration / base.attackSpeedStat;
+
             spinDuration = spinBaseDuration / base.attackSpeedStat;
             spinFinishTime = spinDuration * 0.325f;
 
-            base.PlayCrossfade("FullBody, Override", "AirFlip2", "Flip.playbackRate", flipBaseDuration, 0.2f);
+            base.PlayAnimation("FullBody, Override", "AirFlip2", "Flip.playbackRate", flipDuration);
 
             base.characterBody.bodyFlags |= RoR2.CharacterBody.BodyFlags.IgnoreFallDamage;
-
-            base.characterMotor.Motor.ForceUnground();
-            previousAirControl = base.characterMotor.airControl;
-            base.characterMotor.airControl = BaseLeap.airControl;
             base.characterBody.isSprinting = true;
 
-            flipVector = base.GetAimRay().direction;
+            flipVector = base.inputBank.moveVector;
 
             base.StartAimMode(0.1f, true);
             base.characterMotor.velocity.y = 0f;
@@ -74,7 +71,7 @@ namespace Pathfinder.SkillStates
             airSpinAttack.isCrit = isCrit;
             airSpinAttack.forceVector = Vector3.zero;
             airSpinAttack.pushAwayForce = 1f;
-            airSpinAttack.damage = 7f * base.damageStat;
+            airSpinAttack.damage = 5f * base.damageStat;
             airSpinAttack.hitBoxGroup = hitBoxGroup;
             airSpinAttack.hitEffectPrefab = GroundLight.comboHitEffectPrefab;
 
@@ -87,7 +84,7 @@ namespace Pathfinder.SkillStates
             groundSpinAttack.isCrit = isCrit;
             groundSpinAttack.forceVector = -Vector3.up * 6000f;
             groundSpinAttack.pushAwayForce = 500f;
-            groundSpinAttack.damage = 7f * base.damageStat;
+            groundSpinAttack.damage = 8f * base.damageStat;
             groundSpinAttack.hitBoxGroup = hitBoxGroup;
             groundSpinAttack.hitEffectPrefab = GroundLight.finisherHitEffectPrefab;
         }
@@ -96,9 +93,9 @@ namespace Pathfinder.SkillStates
         {
             base.FixedUpdate();
 
-            base.characterDirection.forward = flipVector;
+            base.StartAimMode(0.1f, false);
 
-            if(inGroundSpin && flipFinished)
+            if(flipFinished)
             {
                 spinStopwatch += Time.fixedDeltaTime;
             }
@@ -108,30 +105,33 @@ namespace Pathfinder.SkillStates
                 this.outer.SetNextStateToMain();
             }
 
-            /*
-            if(base.fixedAge >= flipBaseDuration && !characterMotor.isGrounded && !inAirSpin && !flipFinished)
+            if (!base.characterMotor.isGrounded && !flipFinished && base.isAuthority)
             {
-                inAirSpin = true;
-            }
-            */
+                flipStopwatch += Time.fixedDeltaTime;
 
-            if (!base.characterMotor.isGrounded && !flipFinished)
-            {
+                if(flipStopwatch >= flipDuration)
+                {
+                    flipStopwatch = 0f;
+                    airSpinAttack.ResetIgnoredHealthComponents();
+                }
+
                 base.characterBody.isSprinting = true;
-                FireAttack(airSpinAttack);
+
+                airSpinAttack.Fire();
             }
 
-            if (base.characterMotor.isGrounded && !inGroundSpin)
+            if (base.characterMotor.isGrounded && !flipFinished)
             {
                 StartGroundSpin();
             }
 
-            if (inGroundSpin && flipFinished && (spinStopwatch <= spinFinishTime))
+            if (flipFinished && (spinStopwatch <= spinFinishTime) && base.isAuthority)
             {
-                FireAttack(groundSpinAttack);
+                groundSpinAttack.Fire();
             }
         }
 
+        /*
         public void StartDrop()
         {
             inAirSpin = true;
@@ -139,17 +139,17 @@ namespace Pathfinder.SkillStates
             base.characterMotor.velocity.y = 0;
             base.characterMotor.velocity.y -= 90f;
         }
+        */
 
         public void StartGroundSpin()
         {
-            inAirSpin = false;
             flipFinished = true;
             base.characterMotor.velocity = Vector3.zero;
             base.PlayAnimation("FullBody, Override", "SpinSweep", "Flip.playbackRate", spinDuration);
             Util.PlayAttackSpeedSound(GroundLight.finisherAttackSoundString, base.gameObject, GroundLight.slashPitch);
-            inGroundSpin = true;
         }
 
+        /*
         public void FireAttack(OverlapAttack attack)
         {
             if (attack.Fire() && !isInHitPause)
@@ -167,17 +167,17 @@ namespace Pathfinder.SkillStates
                 }
             }
         }
-
+        */
         public override void OnExit()
         {
             base.characterBody.bodyFlags &= ~RoR2.CharacterBody.BodyFlags.IgnoreFallDamage;
-            base.characterMotor.airControl = previousAirControl;
+            //base.characterMotor.airControl = previousAirControl;
             base.OnExit();
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.Pain;
+            return InterruptPriority.PrioritySkill;
         }
 
         /*

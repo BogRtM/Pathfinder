@@ -5,6 +5,7 @@ using RoR2;
 using System.Collections.Generic;
 using System.Security;
 using System.Security.Permissions;
+using UnityEngine;
 
 [module: UnverifiableCode]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
@@ -36,6 +37,8 @@ namespace Pathfinder
 
         public static PathfinderPlugin instance;
 
+        public static GameObject squallPrefab;
+
         private void Awake()
         {
             instance = this;
@@ -49,8 +52,11 @@ namespace Pathfinder
             Modules.Tokens.AddTokens(); // register name tokens
             Modules.ItemDisplays.PopulateDisplays(); // collect item display prefabs for use in our display rules
 
+            //make bird
+            new Pathfinder.Content.Squall().Initialize();
+
             // survivor initialization
-            new PathfinderINIT().Initialize();
+            new Modules.Survivors.PathfinderINIT().Initialize();
 
             // now make a content pack and add it- this part will change with the next update
             new Modules.ContentPacks().Initialize();

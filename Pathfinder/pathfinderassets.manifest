@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 486835907
+CRC: 3578884257
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 53ef3676eb9cf490c2eba1f733d6deca
+    Hash: 28e76b65a3cfe16e1f29c3af9027bf8e
   TypeTreeHash:
     serializedVersion: 2
-    Hash: ed7dcb5778c100c64f9cc501954a7b4f
+    Hash: 5a73001f5e18f2d2f13db28a79a8ccf1
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -32,6 +32,8 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 261c50d8a80898e4ebf2e8e415ea6766, type: 3}
 - Class: 115
+  Script: {instanceID: 0}
+- Class: 120
   Script: {instanceID: 0}
 - Class: 136
   Script: {instanceID: 0}
@@ -59,6 +61,7 @@ Assets:
 - Assets/PathfinderAssets/Textures/tex_bird_diffuse.png
 - Assets/PathfinderAssets/Animation/clips/Rig_SpinSweep.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_Polevault.anim
+- Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_EmptyAction.anim
 - Assets/PathfinderAssets/Textures/DefaultMaterial_Normal_OpenGL.png
 - Assets/PathfinderAssets/Textures/PathfinderSkin.png
 - Assets/PathfinderAssets/Animation/clips/Rig_JavelinToss.anim
@@ -68,27 +71,36 @@ Assets:
 - Assets/PathfinderAssets/mdlPathfinder.prefab
 - Assets/PathfinderAssets/Materials/hgstandard.shader
 - Assets/PathfinderAssets/Animation/clips/Rig_GroundDashF.001.anim
+- Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_SwerveRight.anim
+- Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_Dive.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_Sweep1H.anim
 - Assets/PathfinderAssets/Textures/z - Copy.png
 - Assets/PathfinderAssets/Animation/clips/Rig_WalkR.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_Ascend USE.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_AirFlip2.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_WalkL.anim
+- Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_AimYaw.anim
+- Assets/PathfinderAssets/Animation/Squall/SquallClips/_Hover.anim
 - Assets/PathfinderAssets/Animation/clips/Display/Bird_MenuIdle.anim
 - Assets/PathfinderAssets/Materials/matVest.mat
+- Assets/PathfinderAssets/mdlSquall.prefab
+- Assets/PathfinderAssets/FBX/fightbird.fbx
 - Assets/PathfinderAssets/Animation/clips/Rig_Jump.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_Rest.001.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_Tri-Combo.anim
 - Assets/PathfinderAssets/Materials/matBird.mat
+- Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_SpinDown.anim
+- Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_AimPitch.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_Rest.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_GroundDashB.anim
 - Assets/PathfinderAssets/PathfinderDisplay.prefab
-- Assets/PathfinderAssets/ThrustCenter.prefab
 - Assets/PathfinderAssets/Animation/clips/Rig_Descend Fast.anim
+- Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_Rise.anim
 - Assets/PathfinderAssets/Materials/matDrape.mat
 - Assets/PathfinderAssets/Animation/RightArm.mask
 - Assets/PathfinderAssets/Textures/z.png
 - Assets/PathfinderAssets/Animation/clips/Rig_IdleIn.anim
+- Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_EmptyAction.001.anim
 - Assets/PathfinderAssets/Animation/clips/Display/Rig_MenuIdleIn.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_WalkB.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_BasicThrust Gesture Down.anim
@@ -97,15 +109,20 @@ Assets:
 - Assets/PathfinderAssets/Animation/clips/Rig_Lunge.anim
 - Assets/PathfinderAssets/Textures/DefaultMaterial_Base_color.png
 - Assets/PathfinderAssets/Animation/clips/Rig_Descend.anim
+- Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_GlideF.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_SprintF.anim
 - Assets/PathfinderAssets/Animation/AimMask.mask
 - Assets/PathfinderAssets/FBX/MenuIdleIn.fbx
 - Assets/PathfinderAssets/Materials/matPathfinder.mat
 - Assets/PathfinderAssets/FBX/Pathfinder.fbx
+- Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_Backflip.anim
+- Assets/PathfinderAssets/Animation/Squall/animSquall.controller
 - Assets/PathfinderAssets/Textures/spearEm.png
 - Assets/PathfinderAssets/Animation/clips/Rig_AimYaw New USE.anim
+- Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_SwerveLeft.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_GroundDashF.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_UnderhandThrow.anim
 - Assets/PathfinderAssets/Materials/matSpear.mat
 - Assets/PathfinderAssets/Animation/clips/Rig__Idle New USE.anim
+- Assets/PathfinderAssets/Animation/Squall/aimMaskSquall.mask
 Dependencies: []

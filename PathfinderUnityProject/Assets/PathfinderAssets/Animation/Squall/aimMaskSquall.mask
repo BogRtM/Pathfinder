@@ -1,0 +1,131 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: aimMaskSquall
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Armature
+    m_Weight: 0
+  - m_Path: Armature/root
+    m_Weight: 0
+  - m_Path: Armature/root/LowerBody
+    m_Weight: 0
+  - m_Path: Armature/root/LowerBody/Pelvis
+    m_Weight: 0
+  - m_Path: Armature/root/LowerBody/Pelvis/Upperleg.l
+    m_Weight: 0
+  - m_Path: Armature/root/LowerBody/Pelvis/Upperleg.l/Lowerleg.l
+    m_Weight: 0
+  - m_Path: Armature/root/LowerBody/Pelvis/Upperleg.l/Lowerleg.l/foot.l
+    m_Weight: 0
+  - m_Path: Armature/root/LowerBody/Pelvis/Upperleg.l/Lowerleg.l/foot.l/Backclaw.l
+    m_Weight: 0
+  - m_Path: Armature/root/LowerBody/Pelvis/Upperleg.l/Lowerleg.l/foot.l/Backclaw.l/Backclaw.l_end
+    m_Weight: 0
+  - m_Path: Armature/root/LowerBody/Pelvis/Upperleg.l/Lowerleg.l/foot.l/claw.1.l
+    m_Weight: 0
+  - m_Path: Armature/root/LowerBody/Pelvis/Upperleg.l/Lowerleg.l/foot.l/claw.1.l/claw.1.l_end
+    m_Weight: 0
+  - m_Path: Armature/root/LowerBody/Pelvis/Upperleg.l/Lowerleg.l/foot.l/claw.2.l
+    m_Weight: 0
+  - m_Path: Armature/root/LowerBody/Pelvis/Upperleg.l/Lowerleg.l/foot.l/claw.2.l/claw.2.l_end
+    m_Weight: 0
+  - m_Path: Armature/root/LowerBody/Pelvis/Upperleg.r
+    m_Weight: 0
+  - m_Path: Armature/root/LowerBody/Pelvis/Upperleg.r/Lowerleg.r
+    m_Weight: 0
+  - m_Path: Armature/root/LowerBody/Pelvis/Upperleg.r/Lowerleg.r/foot.r
+    m_Weight: 0
+  - m_Path: Armature/root/LowerBody/Pelvis/Upperleg.r/Lowerleg.r/foot.r/Backclaw.r
+    m_Weight: 0
+  - m_Path: Armature/root/LowerBody/Pelvis/Upperleg.r/Lowerleg.r/foot.r/Backclaw.r/Backclaw.r_end
+    m_Weight: 0
+  - m_Path: Armature/root/LowerBody/Pelvis/Upperleg.r/Lowerleg.r/foot.r/claw.1.r
+    m_Weight: 0
+  - m_Path: Armature/root/LowerBody/Pelvis/Upperleg.r/Lowerleg.r/foot.r/claw.1.r/claw.1.r_end
+    m_Weight: 0
+  - m_Path: Armature/root/LowerBody/Pelvis/Upperleg.r/Lowerleg.r/foot.r/claw.2.r
+    m_Weight: 0
+  - m_Path: Armature/root/LowerBody/Pelvis/Upperleg.r/Lowerleg.r/foot.r/claw.2.r/claw.2.r_end
+    m_Weight: 0
+  - m_Path: Armature/root/LowerBody/Tail
+    m_Weight: 0
+  - m_Path: Armature/root/LowerBody/Tail/Tail.1.l
+    m_Weight: 0
+  - m_Path: Armature/root/LowerBody/Tail/Tail.1.l/Tail.1.l_end
+    m_Weight: 0
+  - m_Path: Armature/root/LowerBody/Tail/Tail.1.r
+    m_Weight: 0
+  - m_Path: Armature/root/LowerBody/Tail/Tail.1.r/Tail.1.r_end
+    m_Weight: 0
+  - m_Path: Armature/root/LowerBody/Tail/Tail.2.l
+    m_Weight: 0
+  - m_Path: Armature/root/LowerBody/Tail/Tail.2.l/Tail.2.l_end
+    m_Weight: 0
+  - m_Path: Armature/root/LowerBody/Tail/Tail.2.r
+    m_Weight: 0
+  - m_Path: Armature/root/LowerBody/Tail/Tail.2.r/Tail.2.r_end
+    m_Weight: 0
+  - m_Path: Armature/root/UpperBody
+    m_Weight: 0
+  - m_Path: Armature/root/UpperBody/Neck
+    m_Weight: 1
+  - m_Path: Armature/root/UpperBody/Neck/Head
+    m_Weight: 1
+  - m_Path: Armature/root/UpperBody/Neck/Head/BeakLow
+    m_Weight: 1
+  - m_Path: Armature/root/UpperBody/Neck/Head/BeakLow/BeakLow_end
+    m_Weight: 1
+  - m_Path: Armature/root/UpperBody/Neck/Head/BeakTop
+    m_Weight: 1
+  - m_Path: Armature/root/UpperBody/Neck/Head/BeakTop/BeakTop_end
+    m_Weight: 1
+  - m_Path: Armature/root/UpperBody/Wing.1.l
+    m_Weight: 0
+  - m_Path: Armature/root/UpperBody/Wing.1.l/Wing.2.l
+    m_Weight: 0
+  - m_Path: Armature/root/UpperBody/Wing.1.l/Wing.2.l/Wing.3.l
+    m_Weight: 0
+  - m_Path: Armature/root/UpperBody/Wing.1.l/Wing.2.l/Wing.3.l/WingBlade.3.l
+    m_Weight: 0
+  - m_Path: Armature/root/UpperBody/Wing.1.l/Wing.2.l/Wing.3.l/WingBlade.3.l/WingBlade.3.l_end
+    m_Weight: 0
+  - m_Path: Armature/root/UpperBody/Wing.1.l/Wing.2.l/WingBlade.2.l
+    m_Weight: 0
+  - m_Path: Armature/root/UpperBody/Wing.1.l/Wing.2.l/WingBlade.2.l/WingBlade.2.l_end
+    m_Weight: 0
+  - m_Path: Armature/root/UpperBody/Wing.1.l/WingBlade.1.l
+    m_Weight: 0
+  - m_Path: Armature/root/UpperBody/Wing.1.l/WingBlade.1.l/WingBlade.1.l_end
+    m_Weight: 0
+  - m_Path: Armature/root/UpperBody/Wing.1.r
+    m_Weight: 0
+  - m_Path: Armature/root/UpperBody/Wing.1.r/Wing.2.r
+    m_Weight: 0
+  - m_Path: Armature/root/UpperBody/Wing.1.r/Wing.2.r/Wing.3.r
+    m_Weight: 0
+  - m_Path: Armature/root/UpperBody/Wing.1.r/Wing.2.r/Wing.3.r/WingBlade.3.r
+    m_Weight: 0
+  - m_Path: Armature/root/UpperBody/Wing.1.r/Wing.2.r/Wing.3.r/WingBlade.3.r/WingBlade.3.r_end
+    m_Weight: 0
+  - m_Path: Armature/root/UpperBody/Wing.1.r/Wing.2.r/WingBlade.2.r
+    m_Weight: 0
+  - m_Path: Armature/root/UpperBody/Wing.1.r/Wing.2.r/WingBlade.2.r/WingBlade.2.r_end
+    m_Weight: 0
+  - m_Path: Armature/root/UpperBody/Wing.1.r/WingBlade.1.r
+    m_Weight: 0
+  - m_Path: Armature/root/UpperBody/Wing.1.r/WingBlade.1.r/WingBlade.1.r_end
+    m_Weight: 0
+  - m_Path: Bird
+    m_Weight: 0
+  - m_Path: GunL
+    m_Weight: 0
+  - m_Path: GunR
+    m_Weight: 0

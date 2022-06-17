@@ -25,7 +25,7 @@ namespace Pathfinder.SkillStates
             base.characterDirection.forward = dashVector;
 
             PlayAnimation("FullBody, Override", "GroundDashF", "Dash.playbackRate", baseDuration);
-
+            
             empowerComponent.SetPrimary(base.skillLocator);
         }
 

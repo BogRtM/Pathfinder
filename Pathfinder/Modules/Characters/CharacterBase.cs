@@ -44,7 +44,13 @@ namespace Pathfinder.Modules.Characters
             InitializeSkins();
             //InitializeItemDisplays();
 
+            AddMyComponents();
+
             InitializeDoppelganger("Merc");
+        }
+
+        protected virtual void AddMyComponents()
+        {
         }
 
         protected virtual void InitializeCharacterBodyAndModel()

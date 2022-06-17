@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: matDrape
   m_Shader: {fileID: 47, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: CUTOUT  _ALPHATEST_ON _GLOSSYREFLECTIONS_OFF _SPECULARHIGHLIGHTS_OFF
+  m_ShaderKeywords: CUTOUT _ALPHATEST_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -125,6 +125,7 @@ Material:
     - _BlueChannelBias: 0
     - _BlueChannelSmoothness: 0
     - _BumpScale: 1
+    - _ColorMask: 15
     - _ColorsOn: 0
     - _Cull: 2
     - _Cutoff: 0.94
@@ -182,7 +183,13 @@ Material:
     - _SplatmapOn: 0
     - _SplatmapTileScale: 1
     - _SrcBlend: 1
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
     - _UVSec: 0
+    - _UseUIAlphaClip: 0
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}

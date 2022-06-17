@@ -1,5 +1,65 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &511825168
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 511825169}
+  m_Layer: 0
+  m_Name: SpearHitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &511825169
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511825168}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_Children: []
+  m_Father: {fileID: 7349547390587902735}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &842378250
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 842378251}
+  m_Layer: 0
+  m_Name: SpinHitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &842378251
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842378250}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.91, z: 0}
+  m_LocalScale: {x: 22.3125, y: 3.6323438, z: 22.3125}
+  m_Children: []
+  m_Father: {fileID: 9052393363503133841}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1252000596
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,7 +541,7 @@ Transform:
   m_LocalPosition: {x: -0, y: 0.136612, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6476937843401189409}
+  - {fileID: 511825169}
   m_Father: {fileID: 3196671607114416873}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3289,6 +3349,7 @@ Transform:
   - {fileID: 1235690160738502230}
   - {fileID: 2027641462681515321}
   - {fileID: 1252000597}
+  - {fileID: 842378251}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3343,7 +3404,7 @@ MonoBehaviour:
   - name: FootR
     transform: {fileID: 8402525608952225793}
   - name: SpearHitbox
-    transform: {fileID: 6476937843401189409}
+    transform: {fileID: 511825169}
   - name: RisingKick
     transform: {fileID: 1252000597}
   - name: HandR
@@ -3742,83 +3803,3 @@ Transform:
   m_Father: {fileID: 6321379499132704095}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &6431093220566698617
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 7349547390587902735}
-    m_Modifications:
-    - target: {fileID: 62313254067331672, guid: 6a33e2bacc5d090478ad24c6fd9c7bf8,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 62313254067331672, guid: 6a33e2bacc5d090478ad24c6fd9c7bf8,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 62313254067331672, guid: 6a33e2bacc5d090478ad24c6fd9c7bf8,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 62313254067331672, guid: 6a33e2bacc5d090478ad24c6fd9c7bf8,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.52
-      objectReference: {fileID: 0}
-    - target: {fileID: 62313254067331672, guid: 6a33e2bacc5d090478ad24c6fd9c7bf8,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 62313254067331672, guid: 6a33e2bacc5d090478ad24c6fd9c7bf8,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 62313254067331672, guid: 6a33e2bacc5d090478ad24c6fd9c7bf8,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 62313254067331672, guid: 6a33e2bacc5d090478ad24c6fd9c7bf8,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 62313254067331672, guid: 6a33e2bacc5d090478ad24c6fd9c7bf8,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 62313254067331672, guid: 6a33e2bacc5d090478ad24c6fd9c7bf8,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 62313254067331672, guid: 6a33e2bacc5d090478ad24c6fd9c7bf8,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 62313254067331672, guid: 6a33e2bacc5d090478ad24c6fd9c7bf8,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 62313254067331673, guid: 6a33e2bacc5d090478ad24c6fd9c7bf8,
-        type: 3}
-      propertyPath: m_Name
-      value: SpearHitbox
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 6a33e2bacc5d090478ad24c6fd9c7bf8, type: 3}
---- !u!4 &6476937843401189409 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 62313254067331672, guid: 6a33e2bacc5d090478ad24c6fd9c7bf8,
-    type: 3}
-  m_PrefabInstance: {fileID: 6431093220566698617}
-  m_PrefabAsset: {fileID: 0}

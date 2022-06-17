@@ -43,7 +43,7 @@ namespace Pathfinder.SkillStates.Empower
             sweepAttack.isCrit = base.RollCrit();
             sweepAttack.forceVector = Vector3.zero;
             sweepAttack.pushAwayForce = 1f;
-            sweepAttack.damage = 9f * base.damageStat;
+            sweepAttack.damage = 7f * base.damageStat;
             sweepAttack.hitBoxGroup = hitBoxGroup;
             sweepAttack.hitEffectPrefab = GroundLight.finisherHitEffectPrefab;
         }

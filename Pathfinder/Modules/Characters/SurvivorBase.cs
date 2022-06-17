@@ -30,7 +30,7 @@ namespace Pathfinder.Modules.Survivors
 
             InitializeSurvivor();
 
-            AddMyComponents();
+            
         }
 
         protected override void InitializeCharacterBodyAndModel()
@@ -49,10 +49,6 @@ namespace Pathfinder.Modules.Survivors
             displayPrefab = Modules.Prefabs.CreateDisplayPrefab(bodyName + "Display", bodyPrefab, bodyInfo);
         }
         public virtual void InitializeUnlockables()
-        {
-        }
-
-        public virtual void AddMyComponents()
         {
         }
 
