@@ -45,6 +45,10 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="BirdAI\" />
+  </ItemGroup>
+
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="if &quot;$(Username)&quot; == &quot;rtmbo&quot; copy &quot;$(TargetPath)&quot; &quot;C:\Users\rtmbo\AppData\Roaming\r2modmanPlus-local\RiskOfRain2\profiles\Modding\BepInEx\plugins\Test&quot;" />
   </Target>

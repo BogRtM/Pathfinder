@@ -37,7 +37,8 @@ namespace Pathfinder
 
         public static PathfinderPlugin instance;
 
-        public static GameObject squallPrefab;
+        public static GameObject squallBodyPrefab;
+        public static GameObject squallMasterPrefab;
 
         private void Awake()
         {
@@ -56,7 +57,7 @@ namespace Pathfinder
             new Pathfinder.Content.Squall().Initialize();
 
             // survivor initialization
-            new Modules.Survivors.PathfinderINIT().Initialize();
+            new Modules.Survivors.Pathfinder().Initialize();
 
             // now make a content pack and add it- this part will change with the next update
             new Modules.ContentPacks().Initialize();

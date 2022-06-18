@@ -4,7 +4,7 @@ using System.Text;
 using RoR2;
 using EntityStates;
 
-namespace Squall.Skillstates
+namespace Skillstates.Squall
 {
     internal class SquallMain : BaseCharacterMain
     {

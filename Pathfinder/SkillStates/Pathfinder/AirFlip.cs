@@ -5,7 +5,7 @@ using UnityEngine;
 using RoR2;
 using System;
 
-namespace Pathfinder.SkillStates
+namespace Skillstates.Pathfinder
 {
     internal class AirFlip : BaseState
     {

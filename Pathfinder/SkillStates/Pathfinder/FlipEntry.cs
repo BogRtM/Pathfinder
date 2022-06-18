@@ -1,7 +1,7 @@
 ﻿using EntityStates;
 using UnityEngine;
 
-namespace Pathfinder.SkillStates
+namespace Skillstates.Pathfinder
 {
     internal class FlipEntry : BaseState
     {

@@ -372,21 +372,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3423637062085004722, guid: ef136bc9bbb243247abf89b36a177425,
-        type: 3}
-      propertyPath: m_Positions.Array.data[0].x
-      value: 55.07506
-      objectReference: {fileID: 0}
-    - target: {fileID: 3423637062085004722, guid: ef136bc9bbb243247abf89b36a177425,
-        type: 3}
-      propertyPath: m_Positions.Array.data[0].y
-      value: 66.83984
-      objectReference: {fileID: 0}
-    - target: {fileID: 3423637062085004722, guid: ef136bc9bbb243247abf89b36a177425,
-        type: 3}
-      propertyPath: m_Positions.Array.data[0].z
-      value: 375.6234
-      objectReference: {fileID: 0}
     - target: {fileID: 3718246122337555614, guid: ef136bc9bbb243247abf89b36a177425,
         type: 3}
       propertyPath: m_Name
@@ -446,6 +431,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5426034422331514937, guid: ef136bc9bbb243247abf89b36a177425,
+        type: 3}
+      propertyPath: transformPairs.Array.size
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef136bc9bbb243247abf89b36a177425, type: 3}

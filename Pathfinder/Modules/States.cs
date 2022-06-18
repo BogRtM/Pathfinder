@@ -1,5 +1,5 @@
-﻿using Pathfinder.SkillStates;
-using Pathfinder.SkillStates.Empower;
+﻿using Skillstates.Pathfinder;
+using Skillstates.Pathfinder;
 using System.Collections.Generic;
 using System;
 

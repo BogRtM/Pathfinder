@@ -1,11 +1,11 @@
 ﻿using EntityStates;
 using UnityEngine;
-using Pathfinder.Misc;
+using Pathfinder.Components;
 using Pathfinder.Modules;
 using RoR2.Projectile;
 using RoR2;
 
-namespace Pathfinder.SkillStates.Empower
+namespace Skillstates.Pathfinder
 {
     internal class JavelinToss : BaseState
     {
@@ -80,7 +80,7 @@ namespace Pathfinder.SkillStates.Empower
             fireProjectileInfo.owner = base.gameObject;
             fireProjectileInfo.position = leftHand.position;
             fireProjectileInfo.rotation = Util.QuaternionSafeLookRotation(aimRay.direction);
-            fireProjectileInfo.projectilePrefab = Pathfinder.Modules.Projectiles.javelinPrefab;
+            fireProjectileInfo.projectilePrefab = Projectiles.javelinPrefab;
             ProjectileManager.instance.FireProjectile(fireProjectileInfo);
         }
 

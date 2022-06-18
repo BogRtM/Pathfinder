@@ -1,9 +1,9 @@
 ﻿using EntityStates;
 using UnityEngine;
 using Pathfinder.Modules;
-using Pathfinder.Misc;
+using Pathfinder.Components;
 
-namespace Pathfinder.SkillStates
+namespace Skillstates.Pathfinder
 {
     internal class Haste : BaseState
     {

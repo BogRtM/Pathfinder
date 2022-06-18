@@ -3,7 +3,7 @@ using RoR2.Skills;
 using UnityEngine;
 using Pathfinder.Modules;
 
-namespace Pathfinder.Misc
+namespace Pathfinder.Components
 
 {
     public class EmpowerComponent : MonoBehaviour

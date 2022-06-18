@@ -1,29 +1,37 @@
 ﻿using UnityEngine;
 using RoR2;
 using EntityStates.GolemMonster;
+using System;
 
-namespace Pathfinder.Misc
+namespace Pathfinder.Components
 {
-    internal class SquallController : MonoBehaviour
+    internal class SquallPointer : MonoBehaviour
     {
         private ChildLocator childLocator;
-        private GameObject laserEffect;
         private InputBankTest inputBank;
         private LineRenderer laserLine;
 
+        private CharacterBody selfBody;
+
         private float maxAim = 1000f;
 
-        protected void Start()
+        protected void OnEnable()
         {
             childLocator = base.GetComponentInChildren<ChildLocator>();
             laserLine = childLocator.FindChild("Squall").GetComponentInChildren<LineRenderer>();
             inputBank = base.GetComponent<InputBankTest>();
+            selfBody = base.GetComponent<CharacterBody>();
+        }
+
+        protected void OnDisable()
+        {
+            laserLine.enabled = false;
         }
 
         protected void Update()
         {
             Ray aimRay = inputBank.GetAimRay();
-            Vector3 origin = childLocator.FindChild("MainHurtbox").transform.position;
+            Vector3 origin = selfBody.footPosition;
             Vector3 point = aimRay.GetPoint(maxAim);
 
             laserLine.SetPosition(0, origin);

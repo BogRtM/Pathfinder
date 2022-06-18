@@ -4,7 +4,7 @@ using EntityStates.Merc;
 using UnityEngine;
 using System;
 
-namespace Pathfinder.SkillStates
+namespace Skillstates.Pathfinder
 {
     internal class Thrust : BaseState
     {

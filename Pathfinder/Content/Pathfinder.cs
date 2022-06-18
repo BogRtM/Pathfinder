@@ -1,6 +1,7 @@
 ﻿using BepInEx.Configuration;
 using Pathfinder.Modules.Characters;
-using Pathfinder.Misc;
+using Pathfinder.Components;
+using Skillstates.Pathfinder;
 using RoR2;
 using RoR2.Skills;
 using System;
@@ -9,7 +10,7 @@ using UnityEngine;
 
 namespace Pathfinder.Modules.Survivors
 {
-    internal class PathfinderINIT : SurvivorBase
+    internal class Pathfinder : SurvivorBase
     {
         public override string bodyName => "Pathfinder";
 
@@ -106,6 +107,7 @@ namespace Pathfinder.Modules.Survivors
         {
             bodyPrefab.AddComponent<EmpowerComponent>();
             bodyPrefab.AddComponent<FalconerComponent>();
+            bodyPrefab.AddComponent<CommandTracker>();
         }
 
         public override void InitializeSkills()
@@ -120,7 +122,7 @@ namespace Pathfinder.Modules.Survivors
                 skillNameToken = prefix + "_PATHFINDER_BODY_EMPOWER_JAVELIN_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_EMPOWER_JAVELIN_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Empower.JavelinToss)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(JavelinToss)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 0f,
@@ -145,7 +147,7 @@ namespace Pathfinder.Modules.Survivors
                 skillNameToken = prefix + "_PATHFINDER_BODY_EMPOWER_LUNGE_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_EMPOWER_LUNGE_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Empower.Lunge)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(Lunge)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 0f,
@@ -175,7 +177,7 @@ namespace Pathfinder.Modules.Survivors
                 skillNameToken = prefix + "_PATHFINDER_BODY_PRIMARY_THRUST_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_PRIMARY_THRUST_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Thrust)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(Thrust)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 0f,
@@ -204,7 +206,7 @@ namespace Pathfinder.Modules.Survivors
                 skillNameToken = prefix + "_PATHFINDER_BODY_SECONDARY_HASTE_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_SECONDARY_HASTE_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Haste)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(Haste)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 2,
                 baseRechargeInterval = 5f,
@@ -232,7 +234,7 @@ namespace Pathfinder.Modules.Survivors
                 skillNameToken = prefix + "_PATHFINDER_BODY_UTILITY_POLEVAULT_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_UTILITY_POLEVAULT_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texUtilityIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.FlipEntry)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(FlipEntry)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 10f,
@@ -256,23 +258,23 @@ namespace Pathfinder.Modules.Survivors
             #region Special
             SkillDef bombSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "_PATHFINDER_BODY_SPECIAL_BOMB_NAME",
-                skillNameToken = prefix + "_PATHFINDER_BODY_SPECIAL_BOMB_NAME",
-                skillDescriptionToken = prefix + "_PATHFINDER_BODY_SPECIAL_BOMB_DESCRIPTION",
+                skillName = prefix + "_PATHFINDER_BODY_SPECIAL_COMMAND_NAME",
+                skillNameToken = prefix + "_PATHFINDER_BODY_SPECIAL_COMMAND_NAME",
+                skillDescriptionToken = prefix + "_PATHFINDER_BODY_SPECIAL_COMMAND_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSpecialIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Haste)),
-                activationStateMachineName = "Slide",
+                activationState = new EntityStates.SerializableEntityStateType(typeof(CommandMode)),
+                activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 10f,
-                beginSkillCooldownOnSkillEnd = false,
+                baseRechargeInterval = 1f,
+                beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
                 fullRestockOnAssign = true,
                 interruptPriority = EntityStates.InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
-                isCombatSkill = true,
+                isCombatSkill = false,
                 mustKeyPress = false,
-                cancelSprintingOnActivation = true,
+                cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1

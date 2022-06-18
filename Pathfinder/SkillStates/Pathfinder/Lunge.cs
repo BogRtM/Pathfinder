@@ -3,11 +3,11 @@ using EntityStates.Merc;
 using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;
-using Pathfinder.Misc;
+using Pathfinder.Components;
 using System;
 using UnityEngine.AddressableAssets;
 
-namespace Pathfinder.SkillStates.Empower
+namespace Skillstates.Pathfinder
 {
     internal class Lunge : BaseState
     {
