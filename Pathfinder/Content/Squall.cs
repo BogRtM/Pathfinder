@@ -38,6 +38,9 @@ namespace Pathfinder.Content
         //public override Type characterSpawnState => typeof(EntityStates.FlyState);
 
         public override string bodyName => "Squall";
+
+        public static List<AISkillDriver> followDrivers = new List<AISkillDriver>();
+
         public override void InitializeCharacter()
         {
             base.InitializeCharacter();
@@ -47,28 +50,31 @@ namespace Pathfinder.Content
 
         public void InitializeSquall()
         {
-            foreach(var i in bodyPrefab.GetComponents<AkEvent>())
+            bodyPrefab.AddComponent<SquallController>();
+            bodyPrefab.AddComponent<SquallTracker>();
+            bodyPrefab.AddComponent<SquallAIModes>();
+            bodyPrefab.AddComponent<SquallPointer>();
+
+            foreach (var i in bodyPrefab.GetComponents<AkEvent>())
             {
                 UnityEngine.Object.DestroyImmediate(i);
             }
-            base.bodyPrefab.AddComponent<SquallPointer>();
             CreateSquallMaster();
         }
 
         private void CreateSquallMaster()
         {
             var masterPrefab = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Drones/Drone1Master.prefab").WaitForCompletion(), "SquallMaster");
-            
-            var squallController = masterPrefab.AddComponent<SquallController>();
 
             var newMaster = masterPrefab.GetComponent<CharacterMaster>();
             newMaster.bodyPrefab = this.bodyPrefab;
-            newMaster.godMode = true;
 
             var baseAI = masterPrefab.GetComponent<BaseAI>();
             baseAI.aimVectorMaxSpeed = 5000f;
             baseAI.aimVectorDampTime = 0.01f;
             //baseAI.enemyAttentionDuration = float.PositiveInfinity;
+
+            SquallAIModes aiModes = bodyPrefab.GetComponent<SquallAIModes>();
             
             #region AI
             foreach (AISkillDriver i in masterPrefab.GetComponentsInChildren<AISkillDriver>())
@@ -100,7 +106,7 @@ namespace Pathfinder.Content
             hardLeash.minUserHealthFraction = float.NegativeInfinity;
             hardLeash.maxUserHealthFraction = float.PositiveInfinity;
             hardLeash.skillSlot = SkillSlot.None;
-            squallController.followDrivers.Add(hardLeash);
+            aiModes.followDrivers.Add(hardLeash);
 
             AISkillDriver softLeash = masterPrefab.AddComponent<AISkillDriver>();
             softLeash.customName = "SoftLeashToLeader";
@@ -126,7 +132,7 @@ namespace Pathfinder.Content
             softLeash.minUserHealthFraction = float.NegativeInfinity;
             softLeash.maxUserHealthFraction = float.PositiveInfinity;
             softLeash.skillSlot = SkillSlot.None;
-            squallController.followDrivers.Add(softLeash);
+            aiModes.followDrivers.Add(softLeash);
 
             AISkillDriver chaseTarget = masterPrefab.AddComponent<AISkillDriver>();
             chaseTarget.customName = "ChaseTarget";
@@ -151,6 +157,7 @@ namespace Pathfinder.Content
             chaseTarget.minUserHealthFraction = float.NegativeInfinity;
             chaseTarget.maxUserHealthFraction = float.PositiveInfinity;
             chaseTarget.skillSlot = SkillSlot.Primary;
+            aiModes.attackDrivers.Add(chaseTarget);
 
             AISkillDriver attackTarget = masterPrefab.AddComponent<AISkillDriver>();
             attackTarget.customName = "StrafeTarget";
@@ -175,6 +182,7 @@ namespace Pathfinder.Content
             attackTarget.minUserHealthFraction = float.NegativeInfinity;
             attackTarget.maxUserHealthFraction = float.PositiveInfinity;
             attackTarget.skillSlot = SkillSlot.Primary;
+            aiModes.attackDrivers.Add(attackTarget);
 
             /*
             AISkillDriver hardLeash = masterPrefab.AddComponent<AISkillDriver>();
@@ -294,14 +302,14 @@ namespace Pathfinder.Content
             #region Secondary
             SkillDef secondarySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "_SQUALL_BODY_PRIMARY_GUN_NAME",
-                skillNameToken = prefix + "_SQUALLL_BODY_PRIMARY_GUN_NAME",
-                skillDescriptionToken = prefix + "_PATHFINDER_BODY_PRIMARY_GUN_DESCRIPTION",
+                skillName = prefix + "_SQUALL_BODY_PRIMARY_MISSILE_NAME",
+                skillNameToken = prefix + "_SQUALLL_BODY_PRIMARY_MISSILE_NAME",
+                skillDescriptionToken = prefix + "_PATHFINDER_BODY_PRIMARY_MISSILE_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(MountedGuns)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(MissileLauncher)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 8f,
+                baseRechargeInterval = 0f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,

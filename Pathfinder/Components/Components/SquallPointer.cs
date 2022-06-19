@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using RoR2;
-using EntityStates.GolemMonster;
 using System;
 
 namespace Pathfinder.Components
@@ -18,7 +17,7 @@ namespace Pathfinder.Components
         protected void OnEnable()
         {
             childLocator = base.GetComponentInChildren<ChildLocator>();
-            laserLine = childLocator.FindChild("Squall").GetComponentInChildren<LineRenderer>();
+            laserLine = base.GetComponentInChildren<LineRenderer>();
             inputBank = base.GetComponent<InputBankTest>();
             selfBody = base.GetComponent<CharacterBody>();
         }
@@ -31,7 +30,7 @@ namespace Pathfinder.Components
         protected void Update()
         {
             Ray aimRay = inputBank.GetAimRay();
-            Vector3 origin = selfBody.footPosition;
+            Vector3 origin = selfBody.corePosition;
             Vector3 point = aimRay.GetPoint(maxAim);
 
             laserLine.SetPosition(0, origin);

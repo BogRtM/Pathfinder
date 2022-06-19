@@ -106,7 +106,7 @@ namespace Pathfinder.Modules.Survivors
         protected override void AddMyComponents()
         {
             bodyPrefab.AddComponent<EmpowerComponent>();
-            bodyPrefab.AddComponent<FalconerComponent>();
+            bodyPrefab.AddComponent<PathfinderController>();
             bodyPrefab.AddComponent<CommandTracker>();
         }
 
