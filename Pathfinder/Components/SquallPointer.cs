@@ -6,7 +6,6 @@ namespace Pathfinder.Components
 {
     internal class SquallPointer : MonoBehaviour
     {
-        private ChildLocator childLocator;
         private InputBankTest inputBank;
         private LineRenderer laserLine;
 
@@ -16,10 +15,10 @@ namespace Pathfinder.Components
 
         protected void OnEnable()
         {
-            childLocator = base.GetComponentInChildren<ChildLocator>();
             laserLine = base.GetComponentInChildren<LineRenderer>();
             inputBank = base.GetComponent<InputBankTest>();
             selfBody = base.GetComponent<CharacterBody>();
+            laserLine.enabled = true;
         }
 
         protected void OnDisable()

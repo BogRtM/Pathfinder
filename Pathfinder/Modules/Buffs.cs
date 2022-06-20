@@ -8,10 +8,11 @@ namespace Pathfinder.Modules
     {
         // armor buff gained during roll
         internal static BuffDef armorBuff;
+        internal static BuffDef empowerBuff;
 
         internal static void RegisterBuffs()
         {
-            //armorBuff = AddNewBuff("HenryArmorBuff", RoR2.LegacyResourcesAPI.Load<Sprite>("Textures/BuffIcons/texBuffGenericShield"), Color.white, false, false);
+            empowerBuff = AddNewBuff("EmpowerBuff", null, Color.cyan, false, false);
         }
 
         // simple helper method

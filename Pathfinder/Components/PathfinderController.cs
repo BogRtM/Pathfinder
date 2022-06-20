@@ -28,8 +28,8 @@ namespace Pathfinder.Components
         private void Start()
         {
             selfBody = base.GetComponent<CharacterBody>();
-            Hooks();
             selfMaster = selfBody.master;
+            Hooks();
             var minions = CharacterMaster.readOnlyInstancesList.Where(el => el.minionOwnership.ownerMaster == selfMaster);
             foreach(CharacterMaster minion in minions)
             {
@@ -38,7 +38,9 @@ namespace Pathfinder.Components
                 {
                     Log.Warning("Squall is alive");
                     falconMaster = minion;
+                    falconMaster.godMode = true;
                     squallController = minion.bodyInstanceObject.GetComponent<SquallController>();
+                    squallController.ownerController = this;
                     return;
                 }
             }
@@ -57,14 +59,16 @@ namespace Pathfinder.Components
             
             if(falconMaster = minionSummon.Perform())
             {
-                falconMaster.godMode = true;
+                if(selfMaster.playerCharacterMasterController) falconMaster.godMode = true;
+
                 squallController = falconMaster.bodyInstanceObject.GetComponent<SquallController>();
+                squallController.ownerController = this;
                 falconMaster.inventory.CopyItemsFrom(characterBody.inventory);
                 falconMaster.inventory.GiveItem(RoR2Content.Items.MinionLeash);
             }
         }
 
-        public void ChooseTarget(HurtBox target)
+        internal void SetTarget(HurtBox target)
         {
             if(target && target.healthComponent && target.healthComponent.alive)
             {
@@ -72,9 +76,20 @@ namespace Pathfinder.Components
             }
         }
 
+        internal void SetToFollow()
+        {
+            squallController.EnterFollowMode();
+        }
+
         private void Hooks()
         {
             selfBody.onInventoryChanged += SelfBody_onInventoryChanged;
+            selfMaster.onBodyDestroyed += SelfMaster_onBodyDestroyed;
+        }
+
+        private void SelfMaster_onBodyDestroyed(CharacterBody obj)
+        {
+            if(falconMaster) falconMaster.godMode = false;
         }
 
         private void SelfBody_onInventoryChanged()

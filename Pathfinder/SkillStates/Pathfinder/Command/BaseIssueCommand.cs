@@ -4,14 +4,14 @@ using EntityStates;
 using Pathfinder.Components;
 using Pathfinder;
 
-namespace Skillstates.Pathfinder
+namespace Skillstates.Pathfinder.Command
 {
-    internal class IssueCommand : BaseState
+    internal class BaseIssueCommand : BaseState
     {
-        private PathfinderController pathfinderController;
-        public HurtBox target;
+        protected PathfinderController pathfinderController;
+
         public static float baseDuration = 0.5f;
-        private float duration;
+        protected float duration;
         public override void OnEnter()
         {
             base.OnEnter();
@@ -19,17 +19,13 @@ namespace Skillstates.Pathfinder
             duration = baseDuration / base.attackSpeedStat;
             base.StartAimMode(0.2f, false);
             base.PlayCrossfade("Gesture, Override", "Point", "Hand.playbackRate", 0.5f, 0.1f);
-            if(target)
-            {
-                pathfinderController.ChooseTarget(target);
-            }
         }
 
         public override void FixedUpdate()
         {
             base.FixedUpdate();
 
-            if(base.fixedAge >= duration)
+            if (base.fixedAge >= duration)
             {
                 this.outer.SetNextStateToMain();
             }
@@ -42,7 +38,7 @@ namespace Skillstates.Pathfinder
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.PrioritySkill;
+            return InterruptPriority.Pain;
         }
     }
 }

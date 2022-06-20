@@ -4,7 +4,7 @@ using Pathfinder.Components;
 using UnityEngine;
 using Pathfinder;
 
-namespace Skillstates.Pathfinder
+namespace Skillstates.Pathfinder.Command
 {
     internal class CommandMode : BaseState
     {
@@ -32,13 +32,19 @@ namespace Skillstates.Pathfinder
                     target = tracker.GetTrackingTarget();
                     if (target)
                     {
-                        this.outer.SetNextState(new IssueCommand() { target = this.target });
+                        this.outer.SetNextState(new IssueAttackCommand() { target = this.target });
                     }
                     else
                     {
                         Log.Warning("Command failed");
                         this.outer.SetNextStateToMain();
                     }
+                }
+
+                if ((base.inputBank.skill2.down))// || base.inputBank.skill2.down || base.inputBank.skill3.down || base.inputBank.skill4.down))
+                {
+                    Log.Warning("Setting Squall to Follow");
+                    this.outer.SetNextState(new IssueFollowCommand());
                 }
             }
         }
@@ -51,7 +57,7 @@ namespace Skillstates.Pathfinder
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.PrioritySkill;
+            return InterruptPriority.Pain;
         }
     }
 }

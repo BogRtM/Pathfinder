@@ -96,7 +96,7 @@ namespace Skillstates.Pathfinder
         {
             base.PlayAnimation("FullBody, Override", "BufferEmpty");
 
-            empowerComponent.ResetPrimary(base.skillLocator);
+            //empowerComponent.ResetPrimary(base.skillLocator);
 
             if (NetworkServer.active)
             {

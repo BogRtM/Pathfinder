@@ -2,6 +2,7 @@
 using Pathfinder.Modules.Characters;
 using Pathfinder.Components;
 using Skillstates.Pathfinder;
+using Skillstates.Pathfinder.Command;
 using RoR2;
 using RoR2.Skills;
 using System;
@@ -105,7 +106,6 @@ namespace Pathfinder.Modules.Survivors
 
         protected override void AddMyComponents()
         {
-            bodyPrefab.AddComponent<EmpowerComponent>();
             bodyPrefab.AddComponent<PathfinderController>();
             bodyPrefab.AddComponent<CommandTracker>();
         }
@@ -137,10 +137,10 @@ namespace Pathfinder.Modules.Survivors
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,
-                stockToConsume = 1,
-                keywordTokens = new string[] { "KEYWORD_AGILE", "KEYWORD_EMPOWER" }
+                stockToConsume = 1
+                //keywordTokens = new string[] { "KEYWORD_AGILE", "KEYWORD_EMPOWER" }
             });
-
+            /*
             SkillDef lungeSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = prefix + "_PATHFINDER_BODY_EMPOWER_LUNGE_NAME",
@@ -165,8 +165,7 @@ namespace Pathfinder.Modules.Survivors
                 stockToConsume = 1,
                 keywordTokens = new string[] { "KEYWORD_EMPOWER" }
             });
-
-            Modules.Skills.AddEmpowerSkills(bodyPrefab, javelinSkillDef, lungeSkillDef);
+            */
             #endregion
 
             #region Primary
@@ -256,7 +255,7 @@ namespace Pathfinder.Modules.Survivors
             #endregion
 
             #region Special
-            SkillDef bombSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            SkillDef commandSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = prefix + "_PATHFINDER_BODY_SPECIAL_COMMAND_NAME",
                 skillNameToken = prefix + "_PATHFINDER_BODY_SPECIAL_COMMAND_NAME",
@@ -280,7 +279,7 @@ namespace Pathfinder.Modules.Survivors
                 stockToConsume = 1
             });
 
-            Modules.Skills.AddSpecialSkills(bodyPrefab, bombSkillDef);
+            Modules.Skills.AddSpecialSkills(bodyPrefab, commandSkillDef);
             #endregion
         }
 

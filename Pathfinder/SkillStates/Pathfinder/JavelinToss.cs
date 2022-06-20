@@ -13,7 +13,6 @@ namespace Skillstates.Pathfinder
         private ChildLocator childLocator;
         private GameObject shaft;
         private GameObject spearhead;
-        private EmpowerComponent empowerComponent;
         private Ray aimRay;
         private Transform leftHand;
 
@@ -33,7 +32,6 @@ namespace Skillstates.Pathfinder
             animator = base.GetModelAnimator();
             aimRay = base.GetAimRay();
             childLocator = base.GetModelChildLocator();
-            empowerComponent = base.GetComponent<EmpowerComponent>();
 
             leftHand = childLocator.FindChild("HandL");
 
@@ -86,7 +84,6 @@ namespace Skillstates.Pathfinder
 
         public override void OnExit()
         {
-            empowerComponent.ResetPrimary(base.skillLocator);
             shaft.SetActive(true);
             spearhead.SetActive(true);
             base.OnExit();

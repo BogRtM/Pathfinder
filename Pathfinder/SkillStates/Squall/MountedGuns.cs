@@ -47,6 +47,7 @@ namespace Skillstates.Squall
                     damageType = DamageType.Generic,
                     falloffModel = BulletAttack.FalloffModel.None,
                     procCoefficient = 0.3f,
+                    maxDistance = 200f,
                     aimVector = aimRay.direction
                 };
 
