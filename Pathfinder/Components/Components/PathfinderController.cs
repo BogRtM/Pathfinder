@@ -22,12 +22,13 @@ namespace Pathfinder.Components
         private void Awake()
         {
             summonPrefab = PathfinderPlugin.squallMasterPrefab;
-            Hooks();
+            //Hooks();
         }
 
         private void Start()
         {
             selfBody = base.GetComponent<CharacterBody>();
+            Hooks();
             selfMaster = selfBody.master;
             var minions = CharacterMaster.readOnlyInstancesList.Where(el => el.minionOwnership.ownerMaster == selfMaster);
             foreach(CharacterMaster minion in minions)
@@ -67,30 +68,26 @@ namespace Pathfinder.Components
         {
             if(target && target.healthComponent && target.healthComponent.alive)
             {
-                Log.Warning("Sending order to Squall");
                 squallController.SetTarget(target);
             }
         }
 
         private void Hooks()
         {
-            //CharacterBody.onBodyStartGlobal += CharacterBody_onBodyStartGlobal;
-            CharacterBody.onBodyInventoryChangedGlobal += CharacterBody_onBodyInventoryChangedGlobal;
+            selfBody.onInventoryChanged += SelfBody_onInventoryChanged;
         }
 
-        private void CharacterBody_onBodyStartGlobal(CharacterBody obj)
+        private void SelfBody_onInventoryChanged()
         {
-            if(obj.gameObject.GetComponent<PathfinderController>())
-            {
-                SpawnFalcon(obj);
-            }
+            if(falconMaster)
+                falconMaster.inventory.CopyItemsFrom(selfBody.inventory);
         }
 
         private void CharacterBody_onBodyInventoryChangedGlobal(CharacterBody obj)
         {
             if(obj.gameObject.GetComponent<PathfinderController>() && falconMaster)
             {
-                falconMaster.inventory.CopyItemsFrom(obj.inventory);
+                
             }
         }
     }

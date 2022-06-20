@@ -15,33 +15,31 @@ namespace Pathfinder.Components
         private EntityStateMachine weaponMachine;
         private EntityStateMachine bodyMachine;
 
-        private List<AISkillDriver> followDrivers;
-        private List<AISkillDriver> attackDrivers;
+        public List<string> followDrivers = new List<string>();
+        public List<string> attackDrivers = new List<string>();
+
+        private AISkillDriver[] aISkillDrivers;
 
         protected void Start()
         {
-            followDrivers = base.GetComponent<SquallAIModes>().followDrivers;
-            attackDrivers = base.GetComponent<SquallAIModes>().attackDrivers;
-            weaponMachine = EntityStateMachine.FindByCustomName(base.gameObject, "Weapon");
             masterPrefab = base.GetComponent<CharacterBody>().master.gameObject;
+            aISkillDrivers = masterPrefab.GetComponents<AISkillDriver>();
             baseAI = masterPrefab.GetComponent<BaseAI>();
+            weaponMachine = EntityStateMachine.FindByCustomName(base.gameObject, "Weapon");
             bodyMachine = EntityStateMachine.FindByCustomName(base.gameObject, "Body");
         }
 
         public void SetTarget(HurtBox target)
         {
-            Log.Warning("Order received");
             HealthComponent healthComponent = target.healthComponent;
             GameObject bodyObject = healthComponent.gameObject;
             if(target && healthComponent && healthComponent.alive && bodyObject)
             {
-                Log.Warning("Changing target to: " + bodyObject.name);
                 baseAI.currentEnemy.gameObject = bodyObject;
                 baseAI.currentEnemy.bestHurtBox = target;
                 baseAI.enemyAttention = baseAI.enemyAttentionDuration;
                 baseAI.targetRefreshTimer = 5f;
                 EnterAttackMode();
-                Log.Warning("Squall target is now: " + baseAI.currentEnemy.gameObject);
                 baseAI.BeginSkillDriver(baseAI.EvaluateSkillDrivers());
             }
         }
@@ -49,9 +47,13 @@ namespace Pathfinder.Components
         private void EnterAttackMode()
         {
             Log.Warning("Squall entering Attack Mode");
-            foreach(AISkillDriver driver in followDrivers)
+            foreach(AISkillDriver driver in aISkillDrivers)
             {
-                driver.enabled = false;
+                if (followDrivers.Contains(driver.customName))
+                {
+                    Log.Warning("Disabling driver: " + driver.customName);
+                    driver.enabled = false;
+                }
             }
         }
     }

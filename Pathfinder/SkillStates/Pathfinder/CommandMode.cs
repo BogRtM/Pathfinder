@@ -17,7 +17,7 @@ namespace Skillstates.Pathfinder
         {
             base.OnEnter();
             tracker = base.GetComponent<CommandTracker>();
-            pathfinderController = base.GetComponent<PathfinderController>();
+            //pathfinderController = base.GetComponent<PathfinderController>();
             tracker.ActivateIndicator();
         }
 
@@ -29,15 +29,16 @@ namespace Skillstates.Pathfinder
             {
                 if ((base.inputBank.skill1.down))// || base.inputBank.skill2.down || base.inputBank.skill3.down || base.inputBank.skill4.down))
                 {
-                    base.StartAimMode(0.2f, false);
-                    base.PlayCrossfade("Gesture, Override", "Point", "Hand.playbackRate", 0.5f, 0.1f);
                     target = tracker.GetTrackingTarget();
-                    if(target)
+                    if (target)
                     {
-                        Log.Warning("Attempting attack command");
-                        pathfinderController.ChooseTarget(target);
+                        this.outer.SetNextState(new IssueCommand() { target = this.target });
                     }
-                    this.outer.SetNextStateToMain();
+                    else
+                    {
+                        Log.Warning("Command failed");
+                        this.outer.SetNextStateToMain();
+                    }
                 }
             }
         }

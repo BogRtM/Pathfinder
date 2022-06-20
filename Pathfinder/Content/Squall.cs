@@ -51,8 +51,6 @@ namespace Pathfinder.Content
         public void InitializeSquall()
         {
             bodyPrefab.AddComponent<SquallController>();
-            bodyPrefab.AddComponent<SquallTracker>();
-            bodyPrefab.AddComponent<SquallAIModes>();
             bodyPrefab.AddComponent<SquallPointer>();
 
             foreach (var i in bodyPrefab.GetComponents<AkEvent>())
@@ -74,7 +72,7 @@ namespace Pathfinder.Content
             baseAI.aimVectorDampTime = 0.01f;
             //baseAI.enemyAttentionDuration = float.PositiveInfinity;
 
-            SquallAIModes aiModes = bodyPrefab.GetComponent<SquallAIModes>();
+            SquallController squallController = bodyPrefab.GetComponent<SquallController>();
             
             #region AI
             foreach (AISkillDriver i in masterPrefab.GetComponentsInChildren<AISkillDriver>())
@@ -106,7 +104,7 @@ namespace Pathfinder.Content
             hardLeash.minUserHealthFraction = float.NegativeInfinity;
             hardLeash.maxUserHealthFraction = float.PositiveInfinity;
             hardLeash.skillSlot = SkillSlot.None;
-            aiModes.followDrivers.Add(hardLeash);
+            squallController.followDrivers.Add(hardLeash.customName);
 
             AISkillDriver softLeash = masterPrefab.AddComponent<AISkillDriver>();
             softLeash.customName = "SoftLeashToLeader";
@@ -132,7 +130,7 @@ namespace Pathfinder.Content
             softLeash.minUserHealthFraction = float.NegativeInfinity;
             softLeash.maxUserHealthFraction = float.PositiveInfinity;
             softLeash.skillSlot = SkillSlot.None;
-            aiModes.followDrivers.Add(softLeash);
+            squallController.followDrivers.Add(softLeash.customName);
 
             AISkillDriver chaseTarget = masterPrefab.AddComponent<AISkillDriver>();
             chaseTarget.customName = "ChaseTarget";
@@ -157,7 +155,7 @@ namespace Pathfinder.Content
             chaseTarget.minUserHealthFraction = float.NegativeInfinity;
             chaseTarget.maxUserHealthFraction = float.PositiveInfinity;
             chaseTarget.skillSlot = SkillSlot.Primary;
-            aiModes.attackDrivers.Add(chaseTarget);
+            squallController.attackDrivers.Add(chaseTarget.customName);
 
             AISkillDriver attackTarget = masterPrefab.AddComponent<AISkillDriver>();
             attackTarget.customName = "StrafeTarget";
@@ -182,7 +180,7 @@ namespace Pathfinder.Content
             attackTarget.minUserHealthFraction = float.NegativeInfinity;
             attackTarget.maxUserHealthFraction = float.PositiveInfinity;
             attackTarget.skillSlot = SkillSlot.Primary;
-            aiModes.attackDrivers.Add(attackTarget);
+            squallController.attackDrivers.Add(attackTarget.customName);
 
             /*
             AISkillDriver hardLeash = masterPrefab.AddComponent<AISkillDriver>();

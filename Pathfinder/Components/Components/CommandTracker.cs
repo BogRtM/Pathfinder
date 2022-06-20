@@ -25,11 +25,11 @@ namespace Pathfinder.Components
         private void Awake()
         {
             trackerPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Huntress/HuntressTrackingIndicator.prefab").WaitForCompletion();
-            trackerPrefab.transform.Find("Core Pip").gameObject.GetComponent<SpriteRenderer>().color = new Color(6f / 255f, 50f / 255f, 15f / 255f);
-            trackerPrefab.transform.Find("Core, Dark").gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+            trackerPrefab.transform.Find("Core Pip").gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+            trackerPrefab.transform.Find("Core, Dark").gameObject.GetComponent<SpriteRenderer>().color = Color.red;
             foreach(SpriteRenderer i in trackerPrefab.transform.Find("Holder").gameObject.GetComponentsInChildren<SpriteRenderer>())
             {
-                i.color = new Color(6f / 255f, 50f / 255f, 15f / 255f);
+                i.color = Color.red;
             }
             this.indicator = new Indicator(base.gameObject, trackerPrefab);
         }
