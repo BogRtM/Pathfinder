@@ -2,6 +2,7 @@
 using Pathfinder.Modules.Survivors;
 using R2API.Utils;
 using RoR2;
+using RoR2.Skills;
 using System.Collections.Generic;
 using System.Security;
 using System.Security.Permissions;
@@ -39,6 +40,8 @@ namespace Pathfinder
 
         public static GameObject squallBodyPrefab;
         public static GameObject squallMasterPrefab;
+
+        public static SkillDef javelinSkill;
 
         private void Awake()
         {

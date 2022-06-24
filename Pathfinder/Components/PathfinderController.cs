@@ -6,6 +6,7 @@ using UnityEngine.AddressableAssets;
 using Pathfinder.Content;
 using RoR2.UI;
 using System.Linq;
+using RoR2.Skills;
 
 namespace Pathfinder.Components
 {
@@ -13,15 +14,25 @@ namespace Pathfinder.Components
     {
         private GameObject summonPrefab;
 
+        private Animator modelAnimator;
+        private SkillLocator skillLocator;
+
         private CharacterMaster falconMaster;
+        private HealthComponent falconHP;
         private CharacterMaster selfMaster;
         private CharacterBody selfBody;
 
         private SquallController squallController;
 
+        public static SkillDef javelinSkill;
+
+        internal bool javelinReady;
+
         private void Awake()
         {
             summonPrefab = PathfinderPlugin.squallMasterPrefab;
+            modelAnimator = base.GetComponent<ModelLocator>().modelTransform.GetComponent<Animator>();
+            skillLocator = base.GetComponent<SkillLocator>();
             //Hooks();
         }
 
@@ -38,13 +49,38 @@ namespace Pathfinder.Components
                 {
                     Log.Warning("Squall is alive");
                     falconMaster = minion;
-                    falconMaster.godMode = true;
+                    if (!falconMaster.godMode) falconMaster.ToggleGod();
                     squallController = minion.bodyInstanceObject.GetComponent<SquallController>();
                     squallController.ownerController = this;
                     return;
                 }
             }
             SpawnFalcon(selfBody);
+        }
+
+        private void FixedUpdate()
+        {
+            
+        }
+
+        public void ReadyJavelin()
+        {
+            javelinReady = true;
+            skillLocator.primary.SetSkillOverride(base.gameObject, javelinSkill, GenericSkill.SkillOverridePriority.Contextual);
+            if(modelAnimator)
+            {
+                modelAnimator.SetLayerWeight(modelAnimator.GetLayerIndex("JavelinReady"), 1f);
+            }
+        }
+
+        public void UnreadyJavelin()
+        {
+            javelinReady = false;
+            skillLocator.primary.UnsetSkillOverride(base.gameObject, javelinSkill, GenericSkill.SkillOverridePriority.Contextual);
+            if (modelAnimator)
+            {
+                modelAnimator.SetLayerWeight(modelAnimator.GetLayerIndex("JavelinReady"), 0f);
+            }
         }
 
         private void SpawnFalcon(CharacterBody characterBody)
@@ -59,8 +95,7 @@ namespace Pathfinder.Components
             
             if(falconMaster = minionSummon.Perform())
             {
-                if(selfMaster.playerCharacterMasterController) falconMaster.godMode = true;
-
+                if (!falconMaster.godMode) falconMaster.ToggleGod();
                 squallController = falconMaster.bodyInstanceObject.GetComponent<SquallController>();
                 squallController.ownerController = this;
                 falconMaster.inventory.CopyItemsFrom(characterBody.inventory);
@@ -83,6 +118,7 @@ namespace Pathfinder.Components
 
         private void Hooks()
         {
+            //On.RoR2.PrimarySkillShurikenBehavior.OnSkillActivated += PrimarySkillShurikenBehavior_OnSkillActivated;
             selfBody.onInventoryChanged += SelfBody_onInventoryChanged;
             selfMaster.onBodyDestroyed += SelfMaster_onBodyDestroyed;
         }
@@ -90,6 +126,7 @@ namespace Pathfinder.Components
         private void SelfMaster_onBodyDestroyed(CharacterBody obj)
         {
             if(falconMaster) falconMaster.godMode = false;
+            falconMaster.TrueKill();
         }
 
         private void SelfBody_onInventoryChanged()

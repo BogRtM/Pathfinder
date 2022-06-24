@@ -4,6 +4,7 @@ using Pathfinder.Components;
 using Pathfinder.Modules;
 using RoR2.Projectile;
 using RoR2;
+using RoR2.Skills;
 
 namespace Skillstates.Pathfinder
 {
@@ -16,6 +17,9 @@ namespace Skillstates.Pathfinder
         private Ray aimRay;
         private Transform leftHand;
 
+        private SkillLocator skillLocator;
+        private PathfinderController controller;
+
         private float fireTime;
         private float throwForce = 150f;
         private bool hasFired = false;
@@ -26,12 +30,13 @@ namespace Skillstates.Pathfinder
         {
             base.OnEnter();
             duration = baseDuration / base.attackSpeedStat;
-            fireTime = duration * 0.2f;
+            fireTime = duration * 0.15f;
             base.StartAimMode(baseDuration + 0.1f, true);
-
+            controller = base.GetComponent<PathfinderController>();
             animator = base.GetModelAnimator();
             aimRay = base.GetAimRay();
             childLocator = base.GetModelChildLocator();
+            skillLocator = base.skillLocator;
 
             leftHand = childLocator.FindChild("HandL");
 
@@ -49,6 +54,8 @@ namespace Skillstates.Pathfinder
                     base.PlayAnimation("Gesture, Override", "JavelinToss", "Hand.playbackRate", duration);
                 }
             }
+
+            controller.UnreadyJavelin();
         }
 
         public override void FixedUpdate()
@@ -76,7 +83,7 @@ namespace Skillstates.Pathfinder
             fireProjectileInfo.damage = 8f * base.damageStat;
             fireProjectileInfo.force = throwForce;
             fireProjectileInfo.owner = base.gameObject;
-            fireProjectileInfo.position = leftHand.position;
+            fireProjectileInfo.position = aimRay.origin; //leftHand.position;
             fireProjectileInfo.rotation = Util.QuaternionSafeLookRotation(aimRay.direction);
             fireProjectileInfo.projectilePrefab = Projectiles.javelinPrefab;
             ProjectileManager.instance.FireProjectile(fireProjectileInfo);

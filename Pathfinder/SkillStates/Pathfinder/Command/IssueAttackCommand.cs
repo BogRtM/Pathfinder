@@ -13,7 +13,12 @@ namespace Skillstates.Pathfinder.Command
         {
             base.OnEnter();
 
-            if(target)
+            if (!pathfinderController.javelinReady)
+                base.PlayCrossfade("Gesture, Override", "Point", "Hand.playbackRate", duration, 0.1f);
+            else
+                base.PlayCrossfade("Gesture, Override", "JavPoint", "Hand.playbackRate", duration, 0.1f);
+
+            if (target)
             {
                 pathfinderController.SetTarget(target);
             }

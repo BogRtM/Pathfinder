@@ -36,7 +36,7 @@ namespace Pathfinder.Modules
 
             overlapComponent.impactEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Merc/ImpactMercFocusedAssault.prefab").WaitForCompletion();
 
-            javelinPrefab.transform.GetChild(0).transform.localScale = new Vector3(2, 2, 2);
+            javelinPrefab.transform.GetChild(0).transform.localScale = new Vector3(3f, 3f, 3f);
         }
 
         internal static void AddProjectile(GameObject projectileToAdd)

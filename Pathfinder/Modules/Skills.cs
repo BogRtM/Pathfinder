@@ -71,10 +71,6 @@ namespace Pathfinder.Modules
             }
         }
 
-        public static void AddEmpowerSkills(GameObject targetPrefab, params SkillDef[] skillDefs)
-        {
-            AddSkillsToFamily(empowerFamily, skillDefs);
-        }
         public static void AddPrimarySkills(GameObject targetPrefab, params SkillDef[] skillDefs)
         {
             AddSkillsToFamily(targetPrefab.GetComponent<SkillLocator>().primary.skillFamily, skillDefs);

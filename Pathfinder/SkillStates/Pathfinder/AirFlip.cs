@@ -1,6 +1,7 @@
 ﻿using EntityStates;
 using EntityStates.Merc;
 using EntityStates.Croco;
+using Pathfinder.Components;
 using UnityEngine;
 using RoR2;
 using System;
@@ -12,13 +13,15 @@ namespace Skillstates.Pathfinder
         private Animator animator;
         Vector3 flipVector;
 
+        private PathfinderController controller;
+
         private OverlapAttack airSpinAttack;
         private OverlapAttack groundSpinAttack;
 
         public static float flipBaseDuration = 0.3f;
-        public static float spinBaseDuration = 1f;
+        public static float spinBaseDuration = 0.7f;
         public static float forwardVelocity = 4f;
-        public static float upwardVelocity = 20f;
+        public static float upwardVelocity = 25f;
         public static float hopVelocity = 5.5f;
 
         private bool isCrit;
@@ -36,9 +39,12 @@ namespace Skillstates.Pathfinder
             animator = base.GetModelAnimator();
 
             flipDuration = flipBaseDuration / base.attackSpeedStat;
-
+            controller = base.GetComponent<PathfinderController>();
             spinDuration = spinBaseDuration / base.attackSpeedStat;
             spinFinishTime = spinDuration * 0.325f;
+
+            animator.SetLayerWeight(animator.GetLayerIndex("AimYaw"), 0f);
+            animator.SetLayerWeight(animator.GetLayerIndex("AimPitch"), 0f);
 
             base.PlayAnimation("FullBody, Override", "AirFlip2", "Flip.playbackRate", flipDuration);
 
@@ -49,6 +55,7 @@ namespace Skillstates.Pathfinder
 
             base.StartAimMode(0.1f, true);
             base.characterMotor.velocity.y = 0f;
+            base.characterMotor.Motor.ForceUnground();
             base.characterMotor.velocity.y += upwardVelocity;
             base.characterMotor.velocity += flipVector * base.moveSpeedStat * forwardVelocity;
 
@@ -71,7 +78,7 @@ namespace Skillstates.Pathfinder
             airSpinAttack.isCrit = isCrit;
             airSpinAttack.forceVector = Vector3.zero;
             airSpinAttack.pushAwayForce = 1f;
-            airSpinAttack.damage = 5f * base.damageStat;
+            airSpinAttack.damage = 3.5f * base.damageStat;
             airSpinAttack.hitBoxGroup = hitBoxGroup;
             airSpinAttack.hitEffectPrefab = GroundLight.comboHitEffectPrefab;
 
@@ -120,7 +127,7 @@ namespace Skillstates.Pathfinder
                 airSpinAttack.Fire();
             }
 
-            if (base.characterMotor.isGrounded && !flipFinished)
+            if (base.characterMotor.isGrounded && !flipFinished && base.fixedAge >= Leap.minimumDuration)
             {
                 StartGroundSpin();
             }
@@ -145,7 +152,10 @@ namespace Skillstates.Pathfinder
         {
             flipFinished = true;
             base.characterMotor.velocity = Vector3.zero;
-            base.PlayAnimation("FullBody, Override", "SpinSweep", "Flip.playbackRate", spinDuration);
+            if(!controller.javelinReady)
+                base.PlayAnimation("FullBody, Override", "SpinSweep", "Flip.playbackRate", spinDuration);
+            else
+                base.PlayAnimation("FullBody, Override", "JavSpinSweep", "Flip.playbackRate", spinDuration);
             Util.PlayAttackSpeedSound(GroundLight.finisherAttackSoundString, base.gameObject, GroundLight.slashPitch);
         }
 
@@ -170,6 +180,9 @@ namespace Skillstates.Pathfinder
         */
         public override void OnExit()
         {
+            animator.SetLayerWeight(animator.GetLayerIndex("AimYaw"), 1f);
+            animator.SetLayerWeight(animator.GetLayerIndex("AimPitch"), 1f);
+
             base.characterBody.bodyFlags &= ~RoR2.CharacterBody.BodyFlags.IgnoreFallDamage;
             //base.characterMotor.airControl = previousAirControl;
             base.OnExit();

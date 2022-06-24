@@ -45,7 +45,7 @@ namespace Skillstates.Squall
                     isCrit = this.isCrit,
                     radius = 2f,
                     damageType = DamageType.Generic,
-                    falloffModel = BulletAttack.FalloffModel.None,
+                    falloffModel = BulletAttack.FalloffModel.DefaultBullet,
                     procCoefficient = 0.3f,
                     maxDistance = 200f,
                     aimVector = aimRay.direction

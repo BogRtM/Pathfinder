@@ -843,7 +843,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2027641462681515320}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.88, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9052393363503133841}
@@ -860,9 +860,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.4473227
-  m_Height: 2.025308
+  m_Height: 2.0599682
   m_Direction: 1
-  m_Center: {x: -0.004627086, y: 0.93667793, z: 0.11643304}
+  m_Center: {x: -0.004627086, y: 0.02096494, z: 0.11643304}
 --- !u!1 &2041809825897866385
 GameObject:
   m_ObjectHideFlags: 0
@@ -3446,6 +3446,8 @@ MonoBehaviour:
     transform: {fileID: 1206975797}
   - name: HandL
     transform: {fileID: 4471793678384845698}
+  - name: BaseBone
+    transform: {fileID: 8514928799314990965}
 --- !u!1 &8709207383909694165
 GameObject:
   m_ObjectHideFlags: 0

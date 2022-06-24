@@ -69,7 +69,7 @@ namespace Pathfinder.Components
                 if (!driver.enabled) continue;
                 if (followDrivers.Contains(driver.customName))
                 {
-                    Log.Warning("Disabling driver: " + driver.customName);
+                    //Log.Warning("Disabling driver: " + driver.customName);
                     driver.enabled = false;
                 }
             }
@@ -85,7 +85,7 @@ namespace Pathfinder.Components
                 if (driver.enabled) continue;
                 if (followDrivers.Contains(driver.customName))
                 {
-                    Log.Warning("Enabling driver: " + driver.customName);
+                    //Log.Warning("Enabling driver: " + driver.customName);
                     driver.enabled = true;
                 }
             }

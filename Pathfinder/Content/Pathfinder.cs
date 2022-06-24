@@ -80,6 +80,20 @@ namespace Pathfinder.Modules.Survivors
         public override void InitializeCharacter()
         {
             base.InitializeCharacter();
+
+            //SetCoreTransform();
+        }
+
+        private void SetCoreTransform()
+        {
+            ChildLocator childLocator = bodyPrefab.GetComponentInChildren<ChildLocator>();
+            GameObject model = childLocator.gameObject;
+            CharacterBody characterBody = bodyPrefab.GetComponent<CharacterBody>();
+
+            Transform baseTransform = childLocator.FindChild("BaseBone");
+            model.GetComponent<CharacterModel>().coreTransform = baseTransform;
+            characterBody.coreTransform = baseTransform;
+            Log.Warning(characterBody.coreTransform);
         }
 
         public override void InitializeUnlockables()
@@ -102,6 +116,12 @@ namespace Pathfinder.Modules.Survivors
 
             Transform kickHitbox = childLocator.FindChild("RisingKick");
             Modules.Prefabs.SetupHitbox(model, kickHitbox, "Kick");
+
+            Transform groundSpin = childLocator.FindChild("GroundSpin");
+            Modules.Prefabs.SetupHitbox(model, groundSpin, "GroundSpin");
+
+            Transform airSpin = childLocator.FindChild("AirSpin");
+            Modules.Prefabs.SetupHitbox(model, airSpin, "AirSpin");
         }
 
         protected override void AddMyComponents()
@@ -140,6 +160,8 @@ namespace Pathfinder.Modules.Survivors
                 stockToConsume = 1
                 //keywordTokens = new string[] { "KEYWORD_AGILE", "KEYWORD_EMPOWER" }
             });
+
+            PathfinderController.javelinSkill = javelinSkillDef;
             /*
             SkillDef lungeSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
@@ -223,7 +245,31 @@ namespace Pathfinder.Modules.Survivors
                 stockToConsume = 1
             });
 
-            Modules.Skills.AddSecondarySkills(bodyPrefab, hasteSkillDef);
+            SkillDef sweepSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "_PATHFINDER_BODY_SECONDARY_SWEEP_NAME",
+                skillNameToken = prefix + "_PATHFINDER_BODY_SECONDARY_SWEEP_NAME",
+                skillDescriptionToken = prefix + "_PATHFINDER_BODY_SECONDARY_SWEEP_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SweepDash)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 2,
+                baseRechargeInterval = 5f,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = true,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1
+            });
+
+            Modules.Skills.AddSecondarySkills(bodyPrefab, hasteSkillDef, sweepSkillDef);
             #endregion
 
             #region Utility
@@ -233,7 +279,7 @@ namespace Pathfinder.Modules.Survivors
                 skillNameToken = prefix + "_PATHFINDER_BODY_UTILITY_POLEVAULT_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_UTILITY_POLEVAULT_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texUtilityIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(FlipEntry)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(AirFlip)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 10f,

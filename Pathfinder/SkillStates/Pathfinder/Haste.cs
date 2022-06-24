@@ -2,6 +2,8 @@
 using UnityEngine;
 using Pathfinder.Modules;
 using Pathfinder.Components;
+using RoR2;
+using RoR2.Skills;
 
 namespace Skillstates.Pathfinder
 {
@@ -10,23 +12,31 @@ namespace Skillstates.Pathfinder
         public static float baseDuration = 0.2f;
         public static float speedCoefficient = 11f;
 
-        private bool startedGrounded;
+        public static SkillDef javelinSkill;
 
-        private EmpowerComponent empowerComponent;
+        private PathfinderController controller;
+
         private Vector3 dashVector;
         private Animator animator;
 
         public override void OnEnter()
         {
             base.OnEnter();
-            empowerComponent = base.gameObject.GetComponent<EmpowerComponent>();
             animator = base.GetModelAnimator();
+            controller = base.GetComponent<PathfinderController>();
             dashVector = ((base.inputBank.moveVector == Vector3.zero) ? base.characterDirection.forward : base.inputBank.moveVector).normalized;
             base.characterDirection.forward = dashVector;
 
-            PlayAnimation("FullBody, Override", "GroundDashF", "Dash.playbackRate", baseDuration);
+            if (!controller.javelinReady)
+            {
+                PlayAnimation("FullBody, Override", "GroundDashF", "Dash.playbackRate", baseDuration);
+                controller.ReadyJavelin();
+            } else
+            {
+                PlayAnimation("FullBody, Override", "JavGroundDash", "Dash.playbackRate", baseDuration);
+            }
+
             
-            empowerComponent.SetPrimary(base.skillLocator);
         }
 
         public override void FixedUpdate()

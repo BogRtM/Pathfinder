@@ -35,7 +35,6 @@ namespace Skillstates.Squall
             if(squallController)
             {
                 target = squallController.GetCurrentTarget();
-                if (target) Log.Warning("Firing missile at: " + target);
             }
 
             FireMissile();
@@ -63,7 +62,7 @@ namespace Skillstates.Squall
             if (base.isAuthority)
             {
                 MissileUtils.FireMissile(base.characterBody.corePosition, base.characterBody, default(ProcChainMask), target,
-                    2.5f * base.damageStat, isCrit, missilePrefab, DamageColorIndex.Default, Vector3.up, 200f, false);
+                    2f * base.damageStat, isCrit, missilePrefab, DamageColorIndex.Default, Vector3.up, 200f, false);
             }
 
             missileCount++;

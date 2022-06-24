@@ -10,15 +10,14 @@ namespace Skillstates.Pathfinder.Command
     {
         protected PathfinderController pathfinderController;
 
-        public static float baseDuration = 0.5f;
+        public static float baseDuration = 1f;
         protected float duration;
         public override void OnEnter()
         {
             base.OnEnter();
             pathfinderController = base.GetComponent<PathfinderController>();
             duration = baseDuration / base.attackSpeedStat;
-            base.StartAimMode(0.2f, false);
-            base.PlayCrossfade("Gesture, Override", "Point", "Hand.playbackRate", 0.5f, 0.1f);
+            base.StartAimMode(duration, false);
         }
 
         public override void FixedUpdate()

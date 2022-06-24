@@ -109,7 +109,7 @@ namespace Pathfinder.Content
             hardLeash.aimType = AISkillDriver.AimType.AtMoveTarget;
             hardLeash.ignoreNodeGraph = false;
             hardLeash.moveInputScale = 1f;
-            hardLeash.driverUpdateTimerOverride = 3f;
+            hardLeash.driverUpdateTimerOverride = 1f;
             hardLeash.shouldSprint = false;
             hardLeash.shouldTapButton = false;
             hardLeash.shouldFireEquipment = false;
@@ -121,16 +121,17 @@ namespace Pathfinder.Content
             hardLeash.skillSlot = SkillSlot.None;
             followDrivers.Add(hardLeash.customName);
 
+            
             AISkillDriver softLeash = masterPrefab.AddComponent<AISkillDriver>();
             softLeash.customName = "FollowSoftLeashToLeader";
-            softLeash.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+            softLeash.movementType = AISkillDriver.MovementType.StrafeMovetarget;
             softLeash.moveTargetType = AISkillDriver.TargetType.CurrentLeader;
             softLeash.activationRequiresAimConfirmation = false;
             softLeash.activationRequiresTargetLoS = false;
             softLeash.selectionRequiresTargetLoS = false;
             softLeash.maxTimesSelected = -1;
             softLeash.maxDistance = float.PositiveInfinity;
-            softLeash.minDistance = 30f;
+            softLeash.minDistance = 40f;
             softLeash.requireSkillReady = false;
             softLeash.aimType = AISkillDriver.AimType.AtCurrentEnemy;
             softLeash.ignoreNodeGraph = false;
@@ -146,6 +147,7 @@ namespace Pathfinder.Content
             softLeash.maxUserHealthFraction = float.PositiveInfinity;
             softLeash.skillSlot = SkillSlot.None;
             followDrivers.Add(softLeash.customName);
+            
 
             AISkillDriver missileChase = masterPrefab.AddComponent<AISkillDriver>();
             missileChase.customName = "AttackMissileChaseM2";
@@ -153,7 +155,7 @@ namespace Pathfinder.Content
             missileChase.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
             missileChase.activationRequiresAimConfirmation = true;
             missileChase.activationRequiresTargetLoS = true;
-            missileChase.selectionRequiresTargetLoS = true;
+            missileChase.selectionRequiresTargetLoS = false;
             missileChase.maxTimesSelected = -1;
             missileChase.maxDistance = 150f;
             missileChase.minDistance = 30f;
@@ -178,7 +180,7 @@ namespace Pathfinder.Content
             missileStrafe.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
             missileStrafe.activationRequiresAimConfirmation = true;
             missileStrafe.activationRequiresTargetLoS = true;
-            missileStrafe.selectionRequiresTargetLoS = true;
+            missileStrafe.selectionRequiresTargetLoS = false;
             missileStrafe.maxTimesSelected = -1;
             missileStrafe.maxDistance = 30f;
             missileStrafe.minDistance = 0f;
@@ -203,7 +205,7 @@ namespace Pathfinder.Content
             chaseTarget.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
             chaseTarget.activationRequiresAimConfirmation = true;
             chaseTarget.activationRequiresTargetLoS = true;
-            chaseTarget.selectionRequiresTargetLoS = true;
+            chaseTarget.selectionRequiresTargetLoS = false;
             chaseTarget.maxTimesSelected = -1;
             chaseTarget.maxDistance = 150f;
             chaseTarget.minDistance = 30f;
@@ -228,7 +230,7 @@ namespace Pathfinder.Content
             attackTarget.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
             attackTarget.activationRequiresAimConfirmation = true;
             attackTarget.activationRequiresTargetLoS = true;
-            attackTarget.selectionRequiresTargetLoS = true;
+            attackTarget.selectionRequiresTargetLoS = false;
             attackTarget.maxTimesSelected = -1;
             attackTarget.maxDistance = 30f;
             attackTarget.minDistance = 0f;
@@ -282,7 +284,7 @@ namespace Pathfinder.Content
             seekOut.selectionRequiresTargetLoS = false;
             seekOut.maxTimesSelected = -1;
             seekOut.maxDistance = float.PositiveInfinity;
-            seekOut.minDistance = float.NegativeInfinity;
+            seekOut.minDistance = 0f;
             seekOut.requireSkillReady = true;
             seekOut.aimType = AISkillDriver.AimType.AtCurrentEnemy;
             seekOut.ignoreNodeGraph = false;
@@ -295,9 +297,10 @@ namespace Pathfinder.Content
             seekOut.maxTargetHealthFraction = Mathf.Infinity;
             seekOut.minUserHealthFraction = float.NegativeInfinity;
             seekOut.maxUserHealthFraction = float.PositiveInfinity;
-            seekOut.skillSlot = SkillSlot.Primary;
+            seekOut.skillSlot = SkillSlot.None;
             attackDrivers.Add(seekOut.customName);
 
+            /*
             AISkillDriver idleAttackMode = masterPrefab.AddComponent<AISkillDriver>();
             idleAttackMode.customName = "IdleInAttackMode";
             idleAttackMode.movementType = AISkillDriver.MovementType.Stop;
@@ -307,7 +310,7 @@ namespace Pathfinder.Content
             idleAttackMode.selectionRequiresTargetLoS = false;
             idleAttackMode.maxTimesSelected = -1;
             idleAttackMode.maxDistance = float.PositiveInfinity;
-            idleAttackMode.minDistance = float.NegativeInfinity;
+            idleAttackMode.minDistance = 0f;
             idleAttackMode.requireSkillReady = true;
             idleAttackMode.aimType = AISkillDriver.AimType.None;
             idleAttackMode.ignoreNodeGraph = false;
@@ -322,6 +325,7 @@ namespace Pathfinder.Content
             idleAttackMode.maxUserHealthFraction = float.PositiveInfinity;
             idleAttackMode.skillSlot = SkillSlot.None;
             attackDrivers.Add(idleAttackMode.customName);
+            */
 
             /*
             AISkillDriver hardLeash = masterPrefab.AddComponent<AISkillDriver>();
