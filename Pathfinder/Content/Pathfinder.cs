@@ -221,23 +221,23 @@ namespace Pathfinder.Modules.Survivors
             #endregion
 
             #region Secondary
-            SkillDef hasteSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            SkillDef pursuitSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "_PATHFINDER_BODY_SECONDARY_HASTE_NAME",
-                skillNameToken = prefix + "_PATHFINDER_BODY_SECONDARY_HASTE_NAME",
-                skillDescriptionToken = prefix + "_PATHFINDER_BODY_SECONDARY_HASTE_DESCRIPTION",
+                skillName = prefix + "_PATHFINDER_BODY_SECONDARY_PURSUIT_NAME",
+                skillNameToken = prefix + "_PATHFINDER_BODY_SECONDARY_PURSUIT_NAME",
+                skillDescriptionToken = prefix + "_PATHFINDER_BODY_SECONDARY_PURSUIT_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(Haste)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(Pursuit)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 2,
                 baseRechargeInterval = 5f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
-                forceSprintDuringState = true,
+                forceSprintDuringState = false,
                 fullRestockOnAssign = true,
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
                 resetCooldownTimerOnUse = false,
-                isCombatSkill = true,
+                isCombatSkill = false,
                 mustKeyPress = false,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
@@ -251,7 +251,7 @@ namespace Pathfinder.Modules.Survivors
                 skillNameToken = prefix + "_PATHFINDER_BODY_SECONDARY_SWEEP_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_SECONDARY_SWEEP_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SweepDash)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(JavelinToss)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 2,
                 baseRechargeInterval = 5f,
@@ -269,15 +269,15 @@ namespace Pathfinder.Modules.Survivors
                 stockToConsume = 1
             });
 
-            Modules.Skills.AddSecondarySkills(bodyPrefab, hasteSkillDef, sweepSkillDef);
+            Modules.Skills.AddSecondarySkills(bodyPrefab, pursuitSkillDef, sweepSkillDef);
             #endregion
 
             #region Utility
             SkillDef polevaultSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "_PATHFINDER_BODY_UTILITY_POLEVAULT_NAME",
-                skillNameToken = prefix + "_PATHFINDER_BODY_UTILITY_POLEVAULT_NAME",
-                skillDescriptionToken = prefix + "_PATHFINDER_BODY_UTILITY_POLEVAULT_DESCRIPTION",
+                skillName = prefix + "_PATHFINDER_BODY_UTILITY_SPIN_NAME",
+                skillNameToken = prefix + "_PATHFINDER_BODY_UTILITY_SPIN_NAME",
+                skillDescriptionToken = prefix + "_PATHFINDER_BODY_UTILITY_SPIN_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texUtilityIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(AirFlip)),
                 activationStateMachineName = "Weapon",
@@ -289,7 +289,7 @@ namespace Pathfinder.Modules.Survivors
                 fullRestockOnAssign = true,
                 interruptPriority = EntityStates.InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
-                isCombatSkill = false,
+                isCombatSkill = true,
                 mustKeyPress = false,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
@@ -322,7 +322,8 @@ namespace Pathfinder.Modules.Survivors
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,
-                stockToConsume = 1
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_ATTACK", "KEYWORD_FOLLOW" }
             });
 
             Modules.Skills.AddSpecialSkills(bodyPrefab, commandSkillDef);

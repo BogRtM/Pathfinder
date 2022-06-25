@@ -25,7 +25,9 @@ namespace Pathfinder.Content
             bodyName = "SquallBody",
             crosshair = Modules.Assets.LoadCrosshair("Standard"),
             moveSpeed = 24f,
-            acceleration = 150f
+            acceleration = 150f,
+            damage = 6f,
+            damageGrowth = 1.2f
         };
 
         public override CustomRendererInfo[] customRendererInfos { get; set; } = new CustomRendererInfo[]
@@ -109,7 +111,7 @@ namespace Pathfinder.Content
             hardLeash.aimType = AISkillDriver.AimType.AtMoveTarget;
             hardLeash.ignoreNodeGraph = false;
             hardLeash.moveInputScale = 1f;
-            hardLeash.driverUpdateTimerOverride = 1f;
+            hardLeash.driverUpdateTimerOverride = -1f;
             hardLeash.shouldSprint = false;
             hardLeash.shouldTapButton = false;
             hardLeash.shouldFireEquipment = false;
@@ -136,7 +138,7 @@ namespace Pathfinder.Content
             softLeash.aimType = AISkillDriver.AimType.AtCurrentEnemy;
             softLeash.ignoreNodeGraph = false;
             softLeash.moveInputScale = 1f;
-            softLeash.driverUpdateTimerOverride = 0.05f;
+            softLeash.driverUpdateTimerOverride = -1f;
             softLeash.shouldSprint = false;
             softLeash.shouldTapButton = false;
             softLeash.shouldFireEquipment = false;

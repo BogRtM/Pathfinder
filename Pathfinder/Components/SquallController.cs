@@ -4,12 +4,14 @@ using RoR2.CharacterAI;
 using System;
 using System.Collections.Generic;
 using Pathfinder.Content;
+using SkillStates.Squall;
 
 namespace Pathfinder.Components
 {
     internal class SquallController : MonoBehaviour
     {
         private GameObject masterPrefab;
+        private TrailRenderer[] trails;
 
         private BaseAI baseAI { get; set; }
         private EntityStateMachine weaponMachine;
@@ -24,14 +26,10 @@ namespace Pathfinder.Components
         internal List<string> attackDrivers = Squall.attackDrivers; //= new List<string>();
 
         private AISkillDriver[] aISkillDrivers;
-
-        /*
         private void Awake()
         {
-            followDrivers = Squall.followDrivers;
-            attackDrivers = Squall.attackDrivers;
+            trails = base.GetComponentsInChildren<TrailRenderer>();
         }
-        */
 
         private void Start()
         {
@@ -73,6 +71,12 @@ namespace Pathfinder.Components
                     driver.enabled = false;
                 }
             }
+
+            foreach(var i in trails)
+            {
+                i.startColor = Color.red;
+                i.endColor = Color.red;
+            }
         }
 
         internal void EnterFollowMode()
@@ -89,6 +93,18 @@ namespace Pathfinder.Components
                     driver.enabled = true;
                 }
             }
+
+            foreach (var i in trails)
+            {
+                i.startColor = Color.blue;
+                i.endColor = Color.blue;
+            }
+        }
+
+        internal void DoSpecialAttack(HurtBox target)
+        {
+            Log.Warning("Special order at squallcontroller");
+            this.weaponMachine.SetInterruptState(new Piledriver() { target = target }, EntityStates.InterruptPriority.Pain);
         }
 
         internal GameObject GetCurrentTarget()

@@ -4,8 +4,7 @@ using Pathfinder.Modules;
 using Pathfinder.Components;
 using RoR2;
 using RoR2.Skills;
-using System;
-using EntityStates.Merc;
+using RoR2.Projectile;
 
 namespace Skillstates.Pathfinder
 {
@@ -13,45 +12,45 @@ namespace Skillstates.Pathfinder
     {
         public static float baseDuration = 0.2f;
         public static float speedCoefficient = 11f;
+        public static float throwForce = 150f;
 
-        private OverlapAttack attack;
+        public static SkillDef javelinSkill;
+
+        private PathfinderController controller;
 
         private Vector3 dashVector;
         private Animator animator;
-
-        private string hitboxString;
+        private Ray aimRay;
 
         public override void OnEnter()
         {
             base.OnEnter();
             animator = base.GetModelAnimator();
+            controller = base.GetComponent<PathfinderController>();
             dashVector = ((base.inputBank.moveVector == Vector3.zero) ? base.characterDirection.forward : base.inputBank.moveVector).normalized;
             base.characterDirection.forward = dashVector;
-            hitboxString = base.characterMotor.isGrounded ? "GroundSpin" : "AirSpin";
 
-            PlayAnimation("FullBody, Override", "SpinSweep", "Flip.playbackRate", baseDuration);
-            Util.PlayAttackSpeedSound(GroundLight.finisherAttackSoundString, base.gameObject, GroundLight.slashPitch);
-
-            Transform modelTransform = base.GetModelTransform();
-            HitBoxGroup hitBoxGroup = null;
-
-            if (modelTransform)
+            if (!controller.javelinReady)
             {
-                hitBoxGroup = Array.Find<HitBoxGroup>(modelTransform.GetComponents<HitBoxGroup>(), (HitBoxGroup element) => element.groupName == hitboxString);
+                PlayAnimation("FullBody, Override", "GroundDashF", "Dash.playbackRate", baseDuration);
+                //controller.ReadyJavelin();
+            }
+            else
+            {
+                PlayAnimation("FullBody, Override", "JavGroundDash", "Dash.playbackRate", baseDuration);
             }
 
-            this.attack = new OverlapAttack();
-            attack.attacker = base.gameObject;
-            attack.inflictor = base.gameObject;
-            attack.damageType = DamageType.Generic;
-            attack.procCoefficient = 1f;
-            attack.teamIndex = base.GetTeam();
-            attack.isCrit = base.RollCrit();
-            attack.forceVector = Vector3.zero;
-            attack.pushAwayForce = 1f;
-            attack.damage = 6f * base.damageStat;
-            attack.hitBoxGroup = hitBoxGroup;
-            attack.hitEffectPrefab = GroundLight.finisherHitEffectPrefab;
+            aimRay = base.GetAimRay();
+
+            FireProjectileInfo fireProjectileInfo = new FireProjectileInfo();
+            fireProjectileInfo.crit = base.RollCrit();
+            fireProjectileInfo.damage = Config.JavelinDamage.Value * base.damageStat;
+            fireProjectileInfo.force = throwForce;
+            fireProjectileInfo.owner = base.gameObject;
+            fireProjectileInfo.position = aimRay.origin; //leftHand.position;
+            fireProjectileInfo.rotation = Util.QuaternionSafeLookRotation(aimRay.direction);
+            fireProjectileInfo.projectilePrefab = Projectiles.javelinPrefab;
+            ProjectileManager.instance.FireProjectile(fireProjectileInfo);
         }
 
         public override void FixedUpdate()
@@ -63,7 +62,6 @@ namespace Skillstates.Pathfinder
                 base.characterDirection.forward = dashVector;
                 base.characterMotor.rootMotion += dashVector * (speedCoefficient * base.moveSpeedStat * Time.fixedDeltaTime);
                 base.characterMotor.velocity.y = 0f;
-                attack.Fire();
             }
 
             if (base.fixedAge >= baseDuration)
@@ -74,6 +72,7 @@ namespace Skillstates.Pathfinder
 
         public override void OnExit()
         {
+            PlayCrossfade("FullBody, Override", "BufferEmpty", 0.2f);
             base.OnExit();
         }
 

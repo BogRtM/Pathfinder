@@ -22,7 +22,7 @@ namespace Skillstates.Pathfinder
         public static float spinBaseDuration = 0.7f;
         public static float forwardVelocity = 4f;
         public static float upwardVelocity = 25f;
-        public static float hopVelocity = 5.5f;
+        public static float hopVelocity = 0.5f;
 
         private bool isCrit;
         private bool flipFinished;
@@ -120,11 +120,14 @@ namespace Skillstates.Pathfinder
                 {
                     flipStopwatch = 0f;
                     airSpinAttack.ResetIgnoredHealthComponents();
+                    hasHopped = false;
                 }
 
-                base.characterBody.isSprinting = true;
-
-                airSpinAttack.Fire();
+                if(airSpinAttack.Fire() && !hasHopped)
+                {
+                    base.SmallHop(base.characterMotor, hopVelocity);
+                    hasHopped = true;
+                }
             }
 
             if (base.characterMotor.isGrounded && !flipFinished && base.fixedAge >= Leap.minimumDuration)

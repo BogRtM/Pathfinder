@@ -12,13 +12,32 @@ namespace Pathfinder.Modules
     {
         internal static GameObject bombPrefab;
         internal static GameObject javelinPrefab;
+        internal static GameObject explodingJavelin;
 
         internal static void RegisterProjectiles()
         {
             CreateBomb();
-            CreateJavelin();
+            //CreateJavelin();
+            CreateExplodingJavelin();
 
             AddProjectile(bombPrefab);
+        }
+
+        private static void CreateExplodingJavelin()
+        {
+            explodingJavelin = CloneProjectilePrefab("ToolbotGrenadeLauncherProjectile", "ExplodingJavelin");
+            Rigidbody rb = explodingJavelin.GetComponent<Rigidbody>();
+            rb.useGravity = true;
+
+            explodingJavelin.GetComponent<Transform>().localScale = new Vector3(2f, 2f, 2f);
+
+            ProjectileSimple simple = explodingJavelin.GetComponent<ProjectileSimple>();
+            simple.desiredForwardSpeed = 200f;
+
+            ProjectileImpactExplosion impactExplosion = explodingJavelin.GetComponent<ProjectileImpactExplosion>();
+            impactExplosion.blastRadius = 12f;
+            impactExplosion.falloffModel = BlastAttack.FalloffModel.None;
+            impactExplosion.impactEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainTazerNova.prefab").WaitForCompletion();
         }
 
         private static void CreateJavelin()

@@ -32,7 +32,7 @@ namespace Skillstates.Pathfinder.Command
                     target = tracker.GetTrackingTarget();
                     if (target)
                     {
-                        this.outer.SetNextState(new IssueAttackCommand() { target = this.target });
+                        this.outer.SetNextState(new AttackCommand() { target = this.target });
                     }
                     else
                     {
@@ -44,7 +44,20 @@ namespace Skillstates.Pathfinder.Command
                 if ((base.inputBank.skill2.down))// || base.inputBank.skill2.down || base.inputBank.skill3.down || base.inputBank.skill4.down))
                 {
                     Log.Warning("Setting Squall to Follow");
-                    this.outer.SetNextState(new IssueFollowCommand());
+                    this.outer.SetNextState(new FollowCommand());
+                }
+
+                if ((base.inputBank.skill4.down))// || base.inputBank.skill2.down || base.inputBank.skill3.down || base.inputBank.skill4.down))
+                {
+                    target = tracker.GetTrackingTarget();
+                    if (target)
+                    {
+                        this.outer.SetNextState(new SpecialCommand() { target = this.target });
+                    }
+                    else
+                    {
+                        this.outer.SetNextStateToMain();
+                    }
                 }
             }
         }

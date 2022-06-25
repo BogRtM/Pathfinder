@@ -25,6 +25,11 @@ namespace Pathfinder.Modules
 
             SkillLocator skillLocator = targetPrefab.GetComponent<SkillLocator>();
 
+            skillLocator.passiveSkill.enabled = true;
+            skillLocator.passiveSkill.skillNameToken = "BOG_PATHFINDER_BODY_PASSIVE_NAME";
+            skillLocator.passiveSkill.skillDescriptionToken = "BOG_PATHFINDER_BODY_PASSIVE_DESCRIPTION";
+            //skillLocator.passiveSkill.keywordToken = new string[] { "KEYWORD_MACHINEGUN", "KEYWORD_MISSILELAUNCHER" };
+
             skillLocator.primary = CreateGenericSkillWithSkillFamily(targetPrefab, "Primary");
             skillLocator.secondary = CreateGenericSkillWithSkillFamily(targetPrefab, "Secondary");
             skillLocator.utility = CreateGenericSkillWithSkillFamily(targetPrefab, "Utility");

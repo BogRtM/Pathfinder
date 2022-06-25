@@ -6,7 +6,7 @@ using Pathfinder;
 
 namespace Skillstates.Pathfinder.Command
 {
-    internal class AttackCommand : BaseIssueCommand
+    internal class SpecialCommand : BaseIssueCommand
     {
         public HurtBox target;
         public override void OnEnter()
@@ -18,9 +18,11 @@ namespace Skillstates.Pathfinder.Command
             else
                 base.PlayCrossfade("Gesture, Override", "JavPoint", "Hand.playbackRate", duration, 0.1f);
 
+            Log.Warning("Special order at PF entity state");
+
             if (target)
             {
-                pathfinderController.AttackOrder(target);
+                pathfinderController.SpecialOrder(target);
             }
         }
     }

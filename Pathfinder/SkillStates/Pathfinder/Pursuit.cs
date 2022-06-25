@@ -7,10 +7,10 @@ using RoR2.Skills;
 
 namespace Skillstates.Pathfinder
 {
-    internal class Haste : BaseState
+    internal class Pursuit : BaseState
     {
         public static float baseDuration = 0.2f;
-        public static float speedCoefficient = 11f;
+        public static float speedCoefficient = 8f;
 
         public static SkillDef javelinSkill;
 

@@ -28,10 +28,13 @@ namespace Pathfinder.Components
 
         internal bool javelinReady;
 
+        private float javelinDuration = 3f;
+        private float javelinTimer;
+
         private void Awake()
         {
             summonPrefab = PathfinderPlugin.squallMasterPrefab;
-            modelAnimator = base.GetComponent<ModelLocator>().modelTransform.GetComponent<Animator>();
+            modelAnimator = base.GetComponentInChildren<Animator>();
             skillLocator = base.GetComponent<SkillLocator>();
             //Hooks();
         }
@@ -60,7 +63,14 @@ namespace Pathfinder.Components
 
         private void FixedUpdate()
         {
-            
+            if (javelinReady)
+            {
+                javelinTimer -= Time.fixedDeltaTime;
+                if(javelinTimer <= 0)
+                {
+                    UnreadyJavelin();
+                }
+            }
         }
 
         public void ReadyJavelin()
@@ -71,6 +81,7 @@ namespace Pathfinder.Components
             {
                 modelAnimator.SetLayerWeight(modelAnimator.GetLayerIndex("JavelinReady"), 1f);
             }
+            javelinTimer = javelinDuration;
         }
 
         public void UnreadyJavelin()
@@ -103,7 +114,7 @@ namespace Pathfinder.Components
             }
         }
 
-        internal void SetTarget(HurtBox target)
+        internal void AttackOrder(HurtBox target)
         {
             if(target && target.healthComponent && target.healthComponent.alive)
             {
@@ -111,9 +122,18 @@ namespace Pathfinder.Components
             }
         }
 
-        internal void SetToFollow()
+        internal void FollowOrder()
         {
+            Vector3 teleportPosition = selfBody.corePosition + new Vector3(0f, 10f, 0f);
+            TeleportHelper.TeleportBody(falconMaster.GetBody(), teleportPosition);
+            EffectManager.SimpleEffect(Run.instance.GetTeleportEffectPrefab(falconMaster.bodyInstanceObject), teleportPosition, Quaternion.identity, true);
             squallController.EnterFollowMode();
+        }
+
+        internal void SpecialOrder(HurtBox target)
+        {
+            Log.Warning("Special order at pathfindercontroller");
+            squallController.DoSpecialAttack(target);
         }
 
         private void Hooks()

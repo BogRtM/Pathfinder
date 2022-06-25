@@ -9,15 +9,25 @@ namespace Pathfinder.Modules
         {
             #region Pathfinder
             string prefix = PathfinderPlugin.DEVELOPER_PREFIX + "_PATHFINDER_BODY_";
+            string squallPrefix = PathfinderPlugin.DEVELOPER_PREFIX + "_SQUALL_BODY_";
 
-            string desc = "The Pathfinder is a nimble hunter who fights alongside his robotic falcon, Squall.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
+            string desc = "The Pathfinder is a crafty, evasive hunter who fights alongside his trusty falcon, Squall.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
+            desc += "< ! > Squall is a versatile companion who can deal high sustained damage, create distractions, and debuff your foes. Command him liberally." + Environment.NewLine + Environment.NewLine;
+            desc += "< ! > Make sure to alternate between Hunter's Pursuit and your javelin toss to maximize your damage." + Environment.NewLine + Environment.NewLine;
+            desc += "< ! > Rending Talons can deal extremely high sustained damage when coupled with items that increase your air time, like Hopoo Feather or Milky Chrysalis." + Environment.NewLine + Environment.NewLine;
+            desc += "< ! > You are quite fragile compared to other melee survivors; stay evasive, and always be prepared to disengage." + Environment.NewLine + Environment.NewLine + Environment.NewLine;
+            desc += "<style=cShrine>Modder's Note:</style> <style=cUserSetting>Thank you so much for showing interest in The Pathfinder! " +
+                "This survivor is still in active development, thus your feedback is highly requested. " +
+                "Please feel free to contact Bog#4770 on Discord with feedback, suggestions, or inquiries. You can also find me on the official Risk of Rain 2 Modding server. " +
+                "Additionally, a config file has been provided for you to play around with his damage values.</style>";
 
-            string outro = "..and so he left, searching for a new identity.";
+
+            string outro = "..and so they left, searching for a new identity.";
             string outroFailure = "..and so he vanished, forever a blank slate.";
 
             LanguageAPI.Add(prefix + "NAME", "Pathfinder");
             LanguageAPI.Add(prefix + "DESCRIPTION", desc);
-            LanguageAPI.Add(prefix + "SUBTITLE", "Twin Raptors");
+            LanguageAPI.Add(prefix + "SUBTITLE", "Birds of Prey");
             LanguageAPI.Add(prefix + "LORE", "sample lore");
             LanguageAPI.Add(prefix + "OUTRO_FLAVOR", outro);
             LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);
@@ -28,22 +38,30 @@ namespace Pathfinder.Modules
             #endregion
 
             #region Passive
-            LanguageAPI.Add(prefix + "PASSIVE_NAME", "Squall");
-            LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", "Sample text.");
+            LanguageAPI.Add(prefix + "PASSIVE_NAME", "Robot Falcon: Squall");
+            LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", "You are accompanied by your falcon: Squall. Squall inherits your items, " +
+                "and comes equipped with <style=cIsDamage>machine guns</style> and a <style=cIsDamage>missile launcher</style>.");
             #endregion
 
             #region Keywords
             LanguageAPI.Add("KEYWORD_EMPOWER", "<style=cKeywordName>Empower</style><style=cSub>Upgrades the next usage of your primary skill.</style>");
+            //LanguageAPI.Add("KEYWORD_MACHINEGUN", $"<style=cKeywordName>Machine Gun</style><style=cSub>Shoot for 2x<style=cIsDamage>{Config.SquallGunDamage.Value}% damage</style>. </style>");
+            //LanguageAPI.Add("KEYWORD_MISSILELAUNCHER", $"<style=cKeywordName>Missile Launcher</style><style=cSub>Fire a volley of missilles for 4xx<style=cIsDamage>{Config.SquallMissileDamage.Value}% damage</style>. </style>");
+            LanguageAPI.Add("KEYWORD_ATTACK", "<style=cIsDamage>[ Attack ]</style>" + Environment.NewLine +
+                "<style=cSub>Redirect Squall's attention to target enemy, and set him to Attack Mode. " +
+                "In Attack Mode, Squall will attack more aggressively, and seek out enemies by himself.</style>");
+            LanguageAPI.Add("KEYWORD_FOLLOW", "<style=cIsUtility>[ Follow ]</style>" + Environment.NewLine +
+                "<style=cSub>Teleport Squall to yourself, and set him to Follow Mode. In Follow Mode, Squall will prioritize staying close to you.");
             #endregion
 
             #region Primary
             LanguageAPI.Add(prefix + "PRIMARY_THRUST_NAME", "Thrust");
-            LanguageAPI.Add(prefix + "PRIMARY_THRUST_DESCRIPTION", Helpers.agilePrefix + $"Thrust forward for <style=cIsDamage>{100f * StaticValues.swordDamageCoefficient}% damage</style>.");
+            LanguageAPI.Add(prefix + "PRIMARY_THRUST_DESCRIPTION", $"Thrust your spear forward for <style=cIsDamage>{100f * Config.ThrustDamage.Value}% damage</style>.");
             #endregion
 
             #region Empower
-            LanguageAPI.Add(prefix + "EMPOWER_JAVELIN_NAME", "Javelin Toss");
-            LanguageAPI.Add(prefix + "EMPOWER_JAVELIN_DESCRIPTION", "Throw a <style=cIsUtility>piercing</style> javelin for <style=cIsDamage>400% damage</style>.");
+            LanguageAPI.Add(prefix + "SECONDARY_JAVELIN_NAME", "Javelin Toss");
+            LanguageAPI.Add(prefix + "EMPOWER_JAVELIN_DESCRIPTION", "Throw an <style=cIsUtility>exploding</style> javelin for <style=cIsDamage>{}% damage</style>.");
 
             LanguageAPI.Add(prefix + "EMPOWER_COMBO_NAME", "Rending Talons");
             LanguageAPI.Add(prefix + "EMPOWER_COMBO_DESCRIPTION", "Perform a 3-hit combo for <style=cIsDamage>2x200% + 1x300% damage</style>.");
@@ -53,18 +71,21 @@ namespace Pathfinder.Modules
             #endregion
 
             #region Secondary
-            LanguageAPI.Add(prefix + "SECONDARY_HASTE_NAME", "Hunter's Haste");
-            LanguageAPI.Add(prefix + "SECONDARY_HASTE_DESCRIPTION", $"Dash a short distance and <style=cIsUtility>Empower</style> your next Primary skill.");
+            LanguageAPI.Add(prefix + "SECONDARY_PURSUIT_NAME", "Hunter's Pursuit");
+            LanguageAPI.Add(prefix + "SECONDARY_PURSUIT_DESCRIPTION", $"<style=cIsUtility>Dash</style> a short distance. The next primary skill used within three seconds will throw an " +
+                $"<style=cIsUtility>exploding</style> javelin for <style=cIsDamage>{100f * Config.JavelinDamage.Value}% damage</style>.");
             #endregion
 
             #region Utility
-            LanguageAPI.Add(prefix + "UTILITY_POLEVAULT_NAME", "Polevault");
-            LanguageAPI.Add(prefix + "UTILITY_POLEVAULT_DESCRIPTION", "Polevault high into the air");
+            LanguageAPI.Add(prefix + "UTILITY_SPIN_NAME", "Rending Talons");
+            LanguageAPI.Add(prefix + "UTILITY_SPIN_DESCRIPTION", $"Rise into the air, spinning rapidly for <style=cIsDamage>{100f * Config.AirSpinDamage.Value}% damage</style>. " +
+                $"Upon landing, perform a horizontal sweep for <style=cIsDamage>{100f * Config.GroundSpinDamage.Value}% damage</style>.");
             #endregion
 
             #region Special
             LanguageAPI.Add(prefix + "SPECIAL_COMMAND_NAME", "Issue Command");
-            LanguageAPI.Add(prefix + "SPECIAL_COMMAND_DESCRIPTION", "Enter Command Mode");
+            LanguageAPI.Add(prefix + "SPECIAL_COMMAND_DESCRIPTION", "Prepare an order for Squall. You can issue an " +
+                "<style=cIsDamage>Attack</style>, <style=cIsUtility>Follow</style>, or <style=cShrine>Special</style> command.");
             #endregion
 
             #region Achievements

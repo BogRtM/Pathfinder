@@ -3,6 +3,7 @@ using EntityStates;
 using EntityStates.Commando.CommandoWeapon;
 using EntityStates.VoidSurvivor.Weapon;
 using RoR2;
+using Pathfinder.Modules;
 
 namespace Skillstates.Squall
 {
@@ -38,15 +39,15 @@ namespace Skillstates.Squall
                     minSpread = 0f,
                     maxSpread = 0f,
                     bulletCount = 2U,
-                    damage = 0.4f * base.damageStat,
+                    damage = 0.5f * base.damageStat,
                     tracerEffectPrefab = FireBarrage.tracerEffectPrefab,
                     force = 1f,
                     hitEffectPrefab = FirePistol2.hitEffectPrefab,
                     isCrit = this.isCrit,
-                    radius = 2f,
+                    radius = 1f,
                     damageType = DamageType.Generic,
                     falloffModel = BulletAttack.FalloffModel.DefaultBullet,
-                    procCoefficient = 0.3f,
+                    procCoefficient = 0.4f,
                     maxDistance = 200f,
                     aimVector = aimRay.direction
                 };
@@ -57,7 +58,6 @@ namespace Skillstates.Squall
 
         public void FireBullet(BulletAttack attack)
         {
-            Util.PlaySound(FireBarrage.fireBarrageSoundString, base.gameObject);
             Util.PlaySound(FireBarrage.fireBarrageSoundString, base.gameObject);
             EffectManager.SimpleMuzzleFlash(FireBarrage.effectPrefab, base.gameObject, "GunL", false);
             EffectManager.SimpleMuzzleFlash(FireBarrage.effectPrefab, base.gameObject, "GunR", false);

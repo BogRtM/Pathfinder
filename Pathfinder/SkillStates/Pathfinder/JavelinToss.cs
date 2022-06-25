@@ -80,12 +80,12 @@ namespace Skillstates.Pathfinder
             hasFired = true;
             FireProjectileInfo fireProjectileInfo = new FireProjectileInfo();
             fireProjectileInfo.crit = base.RollCrit();
-            fireProjectileInfo.damage = 8f * base.damageStat;
+            fireProjectileInfo.damage = Config.JavelinDamage.Value * base.damageStat;
             fireProjectileInfo.force = throwForce;
             fireProjectileInfo.owner = base.gameObject;
             fireProjectileInfo.position = aimRay.origin; //leftHand.position;
             fireProjectileInfo.rotation = Util.QuaternionSafeLookRotation(aimRay.direction);
-            fireProjectileInfo.projectilePrefab = Projectiles.javelinPrefab;
+            fireProjectileInfo.projectilePrefab = Projectiles.explodingJavelin; //Projectiles.javelinPrefab;
             ProjectileManager.instance.FireProjectile(fireProjectileInfo);
         }
 
@@ -98,7 +98,7 @@ namespace Skillstates.Pathfinder
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.PrioritySkill;
+            return InterruptPriority.Skill;
         }
     }
 }

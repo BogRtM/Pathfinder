@@ -1,11 +1,8 @@
 ﻿using UnityEngine;
 using EntityStates;
-using EntityStates.Drone.DroneWeapon;
 using RoR2;
 using Pathfinder.Components;
-using System;
-using System.Linq;
-using Pathfinder;
+using Pathfinder.Modules;
 
 namespace Skillstates.Squall
 {
@@ -62,7 +59,7 @@ namespace Skillstates.Squall
             if (base.isAuthority)
             {
                 MissileUtils.FireMissile(base.characterBody.corePosition, base.characterBody, default(ProcChainMask), target,
-                    2f * base.damageStat, isCrit, missilePrefab, DamageColorIndex.Default, Vector3.up, 200f, false);
+                    0.8f * base.damageStat, isCrit, missilePrefab, DamageColorIndex.Default, Vector3.up, 200f, false);
             }
 
             missileCount++;

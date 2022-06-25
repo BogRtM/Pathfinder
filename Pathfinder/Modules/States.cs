@@ -15,7 +15,7 @@ namespace Pathfinder.Modules
             Modules.Content.AddEntityState(typeof(Lunge));
             Modules.Content.AddEntityState(typeof(Sweep));
 
-            Modules.Content.AddEntityState(typeof(Haste));
+            Modules.Content.AddEntityState(typeof(Pursuit));
 
             Modules.Content.AddEntityState(typeof(AirFlip));
         }

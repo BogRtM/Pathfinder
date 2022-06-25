@@ -9,10 +9,12 @@ namespace Pathfinder.Modules
         // armor buff gained during roll
         internal static BuffDef armorBuff;
         internal static BuffDef empowerBuff;
+        //internal static BuffDef markDebuff;
 
         internal static void RegisterBuffs()
         {
             empowerBuff = AddNewBuff("EmpowerBuff", null, Color.cyan, false, false);
+            //markDebuff = AddNewBuff("RaptorMark", null, Color.red, false, true);
         }
 
         // simple helper method

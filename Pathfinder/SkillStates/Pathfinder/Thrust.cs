@@ -17,14 +17,15 @@ namespace Skillstates.Pathfinder
         private float duration;
         private float earlyExitTime;
         private float fireTime;
-        private bool hasFired = false;
+
+        private bool hasHopped;
+        private bool hasFired;
         public override void OnEnter()
         {
             base.OnEnter();
             duration = baseDuration / base.attackSpeedStat;
             earlyExitTime = duration * 0.67f;
             fireTime = duration * 0.3f;
-            base.StartAimMode(0.1f + duration, true);
             animator = base.GetModelAnimator();
 
             animator.SetLayerWeight(animator.GetLayerIndex("AimPitch"), 0f);
@@ -67,9 +68,15 @@ namespace Skillstates.Pathfinder
         {
             base.FixedUpdate();
 
-            if(base.fixedAge >= fireTime && !hasFired)
+            base.StartAimMode(0.1f, true);
+
+            if (base.fixedAge >= fireTime && !hasFired)
             {
-                this.attack.Fire();
+                if(this.attack.Fire() && !base.characterMotor.isGrounded && !hasHopped)
+                {
+                    base.SmallHop(base.characterMotor, smallHopVelocity);
+                    hasHopped = true;
+                }
                 hasFired = true;
             }
 
@@ -77,9 +84,7 @@ namespace Skillstates.Pathfinder
             {
                 base.characterBody.isSprinting = false;
                 this.outer.SetNextState(new Thrust());
-            }
-
-            if(base.fixedAge >= this.duration)
+            } else if(base.fixedAge >= this.duration)
             {
                 base.outer.SetNextStateToMain();
             }
@@ -87,7 +92,6 @@ namespace Skillstates.Pathfinder
 
         public override void OnExit()
         {
-            //do thing here
             animator.SetLayerWeight(animator.GetLayerIndex("AimPitch"), 1f);
             base.OnExit();
         }

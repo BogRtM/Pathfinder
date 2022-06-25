@@ -6,7 +6,7 @@ using Pathfinder;
 
 namespace Skillstates.Pathfinder.Command
 {
-    internal class IssueFollowCommand : BaseIssueCommand
+    internal class FollowCommand : BaseIssueCommand
     {
         public override void OnEnter()
         {
@@ -17,7 +17,7 @@ namespace Skillstates.Pathfinder.Command
             else
                 base.PlayCrossfade("Gesture, Override", "JavWave", "Hand.playbackRate", duration, 0.1f);
 
-            pathfinderController.SetToFollow();
+            pathfinderController.FollowOrder();
         }
     }
 }
