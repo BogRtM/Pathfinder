@@ -4,7 +4,7 @@ using RoR2.CharacterAI;
 using System;
 using System.Collections.Generic;
 using Pathfinder.Content;
-using SkillStates.Squall;
+using Skillstates.Squall;
 
 namespace Pathfinder.Components
 {
@@ -16,11 +16,13 @@ namespace Pathfinder.Components
         private BaseAI baseAI { get; set; }
         private EntityStateMachine weaponMachine;
         private EntityStateMachine bodyMachine;
+        private EntityStateMachine missileMachine;
 
         private bool inFollowMode;
         private bool inAttackMode;
 
-        internal PathfinderController ownerController;
+        //internal PathfinderController ownerController;
+        internal GameObject owner;
 
         internal List<string> followDrivers = Squall.followDrivers; //= new List<string>();
         internal List<string> attackDrivers = Squall.attackDrivers; //= new List<string>();
@@ -28,7 +30,7 @@ namespace Pathfinder.Components
         private AISkillDriver[] aISkillDrivers;
         private void Awake()
         {
-            trails = base.GetComponentsInChildren<TrailRenderer>();
+            //trails = base.GetComponentsInChildren<TrailRenderer>();
         }
 
         private void Start()
@@ -38,8 +40,17 @@ namespace Pathfinder.Components
             baseAI = masterPrefab.GetComponent<BaseAI>();
             weaponMachine = EntityStateMachine.FindByCustomName(base.gameObject, "Weapon");
             bodyMachine = EntityStateMachine.FindByCustomName(base.gameObject, "Body");
-            EnterFollowMode();
+            missileMachine = EntityStateMachine.FindByCustomName(base.gameObject, "Missiles");
+        }
 
+        internal void ShootTarget(HealthComponent victim, bool isCrit)
+        {
+            weaponMachine.SetInterruptState(new MountedGuns() { target = victim, isCrit = isCrit }, EntityStates.InterruptPriority.Any);
+        }
+
+        internal void ShootMissile(HealthComponent victim, bool isCrit)
+        {
+            missileMachine.SetInterruptState(new MissileLauncher() { target = victim.gameObject, isCrit = isCrit }, EntityStates.InterruptPriority.Any);
         }
 
         internal void SetTarget(HurtBox target)
@@ -71,12 +82,13 @@ namespace Pathfinder.Components
                     driver.enabled = false;
                 }
             }
-
+            /*
             foreach(var i in trails)
             {
                 i.startColor = Color.red;
                 i.endColor = Color.red;
             }
+            */
         }
 
         internal void EnterFollowMode()
@@ -94,11 +106,14 @@ namespace Pathfinder.Components
                 }
             }
 
-            foreach (var i in trails)
-            {
-                i.startColor = Color.blue;
-                i.endColor = Color.blue;
-            }
+            baseAI.currentEnemy.gameObject = null;
+            baseAI.currentEnemy.bestHurtBox = null;
+            baseAI.BeginSkillDriver(baseAI.EvaluateSkillDrivers());
+        }
+
+        internal void DiveTarget(GameObject target)
+        {
+            weaponMachine.SetInterruptState(new DiveAttack() { target = target }, EntityStates.InterruptPriority.PrioritySkill);
         }
 
         internal void DoSpecialAttack(HurtBox target)

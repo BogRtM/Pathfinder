@@ -16,21 +16,27 @@ namespace Pathfinder.Modules
             desc += "< ! > Make sure to alternate between Hunter's Pursuit and your javelin toss to maximize your damage." + Environment.NewLine + Environment.NewLine;
             desc += "< ! > Rending Talons can deal extremely high sustained damage when coupled with items that increase your air time, like Hopoo Feather or Milky Chrysalis." + Environment.NewLine + Environment.NewLine;
             desc += "< ! > You are quite fragile compared to other melee survivors; stay evasive, and always be prepared to disengage." + Environment.NewLine + Environment.NewLine + Environment.NewLine;
+            
             desc += "<style=cShrine>Modder's Note:</style> <style=cUserSetting>Thank you so much for showing interest in The Pathfinder! " +
-                "This survivor is still in active development, thus your feedback is highly requested. " +
-                "Please feel free to contact Bog#4770 on Discord with feedback, suggestions, or inquiries. You can also find me on the official Risk of Rain 2 Modding server. " +
-                "Additionally, a config file has been provided for you to play around with his damage values.</style>";
+                "This survivor is still in active development, thus many things are liable to change, and your feedback is highly requested;" +
+                "Please feel free to DM <style=cIsUtility>Bog#4770</style> on Discord, or find me on the official Risk of Rain 2 Modding server.</style>";
 
 
             string outro = "..and so they left, searching for a new identity.";
-            string outroFailure = "..and so he vanished, forever a blank slate.";
+            string outroFailure = "..and so they vanished, forever lost to the uncaring wilderness.";
 
+            #region Squall
+            LanguageAPI.Add(squallPrefix + "NAME", "Squall");
+            #endregion
+
+            #region Pathfinder
             LanguageAPI.Add(prefix + "NAME", "Pathfinder");
             LanguageAPI.Add(prefix + "DESCRIPTION", desc);
             LanguageAPI.Add(prefix + "SUBTITLE", "Birds of Prey");
-            LanguageAPI.Add(prefix + "LORE", "sample lore");
+            LanguageAPI.Add(prefix + "LORE", "");
             LanguageAPI.Add(prefix + "OUTRO_FLAVOR", outro);
             LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);
+            #endregion
 
             #region Skins
             LanguageAPI.Add(prefix + "DEFAULT_SKIN_NAME", "Default");
@@ -39,12 +45,11 @@ namespace Pathfinder.Modules
 
             #region Passive
             LanguageAPI.Add(prefix + "PASSIVE_NAME", "Robot Falcon: Squall");
-            LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", "You are accompanied by your falcon: Squall. Squall inherits your items, " +
-                "and comes equipped with <style=cIsDamage>machine guns</style> and a <style=cIsDamage>missile launcher</style>.");
+            LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", "<style=cUserSetting>Squall is currently undergoing a rework; please check back later!</style>");
             #endregion
 
             #region Keywords
-            LanguageAPI.Add("KEYWORD_EMPOWER", "<style=cKeywordName>Empower</style><style=cSub>Upgrades the next usage of your primary skill.</style>");
+            LanguageAPI.Add("KEYWORD_ELECTROCUTE", "<style=cKeywordName>Electrocute</style><style=cSub>Targets have their movespeed reduced by 50%, armor reduced by 20, and take <style=cIsDamage>200% damage</style> per second.</style>");
             //LanguageAPI.Add("KEYWORD_MACHINEGUN", $"<style=cKeywordName>Machine Gun</style><style=cSub>Shoot for 2x<style=cIsDamage>{Config.SquallGunDamage.Value}% damage</style>. </style>");
             //LanguageAPI.Add("KEYWORD_MISSILELAUNCHER", $"<style=cKeywordName>Missile Launcher</style><style=cSub>Fire a volley of missilles for 4xx<style=cIsDamage>{Config.SquallMissileDamage.Value}% damage</style>. </style>");
             LanguageAPI.Add("KEYWORD_ATTACK", "<style=cIsDamage>[ Attack ]</style>" + Environment.NewLine +
@@ -72,7 +77,7 @@ namespace Pathfinder.Modules
 
             #region Secondary
             LanguageAPI.Add(prefix + "SECONDARY_PURSUIT_NAME", "Hunter's Pursuit");
-            LanguageAPI.Add(prefix + "SECONDARY_PURSUIT_DESCRIPTION", $"<style=cIsUtility>Dash</style> a short distance. The next primary skill used within three seconds will throw an " +
+            LanguageAPI.Add(prefix + "SECONDARY_PURSUIT_DESCRIPTION", $"<style=cIsUtility>Dash</style> a short distance. The next time you use your primary skill, throw an " +
                 $"<style=cIsUtility>exploding</style> javelin for <style=cIsDamage>{100f * Config.JavelinDamage.Value}% damage</style>.");
             #endregion
 
@@ -80,12 +85,14 @@ namespace Pathfinder.Modules
             LanguageAPI.Add(prefix + "UTILITY_SPIN_NAME", "Rending Talons");
             LanguageAPI.Add(prefix + "UTILITY_SPIN_DESCRIPTION", $"Rise into the air, spinning rapidly for <style=cIsDamage>{100f * Config.AirSpinDamage.Value}% damage</style>. " +
                 $"Upon landing, perform a horizontal sweep for <style=cIsDamage>{100f * Config.GroundSpinDamage.Value}% damage</style>.");
+
+            LanguageAPI.Add(prefix + "UTILITY_BOLAS_NAME", "Shock Bolas");
+            LanguageAPI.Add(prefix + "UTILITY_BOLAS_DESCRIPTION", "Throw electrically charged bolas, which <style=cIsUtility>shock</style> nearby enemies, and leave behind an <style=cIsUtility>electrocuting</style> field for <style=cIsUtility>10 seconds</style>.");
             #endregion
 
             #region Special
             LanguageAPI.Add(prefix + "SPECIAL_COMMAND_NAME", "Issue Command");
-            LanguageAPI.Add(prefix + "SPECIAL_COMMAND_DESCRIPTION", "Prepare an order for Squall. You can issue an " +
-                "<style=cIsDamage>Attack</style>, <style=cIsUtility>Follow</style>, or <style=cShrine>Special</style> command.");
+            LanguageAPI.Add(prefix + "SPECIAL_COMMAND_DESCRIPTION", "<style=cUserSetting>Squall is currently undergoing a rework; please check back later!</style>");
             #endregion
 
             #region Achievements

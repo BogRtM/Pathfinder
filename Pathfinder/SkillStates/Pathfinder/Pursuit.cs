@@ -26,6 +26,7 @@ namespace Skillstates.Pathfinder
             controller = base.GetComponent<PathfinderController>();
             dashVector = ((base.inputBank.moveVector == Vector3.zero) ? base.characterDirection.forward : base.inputBank.moveVector).normalized;
             base.characterDirection.forward = dashVector;
+            base.characterMotor.velocity *= 0.1f;
 
             if (!controller.javelinReady)
             {
@@ -36,7 +37,6 @@ namespace Skillstates.Pathfinder
                 PlayAnimation("FullBody, Override", "JavGroundDash", "Dash.playbackRate", baseDuration);
             }
 
-            
         }
 
         public override void FixedUpdate()

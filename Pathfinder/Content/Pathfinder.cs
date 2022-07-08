@@ -26,7 +26,7 @@ namespace Pathfinder.Modules.Survivors
             subtitleNameToken = PathfinderPlugin.DEVELOPER_PREFIX + "_PATHFINDER_BODY_SUBTITLE",
 
             characterPortrait = Assets.mainAssetBundle.LoadAsset<Texture>("texPathfinderIcon"),
-            bodyColor = Color.white,
+            bodyColor = new Color((62f / 255f), (162f / 255f), (82f / 255f)),
 
             crosshair = Modules.Assets.LoadCrosshair("Standard"),
             podPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
@@ -63,6 +63,10 @@ namespace Pathfinder.Modules.Survivors
                 new CustomRendererInfo
                 {
                     childName = "Poncho",
+                },
+                new CustomRendererInfo
+                {
+                    childName = "BolasMesh",
                 }
         };
 
@@ -113,9 +117,6 @@ namespace Pathfinder.Modules.Survivors
             
             Transform thrustHitbox = childLocator.FindChild("SpearHitbox");
             Modules.Prefabs.SetupHitbox(model, thrustHitbox, "Spear");
-
-            Transform kickHitbox = childLocator.FindChild("RisingKick");
-            Modules.Prefabs.SetupHitbox(model, kickHitbox, "Kick");
 
             Transform groundSpin = childLocator.FindChild("GroundSpin");
             Modules.Prefabs.SetupHitbox(model, groundSpin, "GroundSpin");
@@ -245,35 +246,11 @@ namespace Pathfinder.Modules.Survivors
                 stockToConsume = 1
             });
 
-            SkillDef sweepSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
-            {
-                skillName = prefix + "_PATHFINDER_BODY_SECONDARY_SWEEP_NAME",
-                skillNameToken = prefix + "_PATHFINDER_BODY_SECONDARY_SWEEP_NAME",
-                skillDescriptionToken = prefix + "_PATHFINDER_BODY_SECONDARY_SWEEP_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(JavelinToss)),
-                activationStateMachineName = "Weapon",
-                baseMaxStock = 2,
-                baseRechargeInterval = 5f,
-                beginSkillCooldownOnSkillEnd = false,
-                canceledFromSprinting = false,
-                forceSprintDuringState = true,
-                fullRestockOnAssign = true,
-                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
-                resetCooldownTimerOnUse = false,
-                isCombatSkill = true,
-                mustKeyPress = false,
-                cancelSprintingOnActivation = false,
-                rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1
-            });
-
-            Modules.Skills.AddSecondarySkills(bodyPrefab, pursuitSkillDef, sweepSkillDef);
+            Modules.Skills.AddSecondarySkills(bodyPrefab, pursuitSkillDef);
             #endregion
 
             #region Utility
-            SkillDef polevaultSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            SkillDef spinSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = prefix + "_PATHFINDER_BODY_UTILITY_SPIN_NAME",
                 skillNameToken = prefix + "_PATHFINDER_BODY_UTILITY_SPIN_NAME",
@@ -282,7 +259,7 @@ namespace Pathfinder.Modules.Survivors
                 activationState = new EntityStates.SerializableEntityStateType(typeof(AirFlip)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 10f,
+                baseRechargeInterval = 8f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -297,7 +274,32 @@ namespace Pathfinder.Modules.Survivors
                 stockToConsume = 1
             });
 
-            Modules.Skills.AddUtilitySkills(bodyPrefab, polevaultSkillDef);
+            SkillDef bolaSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "_PATHFINDER_BODY_UTILITY_BOLAS_NAME",
+                skillNameToken = prefix + "_PATHFINDER_BODY_UTILITY_BOLAS_NAME",
+                skillDescriptionToken = prefix + "_PATHFINDER_BODY_UTILITY_BOLAS_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(ThrowBolas)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 22f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = true,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] {"KEYWORD_ELECTROCUTE"}
+            });
+
+            Modules.Skills.AddUtilitySkills(bodyPrefab, bolaSkillDef, spinSkillDef);
             #endregion
 
             #region Special
@@ -310,7 +312,7 @@ namespace Pathfinder.Modules.Survivors
                 activationState = new EntityStates.SerializableEntityStateType(typeof(CommandMode)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 1f,
+                baseRechargeInterval = 10f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,

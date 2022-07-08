@@ -8,31 +8,22 @@ namespace Skillstates.Squall
 {
     internal class MissileLauncher : BaseState
     {
-        private GameObject target;
+        public GameObject target;
+        public bool isCrit;
+
         private GameObject missilePrefab;
         private SquallController squallController;
 
-        public static float baseDuration = 0.6f;
+        public static float baseDuration = 0.1f;
         public static int maxMissileCount = 4;
 
         private float duration;
-        private float fireTimer;
-        private float fireStopWatch;
-        private int missileCount;
-        private bool isCrit;
         public override void OnEnter()
         {
             base.OnEnter();
             duration = baseDuration / base.attackSpeedStat;
-            fireTimer = duration / (maxMissileCount - 1);
             isCrit = base.RollCrit();
             missilePrefab = GlobalEventManager.CommonAssets.missilePrefab;
-            squallController = base.GetComponent<SquallController>();
-
-            if(squallController)
-            {
-                target = squallController.GetCurrentTarget();
-            }
 
             FireMissile();
         }
@@ -41,14 +32,7 @@ namespace Skillstates.Squall
         {
             base.FixedUpdate();
 
-            fireStopWatch += Time.fixedDeltaTime;
-            if(fireStopWatch >= fireTimer && missileCount < maxMissileCount)
-            {
-                fireStopWatch = 0f;
-                FireMissile();
-            }
-
-            if (base.fixedAge >= duration && missileCount >= maxMissileCount)
+            if (base.fixedAge >= duration)
             {
                 this.outer.SetNextStateToMain();
             }
@@ -59,10 +43,8 @@ namespace Skillstates.Squall
             if (base.isAuthority)
             {
                 MissileUtils.FireMissile(base.characterBody.corePosition, base.characterBody, default(ProcChainMask), target,
-                    0.8f * base.damageStat, isCrit, missilePrefab, DamageColorIndex.Default, Vector3.up, 200f, false);
+                    1f * base.damageStat, isCrit, missilePrefab, DamageColorIndex.Default, Vector3.up, 200f, false);
             }
-
-            missileCount++;
         }
 
         public override void OnExit()
@@ -72,7 +54,7 @@ namespace Skillstates.Squall
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.PrioritySkill;
+            return InterruptPriority.Skill;
         }
     }
 }

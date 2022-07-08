@@ -1,8 +1,11 @@
 ﻿using RoR2;
+using R2API;
 using EntityStates;
 using EntityStates.Merc;
 using UnityEngine;
 using System;
+using Pathfinder;
+using Pathfinder.Modules;
 
 namespace Skillstates.Pathfinder
 {
@@ -10,6 +13,7 @@ namespace Skillstates.Pathfinder
     {
         private Animator animator;
         private OverlapAttack attack;
+        private ChildLocator childLocator;
 
         public static float baseDuration = 0.8f;
         public static float smallHopVelocity = 5.5f;
@@ -27,19 +31,20 @@ namespace Skillstates.Pathfinder
             earlyExitTime = duration * 0.67f;
             fireTime = duration * 0.3f;
             animator = base.GetModelAnimator();
-
+            //childLocator = base.GetModelChildLocator();
             animator.SetLayerWeight(animator.GetLayerIndex("AimPitch"), 0f);
 
+            /*
             if (!animator.GetBool("isMoving") && animator.GetBool("isGrounded"))
             {
                 //Log.Warning("FullBody");
-                base.PlayAnimation("FullBody, Override", "Thrust", "Thrust.playbackRate", duration);
+                //base.PlayAnimation("FullBody, Override", "Thrust", "Thrust.playbackRate", duration);
             }
             else
             {
-                //Log.Warning("Gesture");
-                base.PlayAnimation("Gesture, Override", "Thrust", "Thrust.playbackRate", duration);
-            }
+            */
+            base.PlayAnimation("Gesture, Override", "Thrust", "Thrust.playbackRate", duration);
+            
 
             Transform modelTransform = base.GetModelTransform();
             HitBoxGroup hitBoxGroup = null;
@@ -61,7 +66,7 @@ namespace Skillstates.Pathfinder
             attack.damage = 2.8f * base.damageStat;
             attack.hitBoxGroup = hitBoxGroup;
             attack.hitEffectPrefab = GroundLight.comboHitEffectPrefab;
-
+            
         }
 
         public override void FixedUpdate()
@@ -70,8 +75,10 @@ namespace Skillstates.Pathfinder
 
             base.StartAimMode(0.1f, true);
 
-            if (base.fixedAge >= fireTime && !hasFired)
+            if (base.fixedAge >= fireTime && !hasFired && base.isAuthority)
             {
+                EffectManager.SimpleMuzzleFlash(Assets.thrustEffect, base.gameObject, "SpearTip", true);
+
                 if(this.attack.Fire() && !base.characterMotor.isGrounded && !hasHopped)
                 {
                     base.SmallHop(base.characterMotor, smallHopVelocity);
@@ -80,11 +87,16 @@ namespace Skillstates.Pathfinder
                 hasFired = true;
             }
 
-            if(base.fixedAge >= earlyExitTime && base.inputBank.skill1.down)
+            if(base.fixedAge >= earlyExitTime)
+            {
+                animator.SetLayerWeight(animator.GetLayerIndex("AimPitch"), 1f);
+            }
+
+            if(base.fixedAge >= earlyExitTime && base.inputBank.skill1.down && base.isAuthority)
             {
                 base.characterBody.isSprinting = false;
                 this.outer.SetNextState(new Thrust());
-            } else if(base.fixedAge >= this.duration)
+            } else if(base.fixedAge >= this.duration && base.isAuthority)
             {
                 base.outer.SetNextStateToMain();
             }
@@ -92,7 +104,6 @@ namespace Skillstates.Pathfinder
 
         public override void OnExit()
         {
-            animator.SetLayerWeight(animator.GetLayerIndex("AimPitch"), 1f);
             base.OnExit();
         }
 

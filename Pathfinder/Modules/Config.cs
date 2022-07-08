@@ -17,8 +17,8 @@ namespace Pathfinder.Modules
         public static void ReadConfig(PathfinderPlugin plugin)
         {
             ThrustDamage = plugin.Config.Bind<float>("Pathfinder", "Thrust Damage Coefficient", 2.8f, "Damage coefficient of Thrust");
-            JavelinDamage = plugin.Config.Bind<float>("Pathfinder", "Javelin Damage Coefficient", 7f, "Damage coefficient of your javelin toss");
-            AirSpinDamage = plugin.Config.Bind<float>("Pathfinder", "Air Spin Damage Coefficient", 3.5f, "Damage coefficient of your aerial spin attack");
+            JavelinDamage = plugin.Config.Bind<float>("Pathfinder", "Javelin Damage Coefficient", 8f, "Damage coefficient of your javelin toss");
+            AirSpinDamage = plugin.Config.Bind<float>("Pathfinder", "Air Spin Damage Coefficient", 2f, "Damage coefficient of your aerial spin attack");
             GroundSpinDamage = plugin.Config.Bind<float>("Pathfinder", "Ground Spin Damage Coefficient", 8f, "Damage coefficient of your ground spin attack");
 
             //SquallGunDamage = plugin.Config.Bind<float>("Squall", "Machine Guns Damage Coefficient", 0.3f, "Damage coefficient of Squall's machine guns. Each attack fires two bullets.");

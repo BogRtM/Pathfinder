@@ -10,7 +10,7 @@ using RoR2.Skills;
 
 namespace Pathfinder.Components
 {
-    internal class PathfinderController : MonoBehaviour
+    internal class PathfinderController : MonoBehaviour //, IOnDamageDealtServerReceiver
     {
         private GameObject summonPrefab;
 
@@ -18,7 +18,6 @@ namespace Pathfinder.Components
         private SkillLocator skillLocator;
 
         private CharacterMaster falconMaster;
-        private HealthComponent falconHP;
         private CharacterMaster selfMaster;
         private CharacterBody selfBody;
 
@@ -28,15 +27,11 @@ namespace Pathfinder.Components
 
         internal bool javelinReady;
 
-        private float javelinDuration = 3f;
-        private float javelinTimer;
-
         private void Awake()
         {
             summonPrefab = PathfinderPlugin.squallMasterPrefab;
             modelAnimator = base.GetComponentInChildren<Animator>();
             skillLocator = base.GetComponent<SkillLocator>();
-            //Hooks();
         }
 
         private void Start()
@@ -54,22 +49,14 @@ namespace Pathfinder.Components
                     falconMaster = minion;
                     if (!falconMaster.godMode) falconMaster.ToggleGod();
                     squallController = minion.bodyInstanceObject.GetComponent<SquallController>();
-                    squallController.ownerController = this;
+                    squallController.owner = base.gameObject;
                     return;
                 }
             }
-            SpawnFalcon(selfBody);
-        }
 
-        private void FixedUpdate()
-        {
-            if (javelinReady)
+            if(NetworkServer.active)
             {
-                javelinTimer -= Time.fixedDeltaTime;
-                if(javelinTimer <= 0)
-                {
-                    UnreadyJavelin();
-                }
+                SpawnFalcon(selfBody);
             }
         }
 
@@ -81,7 +68,6 @@ namespace Pathfinder.Components
             {
                 modelAnimator.SetLayerWeight(modelAnimator.GetLayerIndex("JavelinReady"), 1f);
             }
-            javelinTimer = javelinDuration;
         }
 
         public void UnreadyJavelin()
@@ -108,7 +94,7 @@ namespace Pathfinder.Components
             {
                 if (!falconMaster.godMode) falconMaster.ToggleGod();
                 squallController = falconMaster.bodyInstanceObject.GetComponent<SquallController>();
-                squallController.ownerController = this;
+                squallController.owner = base.gameObject;
                 falconMaster.inventory.CopyItemsFrom(characterBody.inventory);
                 falconMaster.inventory.GiveItem(RoR2Content.Items.MinionLeash);
             }
@@ -122,31 +108,31 @@ namespace Pathfinder.Components
             }
         }
 
+        internal void DiveCommand(HurtBox target)
+        {
+            if (target && target.healthComponent && target.healthComponent.alive)
+            {
+                squallController.DiveTarget(target.healthComponent.gameObject);
+            }
+        }
+
         internal void FollowOrder()
         {
             Vector3 teleportPosition = selfBody.corePosition + new Vector3(0f, 10f, 0f);
             TeleportHelper.TeleportBody(falconMaster.GetBody(), teleportPosition);
             EffectManager.SimpleEffect(Run.instance.GetTeleportEffectPrefab(falconMaster.bodyInstanceObject), teleportPosition, Quaternion.identity, true);
-            squallController.EnterFollowMode();
+            //squallController.EnterFollowMode();
         }
 
         internal void SpecialOrder(HurtBox target)
         {
-            Log.Warning("Special order at pathfindercontroller");
             squallController.DoSpecialAttack(target);
         }
 
         private void Hooks()
         {
-            //On.RoR2.PrimarySkillShurikenBehavior.OnSkillActivated += PrimarySkillShurikenBehavior_OnSkillActivated;
             selfBody.onInventoryChanged += SelfBody_onInventoryChanged;
-            selfMaster.onBodyDestroyed += SelfMaster_onBodyDestroyed;
-        }
-
-        private void SelfMaster_onBodyDestroyed(CharacterBody obj)
-        {
-            if(falconMaster) falconMaster.godMode = false;
-            falconMaster.TrueKill();
+            //selfMaster.onBodyDestroyed += SelfMaster_onBodyDestroyed;
         }
 
         private void SelfBody_onInventoryChanged()
@@ -155,12 +141,14 @@ namespace Pathfinder.Components
                 falconMaster.inventory.CopyItemsFrom(selfBody.inventory);
         }
 
-        private void CharacterBody_onBodyInventoryChangedGlobal(CharacterBody obj)
+        /*
+        public void OnDamageDealtServer(DamageReport damageReport)
         {
-            if(obj.gameObject.GetComponent<PathfinderController>() && falconMaster)
+            if(damageReport.victim.alive)
             {
-                
+                squallController.ShootTarget(damageReport.victim, damageReport.damageInfo.crit);
             }
         }
+        */
     }
 }

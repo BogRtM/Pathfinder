@@ -1,5 +1,6 @@
 ﻿using EntityStates;
 using UnityEngine;
+using UnityEngine.Networking;
 using Pathfinder.Components;
 using Pathfinder.Modules;
 using RoR2.Projectile;
@@ -15,9 +16,6 @@ namespace Skillstates.Pathfinder
         private GameObject shaft;
         private GameObject spearhead;
         private Ray aimRay;
-        private Transform leftHand;
-
-        private SkillLocator skillLocator;
         private PathfinderController controller;
 
         private float fireTime;
@@ -36,9 +34,6 @@ namespace Skillstates.Pathfinder
             animator = base.GetModelAnimator();
             aimRay = base.GetAimRay();
             childLocator = base.GetModelChildLocator();
-            skillLocator = base.skillLocator;
-
-            leftHand = childLocator.FindChild("HandL");
 
             shaft = childLocator.FindChild("Shaft").gameObject;
             spearhead = childLocator.FindChild("Spearhead").gameObject;
@@ -66,7 +61,8 @@ namespace Skillstates.Pathfinder
             {
                 shaft.SetActive(false);
                 spearhead.SetActive(false);
-                this.FireJavelin();
+                
+                if(base.isAuthority) this.FireJavelin();
             }
 
             if (base.fixedAge >= this.duration)

@@ -1,12 +1,14 @@
 ﻿using BepInEx;
 using Pathfinder.Modules.Survivors;
 using R2API.Utils;
+using R2API;
 using RoR2;
 using RoR2.Skills;
 using System.Collections.Generic;
 using System.Security;
 using System.Security.Permissions;
 using UnityEngine;
+using UnityEngine.Networking;
 
 [module: UnverifiableCode]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
@@ -21,7 +23,9 @@ namespace Pathfinder
         "PrefabAPI",
         "LanguageAPI",
         "SoundAPI",
-        "UnlockableAPI"
+        "UnlockableAPI",
+        "DamageAPI",
+        "DotAPI"
     })]
 
     public class PathfinderPlugin : BaseUnityPlugin
@@ -43,6 +47,8 @@ namespace Pathfinder
 
         public static SkillDef javelinSkill;
 
+        internal static DamageAPI.ModdedDamageType marking;
+
         private void Awake()
         {
             instance = this;
@@ -56,8 +62,10 @@ namespace Pathfinder
             Modules.Tokens.AddTokens(); // register name tokens
             Modules.ItemDisplays.PopulateDisplays(); // collect item display prefabs for use in our display rules
 
+            marking = DamageAPI.ReserveDamageType();
+
             //make bird
-            new Pathfinder.Content.Squall().Initialize();
+            new Content.Squall().Initialize();
 
             // survivor initialization
             new Modules.Survivors.Pathfinder().Initialize();
@@ -72,6 +80,34 @@ namespace Pathfinder
         {
             // run hooks here, disabling one is as simple as commenting out the line
             On.RoR2.CharacterBody.RecalculateStats += CharacterBody_RecalculateStats;
+            On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
+        }
+
+        private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
+        {
+            if(self.body.HasBuff(Modules.Buffs.raptorMark) && !damageInfo.rejected)
+            {
+                CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
+                if (attackerBody.bodyIndex == BodyCatalog.FindBodyIndex("PathfinderBody"))
+                {
+                    if(!damageInfo.crit && damageInfo.damage >= (attackerBody.damage * 5f))
+                    {
+                        damageInfo.crit = true;
+                        self.body.RemoveBuff(Modules.Buffs.raptorMark);
+                    } else if (damageInfo.crit)
+                    {
+                        damageInfo.damage *= 2f;
+                        self.body.RemoveBuff(Modules.Buffs.raptorMark);
+                    }
+                }
+            }
+
+            orig(self, damageInfo);
+
+            if(damageInfo.HasModdedDamageType(marking) && !damageInfo.rejected && !self.body.HasBuff(Modules.Buffs.raptorMark))
+            {
+                if(NetworkServer.active) self.body.AddBuff(Modules.Buffs.raptorMark);
+            }
         }
 
         private void CharacterBody_RecalculateStats(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self)
@@ -81,9 +117,10 @@ namespace Pathfinder
             // a simple stat hook, adds armor after stats are recalculated
             if (self)
             {
-                if (self.HasBuff(Modules.Buffs.armorBuff))
+                if (self.HasBuff(Modules.Buffs.electrocute))
                 {
-                    self.armor += 300f;
+                    self.armor -= 20f;
+                    self.moveSpeed *= 0.5f;
                 }
             }
         }

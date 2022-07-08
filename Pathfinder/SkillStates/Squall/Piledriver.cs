@@ -5,7 +5,7 @@ using RoR2;
 using EntityStates;
 using Pathfinder;
 
-namespace SkillStates.Squall
+namespace Skillstates.Squall
 {
     internal class Piledriver : BaseState
     {

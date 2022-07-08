@@ -4,29 +4,29 @@ using EntityStates.Commando.CommandoWeapon;
 using EntityStates.VoidSurvivor.Weapon;
 using RoR2;
 using Pathfinder.Modules;
+using Pathfinder;
 
 namespace Skillstates.Squall
 {
     internal class MountedGuns : BaseState
     {
-        public static float baseDuration = 0.3f;
+        public static float baseDuration = 0.1f;
+
+        public HealthComponent target;
+        public bool isCrit;
 
         private BulletAttack attack;
-        private BulletAttack rightAttack;
 
-        private ChildLocator childLocator;
-        private Ray aimRay;
+        private Vector3 shootVector;
 
         private float duration;
-        private bool isCrit;
 
         public override void OnEnter()
         {
             base.OnEnter();
-            childLocator = base.GetModelChildLocator();
-            aimRay = base.GetAimRay();
-            isCrit = base.RollCrit();
             duration = baseDuration / base.attackSpeedStat;
+
+            shootVector = (target.body.corePosition - base.transform.position).normalized;
 
             if (base.isAuthority)
             {
@@ -34,12 +34,12 @@ namespace Skillstates.Squall
                 {
                     owner = base.gameObject,
                     weapon = base.gameObject,
-                    origin = aimRay.origin,
+                    origin = base.transform.position,
                     muzzleName = "GunL",
                     minSpread = 0f,
                     maxSpread = 0f,
                     bulletCount = 2U,
-                    damage = 0.5f * base.damageStat,
+                    damage = 0.2f * base.damageStat,
                     tracerEffectPrefab = FireBarrage.tracerEffectPrefab,
                     force = 1f,
                     hitEffectPrefab = FirePistol2.hitEffectPrefab,
@@ -47,9 +47,9 @@ namespace Skillstates.Squall
                     radius = 1f,
                     damageType = DamageType.Generic,
                     falloffModel = BulletAttack.FalloffModel.DefaultBullet,
-                    procCoefficient = 0.4f,
+                    procCoefficient = 0.3f,
                     maxDistance = 200f,
-                    aimVector = aimRay.direction
+                    aimVector = shootVector
                 };
 
                 FireBullet(attack);

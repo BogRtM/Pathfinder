@@ -2,6 +2,7 @@
 using R2API;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.AddressableAssets;
 using RoR2;
 using System.IO;
 using System.Collections.Generic;
@@ -18,8 +19,10 @@ namespace Pathfinder.Modules
         // particle effects
         internal static GameObject swordSwingEffect;
         internal static GameObject swordHitImpactEffect;
-
         internal static GameObject bombExplosionEffect;
+
+        internal static GameObject thrustEffect;
+        internal static GameObject lightningRingEffect;
 
         // networked hit sounds
         internal static NetworkSoundEventDef swordHitSoundEvent;
@@ -112,6 +115,31 @@ namespace Pathfinder.Modules
 
             swordSwingEffect = Assets.LoadEffect("HenrySwordSwingEffect", true);
             swordHitImpactEffect = Assets.LoadEffect("ImpactHenrySlash");
+
+            thrustEffect = Assets.LoadEffect("SpearThrust", false);
+
+            lightningRingEffect = mainAssetBundle.LoadAsset<GameObject>("LightningRing");
+            Texture2D blots = mainAssetBundle.LoadAsset<Texture2D>("Blots");
+            Texture2D lightningCloud = Addressables.LoadAssetAsync<Texture2D>("RoR2/Base/Common/texCloudLightning1.png").WaitForCompletion();
+            Material zoneMaterial = Addressables.LoadAssetAsync<Material>("RoR2/Base/TPHealingNova/matGlowFlowerAreaIndicator.mat").WaitForCompletion();
+            //Shader zoneShader = Addressables.LoadAssetAsync<Shader>("RoR2/Base/Shaders/HGCloudRemap.shader").WaitForCompletion();
+
+            lightningRingEffect.AddComponent<NetworkIdentity>();
+
+            var innerRing = lightningRingEffect.transform.GetChild(0).GetComponent<ParticleSystemRenderer>();
+            innerRing.material = zoneMaterial;
+            innerRing.material.SetTexture("_Cloud1Tex", lightningCloud);
+            innerRing.material.SetTexture("_Cloud2Tex", lightningCloud);
+            innerRing.material.SetColor("_TintColor", Color.blue);
+            innerRing.material.SetFloat("_RimPower", 6f);
+            innerRing.material.SetFloat("_RimStrength", 1f);
+            
+            var outerRing = lightningRingEffect.transform.GetChild(0).GetChild(0).GetComponent<ParticleSystemRenderer>();
+            outerRing.material = zoneMaterial;
+            outerRing.material.SetTexture("_Cloud1Tex", lightningCloud);
+            outerRing.material.SetTexture("_Cloud2Tex", lightningCloud);
+            outerRing.material.SetFloat("_RimPower", 7f);
+            outerRing.material.SetColor("_TintColor", Color.green);
         }
 
         private static GameObject CreateTracer(string originalTracerName, string newTracerName)

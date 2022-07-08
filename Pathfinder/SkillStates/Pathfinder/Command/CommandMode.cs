@@ -11,13 +11,11 @@ namespace Skillstates.Pathfinder.Command
         public static float minDuration = 0.1f;
 
         private CommandTracker tracker;
-        private PathfinderController pathfinderController;
         private HurtBox target;
         public override void OnEnter()
         {
             base.OnEnter();
             tracker = base.GetComponent<CommandTracker>();
-            //pathfinderController = base.GetComponent<PathfinderController>();
             tracker.ActivateIndicator();
         }
 
@@ -37,16 +35,17 @@ namespace Skillstates.Pathfinder.Command
                     else
                     {
                         Log.Warning("Command failed");
+                        base.skillLocator.special.AddOneStock();
                         this.outer.SetNextStateToMain();
                     }
                 }
 
                 if ((base.inputBank.skill2.down))// || base.inputBank.skill2.down || base.inputBank.skill3.down || base.inputBank.skill4.down))
                 {
-                    Log.Warning("Setting Squall to Follow");
                     this.outer.SetNextState(new FollowCommand());
+                    base.skillLocator.special.AddOneStock();
                 }
-
+                /*
                 if ((base.inputBank.skill4.down))// || base.inputBank.skill2.down || base.inputBank.skill3.down || base.inputBank.skill4.down))
                 {
                     target = tracker.GetTrackingTarget();
@@ -59,6 +58,7 @@ namespace Skillstates.Pathfinder.Command
                         this.outer.SetNextStateToMain();
                     }
                 }
+                */
             }
         }
 

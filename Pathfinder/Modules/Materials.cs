@@ -73,7 +73,7 @@ namespace Pathfinder.Modules
             {
                 tempMat.EnableKeyword("CUTOUT");
                 //Log.Message(cutOff);
-                tempMat.SetFloat("_Cutoff", 0.94f);
+                tempMat.SetFloat("_Cutoff", (float)cutOff);
             }
 
             //set this keyword in unity if you want your model to show backfaces

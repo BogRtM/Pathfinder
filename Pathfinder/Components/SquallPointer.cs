@@ -25,7 +25,7 @@ namespace Pathfinder.Components
         {
             laserLine.enabled = false;
         }
-
+        
         protected void Update()
         {
             Ray aimRay = inputBank.GetAimRay();
@@ -35,5 +35,6 @@ namespace Pathfinder.Components
             laserLine.SetPosition(0, origin);
             laserLine.SetPosition(1, point);
         }
+        
     }
 }

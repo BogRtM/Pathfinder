@@ -14,20 +14,22 @@ namespace Skillstates.Pathfinder
         Vector3 flipVector;
 
         private PathfinderController controller;
+        private ChildLocator childLocator;
 
         private OverlapAttack airSpinAttack;
         private OverlapAttack groundSpinAttack;
 
         public static float flipBaseDuration = 0.3f;
         public static float spinBaseDuration = 0.7f;
-        public static float forwardVelocity = 4f;
+        public static float forwardVelocity = 1.2f;
         public static float upwardVelocity = 25f;
-        public static float hopVelocity = 0.5f;
+        //public static float baseHopVelocity = 0.5f;
 
         private bool isCrit;
         private bool flipFinished;
         private bool hasHopped;
 
+        private float currentHopVelocity;
         private float flipStopwatch;
         private float flipDuration;
         private float spinStopwatch;
@@ -37,11 +39,12 @@ namespace Skillstates.Pathfinder
         {
             base.OnEnter();
             animator = base.GetModelAnimator();
-
+            childLocator = base.GetModelChildLocator();
             flipDuration = flipBaseDuration / base.attackSpeedStat;
             controller = base.GetComponent<PathfinderController>();
             spinDuration = spinBaseDuration / base.attackSpeedStat;
             spinFinishTime = spinDuration * 0.325f;
+            //currentHopVelocity = baseHopVelocity;
 
             animator.SetLayerWeight(animator.GetLayerIndex("AimYaw"), 0f);
             animator.SetLayerWeight(animator.GetLayerIndex("AimPitch"), 0f);
@@ -49,7 +52,6 @@ namespace Skillstates.Pathfinder
             base.PlayAnimation("FullBody, Override", "AirFlip2", "Flip.playbackRate", flipDuration);
 
             base.characterBody.bodyFlags |= RoR2.CharacterBody.BodyFlags.IgnoreFallDamage;
-            base.characterBody.isSprinting = true;
 
             flipVector = base.inputBank.moveVector;
 
@@ -107,7 +109,7 @@ namespace Skillstates.Pathfinder
                 spinStopwatch += Time.fixedDeltaTime;
             }
 
-            if(spinStopwatch >= this.spinDuration)
+            if(spinStopwatch >= this.spinDuration && base.isAuthority)
             {
                 this.outer.SetNextStateToMain();
             }
@@ -120,14 +122,9 @@ namespace Skillstates.Pathfinder
                 {
                     flipStopwatch = 0f;
                     airSpinAttack.ResetIgnoredHealthComponents();
-                    hasHopped = false;
                 }
 
-                if(airSpinAttack.Fire() && !hasHopped)
-                {
-                    base.SmallHop(base.characterMotor, hopVelocity);
-                    hasHopped = true;
-                }
+                airSpinAttack.Fire();
             }
 
             if (base.characterMotor.isGrounded && !flipFinished && base.fixedAge >= Leap.minimumDuration)

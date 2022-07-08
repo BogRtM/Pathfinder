@@ -15,7 +15,7 @@ namespace Pathfinder.Components
         private TeamComponent teamComponent;
         private HurtBox trackingTarget;
 
-        public float maxTrackingDistance = float.PositiveInfinity;
+        public float maxTrackingDistance = 100f;
         public float maxTrackingAngle = 45f;
         public float trackerUpdateFrequency = 10f;
         private float trackerUpdateStopwatch;
@@ -47,16 +47,6 @@ namespace Pathfinder.Components
         }
 
         private void OnEnable()
-        {
-            this.indicator.active = false;
-        }
-
-        private void OnDisable()
-        {
-            this.indicator.active = false;
-        }
-
-        private void OnDestroy()
         {
             this.indicator.active = false;
         }
