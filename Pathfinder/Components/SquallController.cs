@@ -19,7 +19,7 @@ namespace Pathfinder.Components
         private EntityStateMachine missileMachine;
 
         private bool inFollowMode;
-        private bool inAttackMode;
+        public bool inAttackMode;
 
         //internal PathfinderController ownerController;
         internal GameObject owner;
@@ -30,7 +30,7 @@ namespace Pathfinder.Components
         private AISkillDriver[] aISkillDrivers;
         private void Awake()
         {
-            //trails = base.GetComponentsInChildren<TrailRenderer>();
+            trails = base.GetComponentsInChildren<TrailRenderer>();
         }
 
         private void Start()
@@ -41,11 +41,13 @@ namespace Pathfinder.Components
             weaponMachine = EntityStateMachine.FindByCustomName(base.gameObject, "Weapon");
             bodyMachine = EntityStateMachine.FindByCustomName(base.gameObject, "Body");
             missileMachine = EntityStateMachine.FindByCustomName(base.gameObject, "Missiles");
+
+            EnterFollowMode();
         }
 
         internal void ShootTarget(HealthComponent victim, bool isCrit)
         {
-            weaponMachine.SetInterruptState(new MountedGuns() { target = victim, isCrit = isCrit }, EntityStates.InterruptPriority.Any);
+            //weaponMachine.SetInterruptState(new MountedGuns() { target = victim, isCrit = isCrit }, EntityStates.InterruptPriority.Skill);
         }
 
         internal void ShootMissile(HealthComponent victim, bool isCrit)
@@ -109,11 +111,19 @@ namespace Pathfinder.Components
             baseAI.currentEnemy.gameObject = null;
             baseAI.currentEnemy.bestHurtBox = null;
             baseAI.BeginSkillDriver(baseAI.EvaluateSkillDrivers());
+
+            /*
+            foreach(var i in trails)
+            {
+                i.startColor = Color.blue;
+                i.endColor = Color.blue;
+            }
+            */
         }
 
         internal void DiveTarget(GameObject target)
         {
-            weaponMachine.SetInterruptState(new DiveAttack() { target = target }, EntityStates.InterruptPriority.PrioritySkill);
+            bodyMachine.SetInterruptState(new DiveAttack() { target = target }, EntityStates.InterruptPriority.PrioritySkill);
         }
 
         internal void DoSpecialAttack(HurtBox target)

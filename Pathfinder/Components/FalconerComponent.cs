@@ -42,10 +42,8 @@ namespace Pathfinder.Components
             var minions = CharacterMaster.readOnlyInstancesList.Where(el => el.minionOwnership.ownerMaster == selfMaster);
             foreach(CharacterMaster minion in minions)
             {
-                Log.Warning(minion.name);
                 if (minion.masterIndex == MasterCatalog.FindMasterIndex(summonPrefab))
                 {
-                    Log.Warning("Squall is alive");
                     falconMaster = minion;
                     if (!falconMaster.godMode) falconMaster.ToggleGod();
                     squallController = minion.bodyInstanceObject.GetComponent<SquallController>();
@@ -56,7 +54,7 @@ namespace Pathfinder.Components
 
             if(NetworkServer.active)
             {
-                SpawnFalcon(selfBody);
+                //SpawnFalcon(selfBody);
             }
         }
 
@@ -121,7 +119,7 @@ namespace Pathfinder.Components
             Vector3 teleportPosition = selfBody.corePosition + new Vector3(0f, 10f, 0f);
             TeleportHelper.TeleportBody(falconMaster.GetBody(), teleportPosition);
             EffectManager.SimpleEffect(Run.instance.GetTeleportEffectPrefab(falconMaster.bodyInstanceObject), teleportPosition, Quaternion.identity, true);
-            //squallController.EnterFollowMode();
+            squallController.EnterFollowMode();
         }
 
         internal void SpecialOrder(HurtBox target)
@@ -132,7 +130,6 @@ namespace Pathfinder.Components
         private void Hooks()
         {
             selfBody.onInventoryChanged += SelfBody_onInventoryChanged;
-            //selfMaster.onBodyDestroyed += SelfMaster_onBodyDestroyed;
         }
 
         private void SelfBody_onInventoryChanged()
@@ -140,15 +137,17 @@ namespace Pathfinder.Components
             if(falconMaster)
                 falconMaster.inventory.CopyItemsFrom(selfBody.inventory);
         }
-
-        /*
+        
         public void OnDamageDealtServer(DamageReport damageReport)
         {
-            if(damageReport.victim.alive)
+            if(damageReport.damageDealt >= (5f * damageReport.attackerBody.damage))
+            {
+                squallController.ShootMissile(damageReport.victim, damageReport.damageInfo.crit);
+            }
+            else if(damageReport.victim.alive && squallController)
             {
                 squallController.ShootTarget(damageReport.victim, damageReport.damageInfo.crit);
             }
         }
-        */
     }
 }

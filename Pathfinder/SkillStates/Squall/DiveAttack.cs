@@ -32,36 +32,10 @@ namespace Skillstates.Squall
             base.OnEnter();
             squallController = base.GetComponent<SquallController>();
 
-            Chat.AddMessage("Diving now");
-
             if (target) divePosition = target.transform.position;
 
             base.PlayAnimation("FullBody, Override", "DivePrep", "Wing.playbackRate", prepDuration);
-            effect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/LemurianBruiser/OmniExplosionVFXLemurianBruiserFireballImpact.prefab").WaitForCompletion();
-        }
-
-        private GameObject GetBestTarget()
-        {
-            Chat.AddMessage("Searching for target now");
-            List<HurtBox> candidates = new List<HurtBox>();
-
-            search = new SphereSearch();
-            search.origin = squallController.owner.transform.position;
-            search.mask = LayerIndex.entityPrecise.mask;
-            search.radius = searchRadius;
-            search.RefreshCandidates();
-            search.FilterCandidatesByHurtBoxTeam(TeamMask.GetEnemyTeams(base.teamComponent.teamIndex));
-            search.FilterCandidatesByDistinctHurtBoxEntities();
-            search.GetHurtBoxes(candidates);
-            search.ClearCandidates();
-
-            List<HurtBox> orderedList = candidates.OrderBy(e => e.healthComponent.health).ToList();
-
-            GameObject bestTarget = orderedList.Last().healthComponent.gameObject;
-
-            Chat.AddMessage("Diving: " + bestTarget + " - Distance: " + Vector3.Distance(bestTarget.transform.position, search.origin));
-
-            return bestTarget;
+            effect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Scav/OmniExplosionVFXScavCannonImpactExplosion.prefab").WaitForCompletion();
         }
 
         public override void FixedUpdate()

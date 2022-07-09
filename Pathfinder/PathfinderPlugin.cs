@@ -48,6 +48,8 @@ namespace Pathfinder
         public static SkillDef javelinSkill;
 
         internal static DamageAPI.ModdedDamageType marking;
+        internal static DamageAPI.ModdedDamageType squallGun;
+        internal static DamageAPI.ModdedDamageType squallMissile;
 
         private void Awake()
         {
@@ -63,6 +65,8 @@ namespace Pathfinder
             Modules.ItemDisplays.PopulateDisplays(); // collect item display prefabs for use in our display rules
 
             marking = DamageAPI.ReserveDamageType();
+            squallGun = DamageAPI.ReserveDamageType();
+            squallMissile = DamageAPI.ReserveDamageType();
 
             //make bird
             new Content.Squall().Initialize();

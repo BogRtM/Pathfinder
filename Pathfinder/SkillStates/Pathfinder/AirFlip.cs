@@ -35,6 +35,8 @@ namespace Skillstates.Pathfinder
         private float spinStopwatch;
         private float spinDuration;
         private float spinFinishTime;
+
+        private string javString = "";
         public override void OnEnter()
         {
             base.OnEnter();
@@ -152,10 +154,8 @@ namespace Skillstates.Pathfinder
         {
             flipFinished = true;
             base.characterMotor.velocity = Vector3.zero;
-            if(!controller.javelinReady)
-                base.PlayAnimation("FullBody, Override", "SpinSweep", "Flip.playbackRate", spinDuration);
-            else
-                base.PlayAnimation("FullBody, Override", "JavSpinSweep", "Flip.playbackRate", spinDuration);
+            if (controller.javelinReady) javString = "Jav";
+            base.PlayAnimation("FullBody, Override", javString + "SpinSweep", "Flip.playbackRate", spinDuration);
             Util.PlayAttackSpeedSound(GroundLight.finisherAttackSoundString, base.gameObject, GroundLight.slashPitch);
         }
 

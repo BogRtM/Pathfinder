@@ -8,14 +8,14 @@ namespace Skillstates.Pathfinder.Command
 {
     internal class FollowCommand : BaseIssueCommand
     {
+        private string javString = "";
         public override void OnEnter()
         {
             base.OnEnter();
 
-            if(!pathfinderController.javelinReady)
-                base.PlayCrossfade("Gesture, Override", "Wave", "Hand.playbackRate", duration, 0.1f);
-            else
-                base.PlayCrossfade("Gesture, Override", "JavWave", "Hand.playbackRate", duration, 0.1f);
+            if (pathfinderController.javelinReady) javString = "Jav";
+
+            base.PlayCrossfade("Gesture, Override", javString + "Point", "Hand.playbackRate", duration, 0.1f);
 
             pathfinderController.FollowOrder();
         }

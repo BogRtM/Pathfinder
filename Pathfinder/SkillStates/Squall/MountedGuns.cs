@@ -13,11 +13,11 @@ namespace Skillstates.Squall
         public static float baseDuration = 0.1f;
 
         public HealthComponent target;
-        public bool isCrit;
 
         private BulletAttack attack;
 
         private Vector3 shootVector;
+        private Ray aimRay;
 
         private float duration;
 
@@ -26,7 +26,7 @@ namespace Skillstates.Squall
             base.OnEnter();
             duration = baseDuration / base.attackSpeedStat;
 
-            shootVector = (target.body.corePosition - base.transform.position).normalized;
+            aimRay = base.GetAimRay();
 
             if (base.isAuthority)
             {
@@ -34,7 +34,7 @@ namespace Skillstates.Squall
                 {
                     owner = base.gameObject,
                     weapon = base.gameObject,
-                    origin = base.transform.position,
+                    origin = aimRay.origin,
                     muzzleName = "GunL",
                     minSpread = 0f,
                     maxSpread = 0f,
@@ -43,16 +43,27 @@ namespace Skillstates.Squall
                     tracerEffectPrefab = FireBarrage.tracerEffectPrefab,
                     force = 1f,
                     hitEffectPrefab = FirePistol2.hitEffectPrefab,
-                    isCrit = this.isCrit,
+                    stopperMask = LayerIndex.entityPrecise.mask,
+                    isCrit = base.RollCrit(),
                     radius = 1f,
                     damageType = DamageType.Generic,
                     falloffModel = BulletAttack.FalloffModel.DefaultBullet,
                     procCoefficient = 0.3f,
                     maxDistance = 200f,
-                    aimVector = shootVector
+                    aimVector = aimRay.direction
                 };
 
                 FireBullet(attack);
+            }
+        }
+
+        public override void FixedUpdate()
+        {
+            base.FixedUpdate();
+
+            if(base.fixedAge >= this.duration && base.isAuthority)
+            {
+                this.outer.SetNextStateToMain();
             }
         }
 
@@ -62,15 +73,6 @@ namespace Skillstates.Squall
             EffectManager.SimpleMuzzleFlash(FireBarrage.effectPrefab, base.gameObject, "GunL", false);
             EffectManager.SimpleMuzzleFlash(FireBarrage.effectPrefab, base.gameObject, "GunR", false);
             attack.Fire();
-        }
-
-        public override void FixedUpdate()
-        {
-            base.FixedUpdate();
-            if(base.fixedAge >= duration)
-            {
-                this.outer.SetNextStateToMain();
-            }
         }
 
         public override void OnExit()

@@ -112,8 +112,8 @@ namespace Pathfinder.Modules.Survivors
             GameObject model = childLocator.gameObject;
 
             //example of how to create a hitbox
-            //Transform hitboxTransform = childLocator.FindChild("SwordHitbox");
-            //Modules.Prefabs.SetupHitbox(model, hitboxTransform, "Sword");
+            Transform hitboxTransform = childLocator.FindChild("SwordHitbox");
+            Modules.Prefabs.SetupHitbox(model, hitboxTransform, "Sword");
             
             Transform thrustHitbox = childLocator.FindChild("SpearHitbox");
             Modules.Prefabs.SetupHitbox(model, thrustHitbox, "Spear");

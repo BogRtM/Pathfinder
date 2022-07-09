@@ -66,7 +66,8 @@ namespace Pathfinder.Content
             missileMachine.mainStateType = idleStateType;
 
             bodyPrefab.AddComponent<SquallController>();
-            //bodyPrefab.AddComponent<SquallPointer>();
+            bodyPrefab.AddComponent<BatteryComponent>();
+            bodyPrefab.AddComponent<SquallPointer>();
 
             foreach (var i in bodyPrefab.GetComponents<AkEvent>())
             {
@@ -111,8 +112,6 @@ namespace Pathfinder.Content
 
             AddSkillDrivers(masterPrefab);
 
-            
-
             Modules.Content.AddMasterPrefab(masterPrefab);
             PathfinderPlugin.squallMasterPrefab = masterPrefab;
         }
@@ -126,7 +125,7 @@ namespace Pathfinder.Content
             }
 
             AISkillDriver hardLeash = masterPrefab.AddComponent<AISkillDriver>();
-            hardLeash.customName = "FollowHardLeashToLeader";
+            hardLeash.customName = "HardLeashToLeader";
             hardLeash.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
             hardLeash.moveTargetType = AISkillDriver.TargetType.CurrentLeader;
             hardLeash.activationRequiresAimConfirmation = false;
@@ -134,7 +133,7 @@ namespace Pathfinder.Content
             hardLeash.selectionRequiresTargetLoS = false;
             hardLeash.maxTimesSelected = -1;
             hardLeash.maxDistance = float.PositiveInfinity;
-            hardLeash.minDistance = 60f;
+            hardLeash.minDistance = 50f;
             hardLeash.requireSkillReady = false;
             hardLeash.aimType = AISkillDriver.AimType.AtMoveTarget;
             hardLeash.ignoreNodeGraph = false;
@@ -148,35 +147,9 @@ namespace Pathfinder.Content
             hardLeash.minUserHealthFraction = float.NegativeInfinity;
             hardLeash.maxUserHealthFraction = float.PositiveInfinity;
             hardLeash.skillSlot = SkillSlot.None;
-            followDrivers.Add(hardLeash.customName);
-
-            AISkillDriver diveAttack = masterPrefab.AddComponent<AISkillDriver>();
-            diveAttack.customName = "DiveBestTarget";
-            diveAttack.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
-            diveAttack.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-            diveAttack.activationRequiresAimConfirmation = false;
-            diveAttack.activationRequiresTargetLoS = false;
-            diveAttack.selectionRequiresTargetLoS = false;
-            diveAttack.maxTimesSelected = -1;
-            diveAttack.maxDistance = 60f;
-            diveAttack.minDistance = 0f;
-            diveAttack.requireSkillReady = true;
-            diveAttack.aimType = AISkillDriver.AimType.AtCurrentEnemy;
-            diveAttack.ignoreNodeGraph = true;
-            diveAttack.moveInputScale = 1f;
-            diveAttack.driverUpdateTimerOverride = 3f;
-            diveAttack.shouldSprint = false;
-            diveAttack.shouldFireEquipment = false;
-            diveAttack.buttonPressType = AISkillDriver.ButtonPressType.Hold;
-            diveAttack.minTargetHealthFraction = Mathf.NegativeInfinity;
-            diveAttack.maxTargetHealthFraction = Mathf.Infinity;
-            diveAttack.minUserHealthFraction = float.NegativeInfinity;
-            diveAttack.maxUserHealthFraction = float.PositiveInfinity;
-            diveAttack.skillSlot = SkillSlot.Primary;
-
 
             AISkillDriver softLeash = masterPrefab.AddComponent<AISkillDriver>();
-            softLeash.customName = "FollowSoftLeashToLeader";
+            softLeash.customName = "SoftLeashToLeader";
             softLeash.movementType = AISkillDriver.MovementType.StrafeMovetarget;
             softLeash.moveTargetType = AISkillDriver.TargetType.CurrentLeader;
             softLeash.activationRequiresAimConfirmation = false;
@@ -184,9 +157,9 @@ namespace Pathfinder.Content
             softLeash.selectionRequiresTargetLoS = false;
             softLeash.maxTimesSelected = -1;
             softLeash.maxDistance = float.PositiveInfinity;
-            softLeash.minDistance = 40f;
+            softLeash.minDistance = 0f;
             softLeash.requireSkillReady = false;
-            softLeash.aimType = AISkillDriver.AimType.AtCurrentEnemy;
+            softLeash.aimType = AISkillDriver.AimType.AtMoveTarget;
             softLeash.ignoreNodeGraph = false;
             softLeash.moveInputScale = 1f;
             softLeash.driverUpdateTimerOverride = -1f;
@@ -199,33 +172,6 @@ namespace Pathfinder.Content
             softLeash.minUserHealthFraction = float.NegativeInfinity;
             softLeash.maxUserHealthFraction = float.PositiveInfinity;
             softLeash.skillSlot = SkillSlot.None;
-            followDrivers.Add(softLeash.customName);
-
-            AISkillDriver idleStrafe = masterPrefab.AddComponent<AISkillDriver>();
-            idleStrafe.customName = "IdleStrafeLeader";
-            idleStrafe.movementType = AISkillDriver.MovementType.StrafeMovetarget;
-            idleStrafe.moveTargetType = AISkillDriver.TargetType.CurrentLeader;
-            idleStrafe.activationRequiresAimConfirmation = false;
-            idleStrafe.activationRequiresTargetLoS = false;
-            idleStrafe.selectionRequiresTargetLoS = false;
-            idleStrafe.maxTimesSelected = -1;
-            idleStrafe.maxDistance = float.PositiveInfinity;
-            idleStrafe.minDistance = 0f;
-            idleStrafe.requireSkillReady = false;
-            idleStrafe.aimType = AISkillDriver.AimType.MoveDirection;
-            idleStrafe.ignoreNodeGraph = false;
-            idleStrafe.moveInputScale = 1f;
-            idleStrafe.driverUpdateTimerOverride = -1f;
-            idleStrafe.shouldSprint = false;
-            idleStrafe.shouldTapButton = false;
-            idleStrafe.shouldFireEquipment = false;
-            idleStrafe.buttonPressType = AISkillDriver.ButtonPressType.Hold;
-            idleStrafe.minTargetHealthFraction = Mathf.NegativeInfinity;
-            idleStrafe.maxTargetHealthFraction = Mathf.Infinity;
-            idleStrafe.minUserHealthFraction = float.NegativeInfinity;
-            idleStrafe.maxUserHealthFraction = float.PositiveInfinity;
-            idleStrafe.skillSlot = SkillSlot.None;
-            followDrivers.Add(idleStrafe.customName);
             #endregion
         }
 

@@ -1,38 +1,22 @@
 ﻿using RoR2;
-using EntityStates;
 using EntityStates.Merc;
 using UnityEngine;
 using System;
-using Pathfinder.Modules;
+using EntityStates;
 
 namespace Skillstates.Pathfinder
 {
-    internal class Thrust : BaseState
+    internal class ThrustBasic : BaseState
     {
-        private Animator animator;
         private OverlapAttack attack;
 
         public static float baseDuration = 0.8f;
-        public static float smallHopVelocity = 5.5f;
 
         private float duration;
-        private float earlyExitTime;
-        private float fireTime;
-
-        private bool hasHopped;
-        private bool hasFired;
-        private bool isCrit;
         public override void OnEnter()
         {
             base.OnEnter();
             duration = baseDuration / base.attackSpeedStat;
-            earlyExitTime = duration * 0.67f;
-            fireTime = duration * 0.3f;
-            animator = base.GetModelAnimator();
-            animator.SetLayerWeight(animator.GetLayerIndex("AimPitch"), 0f);
-
-            base.PlayAnimation("Gesture, Override", "Thrust", "Thrust.playbackRate", duration);
-            
 
             Transform modelTransform = base.GetModelTransform();
             HitBoxGroup hitBoxGroup = null;
@@ -54,37 +38,15 @@ namespace Skillstates.Pathfinder
             attack.damage = 2.8f * base.damageStat;
             attack.hitBoxGroup = hitBoxGroup;
             attack.hitEffectPrefab = GroundLight.comboHitEffectPrefab;
-            
+
+            this.attack.Fire();
         }
 
         public override void FixedUpdate()
         {
             base.FixedUpdate();
 
-            base.StartAimMode(0.1f, true);
-
-            if (base.fixedAge >= fireTime && !hasFired && base.isAuthority)
-            {
-                EffectManager.SimpleMuzzleFlash(Assets.thrustEffect, base.gameObject, "SpearTip", true);
-
-                if(this.attack.Fire() && !base.characterMotor.isGrounded && !hasHopped)
-                {
-                    base.SmallHop(base.characterMotor, smallHopVelocity);
-                    hasHopped = true;
-                }
-                hasFired = true;
-            }
-
-            if(base.fixedAge >= earlyExitTime)
-            {
-                animator.SetLayerWeight(animator.GetLayerIndex("AimPitch"), 1f);
-            }
-
-            if(base.fixedAge >= earlyExitTime && base.inputBank.skill1.down && base.isAuthority)
-            {
-                base.characterBody.isSprinting = false;
-                this.outer.SetNextState(new Thrust());
-            } else if(base.fixedAge >= this.duration && base.isAuthority)
+            if(base.fixedAge >= this.duration && base.isAuthority)
             {
                 base.outer.SetNextStateToMain();
             }
