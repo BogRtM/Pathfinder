@@ -66,8 +66,8 @@ namespace Pathfinder.Content
             missileMachine.mainStateType = idleStateType;
 
             bodyPrefab.AddComponent<SquallController>();
-            bodyPrefab.AddComponent<BatteryComponent>();
-            bodyPrefab.AddComponent<SquallPointer>();
+            bodyPrefab.AddComponent<SquallBatteryComponent>();
+            bodyPrefab.AddComponent<SquallVFXComponent>();
 
             foreach (var i in bodyPrefab.GetComponents<AkEvent>())
             {
@@ -133,9 +133,9 @@ namespace Pathfinder.Content
             hardLeash.selectionRequiresTargetLoS = false;
             hardLeash.maxTimesSelected = -1;
             hardLeash.maxDistance = float.PositiveInfinity;
-            hardLeash.minDistance = 50f;
+            hardLeash.minDistance = 60f;
             hardLeash.requireSkillReady = false;
-            hardLeash.aimType = AISkillDriver.AimType.AtMoveTarget;
+            hardLeash.aimType = AISkillDriver.AimType.AtCurrentLeader;
             hardLeash.ignoreNodeGraph = false;
             hardLeash.moveInputScale = 1f;
             hardLeash.driverUpdateTimerOverride = -1f;
@@ -148,6 +148,31 @@ namespace Pathfinder.Content
             hardLeash.maxUserHealthFraction = float.PositiveInfinity;
             hardLeash.skillSlot = SkillSlot.None;
 
+            AISkillDriver shootMissile = masterPrefab.AddComponent<AISkillDriver>();
+            shootMissile.customName = "SoftLeashToLeader";
+            shootMissile.movementType = AISkillDriver.MovementType.StrafeMovetarget;
+            shootMissile.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            shootMissile.activationRequiresAimConfirmation = false;
+            shootMissile.activationRequiresTargetLoS = true;
+            shootMissile.selectionRequiresTargetLoS = false;
+            shootMissile.maxTimesSelected = -1;
+            shootMissile.maxDistance = 70f;
+            shootMissile.minDistance = 0f;
+            shootMissile.requireSkillReady = true;
+            shootMissile.aimType = AISkillDriver.AimType.AtMoveTarget;
+            shootMissile.ignoreNodeGraph = false;
+            shootMissile.moveInputScale = 1f;
+            shootMissile.driverUpdateTimerOverride = -1f;
+            shootMissile.shouldSprint = false;
+            shootMissile.shouldFireEquipment = false;
+            shootMissile.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+            shootMissile.minTargetHealthFraction = Mathf.NegativeInfinity;
+            shootMissile.maxTargetHealthFraction = Mathf.Infinity;
+            shootMissile.minUserHealthFraction = float.NegativeInfinity;
+            shootMissile.maxUserHealthFraction = float.PositiveInfinity;
+            shootMissile.skillSlot = SkillSlot.Secondary;
+            attackDrivers.Add(shootMissile.customName);
+
             AISkillDriver softLeash = masterPrefab.AddComponent<AISkillDriver>();
             softLeash.customName = "SoftLeashToLeader";
             softLeash.movementType = AISkillDriver.MovementType.StrafeMovetarget;
@@ -156,15 +181,14 @@ namespace Pathfinder.Content
             softLeash.activationRequiresTargetLoS = false;
             softLeash.selectionRequiresTargetLoS = false;
             softLeash.maxTimesSelected = -1;
-            softLeash.maxDistance = float.PositiveInfinity;
+            softLeash.maxDistance = 40f;
             softLeash.minDistance = 0f;
             softLeash.requireSkillReady = false;
-            softLeash.aimType = AISkillDriver.AimType.AtMoveTarget;
+            softLeash.aimType = AISkillDriver.AimType.AtCurrentEnemy;
             softLeash.ignoreNodeGraph = false;
             softLeash.moveInputScale = 1f;
             softLeash.driverUpdateTimerOverride = -1f;
             softLeash.shouldSprint = false;
-            softLeash.shouldTapButton = false;
             softLeash.shouldFireEquipment = false;
             softLeash.buttonPressType = AISkillDriver.ButtonPressType.Hold;
             softLeash.minTargetHealthFraction = Mathf.NegativeInfinity;
@@ -172,6 +196,30 @@ namespace Pathfinder.Content
             softLeash.minUserHealthFraction = float.NegativeInfinity;
             softLeash.maxUserHealthFraction = float.PositiveInfinity;
             softLeash.skillSlot = SkillSlot.None;
+
+            AISkillDriver idleNear = masterPrefab.AddComponent<AISkillDriver>();
+            idleNear.customName = "IdleNearLeader";
+            idleNear.movementType = AISkillDriver.MovementType.Stop;
+            idleNear.moveTargetType = AISkillDriver.TargetType.CurrentLeader;
+            idleNear.activationRequiresAimConfirmation = false;
+            idleNear.activationRequiresTargetLoS = false;
+            idleNear.selectionRequiresTargetLoS = false;
+            idleNear.maxTimesSelected = -1;
+            idleNear.maxDistance = float.PositiveInfinity;
+            idleNear.minDistance = 0f;
+            idleNear.requireSkillReady = false;
+            idleNear.aimType = AISkillDriver.AimType.AtCurrentEnemy;
+            idleNear.ignoreNodeGraph = false;
+            idleNear.moveInputScale = 1f;
+            idleNear.driverUpdateTimerOverride = -1f;
+            idleNear.shouldSprint = false;
+            idleNear.shouldFireEquipment = false;
+            idleNear.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+            idleNear.minTargetHealthFraction = Mathf.NegativeInfinity;
+            idleNear.maxTargetHealthFraction = Mathf.Infinity;
+            idleNear.minUserHealthFraction = float.NegativeInfinity;
+            idleNear.maxUserHealthFraction = float.PositiveInfinity;
+            idleNear.skillSlot = SkillSlot.None;
             #endregion
         }
 

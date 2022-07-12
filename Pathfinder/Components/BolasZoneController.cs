@@ -14,8 +14,6 @@ namespace Pathfinder.Components
         private SphereSearch search;
         private Vector3 position;
 
-        private DotController.DotIndex electrocute = Buffs.electrocuteDoT;
-
         private float radius = 18f;
         private float dotDuration = 2f;
         private float pulseInterval = 1.5f;
@@ -51,7 +49,7 @@ namespace Pathfinder.Components
                     {
                         if(victim.healthComponent && victim.healthComponent.alive)
                         {
-                            InflictElectrocute(victim.healthComponent);
+                            InflictElectrocute(victim.healthComponent.gameObject);
                         }
                     }
 
@@ -60,12 +58,12 @@ namespace Pathfinder.Components
             }
         }
 
-        private void InflictElectrocute(HealthComponent victim)
+        private void InflictElectrocute(GameObject victim)
         {
             InflictDotInfo dotInfo = new InflictDotInfo();
             dotInfo.attackerObject = owner;
-            dotInfo.victimObject = victim.gameObject;
-            dotInfo.dotIndex = electrocute;
+            dotInfo.victimObject = victim;
+            dotInfo.dotIndex = Buffs.electrocuteDoT;
             dotInfo.duration = dotDuration;
             dotInfo.damageMultiplier = 1f;
             DotController.InflictDot(ref dotInfo);

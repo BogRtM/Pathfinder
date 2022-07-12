@@ -11,18 +11,22 @@ namespace Pathfinder.Components
     internal class SquallController : MonoBehaviour
     {
         private GameObject masterPrefab;
-        private TrailRenderer[] trails;
 
         private BaseAI baseAI { get; set; }
+        public GameObject currentTarget { get { return baseAI.currentEnemy.gameObject; } }
+
         private EntityStateMachine weaponMachine;
         private EntityStateMachine bodyMachine;
         private EntityStateMachine missileMachine;
 
-        private bool inFollowMode;
-        public bool inAttackMode;
+        private bool attackMode;
 
-        //internal PathfinderController ownerController;
-        internal GameObject owner;
+        public bool inAttackMode { get { return attackMode; } }
+
+        private SquallBatteryComponent batteryComponent;
+        private SquallVFXComponent squallVFX;
+
+        public GameObject owner;
 
         internal List<string> followDrivers = Squall.followDrivers; //= new List<string>();
         internal List<string> attackDrivers = Squall.attackDrivers; //= new List<string>();
@@ -30,7 +34,8 @@ namespace Pathfinder.Components
         private AISkillDriver[] aISkillDrivers;
         private void Awake()
         {
-            trails = base.GetComponentsInChildren<TrailRenderer>();
+            batteryComponent = base.GetComponent<SquallBatteryComponent>();
+            squallVFX = base.GetComponent<SquallVFXComponent>();
         }
 
         private void Start()
@@ -38,13 +43,13 @@ namespace Pathfinder.Components
             masterPrefab = base.GetComponent<CharacterBody>().master.gameObject;
             aISkillDrivers = masterPrefab.GetComponents<AISkillDriver>();
             baseAI = masterPrefab.GetComponent<BaseAI>();
+
             weaponMachine = EntityStateMachine.FindByCustomName(base.gameObject, "Weapon");
             bodyMachine = EntityStateMachine.FindByCustomName(base.gameObject, "Body");
-            missileMachine = EntityStateMachine.FindByCustomName(base.gameObject, "Missiles");
-
             EnterFollowMode();
         }
 
+        /*
         internal void ShootTarget(HealthComponent victim, bool isCrit)
         {
             //weaponMachine.SetInterruptState(new MountedGuns() { target = victim, isCrit = isCrit }, EntityStates.InterruptPriority.Skill);
@@ -54,6 +59,7 @@ namespace Pathfinder.Components
         {
             missileMachine.SetInterruptState(new MissileLauncher() { target = victim.gameObject, isCrit = isCrit }, EntityStates.InterruptPriority.Any);
         }
+        */
 
         internal void SetTarget(HurtBox target)
         {
@@ -65,46 +71,39 @@ namespace Pathfinder.Components
                 baseAI.currentEnemy.bestHurtBox = target;
                 baseAI.enemyAttention = baseAI.enemyAttentionDuration;
                 baseAI.targetRefreshTimer = 5f;
-                if(!inAttackMode) EnterAttackMode();
                 baseAI.BeginSkillDriver(baseAI.EvaluateSkillDrivers());
             }
         }
 
         internal void EnterAttackMode()
         {
-            inFollowMode = false;
-            inAttackMode = true;
+            if (inAttackMode) return;
+
+            attackMode = true;
             Chat.AddMessage("Entering Attack Mode");
             foreach(AISkillDriver driver in aISkillDrivers)
             {
-                if (!driver.enabled) continue;
-                if (followDrivers.Contains(driver.customName))
+                if (driver.enabled) continue;
+                if (attackDrivers.Contains(driver.customName))
                 {
-                    //Log.Warning("Disabling driver: " + driver.customName);
-                    driver.enabled = false;
+                    driver.enabled = true;
                 }
             }
-            /*
-            foreach(var i in trails)
-            {
-                i.startColor = Color.red;
-                i.endColor = Color.red;
-            }
-            */
+
+            squallVFX.SetTrailColor(Color.red);
         }
 
         internal void EnterFollowMode()
         {
-            inAttackMode = false;
-            inFollowMode = true;
+            attackMode = false;
             Chat.AddMessage("Entering Follow Mode");
             foreach (AISkillDriver driver in aISkillDrivers)
             {
-                if (driver.enabled) continue;
-                if (followDrivers.Contains(driver.customName))
+                if (!driver.enabled) continue;
+                if (attackDrivers.Contains(driver.customName))
                 {
                     //Log.Warning("Enabling driver: " + driver.customName);
-                    driver.enabled = true;
+                    driver.enabled = false;
                 }
             }
 
@@ -112,13 +111,7 @@ namespace Pathfinder.Components
             baseAI.currentEnemy.bestHurtBox = null;
             baseAI.BeginSkillDriver(baseAI.EvaluateSkillDrivers());
 
-            /*
-            foreach(var i in trails)
-            {
-                i.startColor = Color.blue;
-                i.endColor = Color.blue;
-            }
-            */
+            squallVFX.SetTrailColor(Color.blue);
         }
 
         internal void DiveTarget(GameObject target)

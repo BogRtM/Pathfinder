@@ -16,6 +16,9 @@ namespace Pathfinder.Modules
         // the assetbundle to load assets from
         internal static AssetBundle mainAssetBundle;
 
+        //UI
+        internal static GameObject BatteryMeter;
+
         // particle effects
         internal static GameObject swordSwingEffect;
         internal static GameObject swordHitImpactEffect;
@@ -140,6 +143,8 @@ namespace Pathfinder.Modules
             outerRing.material.SetTexture("_Cloud2Tex", lightningCloud);
             outerRing.material.SetFloat("_RimPower", 7f);
             outerRing.material.SetColor("_TintColor", Color.green);
+
+            BatteryMeter = mainAssetBundle.LoadAsset<GameObject>("BatteryMeter");
         }
 
         private static GameObject CreateTracer(string originalTracerName, string newTracerName)

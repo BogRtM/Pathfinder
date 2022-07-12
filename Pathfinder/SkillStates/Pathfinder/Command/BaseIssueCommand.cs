@@ -17,7 +17,7 @@ namespace Skillstates.Pathfinder.Command
             base.OnEnter();
             pathfinderController = base.GetComponent<PathfinderController>();
             duration = baseDuration / base.attackSpeedStat;
-            base.StartAimMode(duration, false);
+            base.StartAimMode(duration + 0.1f, false);
         }
 
         public override void FixedUpdate()

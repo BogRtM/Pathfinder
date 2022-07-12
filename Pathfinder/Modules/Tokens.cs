@@ -11,7 +11,7 @@ namespace Pathfinder.Modules
             string prefix = PathfinderPlugin.DEVELOPER_PREFIX + "_PATHFINDER_BODY_";
             string squallPrefix = PathfinderPlugin.DEVELOPER_PREFIX + "_SQUALL_BODY_";
 
-            string desc = "The Pathfinder is a crafty, evasive hunter who fights alongside his trusty falcon, Squall.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
+            string desc = "The Pathfinder is a crafty, nimble hunter who fights alongside his trusty falcon, Squall.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
             desc += "< ! > Squall is a versatile companion who can deal high sustained damage, create distractions, and debuff your foes. Command him liberally." + Environment.NewLine + Environment.NewLine;
             desc += "< ! > Make sure to alternate between Hunter's Pursuit and your javelin toss to maximize your damage." + Environment.NewLine + Environment.NewLine;
             desc += "< ! > Rending Talons can deal extremely high sustained damage when coupled with items that increase your air time, like Hopoo Feather or Milky Chrysalis." + Environment.NewLine + Environment.NewLine;
@@ -44,8 +44,8 @@ namespace Pathfinder.Modules
             #endregion
 
             #region Passive
-            LanguageAPI.Add(prefix + "PASSIVE_NAME", "Robot Falcon: Squall");
-            LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", "<style=cUserSetting>Squall is currently undergoing a rework; please check back later!</style>");
+            LanguageAPI.Add(prefix + "PASSIVE_NAME", "Falconer");
+            LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", "You are accompanied by your robot falcon, <style=cIsUtility>Squall</style>. Squall is immune to damage, but runs on a <style=cIsUtility>battery</style>.");
             #endregion
 
             #region Keywords

@@ -8,6 +8,8 @@ using RoR2.Skills;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using R2API;
 
 namespace Pathfinder.Modules.Survivors
 {
@@ -110,25 +112,25 @@ namespace Pathfinder.Modules.Survivors
         {
             ChildLocator childLocator = bodyPrefab.GetComponentInChildren<ChildLocator>();
             GameObject model = childLocator.gameObject;
-
-            //example of how to create a hitbox
-            Transform hitboxTransform = childLocator.FindChild("SwordHitbox");
-            Modules.Prefabs.SetupHitbox(model, hitboxTransform, "Sword");
             
             Transform thrustHitbox = childLocator.FindChild("SpearHitbox");
             Modules.Prefabs.SetupHitbox(model, thrustHitbox, "Spear");
-
-            Transform groundSpin = childLocator.FindChild("GroundSpin");
-            Modules.Prefabs.SetupHitbox(model, groundSpin, "GroundSpin");
-
-            Transform airSpin = childLocator.FindChild("AirSpin");
-            Modules.Prefabs.SetupHitbox(model, airSpin, "AirSpin");
         }
 
         protected override void AddMyComponents()
         {
             bodyPrefab.AddComponent<PathfinderController>();
+
             bodyPrefab.AddComponent<CommandTracker>();
+            GameObject customTracker = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Huntress/HuntressTrackingIndicator.prefab").WaitForCompletion(), "CommandTracker");
+            customTracker.transform.Find("Core Pip").gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+            customTracker.transform.Find("Core, Dark").gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+            foreach (SpriteRenderer i in customTracker.transform.Find("Holder").gameObject.GetComponentsInChildren<SpriteRenderer>())
+            {
+                i.color = Color.red;
+            }
+
+            CommandTracker.trackerPrefab = customTracker;
         }
 
         public override void InitializeSkills()
@@ -231,7 +233,7 @@ namespace Pathfinder.Modules.Survivors
                 activationState = new EntityStates.SerializableEntityStateType(typeof(Pursuit)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 2,
-                baseRechargeInterval = 5f,
+                baseRechargeInterval = 6f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -312,7 +314,7 @@ namespace Pathfinder.Modules.Survivors
                 activationState = new EntityStates.SerializableEntityStateType(typeof(CommandMode)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 10f,
+                baseRechargeInterval = 1f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,

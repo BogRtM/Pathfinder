@@ -15,7 +15,7 @@ namespace Skillstates.Pathfinder.Command
 
             if (pathfinderController.javelinReady) javString = "Jav";
 
-            base.PlayCrossfade("Gesture, Override", javString + "Point", "Hand.playbackRate", duration, 0.1f);
+            base.PlayCrossfade("Gesture, Override", javString + "Wave", "Hand.playbackRate", duration, 0.1f);
 
             pathfinderController.FollowOrder();
         }

@@ -17,7 +17,6 @@ namespace Skillstates.Squall
         public static float prepDuration = 0.5f;
         public static float giveUpDuration = 3f;
         public static float speedCoefficient = 5f;
-        public static float searchRadius = 40f;
 
         public GameObject target;
         private GameObject effect;
@@ -49,6 +48,7 @@ namespace Skillstates.Squall
 
             if(startDive && base.isAuthority && target)
             {
+                divePosition = target.transform.position;
                 base.rigidbodyMotor.rootMotion += (divePosition - base.transform.position).normalized * (speedCoefficient * base.moveSpeedStat * Time.fixedDeltaTime);
             }
             

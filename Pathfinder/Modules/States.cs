@@ -9,15 +9,20 @@ namespace Pathfinder.Modules
     {
         internal static void RegisterStates()
         {
+            #region Pathfinder
             Modules.Content.AddEntityState(typeof(Thrust));
 
             Modules.Content.AddEntityState(typeof(JavelinToss));
-            Modules.Content.AddEntityState(typeof(Lunge));
-            Modules.Content.AddEntityState(typeof(Sweep));
 
             Modules.Content.AddEntityState(typeof(Pursuit));
 
             Modules.Content.AddEntityState(typeof(AirFlip));
+            Modules.Content.AddEntityState(typeof(ThrowBolas));
+            #endregion
+
+            #region Squall
+
+            #endregion
         }
     }
 }

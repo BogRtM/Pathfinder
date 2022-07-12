@@ -14,16 +14,23 @@ namespace Skillstates.Squall
         private GameObject missilePrefab;
         private SquallController squallController;
 
-        public static float baseDuration = 0.1f;
+        public static float baseDuration = 1f;
         public static int maxMissileCount = 4;
 
         private float duration;
+        private float fireTime;
+        private float fireStopwatch;
+        private int missileCount;
         public override void OnEnter()
         {
             base.OnEnter();
             duration = baseDuration / base.attackSpeedStat;
+            fireTime = duration / maxMissileCount;
             isCrit = base.RollCrit();
             missilePrefab = GlobalEventManager.CommonAssets.missilePrefab;
+            squallController = base.GetComponent<SquallController>();
+
+            target = squallController.currentTarget;
 
             FireMissile();
         }
@@ -32,7 +39,14 @@ namespace Skillstates.Squall
         {
             base.FixedUpdate();
 
-            if (base.fixedAge >= duration)
+            fireStopwatch += Time.fixedDeltaTime;
+            if(fireStopwatch >= fireTime && missileCount < maxMissileCount)
+            {
+                fireStopwatch = 0f;
+                FireMissile();
+            }
+
+            if (base.fixedAge >= duration && base.isAuthority)
             {
                 this.outer.SetNextStateToMain();
             }
@@ -43,7 +57,9 @@ namespace Skillstates.Squall
             if (base.isAuthority)
             {
                 MissileUtils.FireMissile(base.characterBody.corePosition, base.characterBody, default(ProcChainMask), target,
-                    1f * base.damageStat, isCrit, missilePrefab, DamageColorIndex.Default, Vector3.up, 200f, false);
+                    2f * base.damageStat, isCrit, missilePrefab, DamageColorIndex.Default, Vector3.up, 200f, false);
+
+                missileCount++;
             }
         }
 

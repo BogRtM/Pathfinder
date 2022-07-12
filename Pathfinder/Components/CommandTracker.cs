@@ -7,9 +7,8 @@ namespace Pathfinder.Components
 {
     internal class CommandTracker : MonoBehaviour
     {
-        private GameObject trackerPrefab;
+        internal static GameObject trackerPrefab;
 
-        private CharacterBody characterBody;
         private Indicator indicator;
         private InputBankTest inputBank;
         private TeamComponent teamComponent;
@@ -24,41 +23,34 @@ namespace Pathfinder.Components
 
         private void Awake()
         {
-            trackerPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Huntress/HuntressTrackingIndicator.prefab").WaitForCompletion();
-            trackerPrefab.transform.Find("Core Pip").gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-            trackerPrefab.transform.Find("Core, Dark").gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-            foreach(SpriteRenderer i in trackerPrefab.transform.Find("Holder").gameObject.GetComponentsInChildren<SpriteRenderer>())
-            {
-                i.color = Color.red;
-            }
             this.indicator = new Indicator(base.gameObject, trackerPrefab);
+        }
+        
+        private void OnDisable()
+        {
+            DeactivateIndicator();
         }
 
         private void Start()
         {
-            this.characterBody = base.GetComponent<CharacterBody>();
+            //this.characterBody = base.GetComponent<CharacterBody>();
             this.inputBank = base.GetComponent<InputBankTest>();
             this.teamComponent = base.GetComponent<TeamComponent>();
+        }
+
+        public void ActivateIndicator()
+        {
+            indicator.active = true;
+        }
+
+        public void DeactivateIndicator()
+        {
+            indicator.active = false;
         }
 
         public HurtBox GetTrackingTarget()
         {
             return this.trackingTarget;
-        }
-
-        private void OnEnable()
-        {
-            this.indicator.active = false;
-        }
-
-        public void ActivateIndicator()
-        {
-            this.indicator.active = true;
-        }
-
-        public void DeactivateIndicator()
-        {
-            this.indicator.active = false;
         }
 
         private void FixedUpdate()

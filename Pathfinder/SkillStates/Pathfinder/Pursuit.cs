@@ -17,12 +17,10 @@ namespace Skillstates.Pathfinder
         private PathfinderController controller;
 
         private Vector3 dashVector;
-        private Animator animator;
 
         public override void OnEnter()
         {
             base.OnEnter();
-            animator = base.GetModelAnimator();
             controller = base.GetComponent<PathfinderController>();
             dashVector = ((base.inputBank.moveVector == Vector3.zero) ? base.characterDirection.forward : base.inputBank.moveVector).normalized;
             base.characterDirection.forward = dashVector;

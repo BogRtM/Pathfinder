@@ -4,11 +4,13 @@ using R2API.Utils;
 using R2API;
 using RoR2;
 using RoR2.Skills;
+using RoR2.UI;
 using System.Collections.Generic;
 using System.Security;
 using System.Security.Permissions;
 using UnityEngine;
 using UnityEngine.Networking;
+using Pathfinder.Components;
 
 [module: UnverifiableCode]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
@@ -85,6 +87,46 @@ namespace Pathfinder
             // run hooks here, disabling one is as simple as commenting out the line
             On.RoR2.CharacterBody.RecalculateStats += CharacterBody_RecalculateStats;
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
+            On.RoR2.UI.HealthBar.UpdateHealthbar += HealthBar_UpdateHealthbar;
+        }
+
+        private void HealthBar_UpdateHealthbar(On.RoR2.UI.HealthBar.orig_UpdateHealthbar orig, HealthBar self, float deltaTime)
+        {
+            orig(self, deltaTime);
+
+            if(self.source)
+            {
+                var component = self.source.GetComponent<SquallBatteryComponent>();
+                if(component)
+                {
+                    Log.Warning("Has Squall battery");
+                    GameObject hudObject = self.transform.GetRoot().gameObject;
+                    var hud = hudObject.GetComponent<HUD>();
+                    if(hud.targetBodyObject == component.squallController.owner)
+                    {
+                        Log.Warning("Destroying Squall HP bar");
+                        Object.Destroy(self.gameObject);
+                    }
+                }
+            }
+
+            //Log.Warning(self.source.gameObject);
+            /*
+             * if (component)
+            {
+                Log.Warning("Destroying squall health bar");
+                RectTransform oldRectTransform = self.GetComponent<RectTransform>();
+
+                GameObject battery = Object.Instantiate(Modules.Assets.BatteryMeter, self.transform.parent);
+                RectTransform newRectTransform = battery.GetComponent<RectTransform>();
+
+                //newRectTransform.localPosition = oldRectTransform.localPosition;
+                //newRectTransform.anchoredPosition = oldRectTransform.anchoredPosition;
+                //newRectTransform.localScale = oldRectTransform.localScale;
+
+                UnityEngine.Object.Destroy(self.gameObject);
+            }
+            */
         }
 
         private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)

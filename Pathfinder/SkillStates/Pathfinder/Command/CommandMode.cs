@@ -25,40 +25,18 @@ namespace Skillstates.Pathfinder.Command
 
             if(base.fixedAge >= minDuration)
             {
-                if ((base.inputBank.skill1.down))// || base.inputBank.skill2.down || base.inputBank.skill3.down || base.inputBank.skill4.down))
+                if ((base.inputBank.skill1.down))
                 {
                     target = tracker.GetTrackingTarget();
-                    if (target)
-                    {
-                        this.outer.SetNextState(new AttackCommand() { target = this.target });
-                    }
-                    else
-                    {
-                        Log.Warning("Command failed");
-                        base.skillLocator.special.AddOneStock();
-                        this.outer.SetNextStateToMain();
-                    }
+                    //base.skillLocator.special.AddOneStock();
+                    this.outer.SetNextState(new AttackCommand() { target = this.target });
                 }
 
-                if ((base.inputBank.skill2.down))// || base.inputBank.skill2.down || base.inputBank.skill3.down || base.inputBank.skill4.down))
+                if ((base.inputBank.skill2.down))
                 {
+                    //base.skillLocator.special.AddOneStock();
                     this.outer.SetNextState(new FollowCommand());
-                    base.skillLocator.special.AddOneStock();
                 }
-                /*
-                if ((base.inputBank.skill4.down))// || base.inputBank.skill2.down || base.inputBank.skill3.down || base.inputBank.skill4.down))
-                {
-                    target = tracker.GetTrackingTarget();
-                    if (target)
-                    {
-                        this.outer.SetNextState(new SpecialCommand() { target = this.target });
-                    }
-                    else
-                    {
-                        this.outer.SetNextStateToMain();
-                    }
-                }
-                */
             }
         }
 

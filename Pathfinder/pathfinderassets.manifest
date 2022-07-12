@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1444812091
+CRC: 4179870981
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a5d9fd20cb46613756cb15c0c1537adc
+    Hash: 8787b5ee2abf4d796fd5eed1081f411d
   TypeTreeHash:
     serializedVersion: 2
-    Hash: fdb88d5451384e2873b1ba66cae39507
+    Hash: da6c996149e739d4040e30d13168ec0e
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -40,11 +40,17 @@ ClassTypes:
 - Class: 108
   Script: {instanceID: 0}
 - Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 9a68da65c907acb4eb4dbcd042f172e7, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: fc41cd48bee14034db80323ab44fbd3e, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 261c50d8a80898e4ebf2e8e415ea6766, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 751bd37d2e55f5f448dbb0d97812d9ba, type: 3}
 - Class: 115
@@ -60,6 +66,14 @@ ClassTypes:
 - Class: 198
   Script: {instanceID: 0}
 - Class: 199
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 223
+  Script: {instanceID: 0}
+- Class: 224
   Script: {instanceID: 0}
 - Class: 319
   Script: {instanceID: 0}
@@ -96,6 +110,7 @@ Assets:
 - Assets/PathfinderAssets/VFX/HenryMaterials/matHenrySwing2.mat
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_Backflip.anim
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/texRipple.png
+- Assets/PathfinderAssets/UI/BatteryMeter.prefab
 - Assets/PathfinderAssets/VFX/Spiral.fbx
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_RollLeft.anim
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/texPunchImpact 1.png
@@ -152,6 +167,7 @@ Assets:
 - Assets/PathfinderAssets/Animation/clips/Rig_JavJump.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_JavAscend.anim
 - Assets/PathfinderAssets/VFX/matSlashOuter.mat
+- Assets/PathfinderAssets/UI/BatteryIcon.png
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_RollRight2.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_AirFlip2.anim
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_DiveEnter.anim
