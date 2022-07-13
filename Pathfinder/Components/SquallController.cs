@@ -49,18 +49,6 @@ namespace Pathfinder.Components
             EnterFollowMode();
         }
 
-        /*
-        internal void ShootTarget(HealthComponent victim, bool isCrit)
-        {
-            //weaponMachine.SetInterruptState(new MountedGuns() { target = victim, isCrit = isCrit }, EntityStates.InterruptPriority.Skill);
-        }
-
-        internal void ShootMissile(HealthComponent victim, bool isCrit)
-        {
-            missileMachine.SetInterruptState(new MissileLauncher() { target = victim.gameObject, isCrit = isCrit }, EntityStates.InterruptPriority.Any);
-        }
-        */
-
         internal void SetTarget(HurtBox target)
         {
             HealthComponent healthComponent = target.healthComponent;
@@ -102,7 +90,6 @@ namespace Pathfinder.Components
                 if (!driver.enabled) continue;
                 if (attackDrivers.Contains(driver.customName))
                 {
-                    //Log.Warning("Enabling driver: " + driver.customName);
                     driver.enabled = false;
                 }
             }

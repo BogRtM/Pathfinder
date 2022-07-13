@@ -45,7 +45,19 @@ namespace Pathfinder.Content
 
         internal static List<string> followDrivers = new List<string>();
         internal static List<string> attackDrivers = new List<string>();
+        internal static List<string> SquallBlackList = new List<string>()
+        {
+            "FreeChest",
+            "TreasureCache",
+            "TreasureCacheVoid",
+            "FireRing",
+            "IceRing",
+            "LunarPrimaryReplacement",
+            "LunarSecondaryReplacement",
+            "LunarSpecialReplacement",
+            "LunarUtilityReplacement",
 
+        };
         public override void InitializeCharacter()
         {
             base.InitializeCharacter();
@@ -107,8 +119,8 @@ namespace Pathfinder.Content
             //baseAI.enemyAttentionDuration = float.PositiveInfinity;
 
             SquallController squallController = bodyPrefab.GetComponent<SquallController>();
-            squallController.followDrivers = new List<string>();
-            squallController.attackDrivers = new List<string>();
+            //squallController.followDrivers = new List<string>();
+            //squallController.attackDrivers = new List<string>();
 
             AddSkillDrivers(masterPrefab);
 

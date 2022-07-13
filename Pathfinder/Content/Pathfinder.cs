@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using R2API;
+using Pathfinder.Modules.Misc;
 
 namespace Pathfinder.Modules.Survivors
 {
@@ -331,6 +332,36 @@ namespace Pathfinder.Modules.Survivors
             });
 
             Modules.Skills.AddSpecialSkills(bodyPrefab, commandSkillDef);
+
+
+            Modules.Skills.AddSquallUtility(bodyPrefab, commandSkillDef);
+
+            CommandTrackingSkillDef squallSpecial = Modules.Skills.CreateTrackingSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "_PATHFINDER_BODY_SQUALL_SPECIAL_GOFORTHROAT_NAME",
+                skillNameToken = prefix + "_PATHFINDER_BODY_SQUALL_SPECIAL_GOFORTHROAT_NAME",
+                skillDescriptionToken = prefix + "_PATHFINDER_BODY_SQUALL_SPECIAL_GOFORTHROAT_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSpecialIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SpecialCommand)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 12f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                //keywordTokens = new string[] { "KEYWORD_ATTACK", "KEYWORD_FOLLOW" }
+            });
+
+            Modules.Skills.AddSquallSpecial(bodyPrefab, squallSpecial);
             #endregion
         }
 

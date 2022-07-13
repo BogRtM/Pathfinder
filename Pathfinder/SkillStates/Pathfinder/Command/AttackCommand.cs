@@ -8,12 +8,18 @@ namespace Skillstates.Pathfinder.Command
 {
     internal class AttackCommand : BaseIssueCommand
     {
-        public HurtBox target;
+        private CommandTracker commandTracker;
+
+        private HurtBox target;
 
         private string javString = "";
         public override void OnEnter()
         {
             base.OnEnter();
+
+            commandTracker = base.GetComponent<CommandTracker>();
+
+            target = commandTracker.GetTrackingTarget();
 
             if (pathfinderController.javelinReady) javString = "Jav";
             

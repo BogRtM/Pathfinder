@@ -7,6 +7,7 @@ using Pathfinder.Content;
 using RoR2.UI;
 using System.Linq;
 using RoR2.Skills;
+using System.Collections.Generic;
 
 namespace Pathfinder.Components
 {
@@ -24,6 +25,7 @@ namespace Pathfinder.Components
         private SquallController squallController;
 
         public static SkillDef javelinSkill;
+        
 
         internal bool javelinReady;
 
@@ -52,28 +54,12 @@ namespace Pathfinder.Components
         private void SelfBody_onInventoryChanged()
         {
             if (falconMaster)
+            {
                 falconMaster.inventory.CopyItemsFrom(selfBody.inventory);
-        }
-
-        public void ReadyJavelin()
-        {
-            javelinReady = true;
-            skillLocator.primary.SetSkillOverride(base.gameObject, javelinSkill, GenericSkill.SkillOverridePriority.Contextual);
-            if(modelAnimator)
-            {
-                modelAnimator.SetLayerWeight(modelAnimator.GetLayerIndex("JavelinReady"), 1f);
+                CleanSquallInventory(falconMaster.inventory);
             }
         }
 
-        public void UnreadyJavelin()
-        {
-            javelinReady = false;
-            skillLocator.primary.UnsetSkillOverride(base.gameObject, javelinSkill, GenericSkill.SkillOverridePriority.Contextual);
-            if (modelAnimator)
-            {
-                modelAnimator.SetLayerWeight(modelAnimator.GetLayerIndex("JavelinReady"), 0f);
-            }
-        }
         private void FindOrSummonSquall()
         {
             var minions = CharacterMaster.readOnlyInstancesList.Where(el => el.minionOwnership.ownerMaster == selfMaster);
@@ -82,6 +68,7 @@ namespace Pathfinder.Components
                 if (minion.masterIndex == MasterCatalog.FindMasterIndex(summonPrefab))
                 {
                     falconMaster = minion;
+                    if (!falconMaster.hasBody) falconMaster.Respawn(base.transform.position + Vector3.up, Quaternion.identity);
                     if (!falconMaster.godMode) falconMaster.ToggleGod();
                     squallController = minion.bodyInstanceObject.GetComponent<SquallController>();
                     squallController.owner = base.gameObject;
@@ -102,18 +89,32 @@ namespace Pathfinder.Components
             minionSummon.ignoreTeamMemberLimit = false;
             minionSummon.teamIndexOverride = TeamIndex.Player;
             minionSummon.summonerBodyObject = characterBody.gameObject;
+            minionSummon.inventoryToCopy = characterBody.inventory;
             minionSummon.position = characterBody.corePosition + new Vector3(0f, 10f, 0f);
-            minionSummon.rotation = characterBody.transform.rotation;
+            minionSummon.rotation = Quaternion.identity;
             
             if(falconMaster = minionSummon.Perform())
             {
                 if (!falconMaster.godMode) falconMaster.ToggleGod();
+                CleanSquallInventory(falconMaster.inventory);
                 squallController = falconMaster.bodyInstanceObject.GetComponent<SquallController>();
                 squallController.owner = base.gameObject;
-                falconMaster.inventory.CopyItemsFrom(characterBody.inventory);
             }
+        }
 
+        private void CleanSquallInventory(Inventory inventory)
+        {
+            if (inventory.itemAcquisitionOrder.Count == 0) return;
 
+            foreach(string itemName in Squall.SquallBlackList)
+            {
+                var itemIndex = ItemCatalog.FindItemIndex(itemName);
+                var itemCount = inventory.GetItemCount(itemIndex);
+                if (itemCount > 0)
+                {
+                    inventory.RemoveItem(itemIndex, itemCount);
+                }
+            }
         }
 
         internal void AttackOrder(HurtBox target)
@@ -146,7 +147,7 @@ namespace Pathfinder.Components
         {
             squallController.DoSpecialAttack(target);
         }
-        
+
         /*
         public void OnDamageDealtServer(DamageReport damageReport)
         {
@@ -160,5 +161,24 @@ namespace Pathfinder.Components
             }
         }
         */
+        public void ReadyJavelin()
+        {
+            javelinReady = true;
+            skillLocator.primary.SetSkillOverride(base.gameObject, javelinSkill, GenericSkill.SkillOverridePriority.Contextual);
+            if (modelAnimator)
+            {
+                modelAnimator.SetLayerWeight(modelAnimator.GetLayerIndex("JavelinReady"), 1f);
+            }
+        }
+
+        public void UnreadyJavelin()
+        {
+            javelinReady = false;
+            skillLocator.primary.UnsetSkillOverride(base.gameObject, javelinSkill, GenericSkill.SkillOverridePriority.Contextual);
+            if (modelAnimator)
+            {
+                modelAnimator.SetLayerWeight(modelAnimator.GetLayerIndex("JavelinReady"), 0f);
+            }
+        }
     }
 }

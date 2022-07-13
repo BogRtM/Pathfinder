@@ -23,21 +23,7 @@ namespace Skillstates.Pathfinder.Command
         {
             base.FixedUpdate();
 
-            if(base.fixedAge >= minDuration)
-            {
-                if ((base.inputBank.skill1.down))
-                {
-                    target = tracker.GetTrackingTarget();
-                    //base.skillLocator.special.AddOneStock();
-                    this.outer.SetNextState(new AttackCommand() { target = this.target });
-                }
-
-                if ((base.inputBank.skill2.down))
-                {
-                    //base.skillLocator.special.AddOneStock();
-                    this.outer.SetNextState(new FollowCommand());
-                }
-            }
+            
         }
 
         public override void OnExit()

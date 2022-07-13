@@ -64,17 +64,6 @@ namespace Pathfinder.Modules
             LanguageAPI.Add(prefix + "PRIMARY_THRUST_DESCRIPTION", $"Thrust your spear forward for <style=cIsDamage>{100f * Config.ThrustDamage.Value}% damage</style>.");
             #endregion
 
-            #region Empower
-            LanguageAPI.Add(prefix + "SECONDARY_JAVELIN_NAME", "Javelin Toss");
-            LanguageAPI.Add(prefix + "EMPOWER_JAVELIN_DESCRIPTION", "Throw an <style=cIsUtility>exploding</style> javelin for <style=cIsDamage>{}% damage</style>.");
-
-            LanguageAPI.Add(prefix + "EMPOWER_COMBO_NAME", "Rending Talons");
-            LanguageAPI.Add(prefix + "EMPOWER_COMBO_DESCRIPTION", "Perform a 3-hit combo for <style=cIsDamage>2x200% + 1x300% damage</style>.");
-
-            LanguageAPI.Add(prefix + "EMPOWER_LUNGE_NAME", "Impale");
-            LanguageAPI.Add(prefix + "EMPOWER_LUNGE_DESCRIPTION", "Swiftly lunge forward for <style=cIsDamage>500% damage</style>.");
-            #endregion
-
             #region Secondary
             LanguageAPI.Add(prefix + "SECONDARY_PURSUIT_NAME", "Hunter's Pursuit");
             LanguageAPI.Add(prefix + "SECONDARY_PURSUIT_DESCRIPTION", $"<style=cIsUtility>Dash</style> a short distance. The next time you use your primary skill, throw an " +
@@ -93,6 +82,11 @@ namespace Pathfinder.Modules
             #region Special
             LanguageAPI.Add(prefix + "SPECIAL_COMMAND_NAME", "Issue Command");
             LanguageAPI.Add(prefix + "SPECIAL_COMMAND_DESCRIPTION", "<style=cUserSetting>Squall is currently undergoing a rework; please check back later!</style>");
+            #endregion
+
+            #region SquallSpecial
+            LanguageAPI.Add(prefix + "SQUALL_SPECIAL_GOFORTHROAT_NAME", "Go for the Throat!");
+            LanguageAPI.Add(prefix + "SQUALL_SPECIAL_GOFORTHROAT_DESCRIPTION", "Order Squall to strike target enemy X times");
             #endregion
 
             #region Achievements

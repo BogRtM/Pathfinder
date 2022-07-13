@@ -27,9 +27,7 @@ namespace Skillstates.Pathfinder
 
         private bool isCrit;
         private bool flipFinished;
-        private bool hasHopped;
 
-        private float currentHopVelocity;
         private float flipStopwatch;
         private float flipDuration;
         private float spinStopwatch;

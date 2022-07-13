@@ -5,13 +5,17 @@ using System;
 using System.Collections.Generic;
 using Pathfinder;
 using UnityEngine;
+using JetBrains.Annotations;
+using Pathfinder.Components;
+using Pathfinder.Modules.Misc;
 
 namespace Pathfinder.Modules
 {
 
     internal static class Skills
     {
-        public static SkillFamily empowerFamily;
+        public static SkillFamily squallUtilityFamily;
+        public static SkillFamily squallSpecialFamily;
         #region genericskills
         public static void CreateSkillFamilies(GameObject targetPrefab, bool destroyExisting = true)
         {
@@ -34,6 +38,9 @@ namespace Pathfinder.Modules
             skillLocator.secondary = CreateGenericSkillWithSkillFamily(targetPrefab, "Secondary");
             skillLocator.utility = CreateGenericSkillWithSkillFamily(targetPrefab, "Utility");
             skillLocator.special = CreateGenericSkillWithSkillFamily(targetPrefab, "Special");
+
+            squallUtilityFamily = CreateGenericSkillWithSkillFamily(targetPrefab, "SquallUtility", true)._skillFamily;
+            squallSpecialFamily = CreateGenericSkillWithSkillFamily(targetPrefab, "SquallSpecial", true)._skillFamily;
         }
 
         public static GenericSkill CreateGenericSkillWithSkillFamily(GameObject targetPrefab, string familyName, bool hidden = false)
@@ -93,6 +100,16 @@ namespace Pathfinder.Modules
             AddSkillsToFamily(targetPrefab.GetComponent<SkillLocator>().special.skillFamily, skillDefs);
         }
 
+        public static void AddSquallUtility(GameObject targetPrefab, params SkillDef[] skillDefs)
+        {
+            AddSkillsToFamily(squallUtilityFamily, skillDefs);
+        }
+
+        public static void AddSquallSpecial(GameObject targetPrefab, params SkillDef[] skillDefs)
+        {
+            AddSkillsToFamily(squallSpecialFamily, skillDefs);
+        }
+
         /// <summary>
         /// pass in an amount of unlockables equal to or less than skill variants, null for skills that aren't locked
         /// <code>
@@ -114,6 +131,11 @@ namespace Pathfinder.Modules
         public static SkillDef CreateSkillDef(SkillDefInfo skillDefInfo)
         {
             return CreateSkillDef<SkillDef>(skillDefInfo);
+        }
+
+        public static CommandTrackingSkillDef CreateTrackingSkillDef(SkillDefInfo skillDefInfo)
+        {
+            return CreateSkillDef<CommandTrackingSkillDef>(skillDefInfo);
         }
 
         public static T CreateSkillDef<T>(SkillDefInfo skillDefInfo) where T : SkillDef
@@ -147,7 +169,6 @@ namespace Pathfinder.Modules
             skillDef.keywordTokens = skillDefInfo.keywordTokens;
 
             Pathfinder.Modules.Content.AddSkillDef(skillDef);
-
 
             return skillDef;
         }
@@ -221,5 +242,40 @@ namespace Pathfinder.Modules
 
         }
         #endregion construction complete
+    }
+}
+
+namespace Pathfinder.Modules.Misc
+{
+    internal class CommandTrackingSkillDef : SkillDef
+    {
+        public override SkillDef.BaseSkillInstanceData OnAssigned([NotNull] GenericSkill skillSlot)
+        {
+            return new CommandTrackingSkillDef.InstanceData
+            {
+                commandTracker = skillSlot.GetComponent<CommandTracker>()
+            };
+        }
+
+        private static bool HasTarget([NotNull] GenericSkill skillSlot)
+        {
+            CommandTracker commandTracker = ((CommandTrackingSkillDef.InstanceData)skillSlot.skillInstanceData).commandTracker;
+            return (commandTracker != null) ? commandTracker.GetTrackingTarget() : null;
+        }
+
+        public override bool CanExecute([NotNull] GenericSkill skillSlot)
+        {
+            return CommandTrackingSkillDef.HasTarget(skillSlot) && base.CanExecute(skillSlot);
+        }
+
+        public override bool IsReady([NotNull] GenericSkill skillSlot)
+        {
+            return base.IsReady(skillSlot) && CommandTrackingSkillDef.HasTarget(skillSlot);
+        }
+
+        protected class InstanceData : SkillDef.BaseSkillInstanceData
+        {
+            public CommandTracker commandTracker;
+        }
     }
 }
