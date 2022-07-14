@@ -16,8 +16,8 @@ namespace Pathfinder.Components
 
         private float radius = 18f;
         private float dotDuration = 2f;
-        private float pulseInterval = 1.5f;
-        private float pulseStopwatch = 1.5f;
+        private float pulseInterval = 1f;
+        private float pulseStopwatch = 1f;
 
         private List<HurtBox> candidates;
 

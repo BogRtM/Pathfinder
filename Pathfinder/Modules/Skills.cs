@@ -38,8 +38,11 @@ namespace Pathfinder.Modules
             skillLocator.secondary = CreateGenericSkillWithSkillFamily(targetPrefab, "Secondary");
             skillLocator.utility = CreateGenericSkillWithSkillFamily(targetPrefab, "Utility");
             skillLocator.special = CreateGenericSkillWithSkillFamily(targetPrefab, "Special");
+        }
 
-            squallUtilityFamily = CreateGenericSkillWithSkillFamily(targetPrefab, "SquallUtility", true)._skillFamily;
+        public static void CreateSquallCommandFamilies(GameObject targetPrefab, bool destroyExisting = true)
+        {
+            //squallUtilityFamily = CreateGenericSkillWithSkillFamily(targetPrefab, "SquallUtility", true)._skillFamily;
             squallSpecialFamily = CreateGenericSkillWithSkillFamily(targetPrefab, "SquallSpecial", true)._skillFamily;
         }
 

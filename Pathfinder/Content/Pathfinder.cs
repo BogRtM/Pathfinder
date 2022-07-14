@@ -11,6 +11,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using R2API;
 using Pathfinder.Modules.Misc;
+using UnityEngine.UI;
 
 namespace Pathfinder.Modules.Survivors
 {
@@ -21,6 +22,11 @@ namespace Pathfinder.Modules.Survivors
         public const string PF_PREFIX = PathfinderPlugin.DEVELOPER_PREFIX + "_PATHFINDER_BODY_";
         //used when registering your survivor's language tokens
         public override string survivorTokenPrefix => PF_PREFIX;
+
+        internal static SkillDef squallAttack;
+        internal static SkillDef squallFollow;
+        internal static SkillDef squallUtility;
+        internal static CommandTrackingSkillDef squallSpecial;
 
         public override BodyInfo bodyInfo { get; set; } = new BodyInfo
         {
@@ -120,7 +126,8 @@ namespace Pathfinder.Modules.Survivors
 
         protected override void AddMyComponents()
         {
-            bodyPrefab.AddComponent<PathfinderController>();
+            bodyPrefab.AddComponent<FalconerComponent>();
+            bodyPrefab.AddComponent<OverrideController>();
 
             bodyPrefab.AddComponent<CommandTracker>();
             GameObject customTracker = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Huntress/HuntressTrackingIndicator.prefab").WaitForCompletion(), "CommandTracker");
@@ -132,11 +139,19 @@ namespace Pathfinder.Modules.Survivors
             }
 
             CommandTracker.trackerPrefab = customTracker;
+
+            GameObject commandCrosshair = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Engi/EngiPaintCrosshair.prefab").WaitForCompletion(), "CommandCrosshair");
+            var square = commandCrosshair.transform.Find("Holder").Find("Square").GetComponent<Image>();
+            square.color = Color.red;
+
+            commandCrosshair.transform.Find("Holder").Find("AmmoArea").gameObject.SetActive(false);
+            CommandMode.crosshairPrefab = commandCrosshair;
         }
 
         public override void InitializeSkills()
         {
             Modules.Skills.CreateSkillFamilies(bodyPrefab);
+            Modules.Skills.CreateSquallCommandFamilies(bodyPrefab);
             string prefix = PathfinderPlugin.DEVELOPER_PREFIX;
 
             #region Empower
@@ -165,33 +180,8 @@ namespace Pathfinder.Modules.Survivors
                 //keywordTokens = new string[] { "KEYWORD_AGILE", "KEYWORD_EMPOWER" }
             });
 
-            PathfinderController.javelinSkill = javelinSkillDef;
-            /*
-            SkillDef lungeSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
-            {
-                skillName = prefix + "_PATHFINDER_BODY_EMPOWER_LUNGE_NAME",
-                skillNameToken = prefix + "_PATHFINDER_BODY_EMPOWER_LUNGE_NAME",
-                skillDescriptionToken = prefix + "_PATHFINDER_BODY_EMPOWER_LUNGE_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(Lunge)),
-                activationStateMachineName = "Weapon",
-                baseMaxStock = 1,
-                baseRechargeInterval = 0f,
-                beginSkillCooldownOnSkillEnd = true,
-                canceledFromSprinting = false,
-                forceSprintDuringState = true,
-                fullRestockOnAssign = true,
-                interruptPriority = EntityStates.InterruptPriority.Skill,
-                resetCooldownTimerOnUse = false,
-                isCombatSkill = true,
-                mustKeyPress = false,
-                cancelSprintingOnActivation = false,
-                rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1,
-                keywordTokens = new string[] { "KEYWORD_EMPOWER" }
-            });
-            */
+            OverrideController.javelinSkill = javelinSkillDef;
+            Modules.Content.AddSkillDef(javelinSkillDef);
             #endregion
 
             #region Primary
@@ -317,14 +307,14 @@ namespace Pathfinder.Modules.Survivors
                 baseMaxStock = 1,
                 baseRechargeInterval = 1f,
                 beginSkillCooldownOnSkillEnd = true,
-                canceledFromSprinting = false,
+                canceledFromSprinting = true,
                 forceSprintDuringState = false,
-                fullRestockOnAssign = true,
+                fullRestockOnAssign = false,
                 interruptPriority = EntityStates.InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = false,
                 mustKeyPress = false,
-                cancelSprintingOnActivation = false,
+                cancelSprintingOnActivation = true,
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1,
@@ -333,8 +323,59 @@ namespace Pathfinder.Modules.Survivors
 
             Modules.Skills.AddSpecialSkills(bodyPrefab, commandSkillDef);
 
+            SkillDef attackCommand = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "_PATHFINDER_BODY_SPECIAL_ATTACK_NAME",
+                skillNameToken = prefix + "_PATHFINDER_BODY_SPECIAL_ATTACK_NAME",
+                skillDescriptionToken = prefix + "_PATHFINDER_BODY_SPECIAL_ATTACK_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSpecialIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(AttackCommand)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = false,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+            });
 
-            Modules.Skills.AddSquallUtility(bodyPrefab, commandSkillDef);
+            OverrideController.squallAttack = attackCommand;
+            Modules.Content.AddSkillDef(attackCommand);
+
+            SkillDef followCommand = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "_PATHFINDER_BODY_SPECIAL_FOLLOW_NAME",
+                skillNameToken = prefix + "_PATHFINDER_BODY_SPECIAL_FOLLOW_NAME",
+                skillDescriptionToken = prefix + "_PATHFINDER_BODY_SPECIAL_FOLLOW_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSpecialIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(FollowCommand)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 1f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = false,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+            });
+
+            OverrideController.squallFollow = followCommand;
+            Modules.Content.AddSkillDef(followCommand);
 
             CommandTrackingSkillDef squallSpecial = Modules.Skills.CreateTrackingSkillDef(new SkillDefInfo
             {
@@ -345,7 +386,7 @@ namespace Pathfinder.Modules.Survivors
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SpecialCommand)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 12f,
+                baseRechargeInterval = 0f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -360,7 +401,6 @@ namespace Pathfinder.Modules.Survivors
                 stockToConsume = 1,
                 //keywordTokens = new string[] { "KEYWORD_ATTACK", "KEYWORD_FOLLOW" }
             });
-
             Modules.Skills.AddSquallSpecial(bodyPrefab, squallSpecial);
             #endregion
         }

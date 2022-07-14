@@ -16,7 +16,7 @@ namespace Skillstates.Pathfinder
         private GameObject shaft;
         private GameObject spearhead;
         private Ray aimRay;
-        private PathfinderController controller;
+        private OverrideController controller;
 
         private float fireTime;
         private float throwForce = 150f;
@@ -30,7 +30,7 @@ namespace Skillstates.Pathfinder
             duration = baseDuration / base.attackSpeedStat;
             fireTime = duration * 0.15f;
             base.StartAimMode(baseDuration + 0.1f, true);
-            controller = base.GetComponent<PathfinderController>();
+            controller = base.GetComponent<OverrideController>();
             animator = base.GetModelAnimator();
             aimRay = base.GetAimRay();
             childLocator = base.GetModelChildLocator();

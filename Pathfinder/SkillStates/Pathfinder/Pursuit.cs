@@ -14,14 +14,14 @@ namespace Skillstates.Pathfinder
 
         public static SkillDef javelinSkill;
 
-        private PathfinderController controller;
+        private OverrideController controller;
 
         private Vector3 dashVector;
 
         public override void OnEnter()
         {
             base.OnEnter();
-            controller = base.GetComponent<PathfinderController>();
+            controller = base.GetComponent<OverrideController>();
             dashVector = ((base.inputBank.moveVector == Vector3.zero) ? base.characterDirection.forward : base.inputBank.moveVector).normalized;
             base.characterDirection.forward = dashVector;
             base.characterMotor.velocity *= 0.1f;

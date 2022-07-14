@@ -8,7 +8,6 @@ namespace Skillstates.Pathfinder.Command
 {
     internal class AttackCommand : BaseIssueCommand
     {
-        private CommandTracker commandTracker;
 
         private HurtBox target;
 
@@ -17,15 +16,13 @@ namespace Skillstates.Pathfinder.Command
         {
             base.OnEnter();
 
-            commandTracker = base.GetComponent<CommandTracker>();
-
             target = commandTracker.GetTrackingTarget();
 
-            if (pathfinderController.javelinReady) javString = "Jav";
+            if (overrideController.javelinReady) javString = "Jav";
             
             base.PlayCrossfade("Gesture, Override", javString + "Point", "Hand.playbackRate", duration, 0.1f);
 
-            pathfinderController.AttackOrder(target);
+            falconerComponent.AttackOrder(target);
         }
     }
 }

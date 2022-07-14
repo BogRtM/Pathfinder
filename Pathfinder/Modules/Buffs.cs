@@ -19,7 +19,6 @@ namespace Pathfinder.Modules
             BuffDef teslaField = Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/ShockNearby/bdTeslaField.asset").WaitForCompletion();
             BuffDef fullCrit = Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/CritOnUse/bdFullCrit.asset").WaitForCompletion();
 
-
             electrocute = AddNewBuff("Electrocuted", teslaField.iconSprite, Color.cyan, false, true);
             raptorMark = AddNewBuff("RaptorMark", fullCrit.iconSprite, Color.blue, false, true);
 
@@ -28,7 +27,7 @@ namespace Pathfinder.Modules
 
         private static void RegisterDoTs()
         {
-            electrocuteDoT = DotAPI.RegisterDotDef(0.2f, 0.4f, DamageColorIndex.Default, electrocute, null, null);
+            electrocuteDoT = DotAPI.RegisterDotDef(0.2f, 0.2f, DamageColorIndex.Default, electrocute, null, null);
         }
 
         // simple helper method

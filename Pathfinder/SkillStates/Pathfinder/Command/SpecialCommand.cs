@@ -12,6 +12,8 @@ namespace Skillstates.Pathfinder.Command
         public override void OnEnter()
         {
             base.OnEnter();
+            target = commandTracker.GetTrackingTarget();
+            Chat.AddMessage(target.healthComponent.gameObject.name);
         }
     }
 }

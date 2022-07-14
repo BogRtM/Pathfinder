@@ -8,10 +8,11 @@ using RoR2.UI;
 using System.Linq;
 using RoR2.Skills;
 using System.Collections.Generic;
+//using Pathfinder.Modules.Misc;
 
 namespace Pathfinder.Components
 {
-    internal class PathfinderController : MonoBehaviour //, IOnDamageDealtServerReceiver
+    internal class FalconerComponent : MonoBehaviour //, IOnDamageDealtServerReceiver
     {
         private GameObject summonPrefab;
 
@@ -23,11 +24,6 @@ namespace Pathfinder.Components
         private CharacterBody selfBody;
 
         private SquallController squallController;
-
-        public static SkillDef javelinSkill;
-        
-
-        internal bool javelinReady;
 
         private void Awake()
         {
@@ -91,7 +87,7 @@ namespace Pathfinder.Components
             minionSummon.summonerBodyObject = characterBody.gameObject;
             minionSummon.inventoryToCopy = characterBody.inventory;
             minionSummon.position = characterBody.corePosition + new Vector3(0f, 10f, 0f);
-            minionSummon.rotation = Quaternion.identity;
+            minionSummon.rotation = characterBody.transform.rotation;
             
             if(falconMaster = minionSummon.Perform())
             {
@@ -146,39 +142,6 @@ namespace Pathfinder.Components
         internal void SpecialOrder(HurtBox target)
         {
             squallController.DoSpecialAttack(target);
-        }
-
-        /*
-        public void OnDamageDealtServer(DamageReport damageReport)
-        {
-            if(damageReport.damageDealt >= (5f * damageReport.attackerBody.damage))
-            {
-                squallController.ShootMissile(damageReport.victim, damageReport.damageInfo.crit);
-            }
-            else if(damageReport.victim.alive && squallController)
-            {
-                squallController.ShootTarget(damageReport.victim, damageReport.damageInfo.crit);
-            }
-        }
-        */
-        public void ReadyJavelin()
-        {
-            javelinReady = true;
-            skillLocator.primary.SetSkillOverride(base.gameObject, javelinSkill, GenericSkill.SkillOverridePriority.Contextual);
-            if (modelAnimator)
-            {
-                modelAnimator.SetLayerWeight(modelAnimator.GetLayerIndex("JavelinReady"), 1f);
-            }
-        }
-
-        public void UnreadyJavelin()
-        {
-            javelinReady = false;
-            skillLocator.primary.UnsetSkillOverride(base.gameObject, javelinSkill, GenericSkill.SkillOverridePriority.Contextual);
-            if (modelAnimator)
-            {
-                modelAnimator.SetLayerWeight(modelAnimator.GetLayerIndex("JavelinReady"), 0f);
-            }
         }
     }
 }

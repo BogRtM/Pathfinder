@@ -8,14 +8,18 @@ namespace Skillstates.Pathfinder.Command
 {
     internal class BaseIssueCommand : BaseState
     {
-        protected PathfinderController pathfinderController;
+        protected FalconerComponent falconerComponent;
+        protected OverrideController overrideController;
 
         public static float baseDuration = 1f;
         protected float duration;
+        protected CommandTracker commandTracker;
         public override void OnEnter()
         {
             base.OnEnter();
-            pathfinderController = base.GetComponent<PathfinderController>();
+            falconerComponent = base.GetComponent<FalconerComponent>();
+            overrideController = base.GetComponent<OverrideController>();
+            commandTracker = base.GetComponent<CommandTracker>();
             duration = baseDuration / base.attackSpeedStat;
             base.StartAimMode(duration + 0.1f, false);
         }

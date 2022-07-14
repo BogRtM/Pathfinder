@@ -14,7 +14,7 @@ namespace Skillstates.Pathfinder
         public static float loopDuration = 0.4f;
         public static float throwForce = 60f;
 
-        private PathfinderController controller;
+        private OverrideController controller;
         private ChildLocator childLocator;
         private Ray aimRay;
 
@@ -23,7 +23,7 @@ namespace Skillstates.Pathfinder
         public override void OnEnter()
         {
             base.OnEnter();
-            controller = base.GetComponent<PathfinderController>();
+            controller = base.GetComponent<OverrideController>();
             childLocator = base.GetModelChildLocator();
             if (controller.javelinReady) javReady = "Jav";
             bolas = childLocator.FindChild("Bolas").gameObject;

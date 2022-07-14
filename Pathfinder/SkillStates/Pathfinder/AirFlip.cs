@@ -13,7 +13,7 @@ namespace Skillstates.Pathfinder
         private Animator animator;
         Vector3 flipVector;
 
-        private PathfinderController controller;
+        private OverrideController controller;
         private ChildLocator childLocator;
 
         private OverlapAttack airSpinAttack;
@@ -41,7 +41,7 @@ namespace Skillstates.Pathfinder
             animator = base.GetModelAnimator();
             childLocator = base.GetModelChildLocator();
             flipDuration = flipBaseDuration / base.attackSpeedStat;
-            controller = base.GetComponent<PathfinderController>();
+            controller = base.GetComponent<OverrideController>();
             spinDuration = spinBaseDuration / base.attackSpeedStat;
             spinFinishTime = spinDuration * 0.325f;
             //currentHopVelocity = baseHopVelocity;
