@@ -12,6 +12,7 @@ namespace Skillstates.Pathfinder.Command
         private HurtBox target;
 
         private string javString = "";
+
         public override void OnEnter()
         {
             base.OnEnter();

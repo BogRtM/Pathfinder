@@ -14,32 +14,50 @@ namespace Pathfinder.Components
 {
     internal class FalconerComponent : MonoBehaviour //, IOnDamageDealtServerReceiver
     {
-        private GameObject summonPrefab;
-
-        private Animator modelAnimator;
-        private SkillLocator skillLocator;
+        internal static GameObject summonPrefab;
 
         private CharacterMaster falconMaster;
         private CharacterMaster selfMaster;
         private CharacterBody selfBody;
 
-        private SquallController squallController;
+        internal SquallController squallController;
 
-        private void Awake()
-        {
-            summonPrefab = PathfinderPlugin.squallMasterPrefab;
-            modelAnimator = base.GetComponentInChildren<Animator>();
-            skillLocator = base.GetComponent<SkillLocator>();
-        }
+        internal GameObject commandCrosshair;
 
         private void Start()
         {
             selfBody = base.GetComponent<CharacterBody>();
             selfMaster = selfBody.master;
 
+            //AttachCommandCrosshair();
+
             FindOrSummonSquall();
 
             Subscriptions();
+        }
+
+        internal void AttachCommandCrosshair()
+        {
+            if(commandCrosshair)
+            {
+                commandCrosshair.SetActive(true);
+                return;
+            }
+
+            var selfHUD = HUD.readOnlyInstanceList.Where(el => el.targetBodyObject == base.gameObject);
+            foreach(HUD i in selfHUD)
+            {
+                Transform crosshairArea = i.transform.Find("MainContainer").Find("MainUIArea").Find("CrosshairCanvas");
+                if (!crosshairArea) return;
+                commandCrosshair = UnityEngine.Object.Instantiate(PathfinderPlugin.commandCrosshair);
+                commandCrosshair.transform.SetParent(crosshairArea, false);
+                commandCrosshair.SetActive(true);
+            }
+        }
+
+        internal void DeactivateCrosshair()
+        {
+            if(commandCrosshair) commandCrosshair.SetActive(false);
         }
 
         private void Subscriptions()
@@ -123,19 +141,12 @@ namespace Pathfinder.Components
             }
         }
 
-        internal void DiveCommand(HurtBox target)
-        {
-            if (target && target.healthComponent && target.healthComponent.alive)
-            {
-                squallController.DiveTarget(target.healthComponent.gameObject);
-            }
-        }
-
         internal void FollowOrder()
         {
             Vector3 teleportPosition = selfBody.corePosition + new Vector3(0f, 10f, 0f);
-            TeleportHelper.TeleportBody(falconMaster.GetBody(), teleportPosition);
-            EffectManager.SimpleEffect(Run.instance.GetTeleportEffectPrefab(falconMaster.bodyInstanceObject), teleportPosition, Quaternion.identity, true);
+            squallController.DiveToPoint(teleportPosition);
+            //TeleportHelper.TeleportBody(falconMaster.GetBody(), teleportPosition);
+            //EffectManager.SimpleEffect(Run.instance.GetTeleportEffectPrefab(falconMaster.bodyInstanceObject), teleportPosition, Quaternion.identity, true);
             squallController.EnterFollowMode();
         }
 

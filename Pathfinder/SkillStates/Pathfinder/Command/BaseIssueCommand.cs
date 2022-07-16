@@ -41,7 +41,7 @@ namespace Skillstates.Pathfinder.Command
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.Pain;
+            return InterruptPriority.Skill;
         }
     }
 }

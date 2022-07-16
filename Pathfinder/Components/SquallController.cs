@@ -10,32 +10,31 @@ namespace Pathfinder.Components
 {
     internal class SquallController : MonoBehaviour
     {
+        internal GameObject owner { get; set; }
         private GameObject masterPrefab;
 
-        private BaseAI baseAI { get; set; }
-        public GameObject currentTarget { get { return baseAI.currentEnemy.gameObject; } }
+        private BaseAI baseAI;
+        internal GameObject currentTarget { get { return baseAI.currentEnemy.gameObject; } }
 
         private EntityStateMachine weaponMachine;
         private EntityStateMachine bodyMachine;
-        private EntityStateMachine missileMachine;
+        //private EntityStateMachine missileMachine;
+        internal SkillLocator skillLocator;
 
         private bool attackMode;
 
-        public bool inAttackMode { get { return attackMode; } }
+        internal bool inAttackMode { get { return attackMode; } }
 
-        private SquallBatteryComponent batteryComponent;
         private SquallVFXComponent squallVFX;
 
-        public GameObject owner;
-
-        internal List<string> followDrivers = Squall.followDrivers; //= new List<string>();
-        internal List<string> attackDrivers = Squall.attackDrivers; //= new List<string>();
+        internal List<string> followDrivers = Squall.followDrivers;
+        internal List<string> attackDrivers = Squall.attackDrivers;
 
         private AISkillDriver[] aISkillDrivers;
         private void Awake()
         {
-            batteryComponent = base.GetComponent<SquallBatteryComponent>();
             squallVFX = base.GetComponent<SquallVFXComponent>();
+            skillLocator = base.GetComponent<SkillLocator>();
         }
 
         private void Start()
@@ -43,7 +42,6 @@ namespace Pathfinder.Components
             masterPrefab = base.GetComponent<CharacterBody>().master.gameObject;
             aISkillDrivers = masterPrefab.GetComponents<AISkillDriver>();
             baseAI = masterPrefab.GetComponent<BaseAI>();
-
             weaponMachine = EntityStateMachine.FindByCustomName(base.gameObject, "Weapon");
             bodyMachine = EntityStateMachine.FindByCustomName(base.gameObject, "Body");
             EnterFollowMode();
@@ -58,7 +56,6 @@ namespace Pathfinder.Components
                 baseAI.currentEnemy.gameObject = bodyObject;
                 baseAI.currentEnemy.bestHurtBox = target;
                 baseAI.enemyAttention = baseAI.enemyAttentionDuration;
-                baseAI.targetRefreshTimer = 5f;
                 baseAI.BeginSkillDriver(baseAI.EvaluateSkillDrivers());
             }
         }
@@ -81,6 +78,11 @@ namespace Pathfinder.Components
             squallVFX.SetTrailColor(Color.red);
         }
 
+        internal void DiveToPoint(Vector3 position)
+        {
+            this.bodyMachine.SetInterruptState(new DivePoint() { divePosition = position }, EntityStates.InterruptPriority.PrioritySkill);
+        }
+
         internal void EnterFollowMode()
         {
             attackMode = false;
@@ -101,15 +103,10 @@ namespace Pathfinder.Components
             squallVFX.SetTrailColor(Color.blue);
         }
 
-        internal void DiveTarget(GameObject target)
-        {
-            bodyMachine.SetInterruptState(new DiveAttack() { target = target }, EntityStates.InterruptPriority.PrioritySkill);
-        }
-
         internal void DoSpecialAttack(HurtBox target)
         {
-            Log.Warning("Special order at squallcontroller");
-            this.weaponMachine.SetInterruptState(new Piledriver() { target = target }, EntityStates.InterruptPriority.Pain);
+            this.skillLocator.special.ExecuteIfReady();
+            this.bodyMachine.SetInterruptState(new SquallEvis() { target = target }, EntityStates.InterruptPriority.PrioritySkill);
         }
 
         internal GameObject GetCurrentTarget()

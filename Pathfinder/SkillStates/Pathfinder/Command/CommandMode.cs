@@ -11,26 +11,22 @@ namespace Skillstates.Pathfinder.Command
 {
     internal class CommandMode : BaseState
     {
-        public static float minDuration = 0.1f;
-        public static GameObject crosshairPrefab;
-
         private CommandTracker tracker;
         private OverrideController overrideController;
-        private CrosshairUtils.OverrideRequest overrideRequest;
+        private FalconerComponent falconerComponent;
 
         public override void OnEnter()
         {
             base.OnEnter();
             tracker = base.GetComponent<CommandTracker>();
             overrideController = base.GetComponent<OverrideController>();
+            falconerComponent = base.GetComponent<FalconerComponent>();
             tracker.ActivateIndicator();
 
             Util.PlaySound(Paint.enterSoundString, base.gameObject);
 
-            if(crosshairPrefab)
-            {
-                overrideRequest = CrosshairUtils.RequestOverrideForBody(base.characterBody, crosshairPrefab, CrosshairUtils.OverridePriority.Skill);
-            }
+            base.characterBody.hideCrosshair = true;
+            falconerComponent.AttachCommandCrosshair();
 
             overrideController.SetCommandSkills();
         }
@@ -43,15 +39,11 @@ namespace Skillstates.Pathfinder.Command
         public override void OnExit()
         {
             tracker.DeactivateIndicator();
+            base.characterBody.hideCrosshair = false;
+            falconerComponent.DeactivateCrosshair();
             Util.PlaySound(Paint.exitSoundString, base.gameObject);
-            if (overrideRequest != null) overrideRequest.Dispose(); 
             overrideController.UnsetCommandSkills();
             base.OnExit();
-        }
-
-        public override InterruptPriority GetMinimumInterruptPriority()
-        {
-            return InterruptPriority.PrioritySkill;
         }
     }
 }

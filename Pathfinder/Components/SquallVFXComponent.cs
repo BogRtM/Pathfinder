@@ -33,7 +33,7 @@ namespace Pathfinder.Components
             laserLine.enabled = false;
         }
         
-        private void FixedUpdate()
+        private void Update()
         {
             Ray aimRay = inputBank.GetAimRay();
             Vector3 origin = selfBody.corePosition;

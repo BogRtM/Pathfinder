@@ -10,9 +10,9 @@ namespace Skillstates.Squall
 {
     internal class MountedGuns : BaseState
     {
-        public static float baseDuration = 0.1f;
+        public static float baseDuration = 0.2f;
 
-        public HealthComponent target;
+        internal HealthComponent target;
 
         private BulletAttack attack;
 

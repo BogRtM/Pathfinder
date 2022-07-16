@@ -47,6 +47,7 @@ namespace Pathfinder
 
         public static GameObject squallBodyPrefab;
         public static GameObject squallMasterPrefab;
+        public static GameObject commandCrosshair;
 
         public static SkillDef javelinSkill;
 
@@ -97,23 +98,15 @@ namespace Pathfinder
                 CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
                 if (attackerBody.bodyIndex == BodyCatalog.FindBodyIndex("PathfinderBody"))
                 {
-                    if(!damageInfo.crit && damageInfo.damage >= (attackerBody.damage * 5f))
-                    {
-                        damageInfo.crit = true;
-                        self.body.RemoveBuff(Modules.Buffs.raptorMark);
-                    } else if (damageInfo.crit)
-                    {
-                        damageInfo.damage *= 2f;
-                        self.body.RemoveBuff(Modules.Buffs.raptorMark);
-                    }
+                    damageInfo.damage *= 1.2f;
                 }
             }
 
             orig(self, damageInfo);
 
-            if(damageInfo.HasModdedDamageType(marking) && !damageInfo.rejected && !self.body.HasBuff(Modules.Buffs.raptorMark))
+            if(damageInfo.HasModdedDamageType(marking) && !damageInfo.rejected)
             {
-                if(NetworkServer.active) self.body.AddBuff(Modules.Buffs.raptorMark);
+                if (NetworkServer.active) self.body.AddTimedBuff(Modules.Buffs.raptorMark, 5f);
             }
         }
 

@@ -23,7 +23,7 @@ namespace Pathfinder.Components
         private void Awake()
         {
             currentCharge = maxCharge;
-            squallController = base.GetComponent<SquallController>();
+            
         }
 
         private void FixedUpdate()
@@ -34,7 +34,6 @@ namespace Pathfinder.Components
                 if(currentCharge <= 0f)
                 {
                     Chat.AddMessage("Battery depleted");
-                    squallController.EnterFollowMode();
                 }
             }
             else if(currentCharge < maxCharge)

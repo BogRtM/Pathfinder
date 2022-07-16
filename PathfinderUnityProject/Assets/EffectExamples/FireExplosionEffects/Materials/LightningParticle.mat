@@ -183,4 +183,4 @@ Material:
     - _EmColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0.019134922, g: 0.8113208, b: 0.7430808, a: 1}
     - _FlashColor: {r: 0, g: 0, b: 0, a: 1}
-    - _TintColor: {r: 1, g: 1, b: 1, a: 0.5}
+    - _TintColor: {r: 1, g: 1, b: 1, a: 1}

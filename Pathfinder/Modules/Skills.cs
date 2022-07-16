@@ -254,10 +254,30 @@ namespace Pathfinder.Modules.Misc
     {
         public override SkillDef.BaseSkillInstanceData OnAssigned([NotNull] GenericSkill skillSlot)
         {
-            return new CommandTrackingSkillDef.InstanceData
+            var instance =  new CommandTrackingSkillDef.InstanceData
             {
-                commandTracker = skillSlot.GetComponent<CommandTracker>()
+                commandTracker = skillSlot.GetComponent<CommandTracker>(),
+                overrideController = skillSlot.GetComponent<OverrideController>(),
+                falconerComponent = skillSlot.GetComponent<FalconerComponent>()
             };
+
+            if (instance.falconerComponent)
+            {
+                var squallController = instance.falconerComponent.squallController;
+
+                if(squallController)
+                {
+                    var squallSkillLocator = squallController.skillLocator;
+
+                    if (squallSkillLocator)
+                    {
+                        skillSlot.stock = squallSkillLocator.special.stock;
+                        skillSlot.rechargeStopwatch = squallSkillLocator.special.rechargeStopwatch;
+                    }
+                }
+            }
+
+            return instance;
         }
 
         private static bool HasTarget([NotNull] GenericSkill skillSlot)
@@ -279,6 +299,8 @@ namespace Pathfinder.Modules.Misc
         protected class InstanceData : SkillDef.BaseSkillInstanceData
         {
             public CommandTracker commandTracker;
+            public OverrideController overrideController;
+            public FalconerComponent falconerComponent;
         }
     }
 }

@@ -38,8 +38,8 @@ namespace Pathfinder.Content
                 }
         };
 
-        public override Type characterMainState => typeof(EntityStates.FlyState);
-        //public override Type characterSpawnState => typeof(EntityStates.FlyState);
+        public override Type characterMainState => typeof(SquallMainState);
+        public override Type characterSpawnState => typeof(SquallMainState);
 
         public override string bodyName => "Squall";
 
@@ -78,7 +78,7 @@ namespace Pathfinder.Content
             missileMachine.mainStateType = idleStateType;
 
             bodyPrefab.AddComponent<SquallController>();
-            bodyPrefab.AddComponent<SquallBatteryComponent>();
+            //bodyPrefab.AddComponent<SquallBatteryComponent>();
             bodyPrefab.AddComponent<SquallVFXComponent>();
 
             foreach (var i in bodyPrefab.GetComponents<AkEvent>())
@@ -125,7 +125,7 @@ namespace Pathfinder.Content
             AddSkillDrivers(masterPrefab);
 
             Modules.Content.AddMasterPrefab(masterPrefab);
-            PathfinderPlugin.squallMasterPrefab = masterPrefab;
+            FalconerComponent.summonPrefab = masterPrefab;
         }
 
         private void AddSkillDrivers(GameObject masterPrefab)
@@ -145,13 +145,13 @@ namespace Pathfinder.Content
             hardLeash.selectionRequiresTargetLoS = false;
             hardLeash.maxTimesSelected = -1;
             hardLeash.maxDistance = float.PositiveInfinity;
-            hardLeash.minDistance = 60f;
+            hardLeash.minDistance = 100f;
             hardLeash.requireSkillReady = false;
             hardLeash.aimType = AISkillDriver.AimType.AtCurrentLeader;
             hardLeash.ignoreNodeGraph = false;
             hardLeash.moveInputScale = 1f;
             hardLeash.driverUpdateTimerOverride = -1f;
-            hardLeash.shouldSprint = false;
+            hardLeash.shouldSprint = true;
             hardLeash.shouldFireEquipment = false;
             hardLeash.buttonPressType = AISkillDriver.ButtonPressType.Hold;
             hardLeash.minTargetHealthFraction = Mathf.NegativeInfinity;
@@ -160,41 +160,141 @@ namespace Pathfinder.Content
             hardLeash.maxUserHealthFraction = float.PositiveInfinity;
             hardLeash.skillSlot = SkillSlot.None;
 
-            AISkillDriver shootMissile = masterPrefab.AddComponent<AISkillDriver>();
-            shootMissile.customName = "SoftLeashToLeader";
-            shootMissile.movementType = AISkillDriver.MovementType.StrafeMovetarget;
-            shootMissile.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
-            shootMissile.activationRequiresAimConfirmation = false;
-            shootMissile.activationRequiresTargetLoS = true;
-            shootMissile.selectionRequiresTargetLoS = false;
-            shootMissile.maxTimesSelected = -1;
-            shootMissile.maxDistance = 70f;
-            shootMissile.minDistance = 0f;
-            shootMissile.requireSkillReady = true;
-            shootMissile.aimType = AISkillDriver.AimType.AtMoveTarget;
-            shootMissile.ignoreNodeGraph = false;
-            shootMissile.moveInputScale = 1f;
-            shootMissile.driverUpdateTimerOverride = -1f;
-            shootMissile.shouldSprint = false;
-            shootMissile.shouldFireEquipment = false;
-            shootMissile.buttonPressType = AISkillDriver.ButtonPressType.Hold;
-            shootMissile.minTargetHealthFraction = Mathf.NegativeInfinity;
-            shootMissile.maxTargetHealthFraction = Mathf.Infinity;
-            shootMissile.minUserHealthFraction = float.NegativeInfinity;
-            shootMissile.maxUserHealthFraction = float.PositiveInfinity;
-            shootMissile.skillSlot = SkillSlot.Secondary;
-            attackDrivers.Add(shootMissile.customName);
+            AISkillDriver strafeMissile = masterPrefab.AddComponent<AISkillDriver>();
+            strafeMissile.customName = "ShootMissilesStrafe";
+            strafeMissile.movementType = AISkillDriver.MovementType.StrafeMovetarget;
+            strafeMissile.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            strafeMissile.activationRequiresAimConfirmation = false;
+            strafeMissile.activationRequiresTargetLoS = true;
+            strafeMissile.selectionRequiresTargetLoS = false;
+            strafeMissile.maxTimesSelected = -1;
+            strafeMissile.maxDistance = 35f;
+            strafeMissile.minDistance = 0f;
+            strafeMissile.requireSkillReady = true;
+            strafeMissile.aimType = AISkillDriver.AimType.AtMoveTarget;
+            strafeMissile.ignoreNodeGraph = false;
+            strafeMissile.moveInputScale = 1f;
+            strafeMissile.driverUpdateTimerOverride = -1f;
+            strafeMissile.shouldSprint = false;
+            strafeMissile.shouldFireEquipment = false;
+            strafeMissile.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+            strafeMissile.minTargetHealthFraction = Mathf.NegativeInfinity;
+            strafeMissile.maxTargetHealthFraction = Mathf.Infinity;
+            strafeMissile.minUserHealthFraction = float.NegativeInfinity;
+            strafeMissile.maxUserHealthFraction = float.PositiveInfinity;
+            strafeMissile.skillSlot = SkillSlot.Secondary;
+            attackDrivers.Add(strafeMissile.customName);
+
+            AISkillDriver chaseMissile = masterPrefab.AddComponent<AISkillDriver>();
+            chaseMissile.customName = "ShootMissilesChase";
+            chaseMissile.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+            chaseMissile.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            chaseMissile.activationRequiresAimConfirmation = false;
+            chaseMissile.activationRequiresTargetLoS = true;
+            chaseMissile.selectionRequiresTargetLoS = false;
+            chaseMissile.maxTimesSelected = -1;
+            chaseMissile.maxDistance = 60f;
+            chaseMissile.minDistance = 30f;
+            chaseMissile.requireSkillReady = true;
+            chaseMissile.aimType = AISkillDriver.AimType.AtMoveTarget;
+            chaseMissile.ignoreNodeGraph = false;
+            chaseMissile.moveInputScale = 1f;
+            chaseMissile.driverUpdateTimerOverride = -1f;
+            chaseMissile.shouldSprint = true;
+            chaseMissile.shouldFireEquipment = false;
+            chaseMissile.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+            chaseMissile.minTargetHealthFraction = Mathf.NegativeInfinity;
+            chaseMissile.maxTargetHealthFraction = Mathf.Infinity;
+            chaseMissile.minUserHealthFraction = float.NegativeInfinity;
+            chaseMissile.maxUserHealthFraction = float.PositiveInfinity;
+            chaseMissile.skillSlot = SkillSlot.Secondary;
+            attackDrivers.Add(chaseMissile.customName);
+
+            AISkillDriver strafeGun = masterPrefab.AddComponent<AISkillDriver>();
+            strafeGun.customName = "ShootGunsStrafe";
+            strafeGun.movementType = AISkillDriver.MovementType.StrafeMovetarget;
+            strafeGun.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            strafeGun.activationRequiresAimConfirmation = true;
+            strafeGun.activationRequiresTargetLoS = true;
+            strafeGun.selectionRequiresTargetLoS = false;
+            strafeGun.maxTimesSelected = -1;
+            strafeGun.maxDistance = 35f;
+            strafeGun.minDistance = 0f;
+            strafeGun.requireSkillReady = true;
+            strafeGun.aimType = AISkillDriver.AimType.AtMoveTarget;
+            strafeGun.ignoreNodeGraph = false;
+            strafeGun.moveInputScale = 1f;
+            strafeGun.driverUpdateTimerOverride = -1f;
+            strafeGun.shouldSprint = false;
+            strafeGun.shouldFireEquipment = false;
+            strafeGun.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+            strafeGun.minTargetHealthFraction = Mathf.NegativeInfinity;
+            strafeGun.maxTargetHealthFraction = Mathf.Infinity;
+            strafeGun.minUserHealthFraction = float.NegativeInfinity;
+            strafeGun.maxUserHealthFraction = float.PositiveInfinity;
+            strafeGun.skillSlot = SkillSlot.Primary;
+            attackDrivers.Add(strafeGun.customName);
+
+            AISkillDriver chaseGun = masterPrefab.AddComponent<AISkillDriver>();
+            chaseGun.customName = "ShootGunsChase";
+            chaseGun.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+            chaseGun.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            chaseGun.activationRequiresAimConfirmation = true;
+            chaseGun.activationRequiresTargetLoS = true;
+            chaseGun.selectionRequiresTargetLoS = false;
+            chaseGun.maxTimesSelected = -1;
+            chaseGun.maxDistance = 60f;
+            chaseGun.minDistance = 30f;
+            chaseGun.requireSkillReady = true;
+            chaseGun.aimType = AISkillDriver.AimType.AtMoveTarget;
+            chaseGun.ignoreNodeGraph = false;
+            chaseGun.moveInputScale = 1f;
+            chaseGun.driverUpdateTimerOverride = -1f;
+            chaseGun.shouldSprint = true;
+            chaseGun.shouldFireEquipment = false;
+            chaseGun.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+            chaseGun.minTargetHealthFraction = Mathf.NegativeInfinity;
+            chaseGun.maxTargetHealthFraction = Mathf.Infinity;
+            chaseGun.minUserHealthFraction = float.NegativeInfinity;
+            chaseGun.maxUserHealthFraction = float.PositiveInfinity;
+            chaseGun.skillSlot = SkillSlot.Primary;
+            attackDrivers.Add(chaseGun.customName);
+
+            AISkillDriver doNothing = masterPrefab.AddComponent<AISkillDriver>();
+            doNothing.customName = "DoNothing";
+            doNothing.movementType = AISkillDriver.MovementType.Stop;
+            doNothing.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            doNothing.activationRequiresAimConfirmation = true;
+            doNothing.activationRequiresTargetLoS = true;
+            doNothing.selectionRequiresTargetLoS = false;
+            doNothing.maxTimesSelected = -1;
+            doNothing.maxDistance = float.PositiveInfinity;
+            doNothing.minDistance = 0f;
+            doNothing.requireSkillReady = true;
+            doNothing.aimType = AISkillDriver.AimType.AtCurrentEnemy;
+            doNothing.ignoreNodeGraph = false;
+            doNothing.moveInputScale = 1f;
+            doNothing.driverUpdateTimerOverride = -1f;
+            doNothing.shouldSprint = false;
+            doNothing.shouldFireEquipment = false;
+            doNothing.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+            doNothing.minTargetHealthFraction = Mathf.NegativeInfinity;
+            doNothing.maxTargetHealthFraction = Mathf.Infinity;
+            doNothing.minUserHealthFraction = float.NegativeInfinity;
+            doNothing.maxUserHealthFraction = float.PositiveInfinity;
+            doNothing.skillSlot = SkillSlot.Primary;
+            attackDrivers.Add(doNothing.customName);
 
             AISkillDriver softLeash = masterPrefab.AddComponent<AISkillDriver>();
             softLeash.customName = "SoftLeashToLeader";
-            softLeash.movementType = AISkillDriver.MovementType.StrafeMovetarget;
+            softLeash.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
             softLeash.moveTargetType = AISkillDriver.TargetType.CurrentLeader;
             softLeash.activationRequiresAimConfirmation = false;
             softLeash.activationRequiresTargetLoS = false;
             softLeash.selectionRequiresTargetLoS = false;
             softLeash.maxTimesSelected = -1;
-            softLeash.maxDistance = 40f;
-            softLeash.minDistance = 0f;
+            softLeash.maxDistance = float.PositiveInfinity;
+            softLeash.minDistance = 30f;
             softLeash.requireSkillReady = false;
             softLeash.aimType = AISkillDriver.AimType.AtCurrentEnemy;
             softLeash.ignoreNodeGraph = false;
@@ -247,10 +347,10 @@ namespace Pathfinder.Content
                 skillNameToken = prefix + "_SQUALLL_BODY_PRIMARY_DIVE_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_PRIMARY_DIVE_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(DiveAttack)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(MountedGuns)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 8f,
+                baseRechargeInterval = 0f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -259,7 +359,7 @@ namespace Pathfinder.Content
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
                 mustKeyPress = false,
-                cancelSprintingOnActivation = true,
+                cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1,
@@ -287,7 +387,7 @@ namespace Pathfinder.Content
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
                 mustKeyPress = false,
-                cancelSprintingOnActivation = true,
+                cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1,
@@ -321,7 +421,32 @@ namespace Pathfinder.Content
             });
 
             Modules.Skills.AddUtilitySkills(bodyPrefab, primarySkillDef);
-            Modules.Skills.AddSpecialSkills(bodyPrefab, primarySkillDef);
+
+            SkillDef specialSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "_SQUALL_BODY_PRIMARY_MISSILE_NAME",
+                skillNameToken = prefix + "_SQUALLL_BODY_PRIMARY_MISSILE_NAME",
+                skillDescriptionToken = prefix + "_PATHFINDER_BODY_PRIMARY_MISSILE_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SquallMainState)),
+                activationStateMachineName = "Body",
+                baseMaxStock = 1,
+                baseRechargeInterval = Modules.Survivors.Pathfinder.squallSpecialCD,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = true,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+            });
+
+            Modules.Skills.AddSpecialSkills(bodyPrefab, specialSkillDef);
         }
 
         public override void InitializeDoppelganger(string clone)

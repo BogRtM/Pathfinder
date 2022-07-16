@@ -26,6 +26,7 @@ namespace Pathfinder.Modules
 
         internal static GameObject thrustEffect;
         internal static GameObject lightningRingEffect;
+        internal static GameObject squallEvisEffect;
 
         // networked hit sounds
         internal static NetworkSoundEventDef swordHitSoundEvent;
@@ -125,7 +126,6 @@ namespace Pathfinder.Modules
             Texture2D blots = mainAssetBundle.LoadAsset<Texture2D>("Blots");
             Texture2D lightningCloud = Addressables.LoadAssetAsync<Texture2D>("RoR2/Base/Common/texCloudLightning1.png").WaitForCompletion();
             Material zoneMaterial = Addressables.LoadAssetAsync<Material>("RoR2/Base/TPHealingNova/matGlowFlowerAreaIndicator.mat").WaitForCompletion();
-            //Shader zoneShader = Addressables.LoadAssetAsync<Shader>("RoR2/Base/Shaders/HGCloudRemap.shader").WaitForCompletion();
 
             lightningRingEffect.AddComponent<NetworkIdentity>();
 
@@ -144,7 +144,9 @@ namespace Pathfinder.Modules
             outerRing.material.SetFloat("_RimPower", 7f);
             outerRing.material.SetColor("_TintColor", Color.green);
 
-            BatteryMeter = mainAssetBundle.LoadAsset<GameObject>("BatteryMeter");
+            //BatteryMeter = mainAssetBundle.LoadAsset<GameObject>("BatteryMeter");
+
+            squallEvisEffect = Assets.LoadEffect("SquallEvisEffect");
         }
 
         private static GameObject CreateTracer(string originalTracerName, string newTracerName)
