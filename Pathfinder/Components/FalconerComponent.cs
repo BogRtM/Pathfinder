@@ -20,7 +20,7 @@ namespace Pathfinder.Components
         private CharacterMaster selfMaster;
         private CharacterBody selfBody;
 
-        private Vector3 spawnPoint = new Vector3(0f, 10f, 0f);
+        private Vector3 verticalOffset = new Vector3(0f, 10f, 0f);
 
         internal SquallController squallController;
         internal BatteryComponent batteryComponent;
@@ -83,7 +83,7 @@ namespace Pathfinder.Components
                 if (minion.masterIndex == MasterCatalog.FindMasterIndex(summonPrefab))
                 {
                     falconMaster = minion;
-                    if (!falconMaster.hasBody) falconMaster.Respawn(base.transform.position + spawnPoint, Quaternion.identity);
+                    if (!falconMaster.hasBody) falconMaster.Respawn(base.transform.position + verticalOffset, Quaternion.identity);
                     if (!falconMaster.godMode) falconMaster.ToggleGod();
                     squallController = minion.bodyInstanceObject.GetComponent<SquallController>();
                     batteryComponent = minion.bodyInstanceObject.GetComponent<BatteryComponent>();
@@ -106,7 +106,7 @@ namespace Pathfinder.Components
             minionSummon.teamIndexOverride = TeamIndex.Player;
             minionSummon.summonerBodyObject = characterBody.gameObject;
             minionSummon.inventoryToCopy = characterBody.inventory;
-            minionSummon.position = characterBody.corePosition + spawnPoint;
+            minionSummon.position = characterBody.corePosition + verticalOffset;
             minionSummon.rotation = characterBody.transform.rotation;
             
             if(falconMaster = minionSummon.Perform())
@@ -140,7 +140,7 @@ namespace Pathfinder.Components
 
             if(target && target.healthComponent && target.healthComponent.alive)
             {
-                Vector3 divePosition = target.transform.position;
+                Vector3 divePosition = target.transform.position + verticalOffset;
                 squallController.DiveToPoint(divePosition, 15f);
                 squallController.SetTarget(target);
             }
@@ -148,7 +148,7 @@ namespace Pathfinder.Components
 
         internal void FollowOrder()
         {
-            Vector3 divePosition = selfBody.corePosition + spawnPoint;
+            Vector3 divePosition = selfBody.corePosition + verticalOffset;
             squallController.DiveToPoint(divePosition, 2f);
             squallController.EnterFollowMode();
         }

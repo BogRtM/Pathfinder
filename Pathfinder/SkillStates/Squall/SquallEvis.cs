@@ -82,13 +82,12 @@ namespace Skillstates.Squall
                     info.crit = isCrit;
                     info.position = enemyPosition;
                     info.damage = base.damageStat * damagePerHit;
-                    //info.AddModdedDamageType(PathfinderPlugin.marking);
                     target.healthComponent.TakeDamage(info);
                     GlobalEventManager.instance.OnHitEnemy(info, target.healthComponent.gameObject);
                     GlobalEventManager.instance.OnHitAll(info, target.healthComponent.gameObject);
                     batteryComponent.Recharge(isCrit ? (2f * chargePerHit) : chargePerHit);
 
-                    EffectManager.SimpleImpactEffect(Evis.hitEffectPrefab, enemyPosition, enemyPosition, true);
+                    EffectManager.SimpleImpactEffect(Assets.squallEvisEffect, enemyPosition, enemyPosition, true);
                 }
             }else if ((!target.healthComponent.alive || base.fixedAge >= attackDuration + diveDuration) && base.isAuthority && !attackFinished)
             {

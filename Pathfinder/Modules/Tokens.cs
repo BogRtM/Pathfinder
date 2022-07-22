@@ -26,7 +26,7 @@ namespace Pathfinder.Modules
 
 
             string outro = "..and so they left, searching for a new identity.";
-            string outroFailure = "..and so they vanished, forever lost to the uncaring wilderness.";
+            string outroFailure = "..and so they vanished, lost to the uncaring wilderness.";
 
             #region Squall
             LanguageAPI.Add(squallPrefix + "NAME", "Squall");
@@ -52,24 +52,27 @@ namespace Pathfinder.Modules
             #endregion
 
             #region Keywords
-            LanguageAPI.Add("KEYWORD_BATTERY", "<style=cKeywordName>Battery></style><style=cSub>In <style=cIsHealing>Follow Mode</style>, Squall regenerates 2% battery per second. " +
-                "In <style=cDeath>Attack Mode</style>, Squall drains 10% battery per second. If the battery reaches 0%, Squall is forced into <style=cIsHealing>Follow Mode</style>.");
+            LanguageAPI.Add("KEYWORD_BATTERY", "<style=cKeywordName>Battery</style><style=cSub>In <color=#00FF00>Follow Mode</color>, " +
+                $"Squall <style=cIsUtility>regenerates {Config.batteryRechargeRate.Value}%</style> battery per second. " +
+                $"In <color=#FF0000>Attack Mode</style>, Squall <style=cIsUtility>drains {Config.batteryDrainRate.Value}%</style> battery per second. " +
+                $"If the battery reaches 0, Squall is forced into <color=#00FF00>Follow Mode</color>.");
 
             LanguageAPI.Add("KEYWORD_ELECTROCUTE", $"<style=cKeywordName>Electrocute</style><style=cSub>Targets have their movespeed reduced by {100f * Config.electrocuteSlowAmount.Value}%, " +
                 $"armor reduced by {Config.electrocuteArmorShred.Value}, and take <style=cIsDamage>{100f * Config.electrocuteDPS.Value}% damage</style> per second.</style>");
             
-            LanguageAPI.Add("KEYWORD_ATTACK", "<style=cDeath[ Attack ]</style>" + Environment.NewLine +
-                "<style=cSub>Redirect Squall's attention to target enemy, and activate <style=cDeath>Attack Mode</style>, " + 
+            LanguageAPI.Add("KEYWORD_ATTACK", "<style=cKeywordName><color=#FF0000>Attack</color></style>"+
+                "<style=cSub>Redirect Squall's attention to target enemy, and activate <color=#FF0000>Attack Mode</style>, " + 
                 $" granting access to machine guns that deal <style=cIsDamage>2x{100f * Config.SquallGunDamage.Value}% damage</style>, " +
                 $"and a missile launcher that deals <style=cIsDamage>{MissileLauncher.maxMissileCount}x{100f * Config.SquallMissileDamage.Value}% damage.</style>");
 
-            LanguageAPI.Add("KEYWORD_FOLLOW", "<style=cIsHealing>[ Follow ]</style>" + Environment.NewLine +
-                $"<style=cSub>Return Squall to yourself, and set him to <style=cIsHealing>Follow Mode</style>.");
+            LanguageAPI.Add("KEYWORD_FOLLOW", "<style=cKeywordName><color=#00FF00>Follow</color></style>" + 
+                $"<style=cSub>Return Squall to yourself, and activate <color=#00FF00>Follow Mode</color>, " +
+                $"causing him to stay close to you, <style=cUserSetting>and do something else I haven't implemented yet.</style></style>");
 
-            LanguageAPI.Add("KEYWORD_SQUALL_UTILITY", "<style>c=IsUtility>[ Utility ]</style>" + Environment.NewLine +
+            LanguageAPI.Add("KEYWORD_SQUALL_UTILITY", "<style=cKeywordName><color=#87b9cf>Utility</color></style>" +
                 "<style=cSub>Order Squall to use his <style=cIsUtility>Utility</style> skill. Check the Loadout panel for details.</style>");
 
-            LanguageAPI.Add("KEYWORD_SQUALL_SPECIAL", "<style>c=Shrine>[ Special ]</style>" + Environment.NewLine +
+            LanguageAPI.Add("KEYWORD_SQUALL_SPECIAL", "<style=cKeywordName><color=#efeb1c>Special</color></style>" +
                 "<style=cSub>Order Squall to use his <style=cShrine>Special</style> skill. Check the Loadout panel for details.</style>");
             #endregion
 
@@ -79,9 +82,9 @@ namespace Pathfinder.Modules
             #endregion
 
             #region Secondary
-            LanguageAPI.Add(prefix + "SECONDARY_PURSUIT_NAME", "Hunter's Pursuit");
-            LanguageAPI.Add(prefix + "SECONDARY_PURSUIT_DESCRIPTION", $"<style=cIsUtility>Dash</style> a short distance. The next time you use your primary skill, throw an " +
-                $"<style=cIsUtility>exploding</style> javelin for <style=cIsDamage>{100f * Config.JavelinDamage.Value}% damage</style>.");
+            LanguageAPI.Add(prefix + "SECONDARY_DASH_NAME", "Evade Step");
+            LanguageAPI.Add(prefix + "SECONDARY_DASH_DESCRIPTION", $"<style=cIsUtility>Dash</style> a short distance. The next time you use your primary skill, throw an " +
+                $"<style=cIsUtility>explosive</style> javelin for <style=cIsDamage>{100f * Config.JavelinDamage.Value}% damage</style>.");
             #endregion
 
             #region Utility
@@ -90,19 +93,18 @@ namespace Pathfinder.Modules
                 $"Upon landing, perform a horizontal sweep for <style=cIsDamage>{100f * Config.GroundSpinDamage.Value}% damage</style>.");
 
             LanguageAPI.Add(prefix + "UTILITY_BOLAS_NAME", "Shock Bolas");
-            LanguageAPI.Add(prefix + "UTILITY_BOLAS_DESCRIPTION", "Throw electrically charged bolas, which <style=cIsUtility>shock</style> nearby enemies, and leave behind an <style=cIsUtility>electrocuting</style> field for <style=cIsUtility>10 seconds</style>.");
+            LanguageAPI.Add(prefix + "UTILITY_BOLAS_DESCRIPTION", "Throw electrically charged bolas, which leave behind an <style=cIsUtility>electrocuting</style> field for <style=cIsUtility>10 seconds</style>.");
             #endregion
 
             #region Special
             LanguageAPI.Add(prefix + "SPECIAL_COMMAND_NAME", "Issue Command");
-            LanguageAPI.Add(prefix + "SPECIAL_COMMAND_DESCRIPTION", "Prepare a command for Squall. You can issue an <style=cDeath>Attack</style>, <style=cIsHealing>Follow</style>, " +
-                "<style=cIsUtility>Utility</style>, or <style=cShrine>Special</style> command." +
-                "<style");
+            LanguageAPI.Add(prefix + "SPECIAL_COMMAND_DESCRIPTION", "Prepare a command for Squall. You can issue an <color=#FF0000>Attack</color>, <color=#00FF00>Follow</color>, " +
+                "<color=#87b9cf>Utility</color>, or <color=#efeb1c>Special</color> command.");
             #endregion
 
             #region SquallSpecial
             LanguageAPI.Add(prefix + "SQUALL_SPECIAL_GOFORTHROAT_NAME", "Go for the Throat!");
-            LanguageAPI.Add(prefix + "SQUALL_SPECIAL_GOFORTHROAT_DESCRIPTION", "Order Squall to strike target enemy X times");
+            LanguageAPI.Add(prefix + "SQUALL_SPECIAL_GOFORTHROAT_DESCRIPTION", "Squall repeatedly strikes the target enemy for ");
             #endregion
 
             #region Achievements

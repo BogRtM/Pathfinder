@@ -75,7 +75,8 @@ namespace Pathfinder.Modules
 
             #region Squall General
             batteryDrainRate = plugin.Config.Bind<float>(squallGeneralTitle, "Battery Drain Rate", 10f, "Amount battery drains per second while Squall is in Attack Mode");
-            batteryRechargeRate = plugin.Config.Bind<float>(squallGeneralTitle, "Battery Drain Rate", 2f, "Amount battery recharges per second while Squall is in Follow Mode");
+            batteryRechargeRate = plugin.Config.Bind<float>(squallGeneralTitle, "Battery Recharge Rate", 2f, "Amount battery recharges per second while Squall is in Follow Mode");
+            #endregion
 
             #region Squall Attack
             SquallGunDamage = plugin.Config.Bind<float>(squallAttackTitle, "Machine Guns Damage Coefficient", 0.2f, "Damage coefficient of Squall's machine guns. Each attack fires two bullets.");
