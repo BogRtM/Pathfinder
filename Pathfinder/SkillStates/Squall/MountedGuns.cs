@@ -39,7 +39,7 @@ namespace Skillstates.Squall
                     minSpread = 0f,
                     maxSpread = 0f,
                     bulletCount = 2U,
-                    damage = 0.2f * base.damageStat,
+                    damage = Config.SquallMissileDamage.Value * base.damageStat,
                     tracerEffectPrefab = FireBarrage.tracerEffectPrefab,
                     force = 1f,
                     hitEffectPrefab = FirePistol2.hitEffectPrefab,
@@ -48,7 +48,7 @@ namespace Skillstates.Squall
                     radius = 1f,
                     damageType = DamageType.Generic,
                     falloffModel = BulletAttack.FalloffModel.DefaultBullet,
-                    procCoefficient = 0.3f,
+                    procCoefficient = Config.SquallGunProc.Value,
                     maxDistance = 200f,
                     aimVector = aimRay.direction
                 };

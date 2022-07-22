@@ -25,8 +25,7 @@ namespace Skillstates.Pathfinder.Command
 
             Util.PlaySound(Paint.enterSoundString, base.gameObject);
 
-            base.characterBody.hideCrosshair = true;
-            falconerComponent.AttachCommandCrosshair();
+            falconerComponent.ActivateCrosshair();
 
             overrideController.SetCommandSkills();
         }
@@ -39,7 +38,6 @@ namespace Skillstates.Pathfinder.Command
         public override void OnExit()
         {
             tracker.DeactivateIndicator();
-            base.characterBody.hideCrosshair = false;
             falconerComponent.DeactivateCrosshair();
             Util.PlaySound(Paint.exitSoundString, base.gameObject);
             overrideController.UnsetCommandSkills();

@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3513531889
+CRC: 4153442652
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 84cc6e02ff1a52d189852bc199a35823
+    Hash: 2b6dd99c1fc25fa3e90cb720168bb374
   TypeTreeHash:
     serializedVersion: 2
     Hash: 191fd58095c9dfffe22a38324962b7e7
@@ -98,7 +98,6 @@ Assets:
 - Assets/PathfinderAssets/Animation/clips/Rig_AimPitch New USE.anim
 - Assets/PathfinderAssets/VFX/Cone.mesh
 - Assets/PathfinderAssets/Animation/clips/Rig_JavIdleIn.anim
-- Assets/PathfinderAssets/VFX/SquallParticle.mesh
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/Javelin Trail.png
 - Assets/PathfinderAssets/Animation/clips/Rig_Sweep.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_OverhandThrow.anim
@@ -185,6 +184,7 @@ Assets:
 - Assets/PathfinderAssets/Animation/clips/Rig_JavJump.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_JavAscend.anim
 - Assets/PathfinderAssets/VFX/matSlashOuter.mat
+- Assets/PathfinderAssets/VFX/squallParticle.mesh
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_RollRight2.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_AirFlip2.anim
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_DiveEnter.anim
@@ -195,7 +195,6 @@ Assets:
 - Assets/PathfinderAssets/Animation/clips/Rig_JavDescendFast.anim
 - Assets/PathfinderAssets/VFX/HenryMaterials/matSwingShadow.mat
 - Assets/PathfinderAssets/VFX/EffectMaterials/Trail.mat
-- Assets/PathfinderAssets/VFX/Bird.001.mesh
 - Assets/PathfinderAssets/Materials/matVest.mat
 - Assets/PathfinderAssets/mdlSquall.prefab
 - Assets/PathfinderAssets/FBX/fightbird.fbx

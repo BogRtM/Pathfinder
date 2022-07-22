@@ -47,7 +47,7 @@ namespace Skillstates.Squall
             batteryComponent = base.GetComponent<BatteryComponent>();
             squallVFXComponent = base.GetComponent<SquallVFXComponent>();
 
-            batteryComponent.isInSpecial = true;
+            batteryComponent.pauseDrain = true;
             squallVFXComponent.ToggleTrails(false);
 
             characterModel.invisibilityCount++;
@@ -82,12 +82,12 @@ namespace Skillstates.Squall
                     info.crit = isCrit;
                     info.position = enemyPosition;
                     info.damage = base.damageStat * damagePerHit;
-                    info.AddModdedDamageType(PathfinderPlugin.marking);
+                    //info.AddModdedDamageType(PathfinderPlugin.marking);
                     target.healthComponent.TakeDamage(info);
                     GlobalEventManager.instance.OnHitEnemy(info, target.healthComponent.gameObject);
                     GlobalEventManager.instance.OnHitAll(info, target.healthComponent.gameObject);
                     batteryComponent.Recharge(isCrit ? (2f * chargePerHit) : chargePerHit);
-                    EffectManager.SimpleEffect(Assets.squallEvisEffect, enemyPosition, Quaternion.identity, true);
+
                     EffectManager.SimpleImpactEffect(Evis.hitEffectPrefab, enemyPosition, enemyPosition, true);
                 }
             }else if ((!target.healthComponent.alive || base.fixedAge >= attackDuration + diveDuration) && base.isAuthority && !attackFinished)
@@ -106,7 +106,7 @@ namespace Skillstates.Squall
         public override void OnExit()
         {
             characterModel.invisibilityCount--;
-            batteryComponent.isInSpecial = false;
+            batteryComponent.pauseDrain = false;
             squallVFXComponent.ToggleTrails(true);
             base.OnExit();
         }

@@ -4807,7 +4807,7 @@ ParticleSystemRenderer:
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
   m_VertexStreams: 00010304
-  m_Mesh: {fileID: 4300000, guid: fa87aab9439d98f438d0b5165d5ff2bf, type: 2}
+  m_Mesh: {fileID: 4300000, guid: 577408a809effe04abf24584a9ed99e0, type: 2}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}

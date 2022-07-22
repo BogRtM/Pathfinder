@@ -55,6 +55,12 @@ namespace Pathfinder.Components
             }
         }
 
+        internal void SetLineColor(Color color)
+        {
+            laserLine.startColor = color;
+            laserLine.endColor = color;
+        }
+
         internal void ToggleTrails(bool onOff)
         {
             foreach(var i in trails)

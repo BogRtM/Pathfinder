@@ -33,7 +33,7 @@ namespace Pathfinder.Modules
             skillLocator.passiveSkill.skillNameToken = "BOG_PATHFINDER_BODY_PASSIVE_NAME";
             skillLocator.passiveSkill.skillDescriptionToken = "BOG_PATHFINDER_BODY_PASSIVE_DESCRIPTION";
             skillLocator.passiveSkill.icon = Assets.mainAssetBundle.LoadAsset<Sprite>("PassiveIcon");
-            //skillLocator.passiveSkill.keywordToken = new string[] { "KEYWORD_MACHINEGUN", "KEYWORD_MISSILELAUNCHER" };
+            skillLocator.passiveSkill.keywordToken = "KEYWORD_BATTERY";
 
             skillLocator.primary = CreateGenericSkillWithSkillFamily(targetPrefab, "Primary");
             skillLocator.secondary = CreateGenericSkillWithSkillFamily(targetPrefab, "Secondary");

@@ -29,15 +29,26 @@ namespace Pathfinder.Modules
         public static ConfigEntry<float> JavelinExplosionRadius;
         #endregion
 
-        #region Utility
+        #region Pathfinder Utility
+        private static string utilitySectionTitle = pathfinderPrefix + "Utility";
         public static ConfigEntry<float> AirSpinDamage;
         public static ConfigEntry<float> GroundSpinDamage;
         #endregion
 
+        #region Squall General
+        private static string squallGeneralTitle = squallPrefix + "General";
+        public static ConfigEntry<float> batteryDrainRate;
+        public static ConfigEntry<float> batteryRechargeRate;
+        #endregion
+
+        #region Squall Attack
+        private static string squallAttackTitle = squallPrefix + "Attack Mode";
         public static ConfigEntry<float> SquallGunDamage;
         public static ConfigEntry<float> SquallGunProc;
         public static ConfigEntry<float> SquallMissileDamage;
         public static ConfigEntry<float> SquallMissileProc;
+        #endregion
+
         public static void ReadConfig(PathfinderPlugin plugin)
         {
             #region Debuffs
@@ -58,12 +69,19 @@ namespace Pathfinder.Modules
             #endregion
 
             #region Utility
-            AirSpinDamage = plugin.Config.Bind<float>("Pathfinder", "Air Spin Damage Coefficient", 3f, "Damage coefficient of Rending Talons aerial spin attack");
-            GroundSpinDamage = plugin.Config.Bind<float>("Pathfinder", "Ground Spin Damage Coefficient", 8f, "Damage coefficient of Rending Talons ground spin attack");
+            AirSpinDamage = plugin.Config.Bind<float>(utilitySectionTitle, "Air Spin Damage Coefficient", 3f, "Damage coefficient of Rending Talons aerial spin attack");
+            GroundSpinDamage = plugin.Config.Bind<float>(utilitySectionTitle, "Ground Spin Damage Coefficient", 8f, "Damage coefficient of Rending Talons ground spin attack");
             #endregion
-            //SquallGunDamage = plugin.Config.Bind<float>("Squall", "Machine Guns Damage Coefficient", 0.3f, "Damage coefficient of Squall's machine guns. Each attack fires two bullets.");
-            //SquallGunProc = plugin.Config.Bind<float>("Squall", "Machine Guns Proc Coefficient", 0.2f, "Proc coefficient of Squall's machine guns. Each attack fires two bullets.");
-            //SquallMissileDamage = plugin.Config.Bind<float>("Squall", "Missile Launcher Damage Coefficient", 0.8f, "Damage coefficient of Squall's missile launcher. Each volley fires four missiles.");
+
+            #region Squall General
+            batteryDrainRate = plugin.Config.Bind<float>(squallGeneralTitle, "Battery Drain Rate", 10f, "Amount battery drains per second while Squall is in Attack Mode");
+            batteryRechargeRate = plugin.Config.Bind<float>(squallGeneralTitle, "Battery Drain Rate", 2f, "Amount battery recharges per second while Squall is in Follow Mode");
+
+            #region Squall Attack
+            SquallGunDamage = plugin.Config.Bind<float>(squallAttackTitle, "Machine Guns Damage Coefficient", 0.2f, "Damage coefficient of Squall's machine guns. Each attack fires two bullets.");
+            SquallGunProc = plugin.Config.Bind<float>(squallAttackTitle, "Machine Guns Proc Coefficient", 0.3f, "Proc coefficient of Squall's machine guns. Each attack fires two bullets.");
+            SquallMissileDamage = plugin.Config.Bind<float>(squallAttackTitle, "Missile Launcher Damage Coefficient", 2f, "Damage coefficient of Squall's missile launcher. Each volley fires four missiles.");
+            #endregion
         }
 
         // this helper automatically makes config entries for disabling survivors

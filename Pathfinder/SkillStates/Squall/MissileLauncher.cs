@@ -57,7 +57,7 @@ namespace Skillstates.Squall
             if (base.isAuthority)
             {
                 MissileUtils.FireMissile(base.characterBody.corePosition, base.characterBody, default(ProcChainMask), target,
-                    2f * base.damageStat, isCrit, missilePrefab, DamageColorIndex.Default, Vector3.up, 200f, false);
+                    Config.SquallMissileDamage.Value * base.damageStat, isCrit, missilePrefab, DamageColorIndex.Default, Vector3.up, 200f, false);
 
                 missileCount++;
             }

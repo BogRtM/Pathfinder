@@ -13,10 +13,9 @@ namespace Pathfinder.Components
         public float maxCharge = 100f;
         private float currentCharge;
 
-        public float drainRate = 10f;
-        public float rechargeRate = 2f;
-        public float rechargeDelay = 1f;
-        public float minRequiredToAttack = 40f;
+        public static float drainRate = Modules.Config.batteryDrainRate.Value;
+        public static float rechargeRate = Modules.Config.batteryRechargeRate.Value;
+        public static float rechargeDelay = 1f;
         internal float stopwatch;
 
         private GameObject batteryUI;
@@ -26,10 +25,10 @@ namespace Pathfinder.Components
         private Image batteryPip;
         private TMPro.TextMeshProUGUI batteryText;
 
-        private Color followColor = new Color(0f, 0.76f, 1f);
-        private Color attackColor = new Color(1, 0f, 0f);
+        private Color followColor = Color.green;
+        private Color attackColor = Color.red;
 
-        internal bool isInSpecial;
+        internal bool pauseDrain;
 
         internal SquallController squallController;
 
@@ -44,7 +43,7 @@ namespace Pathfinder.Components
 
         private void Hooks()
         {
-            On.RoR2.UI.HUD.Update += HUD_Update;
+            On.RoR2.UI.HUD.Update += this.HUD_Update;
         }
 
         private void HUD_Update(On.RoR2.UI.HUD.orig_Update orig, HUD self)
@@ -59,7 +58,7 @@ namespace Pathfinder.Components
 
                 batteryUI = Instantiate(Modules.Assets.BatteryMeter, transform);
                 batteryUI.transform.localPosition = new Vector3(-100f, 0f, 0f);
-                batteryUI.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+                batteryUI.transform.localScale = new Vector3(0.18f, 0.18f, 0.18f);
                 batteryText = batteryUI.transform.Find("Text").GetComponent<TMPro.TextMeshProUGUI>();
                 batteryRings = batteryUI.transform.Find("OuterRings").GetComponent<Image>();
                 batteryMeter = batteryUI.transform.Find("Meter").GetComponent<Image>();
@@ -67,7 +66,7 @@ namespace Pathfinder.Components
                 batteryPip = batteryUI.transform.Find("Pip").GetComponent<Image>();
 
                 UpdateColor();
-                On.RoR2.UI.HUD.Update -= HUD_Update;
+                On.RoR2.UI.HUD.Update -= this.HUD_Update;
             }
         }
 
@@ -78,7 +77,7 @@ namespace Pathfinder.Components
         
         private void FixedUpdate()
         {
-            if (squallController.inAttackMode && !isInSpecial)
+            if (squallController.inAttackMode && !pauseDrain)
             {
                 Drain(drainRate * Time.fixedDeltaTime);
                 if(currentCharge <= 0f)

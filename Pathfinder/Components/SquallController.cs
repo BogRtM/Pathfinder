@@ -12,8 +12,8 @@ namespace Pathfinder.Components
     internal class SquallController : MonoBehaviour
     {
         internal GameObject owner { get; set; }
+        
         private GameObject masterPrefab;
-
         private BaseAI baseAI;
         internal GameObject currentTarget { get { return baseAI.currentEnemy.gameObject; } }
 
@@ -29,8 +29,8 @@ namespace Pathfinder.Components
         private SquallVFXComponent squallVFX;
         internal BatteryComponent batteryComponent;
 
-        internal List<string> followDrivers = Squall.followDrivers;
-        internal List<string> attackDrivers = Squall.attackDrivers;
+        //internal List<string> followDrivers = Squall.followDrivers;
+        //internal List<string> attackDrivers = Squall.attackDrivers;
 
         private AISkillDriver[] aISkillDrivers;
         private void Awake()
@@ -72,20 +72,21 @@ namespace Pathfinder.Components
             foreach(AISkillDriver driver in aISkillDrivers)
             {
                 if (driver.enabled) continue;
-                if (attackDrivers.Contains(driver.customName))
+                if (Squall.attackDrivers.Contains(driver.customName))
                 {
                     driver.enabled = true;
                 }
             }
 
+            squallVFX.SetLineColor(Color.red);
             squallVFX.SetTrailColor(Color.red);
 
             batteryComponent.UpdateColor();
         }
 
-        internal void DiveToPoint(Vector3 position)
+        internal void DiveToPoint(Vector3 position, float minDistance)
         {
-            this.bodyMachine.SetInterruptState(new DivePoint() { divePosition = position }, EntityStates.InterruptPriority.PrioritySkill);
+            this.bodyMachine.SetInterruptState(new DiveToPoint() { divePosition = position, minDistanceFromPoint = minDistance }, EntityStates.InterruptPriority.PrioritySkill);
         }
 
         internal void EnterFollowMode()
@@ -97,7 +98,7 @@ namespace Pathfinder.Components
             foreach (AISkillDriver driver in aISkillDrivers)
             {
                 if (!driver.enabled) continue;
-                if (attackDrivers.Contains(driver.customName))
+                if (Squall.attackDrivers.Contains(driver.customName))
                 {
                     driver.enabled = false;
                 }
@@ -107,7 +108,8 @@ namespace Pathfinder.Components
             baseAI.currentEnemy.bestHurtBox = null;
             baseAI.BeginSkillDriver(baseAI.EvaluateSkillDrivers());
 
-            squallVFX.SetTrailColor(Color.blue);
+            squallVFX.SetLineColor(Color.green);
+            squallVFX.SetTrailColor(Color.green);
             if (batteryComponent)
             {
                 batteryComponent.stopwatch = 0f;
@@ -117,18 +119,8 @@ namespace Pathfinder.Components
 
         internal void DoSpecialAttack(HurtBox target)
         {
-            this.skillLocator.special.ExecuteIfReady();
-            this.bodyMachine.SetInterruptState(new SquallEvis() { target = target }, EntityStates.InterruptPriority.PrioritySkill);
-        }
-
-        internal GameObject GetCurrentTarget()
-        {
-            if(baseAI)
-            {
-                GameObject target = baseAI.currentEnemy.gameObject;
-                if (target) return target;
-            }
-            return null;
+            if(this.skillLocator.special.ExecuteIfReady())
+                this.bodyMachine.SetInterruptState(new SquallEvis() { target = target }, EntityStates.InterruptPriority.PrioritySkill);
         }
     }
 }

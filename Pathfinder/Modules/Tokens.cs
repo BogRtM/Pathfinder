@@ -1,5 +1,8 @@
 ﻿using R2API;
 using System;
+using Pathfinder.Components;
+using Skillstates.Pathfinder;
+using Skillstates.Squall;
 
 namespace Pathfinder.Modules
 {
@@ -45,17 +48,29 @@ namespace Pathfinder.Modules
 
             #region Passive
             LanguageAPI.Add(prefix + "PASSIVE_NAME", "Falconer");
-            LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", "You are accompanied by your robot falcon, <style=cIsUtility>Squall</style>. Squall is immune to damage, but runs on a <style=cIsUtility>battery</style>.");
+            LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", "You are accompanied by your robot falcon, Squall. Squall is immune to damage, but runs on a <style=cIsUtility>battery</style>.");
             #endregion
 
             #region Keywords
+            LanguageAPI.Add("KEYWORD_BATTERY", "<style=cKeywordName>Battery></style><style=cSub>In <style=cIsHealing>Follow Mode</style>, Squall regenerates 2% battery per second. " +
+                "In <style=cDeath>Attack Mode</style>, Squall drains 10% battery per second. If the battery reaches 0%, Squall is forced into <style=cIsHealing>Follow Mode</style>.");
+
             LanguageAPI.Add("KEYWORD_ELECTROCUTE", $"<style=cKeywordName>Electrocute</style><style=cSub>Targets have their movespeed reduced by {100f * Config.electrocuteSlowAmount.Value}%, " +
                 $"armor reduced by {Config.electrocuteArmorShred.Value}, and take <style=cIsDamage>{100f * Config.electrocuteDPS.Value}% damage</style> per second.</style>");
-            LanguageAPI.Add("KEYWORD_ATTACK", "<style=cIsDamage>[ Attack ]</style>" + Environment.NewLine +
-                "<style=cSub>Redirect Squall's attention to target enemy, and set him to Attack Mode. " +
-                "In Attack Mode, Squall will attack more aggressively, and seek out enemies by himself.</style>");
-            LanguageAPI.Add("KEYWORD_FOLLOW", "<style=cIsUtility>[ Follow ]</style>" + Environment.NewLine +
-                "<style=cSub>Teleport Squall to yourself, and set him to Follow Mode. In Follow Mode, Squall will prioritize staying close to you.");
+            
+            LanguageAPI.Add("KEYWORD_ATTACK", "<style=cDeath[ Attack ]</style>" + Environment.NewLine +
+                "<style=cSub>Redirect Squall's attention to target enemy, and activate <style=cDeath>Attack Mode</style>, " + 
+                $" granting access to machine guns that deal <style=cIsDamage>2x{100f * Config.SquallGunDamage.Value}% damage</style>, " +
+                $"and a missile launcher that deals <style=cIsDamage>{MissileLauncher.maxMissileCount}x{100f * Config.SquallMissileDamage.Value}% damage.</style>");
+
+            LanguageAPI.Add("KEYWORD_FOLLOW", "<style=cIsHealing>[ Follow ]</style>" + Environment.NewLine +
+                $"<style=cSub>Return Squall to yourself, and set him to <style=cIsHealing>Follow Mode</style>.");
+
+            LanguageAPI.Add("KEYWORD_SQUALL_UTILITY", "<style>c=IsUtility>[ Utility ]</style>" + Environment.NewLine +
+                "<style=cSub>Order Squall to use his <style=cIsUtility>Utility</style> skill. Check the Loadout panel for details.</style>");
+
+            LanguageAPI.Add("KEYWORD_SQUALL_SPECIAL", "<style>c=Shrine>[ Special ]</style>" + Environment.NewLine +
+                "<style=cSub>Order Squall to use his <style=cShrine>Special</style> skill. Check the Loadout panel for details.</style>");
             #endregion
 
             #region Primary
@@ -80,7 +95,9 @@ namespace Pathfinder.Modules
 
             #region Special
             LanguageAPI.Add(prefix + "SPECIAL_COMMAND_NAME", "Issue Command");
-            LanguageAPI.Add(prefix + "SPECIAL_COMMAND_DESCRIPTION", "<style=cUserSetting>Squall is currently undergoing a rework; please check back later!</style>");
+            LanguageAPI.Add(prefix + "SPECIAL_COMMAND_DESCRIPTION", "Prepare a command for Squall. You can issue an <style=cDeath>Attack</style>, <style=cIsHealing>Follow</style>, " +
+                "<style=cIsUtility>Utility</style>, or <style=cShrine>Special</style> command." +
+                "<style");
             #endregion
 
             #region SquallSpecial

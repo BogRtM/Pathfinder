@@ -20,6 +20,8 @@ namespace Pathfinder.Components
         private CharacterMaster selfMaster;
         private CharacterBody selfBody;
 
+        private Vector3 spawnPoint = new Vector3(0f, 10f, 0f);
+
         internal SquallController squallController;
         internal BatteryComponent batteryComponent;
 
@@ -30,14 +32,12 @@ namespace Pathfinder.Components
             selfBody = base.GetComponent<CharacterBody>();
             selfMaster = selfBody.master;
 
-            //AttachCommandCrosshair();
-
             FindOrSummonSquall();
 
             Subscriptions();
         }
 
-        internal void AttachCommandCrosshair()
+        internal void ActivateCrosshair()
         {
             if(commandCrosshair)
             {
@@ -83,7 +83,7 @@ namespace Pathfinder.Components
                 if (minion.masterIndex == MasterCatalog.FindMasterIndex(summonPrefab))
                 {
                     falconMaster = minion;
-                    if (!falconMaster.hasBody) falconMaster.Respawn(base.transform.position + Vector3.up, Quaternion.identity);
+                    if (!falconMaster.hasBody) falconMaster.Respawn(base.transform.position + spawnPoint, Quaternion.identity);
                     if (!falconMaster.godMode) falconMaster.ToggleGod();
                     squallController = minion.bodyInstanceObject.GetComponent<SquallController>();
                     batteryComponent = minion.bodyInstanceObject.GetComponent<BatteryComponent>();
@@ -94,11 +94,11 @@ namespace Pathfinder.Components
 
             if (NetworkServer.active && !falconMaster)
             {
-                SpawnFalcon(selfBody);
+                SpawnSquall(selfBody);
             }
         }
 
-        private void SpawnFalcon(CharacterBody characterBody)
+        private void SpawnSquall(CharacterBody characterBody)
         {
             MasterSummon minionSummon = new MasterSummon();
             minionSummon.masterPrefab = summonPrefab;
@@ -106,7 +106,7 @@ namespace Pathfinder.Components
             minionSummon.teamIndexOverride = TeamIndex.Player;
             minionSummon.summonerBodyObject = characterBody.gameObject;
             minionSummon.inventoryToCopy = characterBody.inventory;
-            minionSummon.position = characterBody.corePosition + new Vector3(0f, 10f, 0f);
+            minionSummon.position = characterBody.corePosition + spawnPoint;
             minionSummon.rotation = characterBody.transform.rotation;
             
             if(falconMaster = minionSummon.Perform())
@@ -140,14 +140,16 @@ namespace Pathfinder.Components
 
             if(target && target.healthComponent && target.healthComponent.alive)
             {
+                Vector3 divePosition = target.transform.position;
+                squallController.DiveToPoint(divePosition, 15f);
                 squallController.SetTarget(target);
             }
         }
 
         internal void FollowOrder()
         {
-            Vector3 teleportPosition = selfBody.corePosition + new Vector3(0f, 10f, 0f);
-            squallController.DiveToPoint(teleportPosition);
+            Vector3 divePosition = selfBody.corePosition + spawnPoint;
+            squallController.DiveToPoint(divePosition, 2f);
             squallController.EnterFollowMode();
         }
 

@@ -170,7 +170,7 @@ namespace Pathfinder.Modules.Survivors
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
                 fullRestockOnAssign = true,
-                interruptPriority = EntityStates.InterruptPriority.Skill,
+                interruptPriority = EntityStates.InterruptPriority.Any,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
                 mustKeyPress = true,
@@ -178,7 +178,6 @@ namespace Pathfinder.Modules.Survivors
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1
-                //keywordTokens = new string[] { "KEYWORD_AGILE", "KEYWORD_EMPOWER" }
             });
 
             OverrideController.javelinSkill = javelinSkillDef;
@@ -319,7 +318,7 @@ namespace Pathfinder.Modules.Survivors
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1,
-                keywordTokens = new string[] { "KEYWORD_ATTACK", "KEYWORD_FOLLOW" }
+                keywordTokens = new string[] { "KEYWORD_ATTACK", "KEYWORD_FOLLOW", "KEYWORD_SQUALL_UTILITY", "KEYWORD_SQUALL_SPECIAL" }
             });
 
             Modules.Skills.AddSpecialSkills(bodyPrefab, commandSkillDef);
