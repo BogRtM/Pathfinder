@@ -11,10 +11,6 @@ namespace Skillstates.Squall
     {
         private Animator modelAnimator;
 
-        private CharacterAnimParamAvailability CAPA;
-        private CharacterAnimatorWalkParamCalculator CAWPC;
-        private BodyAnimatorSmoothingParameters.SmoothingParameters smoothingParameters;
-
         private bool skill1InputReceived;
         private bool skill2InputReceived;
         private bool skill3InputReceived;
@@ -25,16 +21,8 @@ namespace Skillstates.Squall
         {
             base.OnEnter();
             modelAnimator = base.GetModelAnimator();
-            this.PlayAnimation("Body", "Hover");
-            if (modelAnimator) 
-            { 
-                CAPA = CharacterAnimParamAvailability.FromAnimator(modelAnimator);
-                base.GetBodyAnimatorSmoothingParameters(out smoothingParameters);
-            }
-            if (modelAnimator)
-            {
-                modelAnimator.SetFloat("Fly.rate", 1f);
-            }
+            PlayAnimation("Body", "Hover");
+            modelAnimator.SetFloat("Fly.rate", 1f);
         }
 
         public override void FixedUpdate()
@@ -62,7 +50,10 @@ namespace Skillstates.Squall
                     }
                     if (base.rigidbodyDirection)
                     {
-                        base.rigidbodyDirection.aimDirection = base.inputBank.moveVector == Vector3.zero ? base.transform.forward : base.inputBank.moveVector;//base.GetAimRay().direction;
+                        if (base.inputBank.moveVector != Vector3.zero)
+                            base.rigidbodyDirection.aimDirection = base.inputBank.moveVector;
+                        else
+                            base.rigidbodyDirection.aimDirection.y = 0f;
                     }
 
                     skill1InputReceived = base.inputBank.skill1.down;
@@ -91,14 +82,10 @@ namespace Skillstates.Squall
         {
             if (!modelAnimator) return;
 
-            Vector3 moveVector = base.inputBank ? base.inputBank.moveVector : Vector3.zero;
+            Vector3 moveVector = base.inputBank.moveVector;
             bool value = moveVector != Vector3.zero && base.characterBody.moveSpeed > Mathf.Epsilon;
 
-            CAWPC.Update(moveVector, base.rigidbodyDirection.aimDirection, smoothingParameters, Time.fixedDeltaTime);
-
             modelAnimator.SetBool("isMoving", value);
-            modelAnimator.SetFloat("forwardSpeed", CAWPC.animatorWalkSpeed.x); //, smoothingParameters.forwardSpeedSmoothDamp, Time.deltaTime);
-            modelAnimator.SetFloat("rightSpeed", CAWPC.animatorWalkSpeed.y); //, smoothingParameters.rightSpeedSmoothDamp, Time.deltaTime);
         }
     }
 }

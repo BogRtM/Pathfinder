@@ -78,7 +78,7 @@ namespace Pathfinder.Content
             missileMachine.mainStateType = idleStateType;
 
             bodyPrefab.AddComponent<SquallController>();
-            //bodyPrefab.AddComponent<SquallBatteryComponent>();
+            bodyPrefab.AddComponent<BatteryComponent>();
             bodyPrefab.AddComponent<SquallVFXComponent>();
 
             foreach (var i in bodyPrefab.GetComponents<AkEvent>())
@@ -101,9 +101,6 @@ namespace Pathfinder.Content
             //example of how to create a hitbox
             //Transform hitboxTransform = childLocator.FindChild("SwordHitbox");
             //Modules.Prefabs.SetupHitbox(model, hitboxTransform, "Sword");
-
-            Transform diveHitbox = childLocator.FindChild("DiveHitbox");
-            Modules.Prefabs.SetupHitbox(model, diveHitbox, "Dive");
         }
 
         private void CreateSquallMaster()
@@ -118,7 +115,7 @@ namespace Pathfinder.Content
             baseAI.aimVectorDampTime = 0.01f;
             //baseAI.enemyAttentionDuration = float.PositiveInfinity;
 
-            SquallController squallController = bodyPrefab.GetComponent<SquallController>();
+            //SquallController squallController = bodyPrefab.GetComponent<SquallController>();
             //squallController.followDrivers = new List<string>();
             //squallController.attackDrivers = new List<string>();
 
@@ -193,7 +190,7 @@ namespace Pathfinder.Content
             chaseMissile.activationRequiresTargetLoS = true;
             chaseMissile.selectionRequiresTargetLoS = false;
             chaseMissile.maxTimesSelected = -1;
-            chaseMissile.maxDistance = 60f;
+            chaseMissile.maxDistance = 100f;
             chaseMissile.minDistance = 30f;
             chaseMissile.requireSkillReady = true;
             chaseMissile.aimType = AISkillDriver.AimType.AtMoveTarget;
@@ -243,7 +240,7 @@ namespace Pathfinder.Content
             chaseGun.activationRequiresTargetLoS = true;
             chaseGun.selectionRequiresTargetLoS = false;
             chaseGun.maxTimesSelected = -1;
-            chaseGun.maxDistance = 60f;
+            chaseGun.maxDistance = 100f;
             chaseGun.minDistance = 30f;
             chaseGun.requireSkillReady = true;
             chaseGun.aimType = AISkillDriver.AimType.AtMoveTarget;
@@ -259,6 +256,31 @@ namespace Pathfinder.Content
             chaseGun.maxUserHealthFraction = float.PositiveInfinity;
             chaseGun.skillSlot = SkillSlot.Primary;
             attackDrivers.Add(chaseGun.customName);
+
+            AISkillDriver chaseEnemies = masterPrefab.AddComponent<AISkillDriver>();
+            chaseEnemies.customName = "ChaseEnemies";
+            chaseEnemies.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+            chaseEnemies.moveTargetType = AISkillDriver.TargetType.CurrentEnemy;
+            chaseEnemies.activationRequiresAimConfirmation = false;
+            chaseEnemies.activationRequiresTargetLoS = false;
+            chaseEnemies.selectionRequiresTargetLoS = false;
+            chaseEnemies.maxTimesSelected = -1;
+            chaseEnemies.maxDistance = float.PositiveInfinity;
+            chaseEnemies.minDistance = 0f;
+            chaseEnemies.requireSkillReady = true;
+            chaseEnemies.aimType = AISkillDriver.AimType.AtCurrentEnemy;
+            chaseEnemies.ignoreNodeGraph = false;
+            chaseEnemies.moveInputScale = 1f;
+            chaseEnemies.driverUpdateTimerOverride = -1f;
+            chaseEnemies.shouldSprint = false;
+            chaseEnemies.shouldFireEquipment = false;
+            chaseEnemies.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+            chaseEnemies.minTargetHealthFraction = Mathf.NegativeInfinity;
+            chaseEnemies.maxTargetHealthFraction = Mathf.Infinity;
+            chaseEnemies.minUserHealthFraction = float.NegativeInfinity;
+            chaseEnemies.maxUserHealthFraction = float.PositiveInfinity;
+            chaseEnemies.skillSlot = SkillSlot.None;
+            attackDrivers.Add(chaseEnemies.customName);
 
             AISkillDriver doNothing = masterPrefab.AddComponent<AISkillDriver>();
             doNothing.customName = "DoNothing";
@@ -294,7 +316,7 @@ namespace Pathfinder.Content
             softLeash.selectionRequiresTargetLoS = false;
             softLeash.maxTimesSelected = -1;
             softLeash.maxDistance = float.PositiveInfinity;
-            softLeash.minDistance = 30f;
+            softLeash.minDistance = 20f;
             softLeash.requireSkillReady = false;
             softLeash.aimType = AISkillDriver.AimType.AtCurrentEnemy;
             softLeash.ignoreNodeGraph = false;
@@ -431,7 +453,7 @@ namespace Pathfinder.Content
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SquallMainState)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
-                baseRechargeInterval = Modules.Survivors.Pathfinder.squallSpecialCD,
+                baseRechargeInterval = Modules.Survivors.Pathfinder.goForThroatCD,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,

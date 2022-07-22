@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using Pathfinder.Content;
 using Skillstates.Squall;
+using RoR2.UI;
 
 namespace Pathfinder.Components
 {
@@ -21,11 +22,12 @@ namespace Pathfinder.Components
         //private EntityStateMachine missileMachine;
         internal SkillLocator skillLocator;
 
-        private bool attackMode;
-
         internal bool inAttackMode { get { return attackMode; } }
 
+        private bool attackMode = true;
+
         private SquallVFXComponent squallVFX;
+        internal BatteryComponent batteryComponent;
 
         internal List<string> followDrivers = Squall.followDrivers;
         internal List<string> attackDrivers = Squall.attackDrivers;
@@ -35,6 +37,7 @@ namespace Pathfinder.Components
         {
             squallVFX = base.GetComponent<SquallVFXComponent>();
             skillLocator = base.GetComponent<SkillLocator>();
+            batteryComponent = base.GetComponent<BatteryComponent>();
         }
 
         private void Start()
@@ -62,7 +65,7 @@ namespace Pathfinder.Components
 
         internal void EnterAttackMode()
         {
-            if (inAttackMode) return;
+            if (attackMode) return;
 
             attackMode = true;
             Chat.AddMessage("Entering Attack Mode");
@@ -76,6 +79,8 @@ namespace Pathfinder.Components
             }
 
             squallVFX.SetTrailColor(Color.red);
+
+            batteryComponent.UpdateColor();
         }
 
         internal void DiveToPoint(Vector3 position)
@@ -85,6 +90,8 @@ namespace Pathfinder.Components
 
         internal void EnterFollowMode()
         {
+            if (!attackMode) return;
+
             attackMode = false;
             Chat.AddMessage("Entering Follow Mode");
             foreach (AISkillDriver driver in aISkillDrivers)
@@ -101,6 +108,11 @@ namespace Pathfinder.Components
             baseAI.BeginSkillDriver(baseAI.EvaluateSkillDrivers());
 
             squallVFX.SetTrailColor(Color.blue);
+            if (batteryComponent)
+            {
+                batteryComponent.stopwatch = 0f;
+                batteryComponent.UpdateColor();
+            }
         }
 
         internal void DoSpecialAttack(HurtBox target)

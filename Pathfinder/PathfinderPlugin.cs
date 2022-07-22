@@ -12,6 +12,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using Pathfinder.Components;
 using UnityEngine.UI;
+using System;
 
 [module: UnverifiableCode]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
@@ -45,8 +46,9 @@ namespace Pathfinder
 
         public static PathfinderPlugin instance;
 
+        public static GameObject pathfinderBodyPrefab;
         public static GameObject squallBodyPrefab;
-        public static GameObject squallMasterPrefab;
+        //public static GameObject squallMasterPrefab;
         public static GameObject commandCrosshair;
 
         public static SkillDef javelinSkill;
@@ -81,7 +83,13 @@ namespace Pathfinder
             // now make a content pack and add it- this part will change with the next update
             new Modules.ContentPacks().Initialize();
 
+            Subscriptions();
             Hook();
+        }
+
+        private void Subscriptions()
+        {
+            GlobalEventManager.onClientDamageNotified += GlobalEventManager_onClientDamageNotified;
         }
 
         private void Hook()
@@ -89,6 +97,48 @@ namespace Pathfinder
             // run hooks here, disabling one is as simple as commenting out the line
             On.RoR2.CharacterBody.RecalculateStats += CharacterBody_RecalculateStats;
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
+            //On.RoR2.UI.HealthBar.Start += HealthBar_Start;
+        }
+
+        private void HealthBar_Start(On.RoR2.UI.HealthBar.orig_Start orig, HealthBar self)
+        {
+            orig(self);
+
+            Chat.AddMessage(self.source.gameObject.name);
+            /*
+            if(self.source.body.bodyIndex == BodyCatalog.FindBodyIndex(squallBodyPrefab) && self.viewerBody.bodyIndex == BodyCatalog.FindBodyIndex(pathfinderBodyPrefab))
+            {
+                self.enabled = false;
+                GameObject batteryMeter = UnityEngine.Object.Instantiate(Modules.Assets.BatteryMeter, self.transform.parent);
+                batteryMeter.transform.localScale = Vector3.one;
+            }
+            */
+        }
+
+        private void GlobalEventManager_onClientDamageNotified(DamageDealtMessage msg)
+        {
+            if (BodyCatalog.FindBodyIndex(msg.attacker) != BodyCatalog.FindBodyIndex(squallBodyPrefab)) return;
+
+            SquallController squallController = msg.attacker.GetComponent<SquallController>();
+            if (!squallController || !squallController.owner) return;
+
+            if (!msg.victim || msg.isSilent)
+            {
+                return;
+            }
+            HealthComponent component = msg.victim.GetComponent<HealthComponent>();
+            if (!component || component.dontShowHealthbar)
+            {
+                return;
+            }
+            TeamIndex objectTeam = TeamComponent.GetObjectTeam(component.gameObject);
+            foreach (CombatHealthBarViewer combatHealthBarViewer in CombatHealthBarViewer.instancesList)
+            {
+                if (squallController.owner == combatHealthBarViewer.viewerBodyObject && combatHealthBarViewer.viewerBodyObject)
+                {
+                    combatHealthBarViewer.HandleDamage(component, objectTeam);
+                }
+            }
         }
 
         private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
@@ -98,7 +148,7 @@ namespace Pathfinder
                 CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
                 if (attackerBody.bodyIndex == BodyCatalog.FindBodyIndex("PathfinderBody"))
                 {
-                    damageInfo.damage *= 1.2f;
+                    damageInfo.damage *= Modules.Config.raptorMarkDamageMult.Value;
                 }
             }
 
@@ -106,7 +156,7 @@ namespace Pathfinder
 
             if(damageInfo.HasModdedDamageType(marking) && !damageInfo.rejected)
             {
-                if (NetworkServer.active) self.body.AddTimedBuff(Modules.Buffs.raptorMark, 5f);
+                if (NetworkServer.active) self.body.AddTimedBuff(Modules.Buffs.raptorMark, Modules.Config.raptorMarkDuration.Value);
             }
         }
 
@@ -119,8 +169,8 @@ namespace Pathfinder
             {
                 if (self.HasBuff(Modules.Buffs.electrocute))
                 {
-                    self.armor -= 20f;
-                    self.moveSpeed *= 0.5f;
+                    self.armor -= Modules.Config.electrocuteArmorShred.Value;
+                    self.moveSpeed *= Modules.Config.electrocuteSlowAmount.Value;
                 }
             }
         }

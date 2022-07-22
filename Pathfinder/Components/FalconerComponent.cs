@@ -12,7 +12,7 @@ using System.Collections.Generic;
 
 namespace Pathfinder.Components
 {
-    internal class FalconerComponent : MonoBehaviour //, IOnDamageDealtServerReceiver
+    internal class FalconerComponent : MonoBehaviour
     {
         internal static GameObject summonPrefab;
 
@@ -21,6 +21,7 @@ namespace Pathfinder.Components
         private CharacterBody selfBody;
 
         internal SquallController squallController;
+        internal BatteryComponent batteryComponent;
 
         internal GameObject commandCrosshair;
 
@@ -49,7 +50,7 @@ namespace Pathfinder.Components
             {
                 Transform crosshairArea = i.transform.Find("MainContainer").Find("MainUIArea").Find("CrosshairCanvas");
                 if (!crosshairArea) return;
-                commandCrosshair = UnityEngine.Object.Instantiate(PathfinderPlugin.commandCrosshair);
+                commandCrosshair = UnityEngine.Object.Instantiate(Modules.Assets.commandCrosshair);
                 commandCrosshair.transform.SetParent(crosshairArea, false);
                 commandCrosshair.SetActive(true);
             }
@@ -85,6 +86,7 @@ namespace Pathfinder.Components
                     if (!falconMaster.hasBody) falconMaster.Respawn(base.transform.position + Vector3.up, Quaternion.identity);
                     if (!falconMaster.godMode) falconMaster.ToggleGod();
                     squallController = minion.bodyInstanceObject.GetComponent<SquallController>();
+                    batteryComponent = minion.bodyInstanceObject.GetComponent<BatteryComponent>();
                     squallController.owner = base.gameObject;
                     return;
                 }
@@ -112,6 +114,7 @@ namespace Pathfinder.Components
                 if (!falconMaster.godMode) falconMaster.ToggleGod();
                 CleanSquallInventory(falconMaster.inventory);
                 squallController = falconMaster.bodyInstanceObject.GetComponent<SquallController>();
+                batteryComponent = falconMaster.bodyInstanceObject.GetComponent<BatteryComponent>();
                 squallController.owner = base.gameObject;
             }
         }
@@ -145,8 +148,6 @@ namespace Pathfinder.Components
         {
             Vector3 teleportPosition = selfBody.corePosition + new Vector3(0f, 10f, 0f);
             squallController.DiveToPoint(teleportPosition);
-            //TeleportHelper.TeleportBody(falconMaster.GetBody(), teleportPosition);
-            //EffectManager.SimpleEffect(Run.instance.GetTeleportEffectPrefab(falconMaster.bodyInstanceObject), teleportPosition, Quaternion.identity, true);
             squallController.EnterFollowMode();
         }
 

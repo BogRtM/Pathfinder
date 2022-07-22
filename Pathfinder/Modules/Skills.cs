@@ -32,6 +32,7 @@ namespace Pathfinder.Modules
             skillLocator.passiveSkill.enabled = true;
             skillLocator.passiveSkill.skillNameToken = "BOG_PATHFINDER_BODY_PASSIVE_NAME";
             skillLocator.passiveSkill.skillDescriptionToken = "BOG_PATHFINDER_BODY_PASSIVE_DESCRIPTION";
+            skillLocator.passiveSkill.icon = Assets.mainAssetBundle.LoadAsset<Sprite>("PassiveIcon");
             //skillLocator.passiveSkill.keywordToken = new string[] { "KEYWORD_MACHINEGUN", "KEYWORD_MISSILELAUNCHER" };
 
             skillLocator.primary = CreateGenericSkillWithSkillFamily(targetPrefab, "Primary");
@@ -136,9 +137,14 @@ namespace Pathfinder.Modules
             return CreateSkillDef<SkillDef>(skillDefInfo);
         }
 
-        public static CommandTrackingSkillDef CreateTrackingSkillDef(SkillDefInfo skillDefInfo)
+        public static AttackCommandSkillDef CreateAttackCommandSkillDef(SkillDefInfo skillDefInfo)
         {
-            return CreateSkillDef<CommandTrackingSkillDef>(skillDefInfo);
+            return CreateSkillDef<AttackCommandSkillDef>(skillDefInfo);
+        }
+
+        public static SpecialCommandSkillDef CreateSpecialSkillDef(SkillDefInfo skillDefInfo)
+        {
+            return CreateSkillDef<SpecialCommandSkillDef>(skillDefInfo);
         }
 
         public static T CreateSkillDef<T>(SkillDefInfo skillDefInfo) where T : SkillDef
@@ -250,14 +256,14 @@ namespace Pathfinder.Modules
 
 namespace Pathfinder.Modules.Misc
 {
-    internal class CommandTrackingSkillDef : SkillDef
+    internal class SpecialCommandSkillDef : SkillDef
     {
         public override SkillDef.BaseSkillInstanceData OnAssigned([NotNull] GenericSkill skillSlot)
         {
-            var instance =  new CommandTrackingSkillDef.InstanceData
+            var instance =  new SpecialCommandSkillDef.InstanceData
             {
                 commandTracker = skillSlot.GetComponent<CommandTracker>(),
-                overrideController = skillSlot.GetComponent<OverrideController>(),
+                //overrideController = skillSlot.GetComponent<OverrideController>(),
                 falconerComponent = skillSlot.GetComponent<FalconerComponent>()
             };
 
@@ -282,25 +288,58 @@ namespace Pathfinder.Modules.Misc
 
         private static bool HasTarget([NotNull] GenericSkill skillSlot)
         {
-            CommandTracker commandTracker = ((CommandTrackingSkillDef.InstanceData)skillSlot.skillInstanceData).commandTracker;
+            CommandTracker commandTracker = ((SpecialCommandSkillDef.InstanceData)skillSlot.skillInstanceData).commandTracker;
             return (commandTracker != null) ? commandTracker.GetTrackingTarget() : null;
         }
 
         public override bool CanExecute([NotNull] GenericSkill skillSlot)
         {
-            return CommandTrackingSkillDef.HasTarget(skillSlot) && base.CanExecute(skillSlot);
+            return SpecialCommandSkillDef.HasTarget(skillSlot) && base.CanExecute(skillSlot);
         }
 
         public override bool IsReady([NotNull] GenericSkill skillSlot)
         {
-            return base.IsReady(skillSlot) && CommandTrackingSkillDef.HasTarget(skillSlot);
+            return base.IsReady(skillSlot) && SpecialCommandSkillDef.HasTarget(skillSlot);
         }
 
         protected class InstanceData : SkillDef.BaseSkillInstanceData
         {
             public CommandTracker commandTracker;
-            public OverrideController overrideController;
+            //public OverrideController overrideController;
             public FalconerComponent falconerComponent;
+        }
+    }
+
+    internal class AttackCommandSkillDef : SkillDef
+    {
+        public override SkillDef.BaseSkillInstanceData OnAssigned([NotNull] GenericSkill skillSlot)
+        {
+            var instance = new AttackCommandSkillDef.InstanceData
+            {
+                commandTracker = skillSlot.GetComponent<CommandTracker>()
+            };
+
+            return instance;
+        }
+
+        private static bool HasTarget([NotNull] GenericSkill skillSlot)
+        {
+            CommandTracker commandTracker = ((AttackCommandSkillDef.InstanceData)skillSlot.skillInstanceData).commandTracker;
+            return (commandTracker != null) ? commandTracker.GetTrackingTarget() : null;
+        }
+
+        public override bool CanExecute([NotNull] GenericSkill skillSlot)
+        {
+            return base.CanExecute(skillSlot) && AttackCommandSkillDef.HasTarget(skillSlot);
+        }
+
+        public override bool IsReady([NotNull] GenericSkill skillSlot)
+        {
+            return base.IsReady(skillSlot) && AttackCommandSkillDef.HasTarget(skillSlot);
+        }
+        protected class InstanceData : SkillDef.BaseSkillInstanceData
+        {
+            public CommandTracker commandTracker;
         }
     }
 }

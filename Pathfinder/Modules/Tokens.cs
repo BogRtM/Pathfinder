@@ -49,9 +49,8 @@ namespace Pathfinder.Modules
             #endregion
 
             #region Keywords
-            LanguageAPI.Add("KEYWORD_ELECTROCUTE", "<style=cKeywordName>Electrocute</style><style=cSub>Targets have their movespeed reduced by 50%, armor reduced by 20, and take <style=cIsDamage>200% damage</style> per second.</style>");
-            //LanguageAPI.Add("KEYWORD_MACHINEGUN", $"<style=cKeywordName>Machine Gun</style><style=cSub>Shoot for 2x<style=cIsDamage>{Config.SquallGunDamage.Value}% damage</style>. </style>");
-            //LanguageAPI.Add("KEYWORD_MISSILELAUNCHER", $"<style=cKeywordName>Missile Launcher</style><style=cSub>Fire a volley of missilles for 4xx<style=cIsDamage>{Config.SquallMissileDamage.Value}% damage</style>. </style>");
+            LanguageAPI.Add("KEYWORD_ELECTROCUTE", $"<style=cKeywordName>Electrocute</style><style=cSub>Targets have their movespeed reduced by {100f * Config.electrocuteSlowAmount.Value}%, " +
+                $"armor reduced by {Config.electrocuteArmorShred.Value}, and take <style=cIsDamage>{100f * Config.electrocuteDPS.Value}% damage</style> per second.</style>");
             LanguageAPI.Add("KEYWORD_ATTACK", "<style=cIsDamage>[ Attack ]</style>" + Environment.NewLine +
                 "<style=cSub>Redirect Squall's attention to target enemy, and set him to Attack Mode. " +
                 "In Attack Mode, Squall will attack more aggressively, and seek out enemies by himself.</style>");

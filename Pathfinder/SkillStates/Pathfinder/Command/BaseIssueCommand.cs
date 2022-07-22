@@ -11,7 +11,7 @@ namespace Skillstates.Pathfinder.Command
         protected FalconerComponent falconerComponent;
         protected OverrideController overrideController;
 
-        public static float baseDuration = 1f;
+        public static float baseDuration = 0.5f;
         protected float duration;
         protected CommandTracker commandTracker;
         public override void OnEnter()
@@ -41,7 +41,7 @@ namespace Skillstates.Pathfinder.Command
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.Skill;
+            return InterruptPriority.Any;
         }
     }
 }

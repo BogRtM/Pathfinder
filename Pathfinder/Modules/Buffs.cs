@@ -27,7 +27,7 @@ namespace Pathfinder.Modules
 
         private static void RegisterDoTs()
         {
-            electrocuteDoT = DotAPI.RegisterDotDef(0.2f, 0.2f, DamageColorIndex.Default, electrocute, null, null);
+            electrocuteDoT = DotAPI.RegisterDotDef(0.2f, (Config.electrocuteDPS.Value * 0.2f), DamageColorIndex.Default, electrocute, null, null);
         }
 
         // simple helper method

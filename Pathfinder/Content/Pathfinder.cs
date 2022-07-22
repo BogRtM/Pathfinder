@@ -24,7 +24,7 @@ namespace Pathfinder.Modules.Survivors
         //used when registering your survivor's language tokens
         public override string survivorTokenPrefix => PF_PREFIX;
 
-        internal static float squallSpecialCD = 12f;
+        internal static float goForThroatCD = 12f;
 
         public override BodyInfo bodyInfo { get; set; } = new BodyInfo
         {
@@ -35,7 +35,7 @@ namespace Pathfinder.Modules.Survivors
             characterPortrait = Assets.mainAssetBundle.LoadAsset<Texture>("texPathfinderIcon"),
             bodyColor = new Color((62f / 255f), (162f / 255f), (82f / 255f)),
 
-            crosshair = Modules.Assets.LoadCrosshair("Standard"),
+            crosshair = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/UI/SimpleDotCrosshair.prefab").WaitForCompletion(),
             podPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
 
             maxHealth = 110f,
@@ -91,7 +91,7 @@ namespace Pathfinder.Modules.Survivors
         public override void InitializeCharacter()
         {
             base.InitializeCharacter();
-
+            PathfinderPlugin.pathfinderBodyPrefab = this.bodyPrefab;
             //SetCoreTransform();
         }
 
@@ -104,7 +104,6 @@ namespace Pathfinder.Modules.Survivors
             Transform baseTransform = childLocator.FindChild("BaseBone");
             model.GetComponent<CharacterModel>().coreTransform = baseTransform;
             characterBody.coreTransform = baseTransform;
-            Log.Warning(characterBody.coreTransform);
         }
 
         public override void InitializeUnlockables()
@@ -126,6 +125,7 @@ namespace Pathfinder.Modules.Survivors
         {
             bodyPrefab.AddComponent<FalconerComponent>();
             bodyPrefab.AddComponent<OverrideController>();
+            //bodyPrefab.AddComponent<SquallBatteryComponent>();
 
             bodyPrefab.AddComponent<CommandTracker>();
             GameObject customTracker = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Huntress/HuntressTrackingIndicator.prefab").WaitForCompletion(), "CommandTracker");
@@ -146,7 +146,7 @@ namespace Pathfinder.Modules.Survivors
             holder.Find("AmmoArea").gameObject.SetActive(false);
             holder.Find("ReadyContainer").Find("Text").gameObject.SetActive(false);
             holder.Find("ReadyContainer").Find("Square, Outer").GetComponent<Image>().color = new Color(0.579f, 0f, 0f);
-            PathfinderPlugin.commandCrosshair = commandCrosshair;
+            Assets.commandCrosshair = commandCrosshair;
         }
 
         public override void InitializeSkills()
@@ -192,7 +192,7 @@ namespace Pathfinder.Modules.Survivors
                 skillName = prefix + "_PATHFINDER_BODY_PRIMARY_THRUST_NAME",
                 skillNameToken = prefix + "_PATHFINDER_BODY_PRIMARY_THRUST_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_PRIMARY_THRUST_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("ThrustIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(Thrust)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -324,7 +324,7 @@ namespace Pathfinder.Modules.Survivors
 
             Modules.Skills.AddSpecialSkills(bodyPrefab, commandSkillDef);
 
-            SkillDef attackCommand = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            AttackCommandSkillDef attackCommand = Modules.Skills.CreateAttackCommandSkillDef(new SkillDefInfo
             {
                 skillName = prefix + "_PATHFINDER_BODY_SPECIAL_ATTACK_NAME",
                 skillNameToken = prefix + "_PATHFINDER_BODY_SPECIAL_ATTACK_NAME",
@@ -407,7 +407,7 @@ namespace Pathfinder.Modules.Survivors
             OverrideController.cancelCommand = cancelCommand;
             Modules.Content.AddSkillDef(cancelCommand);
 
-            CommandTrackingSkillDef squallSpecial = Modules.Skills.CreateTrackingSkillDef(new SkillDefInfo
+            SpecialCommandSkillDef squallSpecial = Modules.Skills.CreateSpecialSkillDef(new SkillDefInfo
             {
                 skillName = prefix + "_PATHFINDER_BODY_SQUALL_SPECIAL_GOFORTHROAT_NAME",
                 skillNameToken = prefix + "_PATHFINDER_BODY_SQUALL_SPECIAL_GOFORTHROAT_NAME",
@@ -416,7 +416,7 @@ namespace Pathfinder.Modules.Survivors
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SpecialCommand)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = squallSpecialCD,
+                baseRechargeInterval = goForThroatCD,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,

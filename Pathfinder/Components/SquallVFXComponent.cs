@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using RoR2;
+using Pathfinder.Modules;
 using System;
 
 namespace Pathfinder.Components
 {
     internal class SquallVFXComponent : MonoBehaviour
     {
+        private GameObject dashEffect = Assets.squallDashEffect;
+
         private InputBankTest inputBank;
         private LineRenderer laserLine;
 
@@ -51,6 +54,26 @@ namespace Pathfinder.Components
                 i.endColor = color;
             }
         }
-        
+
+        internal void ToggleTrails(bool onOff)
+        {
+            foreach(var i in trails)
+            {
+                i.enabled = onOff;
+            }
+        }
+        internal void PlayDashEffect(Vector3 start, Vector3 end)
+        {
+            dashEffect.GetComponentInChildren<ParticleSystem>().startSpeed = Vector3.Distance(start, end) * 5f;
+
+            EffectData effectData = new EffectData()
+            {
+                origin = start,
+                rotation = Util.QuaternionSafeLookRotation((end - start).normalized)
+            };
+
+            EffectManager.SpawnEffect(dashEffect, effectData, true);
+        }
+
     }
 }

@@ -8,6 +8,7 @@ using System.IO;
 using System.Collections.Generic;
 using RoR2.UI;
 using System;
+using TMPro;
 
 namespace Pathfinder.Modules
 {
@@ -18,15 +19,18 @@ namespace Pathfinder.Modules
 
         //UI
         internal static GameObject BatteryMeter;
+        internal static GameObject commandCrosshair;
 
-        // particle effects
+        /* particle effects
         internal static GameObject swordSwingEffect;
         internal static GameObject swordHitImpactEffect;
         internal static GameObject bombExplosionEffect;
+        */
 
         internal static GameObject thrustEffect;
         internal static GameObject lightningRingEffect;
         internal static GameObject squallEvisEffect;
+        internal static GameObject squallDashEffect;
 
         // networked hit sounds
         internal static NetworkSoundEventDef swordHitSoundEvent;
@@ -96,7 +100,7 @@ namespace Pathfinder.Modules
 
             // feel free to delete everything in here and load in your own assets instead
             // it should work fine even if left as is- even if the assets aren't in the bundle
-
+            /*
             swordHitSoundEvent = CreateNetworkSoundEventDef("HenrySwordHit");
 
             bombExplosionEffect = LoadEffect("BombExplosionEffect", "HenryBombExplosion");
@@ -119,6 +123,7 @@ namespace Pathfinder.Modules
 
             swordSwingEffect = Assets.LoadEffect("HenrySwordSwingEffect", true);
             swordHitImpactEffect = Assets.LoadEffect("ImpactHenrySlash");
+            */
 
             thrustEffect = Assets.LoadEffect("SpearThrust", false);
 
@@ -144,9 +149,13 @@ namespace Pathfinder.Modules
             outerRing.material.SetFloat("_RimPower", 7f);
             outerRing.material.SetColor("_TintColor", Color.green);
 
-            //BatteryMeter = mainAssetBundle.LoadAsset<GameObject>("BatteryMeter");
+            BatteryMeter = mainAssetBundle.LoadAsset<GameObject>("BatteryMeter");
+            TextMeshProUGUI text = BatteryMeter.GetComponentInChildren<TextMeshProUGUI>();
+            text.font = Addressables.LoadAssetAsync<TMP_FontAsset>("RoR2/Base/Common/Fonts/Bombardier/tmpBombDropshadow.asset").WaitForCompletion();
 
             squallEvisEffect = Assets.LoadEffect("SquallEvisEffect");
+
+            squallDashEffect = Assets.LoadEffect("SquallDash");
         }
 
         private static GameObject CreateTracer(string originalTracerName, string newTracerName)

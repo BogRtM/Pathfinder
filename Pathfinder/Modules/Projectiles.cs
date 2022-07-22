@@ -19,12 +19,9 @@ namespace Pathfinder.Modules
 
         internal static void RegisterProjectiles()
         {
-            //CreateBomb();
-            //CreateJavelin();
             CreateExplodingJavelin();
             CreateBolasZone();
             CreateBolas();
-            //AddProjectile(bombPrefab);
             AddProjectile(explodingJavelin);
             AddProjectile(bolas);
             AddProjectile(bolasZone);
@@ -111,7 +108,7 @@ namespace Pathfinder.Modules
             simple.desiredForwardSpeed = 200f;
 
             ProjectileImpactExplosion impactExplosion = explodingJavelin.GetComponent<ProjectileImpactExplosion>();
-            impactExplosion.blastRadius = 8f;
+            impactExplosion.blastRadius = Config.JavelinExplosionRadius.Value;
             impactExplosion.falloffModel = BlastAttack.FalloffModel.None;
             //impactExplosion.impactEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/OmniImpactVFXLightningMage.prefab").WaitForCompletion();
             impactExplosion.impactEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/EliteLightning/LightningStakeNova.prefab").WaitForCompletion();
