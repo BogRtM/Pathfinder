@@ -152,7 +152,7 @@ namespace Pathfinder.Modules.Survivors
         public override void InitializeSkills()
         {
             Modules.Skills.CreateSkillFamilies(bodyPrefab);
-            Modules.Skills.CreateSquallCommandFamilies(bodyPrefab);
+            //Modules.Skills.CreateSquallCommandFamilies(bodyPrefab);
             string prefix = PathfinderPlugin.DEVELOPER_PREFIX;
 
             #region Empower
@@ -173,7 +173,7 @@ namespace Pathfinder.Modules.Survivors
                 interruptPriority = EntityStates.InterruptPriority.Any,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
-                mustKeyPress = true,
+                mustKeyPress = false,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,
@@ -313,7 +313,7 @@ namespace Pathfinder.Modules.Survivors
                 interruptPriority = EntityStates.InterruptPriority.Skill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = false,
-                mustKeyPress = false,
+                mustKeyPress = true,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,
@@ -411,7 +411,7 @@ namespace Pathfinder.Modules.Survivors
                 skillName = prefix + "_PATHFINDER_BODY_SQUALL_SPECIAL_GOFORTHROAT_NAME",
                 skillNameToken = prefix + "_PATHFINDER_BODY_SQUALL_SPECIAL_GOFORTHROAT_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_SQUALL_SPECIAL_GOFORTHROAT_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSpecialIcon"),
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texThrustIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SpecialCommand)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -429,8 +429,9 @@ namespace Pathfinder.Modules.Survivors
                 requiredStock = 1,
                 stockToConsume = 1
             });
-
-            Modules.Skills.AddSquallSpecial(bodyPrefab, squallSpecial);
+            OverrideController.squallSpecial = squallSpecial;
+            Modules.Content.AddSkillDef(squallSpecial);
+            //Modules.Skills.AddSquallSpecial(bodyPrefab, squallSpecial);
             #endregion
         }
 

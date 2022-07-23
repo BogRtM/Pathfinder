@@ -39,7 +39,7 @@ namespace Skillstates.Squall
                     minSpread = 0f,
                     maxSpread = 0f,
                     bulletCount = 2U,
-                    damage = Config.SquallMissileDamage.Value * base.damageStat,
+                    damage = Config.SquallGunDamage.Value * base.damageStat,
                     tracerEffectPrefab = FireBarrage.tracerEffectPrefab,
                     force = 1f,
                     hitEffectPrefab = FirePistol2.hitEffectPrefab,

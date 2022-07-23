@@ -53,7 +53,7 @@ namespace Pathfinder
 
         public static SkillDef javelinSkill;
 
-        internal static DamageAPI.ModdedDamageType marking;
+        internal static DamageAPI.ModdedDamageType shredding;
         internal static DamageAPI.ModdedDamageType squallGun;
         internal static DamageAPI.ModdedDamageType squallMissile;
 
@@ -70,7 +70,7 @@ namespace Pathfinder
             Modules.Tokens.AddTokens(); // register name tokens
             Modules.ItemDisplays.PopulateDisplays(); // collect item display prefabs for use in our display rules
 
-            marking = DamageAPI.ReserveDamageType();
+            shredding = DamageAPI.ReserveDamageType();
             squallGun = DamageAPI.ReserveDamageType();
             squallMissile = DamageAPI.ReserveDamageType();
 
@@ -154,7 +154,7 @@ namespace Pathfinder
 
             orig(self, damageInfo);
 
-            if(damageInfo.HasModdedDamageType(marking) && !damageInfo.rejected)
+            if(damageInfo.HasModdedDamageType(shredding) && !damageInfo.rejected)
             {
                 if (NetworkServer.active) self.body.AddTimedBuff(Modules.Buffs.raptorMark, Modules.Config.raptorMarkDuration.Value);
             }
@@ -169,7 +169,6 @@ namespace Pathfinder
             {
                 if (self.HasBuff(Modules.Buffs.electrocute))
                 {
-                    self.armor -= Modules.Config.electrocuteArmorShred.Value;
                     self.moveSpeed *= Modules.Config.electrocuteSlowAmount.Value;
                 }
             }

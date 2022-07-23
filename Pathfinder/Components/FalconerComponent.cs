@@ -19,6 +19,7 @@ namespace Pathfinder.Components
         private CharacterMaster falconMaster;
         private CharacterMaster selfMaster;
         private CharacterBody selfBody;
+        private SkillLocator skillLocator;
 
         private Vector3 verticalOffset = new Vector3(0f, 10f, 0f);
 
@@ -31,34 +32,11 @@ namespace Pathfinder.Components
         {
             selfBody = base.GetComponent<CharacterBody>();
             selfMaster = selfBody.master;
+            skillLocator = selfBody.GetComponent<SkillLocator>();
 
             FindOrSummonSquall();
 
             Subscriptions();
-        }
-
-        internal void ActivateCrosshair()
-        {
-            if(commandCrosshair)
-            {
-                commandCrosshair.SetActive(true);
-                return;
-            }
-
-            var selfHUD = HUD.readOnlyInstanceList.Where(el => el.targetBodyObject == base.gameObject);
-            foreach(HUD i in selfHUD)
-            {
-                Transform crosshairArea = i.transform.Find("MainContainer").Find("MainUIArea").Find("CrosshairCanvas");
-                if (!crosshairArea) return;
-                commandCrosshair = UnityEngine.Object.Instantiate(Modules.Assets.commandCrosshair);
-                commandCrosshair.transform.SetParent(crosshairArea, false);
-                commandCrosshair.SetActive(true);
-            }
-        }
-
-        internal void DeactivateCrosshair()
-        {
-            if(commandCrosshair) commandCrosshair.SetActive(false);
         }
 
         private void Subscriptions()
@@ -87,7 +65,7 @@ namespace Pathfinder.Components
                     if (!falconMaster.godMode) falconMaster.ToggleGod();
                     squallController = minion.bodyInstanceObject.GetComponent<SquallController>();
                     batteryComponent = minion.bodyInstanceObject.GetComponent<BatteryComponent>();
-                    squallController.owner = base.gameObject;
+                    //squallController.owner = base.gameObject;
                     return;
                 }
             }
@@ -136,12 +114,11 @@ namespace Pathfinder.Components
 
         internal void AttackOrder(HurtBox target)
         {
-            squallController.EnterAttackMode();
-
             if(target && target.healthComponent && target.healthComponent.alive)
             {
+                squallController.EnterAttackMode();
                 Vector3 divePosition = target.transform.position + verticalOffset;
-                squallController.DiveToPoint(divePosition, 15f);
+                squallController.DiveToPoint(divePosition, 20f);
                 squallController.SetTarget(target);
             }
         }
@@ -149,7 +126,7 @@ namespace Pathfinder.Components
         internal void FollowOrder()
         {
             Vector3 divePosition = selfBody.corePosition + verticalOffset;
-            squallController.DiveToPoint(divePosition, 2f);
+            squallController.DiveToPoint(divePosition, 10f);
             squallController.EnterFollowMode();
         }
 
@@ -157,5 +134,33 @@ namespace Pathfinder.Components
         {
             squallController.DoSpecialAttack(target);
         }
+
+        #region Junk
+        /*
+        internal void ActivateCrosshair()
+        {
+            if (commandCrosshair)
+            {
+                commandCrosshair.SetActive(true);
+                return;
+            }
+
+            var selfHUD = HUD.readOnlyInstanceList.Where(el => el.targetBodyObject == base.gameObject);
+            foreach (HUD i in selfHUD)
+            {
+                Transform crosshairArea = i.transform.Find("MainContainer").Find("MainUIArea").Find("CrosshairCanvas");
+                if (!crosshairArea) return;
+                commandCrosshair = UnityEngine.Object.Instantiate(Modules.Assets.commandCrosshair);
+                commandCrosshair.transform.SetParent(crosshairArea, false);
+                commandCrosshair.SetActive(true);
+            }
+        }
+
+        internal void DeactivateCrosshair()
+        {
+            if (commandCrosshair) commandCrosshair.SetActive(false);
+        }
+        */
+        #endregion
     }
 }

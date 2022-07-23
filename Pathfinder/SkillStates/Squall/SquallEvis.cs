@@ -88,6 +88,7 @@ namespace Skillstates.Squall
                     batteryComponent.Recharge(isCrit ? (2f * chargePerHit) : chargePerHit);
 
                     EffectManager.SimpleImpactEffect(Assets.squallEvisEffect, enemyPosition, enemyPosition, true);
+                    EffectManager.SimpleImpactEffect(GroundLight.comboHitEffectPrefab, enemyPosition, enemyPosition, true);
                 }
             }else if ((!target.healthComponent.alive || base.fixedAge >= attackDuration + diveDuration) && base.isAuthority && !attackFinished)
             {

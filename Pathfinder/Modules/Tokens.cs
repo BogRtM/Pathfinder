@@ -58,7 +58,7 @@ namespace Pathfinder.Modules
                 $"If the battery reaches 0, Squall is forced into <color=#00FF00>Follow Mode</color>.");
 
             LanguageAPI.Add("KEYWORD_ELECTROCUTE", $"<style=cKeywordName>Electrocute</style><style=cSub>Targets have their movespeed reduced by {100f * Config.electrocuteSlowAmount.Value}%, " +
-                $"armor reduced by {Config.electrocuteArmorShred.Value}, and take <style=cIsDamage>{100f * Config.electrocuteDPS.Value}% damage</style> per second.</style>");
+                $"and take <style=cIsDamage>{100f * Config.electrocuteDPS.Value}% damage</style> per second.</style>");
             
             LanguageAPI.Add("KEYWORD_ATTACK", "<style=cKeywordName><color=#FF0000>Attack</color></style>"+
                 "<style=cSub>Redirect Squall's attention to target enemy, and activate <color=#FF0000>Attack Mode</style>, " + 

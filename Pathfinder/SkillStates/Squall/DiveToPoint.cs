@@ -32,6 +32,8 @@ namespace Skillstates.Squall
         {
             base.FixedUpdate();
 
+            PerformInputs();
+
             bool flag1 = Vector3.Distance(divePosition, base.transform.position) <= minDistanceFromPoint;
             bool flag2 = base.fixedAge >= giveUpDuration;
             
@@ -44,6 +46,17 @@ namespace Skillstates.Squall
             {
                 base.rigidbodyDirection.aimDirection = (divePosition - base.transform.position).normalized;
                 base.rigidbodyMotor.rootMotion += (divePosition - base.transform.position).normalized * (speedCoefficient * base.moveSpeedStat * Time.fixedDeltaTime);
+            }
+        }
+
+        private void PerformInputs()
+        {
+            if (base.skillLocator)
+            {
+                if (base.inputBank.skill1.down && base.skillLocator.primary) base.skillLocator.primary.ExecuteIfReady();
+                if (base.inputBank.skill2.down && base.skillLocator.secondary) base.skillLocator.secondary.ExecuteIfReady();
+                if (base.inputBank.skill3.down && base.skillLocator.utility) base.skillLocator.utility.ExecuteIfReady();
+                if (base.inputBank.skill4.down && base.skillLocator.special) base.skillLocator.special.ExecuteIfReady();
             }
         }
 

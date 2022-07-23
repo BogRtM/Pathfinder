@@ -449,7 +449,7 @@ namespace Pathfinder.Content
                 skillName = prefix + "_SQUALL_BODY_PRIMARY_MISSILE_NAME",
                 skillNameToken = prefix + "_SQUALLL_BODY_PRIMARY_MISSILE_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_PRIMARY_MISSILE_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texThrustIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SquallMainState)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
