@@ -1,4 +1,5 @@
 ﻿using EntityStates;
+using EntityStates.Commando;
 using UnityEngine;
 using Pathfinder.Modules;
 using Pathfinder.Components;
@@ -16,6 +17,8 @@ namespace Skillstates.Pathfinder
 
         private OverrideController controller;
 
+        private GameObject dustPrefab;
+
         private Vector3 dashVector;
 
         public override void OnEnter()
@@ -25,6 +28,10 @@ namespace Skillstates.Pathfinder
             dashVector = ((base.inputBank.moveVector == Vector3.zero) ? base.characterDirection.forward : base.inputBank.moveVector).normalized;
             base.characterDirection.forward = dashVector;
             base.characterMotor.velocity *= 0.1f;
+
+            Util.PlaySound(SlideState.soundString, base.gameObject);
+
+            dustPrefab = UnityEngine.Object.Instantiate<GameObject>(SlideState.slideEffectPrefab, base.FindModelChild("Pathfinder"));
 
             if (!controller.javelinReady)
             {
@@ -56,6 +63,7 @@ namespace Skillstates.Pathfinder
 
         public override void OnExit()
         {
+            if (dustPrefab) UnityEngine.Object.Destroy(dustPrefab);
             PlayCrossfade("FullBody, Override", "BufferEmpty", 0.2f);
             base.OnExit();
         }

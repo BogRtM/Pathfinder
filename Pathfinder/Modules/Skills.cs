@@ -7,7 +7,7 @@ using Pathfinder;
 using UnityEngine;
 using JetBrains.Annotations;
 using Pathfinder.Components;
-using Pathfinder.Modules.Misc;
+using Pathfinder.Modules.CustomSkillDefs;
 
 namespace Pathfinder.Modules
 {
@@ -254,7 +254,7 @@ namespace Pathfinder.Modules
     }
 }
 
-namespace Pathfinder.Modules.Misc
+namespace Pathfinder.Modules.CustomSkillDefs
 {
     internal class SpecialCommandSkillDef : SkillDef
     {
@@ -263,7 +263,6 @@ namespace Pathfinder.Modules.Misc
             var instance =  new SpecialCommandSkillDef.InstanceData
             {
                 commandTracker = skillSlot.GetComponent<CommandTracker>(),
-                //overrideController = skillSlot.GetComponent<OverrideController>(),
                 falconerComponent = skillSlot.GetComponent<FalconerComponent>()
             };
 

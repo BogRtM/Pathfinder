@@ -10,17 +10,17 @@ namespace Pathfinder.Modules
     public static class Buffs
     {
         internal static BuffDef electrocute;
-        internal static BuffDef raptorMark;
+        internal static BuffDef armorShred;
 
         internal static DotController.DotIndex electrocuteDoT;
 
         internal static void RegisterBuffs()
         {
             BuffDef teslaField = Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/ShockNearby/bdTeslaField.asset").WaitForCompletion();
-            BuffDef fullCrit = Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/CritOnUse/bdFullCrit.asset").WaitForCompletion();
+            BuffDef pulverized = Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/ArmorReductionOnHit/bdPulverized.asset").WaitForCompletion();
 
             electrocute = AddNewBuff("Electrocuted", teslaField.iconSprite, Color.cyan, false, true);
-            raptorMark = AddNewBuff("RaptorMark", fullCrit.iconSprite, Color.blue, false, true);
+            armorShred = AddNewBuff("ArmorShred", pulverized.iconSprite, Color.cyan, true, true);
 
             RegisterDoTs();
         }

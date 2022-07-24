@@ -142,7 +142,7 @@ namespace Pathfinder.Content
             hardLeash.selectionRequiresTargetLoS = false;
             hardLeash.maxTimesSelected = -1;
             hardLeash.maxDistance = float.PositiveInfinity;
-            hardLeash.minDistance = 100f;
+            hardLeash.minDistance = 120f;
             hardLeash.requireSkillReady = false;
             hardLeash.aimType = AISkillDriver.AimType.AtCurrentLeader;
             hardLeash.ignoreNodeGraph = false;
@@ -424,7 +424,7 @@ namespace Pathfinder.Content
                 skillNameToken = prefix + "_SQUALLL_BODY_PRIMARY_MISSILE_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_PRIMARY_MISSILE_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(MissileLauncher)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SquallMainState)),
                 activationStateMachineName = "Missiles",
                 baseMaxStock = 1,
                 baseRechargeInterval = 6f,
@@ -449,7 +449,7 @@ namespace Pathfinder.Content
                 skillName = prefix + "_SQUALL_BODY_PRIMARY_MISSILE_NAME",
                 skillNameToken = prefix + "_SQUALLL_BODY_PRIMARY_MISSILE_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_PRIMARY_MISSILE_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texThrustIcon"),
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSquallEvisIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SquallMainState)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,

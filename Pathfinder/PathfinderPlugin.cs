@@ -97,22 +97,19 @@ namespace Pathfinder
             // run hooks here, disabling one is as simple as commenting out the line
             On.RoR2.CharacterBody.RecalculateStats += CharacterBody_RecalculateStats;
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
-            //On.RoR2.UI.HealthBar.Start += HealthBar_Start;
+            On.RoR2.PrimarySkillShurikenBehavior.FireShuriken += PrimarySkillShurikenBehavior_FireShuriken;
         }
 
-        private void HealthBar_Start(On.RoR2.UI.HealthBar.orig_Start orig, HealthBar self)
+        private void PrimarySkillShurikenBehavior_FireShuriken(On.RoR2.PrimarySkillShurikenBehavior.orig_FireShuriken orig, PrimarySkillShurikenBehavior self)
         {
-            orig(self);
+            OverrideController overrideController = self.GetComponent<OverrideController>();
 
-            Chat.AddMessage(self.source.gameObject.name);
-            /*
-            if(self.source.body.bodyIndex == BodyCatalog.FindBodyIndex(squallBodyPrefab) && self.viewerBody.bodyIndex == BodyCatalog.FindBodyIndex(pathfinderBodyPrefab))
+            if(overrideController)
             {
-                self.enabled = false;
-                GameObject batteryMeter = UnityEngine.Object.Instantiate(Modules.Assets.BatteryMeter, self.transform.parent);
-                batteryMeter.transform.localScale = Vector3.one;
+                if (overrideController.javelinReady || overrideController.inCommandMode) return;
             }
-            */
+
+            orig(self);
         }
 
         private void GlobalEventManager_onClientDamageNotified(DamageDealtMessage msg)
@@ -143,20 +140,11 @@ namespace Pathfinder
 
         private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
         {
-            if(self.body.HasBuff(Modules.Buffs.raptorMark) && !damageInfo.rejected)
-            {
-                CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
-                if (attackerBody.bodyIndex == BodyCatalog.FindBodyIndex("PathfinderBody"))
-                {
-                    damageInfo.damage *= Modules.Config.raptorMarkDamageMult.Value;
-                }
-            }
-
             orig(self, damageInfo);
 
             if(damageInfo.HasModdedDamageType(shredding) && !damageInfo.rejected)
             {
-                if (NetworkServer.active) self.body.AddTimedBuff(Modules.Buffs.raptorMark, Modules.Config.raptorMarkDuration.Value);
+                if (NetworkServer.active) self.body.AddTimedBuff(Modules.Buffs.armorShred, 5f);
             }
         }
 
@@ -170,6 +158,11 @@ namespace Pathfinder
                 if (self.HasBuff(Modules.Buffs.electrocute))
                 {
                     self.moveSpeed *= Modules.Config.electrocuteSlowAmount.Value;
+                }
+
+                if(self.HasBuff(Modules.Buffs.armorShred))
+                {
+                    self.armor -= (Modules.Config.specialArmorShred.Value * self.GetBuffCount(Modules.Buffs.armorShred));
                 }
             }
         }

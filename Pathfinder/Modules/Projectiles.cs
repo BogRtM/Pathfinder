@@ -33,6 +33,8 @@ namespace Pathfinder.Modules
             //DestroyOnTimer destroyOnTimer = shockNet.AddComponent<DestroyOnTimer>();
             //destroyOnTimer.duration = 10f;
 
+            bolas.transform.localScale = new Vector3(2f, 1f, 1f);
+
             ProjectileController bolasController = bolas.GetComponent<ProjectileController>();
             bolasController.ghostPrefab = CreateGhostPrefab("BolasGhost");
 

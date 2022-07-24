@@ -27,6 +27,8 @@ namespace Skillstates.Pathfinder.Command
             falconerComponent = base.GetComponent<FalconerComponent>();
             tracker.ActivateIndicator();
 
+            overrideController.inCommandMode = true;
+
             Util.PlaySound(Paint.enterSoundString, base.gameObject);
 
             overlayController = HudOverlayManager.AddOverlay(base.gameObject, new OverlayCreationParams
@@ -46,6 +48,7 @@ namespace Skillstates.Pathfinder.Command
         public override void OnExit()
         {
             tracker.DeactivateIndicator();
+            overrideController.inCommandMode = false;
             RemoveOverlay();
             Util.PlaySound(Paint.exitSoundString, base.gameObject);
             overrideController.UnsetCommandSkills();

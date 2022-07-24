@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using R2API;
-using Pathfinder.Modules.Misc;
+using Pathfinder.Modules.CustomSkillDefs;
 using UnityEngine.UI;
 using EntityStates;
 
@@ -33,7 +33,7 @@ namespace Pathfinder.Modules.Survivors
             subtitleNameToken = PathfinderPlugin.DEVELOPER_PREFIX + "_PATHFINDER_BODY_SUBTITLE",
 
             characterPortrait = Assets.mainAssetBundle.LoadAsset<Texture>("texPathfinderIcon"),
-            bodyColor = new Color((62f / 255f), (162f / 255f), (82f / 255f)),
+            bodyColor = new Color(62f / 255f, 162f / 255f, 82f / 255f),
 
             crosshair = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/UI/SimpleDotCrosshair.prefab").WaitForCompletion(),
             podPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
@@ -41,7 +41,7 @@ namespace Pathfinder.Modules.Survivors
             maxHealth = 110f,
             healthGrowth = 33f,
             healthRegen = 1f,
-            armor = 20f,
+            armor = 0f,
             jumpCount = 1,
         };
 
@@ -161,7 +161,7 @@ namespace Pathfinder.Modules.Survivors
                 skillName = prefix + "_PATHFINDER_BODY_EMPOWER_JAVELIN_NAME",
                 skillNameToken = prefix + "_PATHFINDER_BODY_EMPOWER_JAVELIN_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_EMPOWER_JAVELIN_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texJavelinIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(JavelinToss)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -220,7 +220,7 @@ namespace Pathfinder.Modules.Survivors
                 skillName = prefix + "_PATHFINDER_BODY_SECONDARY_DASH_NAME",
                 skillNameToken = prefix + "_PATHFINDER_BODY_SECONDARY_DASH_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_SECONDARY_DASH_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texDashIcon"),
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texEvadeIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(Evade)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 2,
@@ -248,7 +248,7 @@ namespace Pathfinder.Modules.Survivors
                 skillName = prefix + "_PATHFINDER_BODY_UTILITY_SPIN_NAME",
                 skillNameToken = prefix + "_PATHFINDER_BODY_UTILITY_SPIN_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_UTILITY_SPIN_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texUtilityIcon"),
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSpinIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(AirFlip)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -305,7 +305,7 @@ namespace Pathfinder.Modules.Survivors
                 activationState = new EntityStates.SerializableEntityStateType(typeof(CommandMode)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 1f,
+                baseRechargeInterval = 0f,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -318,7 +318,7 @@ namespace Pathfinder.Modules.Survivors
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1,
-                keywordTokens = new string[] { "KEYWORD_ATTACK", "KEYWORD_FOLLOW", "KEYWORD_SQUALL_UTILITY", "KEYWORD_SQUALL_SPECIAL" }
+                keywordTokens = new string[] { "KEYWORD_ATTACK", "KEYWORD_FOLLOW", "KEYWORD_SQUALL_SPECIAL" }
             });
 
             Modules.Skills.AddSpecialSkills(bodyPrefab, commandSkillDef);
@@ -328,7 +328,7 @@ namespace Pathfinder.Modules.Survivors
                 skillName = prefix + "_PATHFINDER_BODY_SPECIAL_ATTACK_NAME",
                 skillNameToken = prefix + "_PATHFINDER_BODY_SPECIAL_ATTACK_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_SPECIAL_ATTACK_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSpecialIcon"),
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texAttackIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(AttackCommand)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -355,7 +355,7 @@ namespace Pathfinder.Modules.Survivors
                 skillName = prefix + "_PATHFINDER_BODY_SPECIAL_FOLLOW_NAME",
                 skillNameToken = prefix + "_PATHFINDER_BODY_SPECIAL_FOLLOW_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_SPECIAL_FOLLOW_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSpecialIcon"),
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texFollowIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(FollowCommand)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -411,7 +411,7 @@ namespace Pathfinder.Modules.Survivors
                 skillName = prefix + "_PATHFINDER_BODY_SQUALL_SPECIAL_GOFORTHROAT_NAME",
                 skillNameToken = prefix + "_PATHFINDER_BODY_SQUALL_SPECIAL_GOFORTHROAT_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_SQUALL_SPECIAL_GOFORTHROAT_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texThrustIcon"),
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSquallEvisIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SpecialCommand)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,

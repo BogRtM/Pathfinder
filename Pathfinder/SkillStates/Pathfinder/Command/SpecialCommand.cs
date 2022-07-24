@@ -17,8 +17,6 @@ namespace Skillstates.Pathfinder.Command
             base.OnEnter();
             target = commandTracker.GetTrackingTarget();
 
-            //overrideController.squallSpecialCurrentStock--;
-
             if (overrideController.javelinReady) javString = "Jav";
 
             base.PlayCrossfade("Gesture, Override", javString + "Point", "Hand.playbackRate", duration, 0.1f);

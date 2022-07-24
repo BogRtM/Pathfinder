@@ -25,13 +25,8 @@ namespace Pathfinder.Components
         internal static SkillDef squallSpecial;
         //internal GenericSkill squallSpecial;
 
-        internal int squallSpecialMaxStock;
-        internal int squallSpecialCurrentStock;
-
-        internal float specialStopwatch;
-        internal float squallSpecialRechargeInterval;
-
         internal bool javelinReady;
+        internal bool inCommandMode;
 
         private void Awake()
         {

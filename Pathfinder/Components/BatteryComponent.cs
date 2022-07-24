@@ -6,13 +6,15 @@ using RoR2;
 using RoR2.UI;
 using RoR2.HudOverlay;
 using UnityEngine.UI;
+using System.Linq;
 
 namespace Pathfinder.Components
 {
     internal class BatteryComponent : MonoBehaviour
     {
         public float maxCharge = 100f;
-        private float currentCharge = 0f;
+        public float maxOvercharge = 20f;
+        private float currentCharge;
 
         public static float drainRate = Modules.Config.batteryDrainRate.Value;
         public static float rechargeRate = Modules.Config.batteryRechargeRate.Value;
@@ -35,6 +37,8 @@ namespace Pathfinder.Components
 
         internal SquallController squallController;
 
+        private CharacterBody selfBody;
+
         private void Awake()
         {
             //Do not set currentCharge to 0 on Awake
@@ -44,23 +48,11 @@ namespace Pathfinder.Components
             //Hooks();
         }
 
-        private void Start()
-        {
-            CreateOverlay();
-        }
-
-        private void OnDisable()
-        {
-            if (overlayController != null)
-            {
-                overlayController.onInstanceAdded -= OverlayController_onInstanceAdded;
-                HudOverlayManager.RemoveOverlay(overlayController);
-            }
-        }
+        
         
         private void FixedUpdate()
         {
-            if (squallController.inAttackMode && !pauseDrain)
+            if ((squallController.inAttackMode || currentCharge > maxCharge) && !pauseDrain)
             {
                 Drain(drainRate * Time.fixedDeltaTime);
                 if(currentCharge <= 0f)
@@ -73,23 +65,44 @@ namespace Pathfinder.Components
                 stopwatch += Time.fixedDeltaTime;
 
                 if (currentCharge < maxCharge && stopwatch >= rechargeDelay)
-                    Recharge(rechargeRate * Time.fixedDeltaTime);
+                    Recharge(rechargeRate * Time.fixedDeltaTime, false);
+            }
+
+            if (overlayController != null || !squallController.owner.GetComponent<CharacterBody>().isPlayerControlled) return;
+
+            var ownerHUD = HUD.readOnlyInstanceList.Where(el => el.targetBodyObject == squallController.owner);
+            foreach (HUD hud in ownerHUD)
+            {
+                CreateOverlay();
             }
         }
         
-        public void Recharge(float amount)
+        public void Recharge(float amount, bool canOvercharge)
         {
-            currentCharge = Mathf.Clamp(currentCharge + amount, 0f, maxCharge);
+            if(canOvercharge)
+                currentCharge = Mathf.Clamp(currentCharge + amount, 0f, maxCharge + maxOvercharge);
+            else
+                currentCharge = Mathf.Clamp(currentCharge + amount, 0f, maxCharge);
+
             UpdateValues();
         }
 
         public void Drain(float amount)
         {
-            currentCharge = Mathf.Clamp(currentCharge - amount, 0f, maxCharge);
+            currentCharge = Mathf.Clamp(currentCharge - amount, 0f, maxCharge + maxOvercharge);
             UpdateValues();
         }
 
         #region UI
+        private void OnDisable()
+        {
+            if (overlayController != null)
+            {
+                overlayController.onInstanceAdded -= OverlayController_onInstanceAdded;
+                HudOverlayManager.RemoveOverlay(overlayController);
+            }
+        }
+
         private void CreateOverlay()
         {
             OverlayCreationParams overlayCreationParams = new OverlayCreationParams
@@ -126,7 +139,7 @@ namespace Pathfinder.Components
             if (overlayController == null) return;
             if (!allCreated) return;
 
-            float fill = currentCharge / 100f;
+            float fill = Mathf.Clamp01(currentCharge / 100f);
 
             batteryMeter.fillAmount = fill;
             batteryRings.fillAmount = fill;

@@ -41,107 +41,9 @@ namespace Pathfinder.Components
             //Hooks();
         }
 
-        private void FixedUpdate()
-        {
-            if (overlayController != null) return;
-
-            var ownerHUD = HUD.readOnlyInstanceList.Where(el => el.targetBodyObject == owner);
-            foreach(HUD hud in ownerHUD)
-            {
-                Chat.AddMessage("Found Owner");
-
-                Transform scaler = hud.transform.Find("MainContainer").Find("MainUIArea").Find("SpringCanvas").Find("BottomRightCluster").Find("Scaler");
-
-                ChildLocator childLocator = hud.GetComponent<ChildLocator>();
-                ChildLocator.NameTransformPair[] newArray = new ChildLocator.NameTransformPair[childLocator.transformPairs.Length + 1];
-                childLocator.transformPairs.CopyTo(newArray, 0);
-                newArray[newArray.Length - 1] = new ChildLocator.NameTransformPair
-                {
-                    name = "Scaler",
-                    transform = scaler
-                };
-                childLocator.transformPairs = newArray;
-
-                GameObject skillIcon = scaler.Find("Skill4Root").gameObject;
-
-                OverlayCreationParams overlayCreationParams = new OverlayCreationParams()
-                {
-                    prefab = skillIcon,
-                    childLocatorEntry = "Scaler"
-                };
-
-                overlayController = HudOverlayManager.AddOverlay(owner, overlayCreationParams);
-                overlayController.onInstanceAdded += OverlayController_onInstanceAdded;
-                /*
-                GameObject newTransform = UnityEngine.Object.Instantiate<GameObject>(skillIcon, scaler);
-                newTransform.transform.Find("SkillBackgroundPanel").gameObject.SetActive(false);
-
-                RectTransform oldRect = newTransform.GetComponent<RectTransform>();
-                RectTransform newRect = newTransform.GetComponent<RectTransform>();
-
-                newRect.anchoredPosition = new Vector2(oldRect.anchoredPosition.x, 115f);
-                newRect.localScale = oldRect.localScale;
-
-                newTransform.name = "SquallSpecialRoot";
-
-                newTransform.GetComponent<SkillIcon>().targetSkill = skillLocator.special;
-                */
-            }
-        }
-
-        private void OverlayController_onInstanceAdded(OverlayController overlayController, GameObject instance)
-        {
-            instance.transform.Find("SkillBackgroundPanel").gameObject.SetActive(false);
-            instance.GetComponent<RectTransform>().anchoredPosition += new Vector2(0f, 115f);
-            instance.GetComponent<SkillIcon>().targetSkill = skillLocator.special;
-        }
-
-        private void OnDisable()
-        {
-            if (overlayController != null)
-            {
-                overlayController.onInstanceAdded -= OverlayController_onInstanceAdded;
-                HudOverlayManager.RemoveOverlay(overlayController);
-            }
-        }
-
-        private void Hooks()
-        {
-            On.RoR2.UI.HUD.Update += HUD_Update;
-        }
-
-        private void HUD_Update(On.RoR2.UI.HUD.orig_Update orig, HUD self)
-        {
-            orig(self);
-
-            if (self.targetBodyObject == owner)
-            {
-                Chat.AddMessage("Found Owner");
-
-                Transform scaler = self.transform.Find("MainContainer").Find("MainUIArea").Find("SpringCanvas").Find("BottomRightCluster").Find("Scaler");
-
-                Transform skill4Transform = scaler.Find("Skill4Root");
-                
-                Transform newTransform = UnityEngine.Object.Instantiate<Transform>(skill4Transform, scaler);
-                newTransform.Find("SkillBackgroundPanel").gameObject.SetActive(false);
-
-                RectTransform oldRect = newTransform.GetComponent<RectTransform>();
-                RectTransform newRect = newTransform.GetComponent<RectTransform>();
-
-                newRect.anchoredPosition = new Vector2(oldRect.anchoredPosition.x, 115f);
-                newRect.localScale = oldRect.localScale;
-
-                newTransform.name = "SquallSpecialRoot";
-
-                newTransform.GetComponent<SkillIcon>().targetSkill = skillLocator.special;
-                
-                On.RoR2.UI.HUD.Update -= this.HUD_Update;
-            }
-        }
-
         private void Start()
         {
-            owner = base.GetComponent<CharacterBody>().master.minionOwnership.ownerMaster.bodyInstanceObject;
+            //owner = base.GetComponent<CharacterBody>().master.minionOwnership.ownerMaster.bodyInstanceObject;
             masterPrefab = base.GetComponent<CharacterBody>().master.gameObject;
             aISkillDrivers = masterPrefab.GetComponents<AISkillDriver>();
             baseAI = masterPrefab.GetComponent<BaseAI>();
@@ -168,7 +70,6 @@ namespace Pathfinder.Components
             if (attackMode) return;
 
             attackMode = true;
-            Chat.AddMessage("Entering Attack Mode");
             foreach(AISkillDriver driver in aISkillDrivers)
             {
                 if (driver.enabled) continue;
@@ -194,7 +95,6 @@ namespace Pathfinder.Components
             if (!attackMode) return;
 
             attackMode = false;
-            Chat.AddMessage("Entering Follow Mode");
             foreach (AISkillDriver driver in aISkillDrivers)
             {
                 if (!driver.enabled) continue;
@@ -222,5 +122,115 @@ namespace Pathfinder.Components
             if(this.skillLocator.special.ExecuteIfReady())
                 this.bodyMachine.SetInterruptState(new SquallEvis() { target = target }, EntityStates.InterruptPriority.PrioritySkill);
         }
+
+        #region UI
+        private void FixedUpdate()
+        {
+            if (overlayController != null || !owner.GetComponent<CharacterBody>().isPlayerControlled) return;
+
+            var ownerHUD = HUD.readOnlyInstanceList.Where(el => el.targetBodyObject == owner);
+            foreach (HUD hud in ownerHUD)
+            {
+                Chat.AddMessage("Found Owner");
+
+                AddSkillOverlay(hud);
+                /*
+                GameObject newTransform = UnityEngine.Object.Instantiate<GameObject>(skillIcon, scaler);
+                newTransform.transform.Find("SkillBackgroundPanel").gameObject.SetActive(false);
+
+                RectTransform oldRect = newTransform.GetComponent<RectTransform>();
+                RectTransform newRect = newTransform.GetComponent<RectTransform>();
+
+                newRect.anchoredPosition = new Vector2(oldRect.anchoredPosition.x, 115f);
+                newRect.localScale = oldRect.localScale;
+
+                newTransform.name = "SquallSpecialRoot";
+
+                newTransform.GetComponent<SkillIcon>().targetSkill = skillLocator.special;
+                */
+            }
+        }
+
+        private void AddSkillOverlay(HUD hud)
+        {
+            Transform scaler = hud.transform.Find("MainContainer").Find("MainUIArea").Find("SpringCanvas").Find("BottomRightCluster").Find("Scaler");
+
+            ChildLocator childLocator = hud.GetComponent<ChildLocator>();
+            ChildLocator.NameTransformPair[] newArray = new ChildLocator.NameTransformPair[childLocator.transformPairs.Length + 1];
+            childLocator.transformPairs.CopyTo(newArray, 0);
+            newArray[newArray.Length - 1] = new ChildLocator.NameTransformPair
+            {
+                name = "Scaler",
+                transform = scaler
+            };
+            childLocator.transformPairs = newArray;
+
+            GameObject skillIcon = scaler.Find("Skill4Root").gameObject;
+
+            OverlayCreationParams overlayCreationParams = new OverlayCreationParams()
+            {
+                prefab = skillIcon,
+                childLocatorEntry = "Scaler"
+            };
+
+            overlayController = HudOverlayManager.AddOverlay(owner, overlayCreationParams);
+            overlayController.onInstanceAdded += OverlayController_onInstanceAdded;
+        }
+
+        private void OverlayController_onInstanceAdded(OverlayController overlayController, GameObject instance)
+        {
+            instance.name = "SquallSpecialRoot";
+            instance.transform.Find("SkillBackgroundPanel").gameObject.SetActive(false);
+            instance.GetComponent<RectTransform>().anchoredPosition += new Vector2(0f, 130f);
+            instance.GetComponent<SkillIcon>().targetSkill = skillLocator.special;
+        }
+
+        private void OnDisable()
+        {
+            if (overlayController != null)
+            {
+                overlayController.onInstanceAdded -= OverlayController_onInstanceAdded;
+                HudOverlayManager.RemoveOverlay(overlayController);
+            }
+        }
+        #endregion
+
+        #region Junk
+        /*
+        private void Hooks()
+        {
+            On.RoR2.UI.HUD.Update += HUD_Update;
+        }
+
+        private void HUD_Update(On.RoR2.UI.HUD.orig_Update orig, HUD self)
+        {
+            orig(self);
+
+            if (self.targetBodyObject == owner)
+            {
+                Chat.AddMessage("Found Owner");
+
+                Transform scaler = self.transform.Find("MainContainer").Find("MainUIArea").Find("SpringCanvas").Find("BottomRightCluster").Find("Scaler");
+
+                Transform skill4Transform = scaler.Find("Skill4Root");
+
+                Transform newTransform = UnityEngine.Object.Instantiate<Transform>(skill4Transform, scaler);
+                newTransform.Find("SkillBackgroundPanel").gameObject.SetActive(false);
+
+                RectTransform oldRect = newTransform.GetComponent<RectTransform>();
+                RectTransform newRect = newTransform.GetComponent<RectTransform>();
+
+                newRect.anchoredPosition = new Vector2(oldRect.anchoredPosition.x, 115f);
+                newRect.localScale = oldRect.localScale;
+
+                newTransform.name = "SquallSpecialRoot";
+
+                newTransform.GetComponent<SkillIcon>().targetSkill = skillLocator.special;
+
+                On.RoR2.UI.HUD.Update -= this.HUD_Update;
+            }
+        }
+        */
+        #endregion
     }
 }

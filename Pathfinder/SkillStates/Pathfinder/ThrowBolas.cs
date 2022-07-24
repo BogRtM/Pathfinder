@@ -49,7 +49,7 @@ namespace Skillstates.Pathfinder
             
             FireProjectileInfo fireProjectileInfo = new FireProjectileInfo();
             fireProjectileInfo.crit = false;
-            fireProjectileInfo.damage = 0f;
+            fireProjectileInfo.damage = 2f * base.damageStat;
             fireProjectileInfo.force = throwForce;
             fireProjectileInfo.owner = base.gameObject;
             fireProjectileInfo.position = aimRay.origin;

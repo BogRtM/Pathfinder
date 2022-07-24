@@ -12,14 +12,13 @@ using System.Collections.Generic;
 
 namespace Pathfinder.Components
 {
-    internal class FalconerComponent : MonoBehaviour
+    internal class FalconerComponent : MonoBehaviour, ILifeBehavior
     {
         internal static GameObject summonPrefab;
 
         private CharacterMaster falconMaster;
         private CharacterMaster selfMaster;
         private CharacterBody selfBody;
-        private SkillLocator skillLocator;
 
         private Vector3 verticalOffset = new Vector3(0f, 10f, 0f);
 
@@ -32,7 +31,6 @@ namespace Pathfinder.Components
         {
             selfBody = base.GetComponent<CharacterBody>();
             selfMaster = selfBody.master;
-            skillLocator = selfBody.GetComponent<SkillLocator>();
 
             FindOrSummonSquall();
 
@@ -65,7 +63,7 @@ namespace Pathfinder.Components
                     if (!falconMaster.godMode) falconMaster.ToggleGod();
                     squallController = minion.bodyInstanceObject.GetComponent<SquallController>();
                     batteryComponent = minion.bodyInstanceObject.GetComponent<BatteryComponent>();
-                    //squallController.owner = base.gameObject;
+                    squallController.owner = base.gameObject;
                     return;
                 }
             }
@@ -89,7 +87,7 @@ namespace Pathfinder.Components
             
             if(falconMaster = minionSummon.Perform())
             {
-                if (!falconMaster.godMode) falconMaster.ToggleGod();
+                if (!falconMaster.godMode && selfBody.isPlayerControlled) falconMaster.ToggleGod();
                 CleanSquallInventory(falconMaster.inventory);
                 squallController = falconMaster.bodyInstanceObject.GetComponent<SquallController>();
                 batteryComponent = falconMaster.bodyInstanceObject.GetComponent<BatteryComponent>();
@@ -133,6 +131,16 @@ namespace Pathfinder.Components
         internal void SpecialOrder(HurtBox target)
         {
             squallController.DoSpecialAttack(target);
+        }
+
+        public void OnDeathStart()
+        {
+            if (falconMaster)
+            {
+                if (falconMaster.godMode) falconMaster.ToggleGod();
+
+                falconMaster.TrueKill();
+            }
         }
 
         #region Junk

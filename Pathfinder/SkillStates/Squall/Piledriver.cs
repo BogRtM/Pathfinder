@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 using System.Collections.Generic;
 using System.Text;
 using RoR2;
@@ -40,3 +41,4 @@ namespace Skillstates.Squall
         }
     }
 }
+*/
