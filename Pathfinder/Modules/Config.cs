@@ -23,6 +23,7 @@ namespace Pathfinder.Modules
         public static ConfigEntry<float> AirSpinDamage;
         public static ConfigEntry<float> GroundSpinDamage;
 
+        public static ConfigEntry<float> bolasExplosionDamage;
         public static ConfigEntry<float> electrocuteDPS;
         public static ConfigEntry<float> electrocuteSlowAmount;
         #endregion
@@ -55,10 +56,11 @@ namespace Pathfinder.Modules
             #endregion
 
             #region Secondary
-            JavelinDamage = plugin.Config.Bind<float>(secondarySectionTitle, "Javelin Damage Coefficient", 7f, "Damage coefficient of javelin toss");
+            JavelinDamage = plugin.Config.Bind<float>(secondarySectionTitle, "Javelin Damage Coefficient", 8f, "Damage coefficient of javelin toss");
             #endregion
 
             #region Utility
+            bolasExplosionDamage = plugin.Config.Bind<float>(utilitySectionTitle, "Bolas Explosion Damage", 2f, "Damage coefficient of Shock Bolas' explosion");
             electrocuteDPS = plugin.Config.Bind<float>(utilitySectionTitle, "Electrocute Damage per Second", 1.2f, "Damage % per second of Electrocute DoT");
             electrocuteSlowAmount = plugin.Config.Bind<float>(utilitySectionTitle, "Electrocute Slow Multiplier", 0.5f, "Movespeed multiplier of Electrocute DoT");
 

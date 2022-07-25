@@ -15,18 +15,18 @@ namespace Pathfinder.Modules
             string squallPrefix = PathfinderPlugin.DEVELOPER_PREFIX + "_SQUALL_BODY_";
 
             string desc = "The Pathfinder is a crafty, nimble hunter who fights alongside his trusty falcon, Squall.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
-            desc += "< ! > Squall is a versatile companion who can deal high sustained damage, create distractions, and debuff your foes. Command him liberally." + Environment.NewLine + Environment.NewLine;
-            desc += "< ! > Make sure to alternate between Hunter's Pursuit and your javelin toss to maximize your damage." + Environment.NewLine + Environment.NewLine;
-            desc += "< ! > Rending Talons can deal extremely high sustained damage when coupled with items that increase your air time, like Hopoo Feather or Milky Chrysalis." + Environment.NewLine + Environment.NewLine;
-            desc += "< ! > You are quite fragile compared to other melee survivors; stay evasive, and always be prepared to disengage." + Environment.NewLine + Environment.NewLine + Environment.NewLine;
+            desc += "< ! > You are more fragile compared to other melee survivors; stay light on your feet and use Squall's distractions to your advantage." + Environment.NewLine + Environment.NewLine;
+            desc += "< ! > Make sure to alternate between Fleetfoot and your javelin toss to get as many javelins as possible." + Environment.NewLine + Environment.NewLine;
+            desc += "< ! > Use Shock Bolas to lock down large groups of enemies at once." + Environment.NewLine + Environment.NewLine;
+            desc += "< ! > You benefit greatly from items that increase your burst damage potential, while Squall benefits greatly from attack speed." + Environment.NewLine + Environment.NewLine + Environment.NewLine;
             
             desc += "<style=cShrine>Modder's Note:</style> <style=cUserSetting>Thank you so much for showing interest in The Pathfinder! " +
                 "This survivor is still in active development, thus many things are liable to change, and your feedback is highly requested;" +
                 "Please feel free to DM <style=cIsUtility>Bog#4770</style> on Discord, or find me on the official Risk of Rain 2 Modding server.</style>";
 
 
-            string outro = "..and so they left, searching for a new identity.";
-            string outroFailure = "..and so they vanished, lost to the uncaring wilderness.";
+            string outro = "..and so they left, as the new apex predators of yet another planet.";
+            string outroFailure = "..and so they vanished, forever lost to the uncaring wilderness.";
 
             #region Squall
             LanguageAPI.Add(squallPrefix + "NAME", "Squall");
@@ -53,20 +53,22 @@ namespace Pathfinder.Modules
 
             #region Keywords
             LanguageAPI.Add("KEYWORD_BATTERY", "<style=cKeywordName>Battery</style><style=cSub>" +
-                "Squall's behavior is governed by a <style=cIsUtility>battery meter</style>. If the meter hits 0, Squall is forced into <color=#00FF00>Follow Mode</color>.</style>");
+                "Squall has two modes: <color=#FF0000>Attack</color>, and <color=#00FF00>Follow</color>. " +
+                $"In <color=#FF0000>Attack Mode</color>, Squall <style=cIsDamage>drains {Config.batteryDrainRate.Value}%</style> battery per second. " +
+                $"In <color=#00FF00>Follow Mode</color>, Squall <style=cIsHealing>regenerates {Config.batteryRechargeRate.Value}%</style> battery per second, " +
+                $"scaling with <style=cIsUtility>his attack speed</style>. " +
+                $"If the meter hits 0, Squall is forced into <color=#00FF00>Follow Mode</color>.</style>");
 
             LanguageAPI.Add("KEYWORD_ELECTROCUTE", $"<style=cKeywordName>Electrocute</style><style=cSub>Targets have their movespeed reduced by {100f * Config.electrocuteSlowAmount.Value}%, " +
                 $"and take <style=cIsDamage>{100f * Config.electrocuteDPS.Value}% damage</style> per second.</style>");
-            
-            LanguageAPI.Add("KEYWORD_ATTACK", "<style=cKeywordName><color=#FF0000>Attack</color></style>"+
-                "<style=cSub>Redirect Squall's attention to the targeted enemy, and activate <color=#FF0000>Attack Mode</style>, " + 
-                $" granting access to machine guns that deal <style=cIsDamage>2x{100f * Config.SquallGunDamage.Value}% damage</style>, " +
-                $"and a missile launcher that deals <style=cIsDamage>{MissileLauncher.maxMissileCount}x{100f * Config.SquallMissileDamage.Value}% damage</style>. " +
-                $"In this mode, Squall <style=cIsUtility>drains {Config.batteryDrainRate.Value}%</style> battery per second.</style>");
 
-            LanguageAPI.Add("KEYWORD_FOLLOW", "<style=cKeywordName><color=#00FF00>Follow</color></style>" + 
-                $"<style=cSub>Return Squall to yourself, and activate <color=#00FF00>Follow Mode</color>, causing him to stay close and " +
-                $"<style=cIsUtility>regenerate {Config.batteryRechargeRate.Value}%</style> battery per second.");
+            LanguageAPI.Add("KEYWORD_ATTACK", "<style=cKeywordName><color=#FF0000>Attack</color></style>" +
+                "<style=cSub>Direct Squall's attention to the targeted enemy, and activate <color=#FF0000>Attack Mode</style>, " +
+                $" granting access to machine guns that deal <style=cIsDamage>2x{100f * Config.SquallGunDamage.Value}% damage</style>, " +
+                $"and a missile launcher that deals <style=cIsDamage>{MissileLauncher.maxMissileCount}x{100f * Config.SquallMissileDamage.Value}% damage</style>.</style>");
+
+            LanguageAPI.Add("KEYWORD_FOLLOW", "<style=cKeywordName><color=#00FF00>Follow</color></style>" +
+                $"<style=cSub>Return Squall to yourself, and activate <color=#00FF00>Follow Mode</color>, causing him to stay close to you.</style>");
 
             LanguageAPI.Add("KEYWORD_SQUALL_UTILITY", "<style=cKeywordName><color=#87b9cf>Utility</color></style>" +
                 "<style=cSub>Order Squall to use his <style=cIsUtility>Utility</style> skill.</style>");
@@ -76,6 +78,9 @@ namespace Pathfinder.Modules
                 $"Each strike reduces <style=cIsDamage>armor</style> by <style=cIsDamage>{Config.specialArmorShred.Value}</style>, " +
                 $"and <style=cIsUtility>regenerates {Config.specialRechargeAmount.Value}%</style> battery. " +
                 $"This skill can overcharge the battery up to <style=cIsUtility>120%</style>.</style>");
+
+            LanguageAPI.Add("KEYWORD_UNPOLISHED", "<style=cKeywordName>Unpolished</style> " +
+                "<style=cSub>This skill is missing VFX and SFX, and is comparatively in need of more refinement.");
             #endregion
 
             #region Primary
@@ -84,18 +89,19 @@ namespace Pathfinder.Modules
             #endregion
 
             #region Secondary
-            LanguageAPI.Add(prefix + "SECONDARY_DASH_NAME", "Quick Evade");
+            LanguageAPI.Add(prefix + "SECONDARY_DASH_NAME", "Fleetfoot");
             LanguageAPI.Add(prefix + "SECONDARY_DASH_DESCRIPTION", $"<style=cIsUtility>Dash</style> a short distance. The next time you use your primary skill, throw an " +
                 $"<style=cIsUtility>explosive</style> javelin for <style=cIsDamage>{100f * Config.JavelinDamage.Value}% damage</style>.");
             #endregion
 
             #region Utility
             LanguageAPI.Add(prefix + "UTILITY_SPIN_NAME", "Rending Talons");
-            LanguageAPI.Add(prefix + "UTILITY_SPIN_DESCRIPTION", $"Rise into the air, spinning rapidly for <style=cIsDamage>{100f * Config.AirSpinDamage.Value}% damage</style>. " +
+            LanguageAPI.Add(prefix + "UTILITY_SPIN_DESCRIPTION", $"<style=cWorldEvent>UNPOLISHED</style>. Rise into the air, spinning rapidly for <style=cIsDamage>{100f * Config.AirSpinDamage.Value}% damage</style>. " +
                 $"Upon landing, perform a horizontal sweep for <style=cIsDamage>{100f * Config.GroundSpinDamage.Value}% damage</style>.");
 
             LanguageAPI.Add(prefix + "UTILITY_BOLAS_NAME", "Shock Bolas");
-            LanguageAPI.Add(prefix + "UTILITY_BOLAS_DESCRIPTION", "Throw electrically charged bolas, which leave behind an <style=cIsUtility>electrocuting</style> field for <style=cIsUtility>10 seconds</style>.");
+            LanguageAPI.Add(prefix + "UTILITY_BOLAS_DESCRIPTION", $"Throw electrically charged bolas, which deal " +
+                "leave behind an <style=cIsUtility>electrocuting</style> field for <style=cIsUtility>10 seconds</style>.");
             #endregion
 
             #region Special

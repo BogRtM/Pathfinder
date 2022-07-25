@@ -67,6 +67,8 @@ namespace Skillstates.Pathfinder
             {
                 EffectManager.SimpleMuzzleFlash(Assets.thrustEffect, base.gameObject, "SpearTip", true);
 
+                Util.PlaySound("PF_Thrust", base.gameObject);
+
                 if(this.attack.Fire() && !base.characterMotor.isGrounded && !hasHopped)
                 {
                     base.SmallHop(base.characterMotor, smallHopVelocity);

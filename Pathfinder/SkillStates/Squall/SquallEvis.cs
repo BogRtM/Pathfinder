@@ -10,6 +10,7 @@ using System.Text;
 using Pathfinder.Components;
 using Pathfinder;
 using Pathfinder.Modules;
+using System.Linq;
 
 namespace Skillstates.Squall
 {
@@ -52,7 +53,7 @@ namespace Skillstates.Squall
 
             characterModel.invisibilityCount++;
 
-            if(target)
+            if (target)
             {
                 startPosition = base.transform.position;
                 enemyPosition = target.transform.position;
@@ -95,18 +96,24 @@ namespace Skillstates.Squall
                     EffectManager.SimpleImpactEffect(Assets.squallEvisEffect, enemyPosition, enemyPosition, true);
                     EffectManager.SimpleImpactEffect(GroundLight.comboHitEffectPrefab, enemyPosition, enemyPosition, true);
                 }
-            }else if ((!target.healthComponent.alive || base.fixedAge >= attackDuration + diveDuration) && base.isAuthority && !attackFinished)
+            }
+            else if (base.fixedAge >= attackDuration + diveDuration && base.isAuthority && !attackFinished)
             {
-                squallVFXComponent.PlayDashEffect(enemyPosition, startPosition);
-                Util.PlaySound(EvisDash.endSoundString, base.gameObject);
-                attackFinished = true;
-                stopwatch = 0f;
+                FinishAttack();
             }
 
             if(attackFinished && stopwatch >= diveDuration)
             {
                 this.outer.SetNextStateToMain();
             }
+        }
+
+        private void FinishAttack()
+        {
+            squallVFXComponent.PlayDashEffect(enemyPosition, startPosition);
+            Util.PlaySound(EvisDash.endSoundString, base.gameObject);
+            attackFinished = true;
+            stopwatch = 0f;
         }
 
         public override void OnExit()

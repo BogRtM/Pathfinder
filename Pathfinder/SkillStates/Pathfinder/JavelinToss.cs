@@ -1,4 +1,5 @@
 ﻿using EntityStates;
+using EntityStates.Engi.EngiWeapon;
 using UnityEngine;
 using UnityEngine.Networking;
 using Pathfinder.Components;
@@ -74,6 +75,7 @@ namespace Skillstates.Pathfinder
         private void FireJavelin()
         {
             hasFired = true;
+            Util.PlaySound(FireMines.throwMineSoundString, base.gameObject);
             FireProjectileInfo fireProjectileInfo = new FireProjectileInfo();
             fireProjectileInfo.crit = base.RollCrit();
             fireProjectileInfo.damage = Config.JavelinDamage.Value * base.damageStat;

@@ -17,9 +17,11 @@ namespace Pathfinder.Components
         public float maxOvercharge = 20f;
         private float currentCharge;
 
-        public static float drainRate = 1f; // Modules.Config.batteryDrainRate.Value;
-        public static float rechargeRate = Modules.Config.batteryRechargeRate.Value;
+        public static float drainRate = Modules.Config.batteryDrainRate.Value;
+        public static float baseRechargeRate = Modules.Config.batteryRechargeRate.Value;
         public static float rechargeDelay = 1f;
+
+        internal float rechargeRate;
         internal float stopwatch;
 
         private OverlayController overlayController;
@@ -38,7 +40,7 @@ namespace Pathfinder.Components
 
         internal SquallController squallController;
 
-        //private CharacterBody selfBody;
+        private CharacterBody selfBody;
 
         private void Awake()
         {
@@ -49,8 +51,12 @@ namespace Pathfinder.Components
             //Hooks();
         }
 
-        
-        
+        private void Start()
+        {
+            selfBody = base.GetComponent<CharacterBody>();
+            rechargeRate = baseRechargeRate * selfBody.attackSpeed;
+        }
+
         private void FixedUpdate()
         {
             if ((squallController.inAttackMode || currentCharge > maxCharge) && !pauseDrain)

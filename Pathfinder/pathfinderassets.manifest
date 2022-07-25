@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2441301137
+CRC: 1068094195
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 6461003c5e8f569f73bcd5e35020cfa1
+    Hash: be0593e76d09ed6f1fd98354e6a66d6c
   TypeTreeHash:
     serializedVersion: 2
     Hash: 191fd58095c9dfffe22a38324962b7e7
@@ -88,6 +88,7 @@ Assets:
 - Assets/PathfinderAssets/VFX/Cone Center.mesh
 - Assets/PathfinderAssets/VFX/HenryMaterials/texPunchImpact.png
 - Assets/PathfinderAssets/Animation/clips/Rig_JavelinToss.anim
+- Assets/PathfinderAssets/VFX/FlashFollow.prefab
 - Assets/PathfinderAssets/VFX/HenryMaterials/matAnimeShapes.mat
 - Assets/PathfinderAssets/UI/MeterPip.png
 - Assets/PathfinderAssets/Materials/HitboxPreview.mat
@@ -133,7 +134,6 @@ Assets:
 - Assets/PathfinderAssets/Materials/DisplayMats/matVest 1.mat
 - Assets/PathfinderAssets/Animation/clips/Rig_JavBolasThrow.anim
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/texFistSwing.png
-- Assets/PathfinderAssets/Icons/Skill Icons/texEvadeIcon.png
 - Assets/PathfinderAssets/UI/BatteryMeter.png
 - Assets/PathfinderAssets/VFX/HenryMaterials/texLightning.tif
 - Assets/PathfinderAssets/Animation/clips/Display/Armature_MenuIdle.anim
@@ -243,6 +243,7 @@ Assets:
 - Assets/PathfinderAssets/Animation/clips/Rig_Descend Fast.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_SpinSweep.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_JavIdle.anim
+- Assets/PathfinderAssets/VFX/FlashAttack.prefab
 - Assets/PathfinderAssets/Materials/matDrape.mat
 - Assets/PathfinderAssets/VFX/HenryMaterials/matEmbers.mat
 - Assets/PathfinderAssets/Animation/clips/Rig_JavSpinSweep.anim
@@ -257,6 +258,7 @@ Assets:
 - Assets/PathfinderAssets/BolasGhost.prefab
 - Assets/PathfinderAssets/Icons/Skill Icons/texSquallEvisIcon.png
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_DiveLoop.anim
+- Assets/PathfinderAssets/VFX/EffectMaterials/Textures/Flash.png
 - Assets/PathfinderAssets/VFX/matSlash.mat
 - Assets/PathfinderAssets/VFX/HenryMaterials/matDust.mat
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/texSmoke.png
@@ -273,6 +275,7 @@ Assets:
 - Assets/PathfinderAssets/Textures/DefaultMaterial_Base_color.png
 - Assets/PathfinderAssets/VFX/HenryMaterials/matRipple.mat
 - Assets/PathfinderAssets/Animation/clips/Rig_Descend.anim
+- Assets/PathfinderAssets/VFX/EffectMaterials/Flash.mat
 - Assets/PathfinderAssets/FBX/JavelinGhostFBX.fbx
 - Assets/PathfinderAssets/VFX/HenryMaterials/texPunchImpactShadow.png
 - Assets/PathfinderAssets/Animation/AimMask.mask
@@ -297,6 +300,7 @@ Assets:
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/Javelin Trail 1.png
 - Assets/PathfinderAssets/Animation/clips/Rig_UnderhandThrow.anim
 - Assets/PathfinderAssets/Materials/matSpear.mat
+- Assets/PathfinderAssets/Icons/Skill Icons/texEvadeIcon.png
 - Assets/PathfinderAssets/UI/SquallIndicator.prefab
 - Assets/PathfinderAssets/Animation/clips/Rig_JavUnderhandThrow.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_JavWalkB.anim

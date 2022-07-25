@@ -13,9 +13,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Soundbanks\**" />
+    <EmbeddedResource Remove="Soundbanks\**" />
+    <None Remove="Soundbanks\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="HenryBank.bnk" />
     <None Remove="Modules\Characters\Henry.cs~RF6221a098.TMP" />
+    <None Remove="Pathfinder.bnk" />
     <None Remove="pathfinderassets" />
+    <None Remove="PathfinderBank.bnk" />
     <None Remove="pathfinderbundle" />
   </ItemGroup>
 
@@ -32,6 +40,7 @@
   <ItemGroup>
     <EmbeddedResource Include="HenryBank.bnk" />
     <EmbeddedResource Include="pathfinderassets" />
+    <EmbeddedResource Include="PathfinderBank.bnk" />
   </ItemGroup>
 
   <ItemGroup>

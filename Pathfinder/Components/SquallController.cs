@@ -33,8 +33,11 @@ namespace Pathfinder.Components
         internal BatteryComponent batteryComponent;
 
         internal OverlayController overlayController;
+        private GameObject overlayInstance;
 
         internal Highlight targetHighlight;
+
+        private bool hasBubbetUI;
 
         private void Awake()
         {
@@ -70,10 +73,14 @@ namespace Pathfinder.Components
 
         internal void EnterAttackMode()
         {
+            Util.PlaySound("BeepAttack", base.gameObject);
+            EffectManager.SimpleEffect(Modules.Assets.squallAttackFlash, base.transform.position, Quaternion.identity, false);
+
             if (attackMode) return;
 
             attackMode = true;
-            foreach(AISkillDriver driver in aISkillDrivers)
+
+            foreach (AISkillDriver driver in aISkillDrivers)
             {
                 if (driver.enabled) continue;
                 if (Squall.attackDrivers.Contains(driver.customName))
@@ -90,6 +97,9 @@ namespace Pathfinder.Components
 
         internal void EnterFollowMode()
         {
+            Util.PlaySound("BeepFollow", base.gameObject);
+            EffectManager.SimpleEffect(Modules.Assets.squallFollowFlash, base.transform.position, Quaternion.identity, false);
+
             if (!attackMode) return;
 
             attackMode = false;
@@ -132,6 +142,15 @@ namespace Pathfinder.Components
         #region UI
         private void FixedUpdate()
         {
+            if(hasBubbetUI && overlayController != null && overlayInstance)
+            {
+                if(overlayInstance.GetComponent<RectTransform>().anchoredPosition3D != new Vector3(355f, -155f))
+                {
+                    overlayInstance.GetComponent<RectTransform>().anchoredPosition = new Vector3(355f, -155f);
+                    overlayInstance.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(355f, -155f, 0f);
+                }
+            }
+
             if (overlayController != null || !owner.GetComponent<CharacterBody>().isPlayerControlled) return;
 
             var ownerHUD = HUD.readOnlyInstanceList.Where(el => el.targetBodyObject == owner);
@@ -144,6 +163,8 @@ namespace Pathfinder.Components
         private void CreateHighlight(GameObject target)
         {
             if (targetHighlight) UnityEngine.Object.Destroy(targetHighlight);
+
+            if (target.GetComponent<Highlight>()) return;
 
             var modelLocator = target.GetComponent<ModelLocator>();
             if (modelLocator)
@@ -158,7 +179,7 @@ namespace Pathfinder.Components
                         {
                             if (!rendererInfo.ignoreOverlays)
                             {
-                                targetHighlight = modelTransform.gameObject.AddComponent<Highlight>();
+                                targetHighlight = target.AddComponent<Highlight>();
                                 targetHighlight.highlightColor = Highlight.HighlightColor.teleporter;
                                 targetHighlight.strength = 1f;
                                 targetHighlight.targetRenderer = rendererInfo.renderer;
@@ -173,24 +194,33 @@ namespace Pathfinder.Components
 
         private void AddSkillOverlay(HUD hud)
         {
-            Transform scaler = hud.transform.Find("MainContainer").Find("MainUIArea").Find("SpringCanvas").Find("BottomRightCluster").Find("Scaler");
+            Transform iconContainer = hud.transform.Find("MainContainer").Find("MainUIArea").Find("SpringCanvas").Find("BottomRightCluster").Find("Scaler");
+
+            string childName = "Scaler";
+            
+            if (iconContainer.Find("SkillIconContainer"))
+            {
+                hasBubbetUI = true;
+                childName = "SkillIconContainer";
+                iconContainer = iconContainer.Find("SkillIconContainer");
+            };
 
             ChildLocator childLocator = hud.GetComponent<ChildLocator>();
             ChildLocator.NameTransformPair[] newArray = new ChildLocator.NameTransformPair[childLocator.transformPairs.Length + 1];
             childLocator.transformPairs.CopyTo(newArray, 0);
             newArray[newArray.Length - 1] = new ChildLocator.NameTransformPair
             {
-                name = "Scaler",
-                transform = scaler
+                name = childName,
+                transform = iconContainer
             };
             childLocator.transformPairs = newArray;
 
-            GameObject skillIcon = scaler.Find("Skill4Root").gameObject;
+            GameObject skillIcon = iconContainer.Find("Skill4Root").gameObject;
 
             OverlayCreationParams overlayCreationParams = new OverlayCreationParams()
             {
                 prefab = skillIcon,
-                childLocatorEntry = "Scaler"
+                childLocatorEntry = childName
             };
 
             overlayController = HudOverlayManager.AddOverlay(owner, overlayCreationParams);
@@ -199,9 +229,21 @@ namespace Pathfinder.Components
 
         private void OverlayController_onInstanceAdded(OverlayController overlayController, GameObject instance)
         {
+            overlayInstance = instance;
+
+            if(overlayController.creationParams.childLocatorEntry == "SkillIconContainer")
+            {
+                instance.transform.Find("BottomContainer").gameObject.SetActive(false);
+                instance.GetComponent<RectTransform>().anchoredPosition += new Vector2(80f, 0f);
+            } 
+            else
+            {
+                instance.transform.Find("SkillBackgroundPanel").gameObject.SetActive(false);
+                instance.GetComponent<RectTransform>().anchoredPosition += new Vector2(0f, 130f);
+            }
+
             instance.name = "SquallSpecialRoot";
-            instance.transform.Find("SkillBackgroundPanel").gameObject.SetActive(false);
-            instance.GetComponent<RectTransform>().anchoredPosition += new Vector2(0f, 130f);
+            
             instance.GetComponent<SkillIcon>().targetSkill = skillLocator.special;
         }
 

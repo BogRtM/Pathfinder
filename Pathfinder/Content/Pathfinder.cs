@@ -264,7 +264,8 @@ namespace Pathfinder.Modules.Survivors
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,
-                stockToConsume = 1
+                stockToConsume = 1,
+                keywordTokens = new string[] {"KEYWORD_UNPOLISHED"}
             });
 
             SkillDef bolaSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo

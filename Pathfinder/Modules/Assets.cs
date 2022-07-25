@@ -32,6 +32,8 @@ namespace Pathfinder.Modules
         internal static GameObject squallEvisEffect;
         internal static GameObject squallDashEffect;
         internal static GameObject squallIndicator;
+        internal static GameObject squallFollowFlash;
+        internal static GameObject squallAttackFlash;
 
         // networked hit sounds
         internal static NetworkSoundEventDef swordHitSoundEvent;
@@ -84,6 +86,13 @@ namespace Pathfinder.Modules
         {                                                                
             //soundbank currently broke, but this is how you should load yours
             using (Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream($"{csProjName}.HenryBank.bnk"))
+            {
+                byte[] array = new byte[manifestResourceStream2.Length];
+                manifestResourceStream2.Read(array, 0, array.Length);
+                SoundAPI.SoundBanks.Add(array);
+            }
+
+            using (Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream($"{csProjName}.PathfinderBank.bnk"))
             {
                 byte[] array = new byte[manifestResourceStream2.Length];
                 manifestResourceStream2.Read(array, 0, array.Length);
@@ -154,8 +163,9 @@ namespace Pathfinder.Modules
             TextMeshProUGUI text = BatteryMeter.GetComponentInChildren<TextMeshProUGUI>();
             text.font = Addressables.LoadAssetAsync<TMP_FontAsset>("RoR2/Base/Common/Fonts/Bombardier/tmpBombDropshadow.asset").WaitForCompletion();
 
+            squallFollowFlash = Assets.LoadEffect("FlashFollow");
+            squallAttackFlash = Assets.LoadEffect("FlashAttack");
             squallEvisEffect = Assets.LoadEffect("SquallEvisEffect");
-
             squallDashEffect = Assets.LoadEffect("SquallDash");
 
             squallIndicator = mainAssetBundle.LoadAsset<GameObject>("SquallIndicator");

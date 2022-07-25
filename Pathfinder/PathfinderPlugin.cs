@@ -164,6 +164,10 @@ namespace Pathfinder
                 {
                     self.armor -= (Modules.Config.specialArmorShred.Value * self.GetBuffCount(Modules.Buffs.armorShred));
                 }
+
+                BatteryComponent batteryComponent = self.GetComponent<BatteryComponent>();
+                if (!batteryComponent) return;
+                batteryComponent.rechargeRate = Modules.Config.batteryRechargeRate.Value * self.attackSpeed;
             }
         }
     }

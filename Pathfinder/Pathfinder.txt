@@ -1,0 +1,13 @@
+Event	ID	Name			Wwise Object Path	Notes
+	2920665578	BeepFollow			\Default Work Unit\Pathfinder\BeepFollow	
+	3474682785	BeepAttack			\Default Work Unit\Pathfinder\BeepAttack	
+	4204443996	PF_Thrust			\Default Work Unit\Pathfinder\PF_Thrust	
+
+Game Parameter	ID	Name			Wwise Object Path	Notes
+	3673881719	Volume_SFX			\Default Work Unit\Volume_SFX	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	172826040	BeepFollow	C:\Users\rtmbo\My project (1)\My project (1)_WwiseProject\.cache\Windows\SFX\SonarBeep_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\SFX Mixer\Pathfinder\BeepFollow		144972
+	288848410	BeepAttack	C:\Users\rtmbo\My project (1)\My project (1)_WwiseProject\.cache\Windows\SFX\BeepHigh_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\SFX Mixer\Pathfinder\BeepAttack		264508
+	930803613	Thrust	C:\Users\rtmbo\My project (1)\My project (1)_WwiseProject\.cache\Windows\SFX\thrust_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Master Mixer\SFX Mixer\Pathfinder\Thrust		39012
+
