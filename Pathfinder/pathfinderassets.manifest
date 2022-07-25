@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1931931920
+CRC: 2441301137
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 6a55528342f241305722922d147779ac
+    Hash: 6461003c5e8f569f73bcd5e35020cfa1
   TypeTreeHash:
     serializedVersion: 2
     Hash: 191fd58095c9dfffe22a38324962b7e7
@@ -90,7 +90,7 @@ Assets:
 - Assets/PathfinderAssets/Animation/clips/Rig_JavelinToss.anim
 - Assets/PathfinderAssets/VFX/HenryMaterials/matAnimeShapes.mat
 - Assets/PathfinderAssets/UI/MeterPip.png
-- Assets/PathfinderAssets/Materials/HitboxTest.mat
+- Assets/PathfinderAssets/Materials/HitboxPreview.mat
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/texPunchImpactShadow.png
 - Assets/PathfinderAssets/Animation/clips/Rig_BolasThrow.anim
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/texHenrySwing2.png
@@ -122,6 +122,7 @@ Assets:
 - Assets/PathfinderAssets/VFX/HenryMaterials/texHenrySwing2.png
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/texRipple.png
 - Assets/PathfinderAssets/UI/BatteryMeter.prefab
+- Assets/PathfinderAssets/UI/Battery/BatteryIconAndMeter.png
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_RollLeft.anim
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/texPunchImpact 1.png
 - Assets/PathfinderAssets/UI/Battery/InnerRing.png
@@ -197,13 +198,16 @@ Assets:
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_FlyBack.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_Ascend USE.anim
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_DivePrep.anim
+- Assets/PathfinderAssets/UI/Battery/BatteryGlow.png
 - Assets/PathfinderAssets/Animation/clips/Rig_JavJump.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_JavAscend.anim
+- Assets/PathfinderAssets/UI/Battery/BatteryIcon.png
 - Assets/PathfinderAssets/VFX/matSlashOuter.mat
 - Assets/PathfinderAssets/VFX/squallParticle.mesh
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_RollRight2.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_AirFlip2.anim
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_DiveEnter.anim
+- Assets/PathfinderAssets/UI/Battery/BatteryIconCropped.png
 - Assets/PathfinderAssets/Animation/clips/Rig_WalkB.anim
 - Assets/PathfinderAssets/VFX/HenryMaterials/texSwingEffect.png
 - Assets/PathfinderAssets/JavelinGhost.prefab
@@ -244,6 +248,7 @@ Assets:
 - Assets/PathfinderAssets/Animation/clips/Rig_JavSpinSweep.anim
 - Assets/PathfinderAssets/Animation/RightArm.mask
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/Motion lines.png
+- Assets/PathfinderAssets/UI/AttackIndicator.png
 - Assets/PathfinderAssets/Textures/z.png
 - Assets/PathfinderAssets/VFX/SquallEvisEffect.prefab
 - Assets/PathfinderAssets/VFX/EffectMaterials/ShockField.mat
@@ -252,7 +257,6 @@ Assets:
 - Assets/PathfinderAssets/BolasGhost.prefab
 - Assets/PathfinderAssets/Icons/Skill Icons/texSquallEvisIcon.png
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_DiveLoop.anim
-- Assets/PathfinderAssets/UI/BatteryIcon - Copy.png
 - Assets/PathfinderAssets/VFX/matSlash.mat
 - Assets/PathfinderAssets/VFX/HenryMaterials/matDust.mat
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/texSmoke.png
@@ -293,6 +297,7 @@ Assets:
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/Javelin Trail 1.png
 - Assets/PathfinderAssets/Animation/clips/Rig_UnderhandThrow.anim
 - Assets/PathfinderAssets/Materials/matSpear.mat
+- Assets/PathfinderAssets/UI/SquallIndicator.prefab
 - Assets/PathfinderAssets/Animation/clips/Rig_JavUnderhandThrow.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_JavWalkB.anim
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_EmptyAction.001.anim
@@ -304,6 +309,7 @@ Assets:
 - Assets/PathfinderAssets/Animation/clips/Rig__Idle New USE.anim
 - Assets/PathfinderAssets/Icons/Skill Icons/texCommandIcon.png
 - Assets/PathfinderAssets/Animation/Squall/aimMaskSquall.mask
+- Assets/PathfinderAssets/UI/Battery/BatteryGlowCropped.png
 - Assets/PathfinderAssets/Animation/clips/Rig_JavSprintF.anim
 - Assets/PathfinderAssets/Icons/Skill Icons/texBolasIcon.png
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/texSlash.png

@@ -13,12 +13,13 @@ namespace Pathfinder.Components
 {
     internal class SquallController : MonoBehaviour
     {
-        internal GameObject owner { get; set; }
+        internal GameObject owner;
         
         private GameObject masterPrefab;
         private BaseAI baseAI;
         private AISkillDriver[] aISkillDrivers;
         internal GameObject currentTarget { get { return baseAI.currentEnemy.gameObject; } }
+        private HurtBox cachedHurtbox;
 
         private EntityStateMachine weaponMachine;
         private EntityStateMachine bodyMachine;
@@ -31,19 +32,19 @@ namespace Pathfinder.Components
         private SquallVFXComponent squallVFX;
         internal BatteryComponent batteryComponent;
 
-        private OverlayController overlayController;
+        internal OverlayController overlayController;
+
+        internal Highlight targetHighlight;
 
         private void Awake()
         {
             squallVFX = base.GetComponent<SquallVFXComponent>();
             skillLocator = base.GetComponent<SkillLocator>();
             batteryComponent = base.GetComponent<BatteryComponent>();
-            //Hooks();
         }
 
         private void Start()
         {
-            //owner = base.GetComponent<CharacterBody>().master.minionOwnership.ownerMaster.bodyInstanceObject;
             masterPrefab = base.GetComponent<CharacterBody>().master.gameObject;
             aISkillDrivers = masterPrefab.GetComponents<AISkillDriver>();
             baseAI = masterPrefab.GetComponent<BaseAI>();
@@ -58,6 +59,8 @@ namespace Pathfinder.Components
             GameObject bodyObject = healthComponent.gameObject;
             if(target && healthComponent && healthComponent.alive && bodyObject)
             {
+                CreateHighlight(bodyObject);
+
                 baseAI.currentEnemy.gameObject = bodyObject;
                 baseAI.currentEnemy.bestHurtBox = target;
                 baseAI.enemyAttention = baseAI.enemyAttentionDuration;
@@ -85,16 +88,14 @@ namespace Pathfinder.Components
             batteryComponent.UpdateColor();
         }
 
-        internal void DiveToPoint(Vector3 position, float minDistance)
-        {
-            this.bodyMachine.SetInterruptState(new DiveToPoint() { divePosition = position, minDistanceFromPoint = minDistance }, EntityStates.InterruptPriority.PrioritySkill);
-        }
-
         internal void EnterFollowMode()
         {
             if (!attackMode) return;
 
             attackMode = false;
+
+            if (targetHighlight) UnityEngine.Object.Destroy(targetHighlight);
+
             foreach (AISkillDriver driver in aISkillDrivers)
             {
                 if (!driver.enabled) continue;
@@ -117,6 +118,11 @@ namespace Pathfinder.Components
             }
         }
 
+        internal void DiveToPoint(Vector3 position, float minDistance)
+        {
+            this.bodyMachine.SetInterruptState(new DiveToPoint() { divePosition = position, minDistanceFromPoint = minDistance }, EntityStates.InterruptPriority.PrioritySkill);
+        }
+
         internal void DoSpecialAttack(HurtBox target)
         {
             if(this.skillLocator.special.ExecuteIfReady())
@@ -131,23 +137,37 @@ namespace Pathfinder.Components
             var ownerHUD = HUD.readOnlyInstanceList.Where(el => el.targetBodyObject == owner);
             foreach (HUD hud in ownerHUD)
             {
-                Chat.AddMessage("Found Owner");
-
                 AddSkillOverlay(hud);
-                /*
-                GameObject newTransform = UnityEngine.Object.Instantiate<GameObject>(skillIcon, scaler);
-                newTransform.transform.Find("SkillBackgroundPanel").gameObject.SetActive(false);
+            }
+        }
 
-                RectTransform oldRect = newTransform.GetComponent<RectTransform>();
-                RectTransform newRect = newTransform.GetComponent<RectTransform>();
+        private void CreateHighlight(GameObject target)
+        {
+            if (targetHighlight) UnityEngine.Object.Destroy(targetHighlight);
 
-                newRect.anchoredPosition = new Vector2(oldRect.anchoredPosition.x, 115f);
-                newRect.localScale = oldRect.localScale;
-
-                newTransform.name = "SquallSpecialRoot";
-
-                newTransform.GetComponent<SkillIcon>().targetSkill = skillLocator.special;
-                */
+            var modelLocator = target.GetComponent<ModelLocator>();
+            if (modelLocator)
+            {
+                var modelTransform = modelLocator.modelTransform;
+                if (modelTransform)
+                {
+                    var characterModel = modelTransform.GetComponent<CharacterModel>();
+                    if (characterModel)
+                    {
+                        foreach (CharacterModel.RendererInfo rendererInfo in characterModel.baseRendererInfos)
+                        {
+                            if (!rendererInfo.ignoreOverlays)
+                            {
+                                targetHighlight = modelTransform.gameObject.AddComponent<Highlight>();
+                                targetHighlight.highlightColor = Highlight.HighlightColor.teleporter;
+                                targetHighlight.strength = 1f;
+                                targetHighlight.targetRenderer = rendererInfo.renderer;
+                                targetHighlight.isOn = true;
+                                return;
+                            }
+                        }
+                    }
+                }
             }
         }
 

@@ -48,10 +48,10 @@ namespace Skillstates.Pathfinder.Command
         public override void OnExit()
         {
             tracker.DeactivateIndicator();
-            overrideController.inCommandMode = false;
             RemoveOverlay();
             Util.PlaySound(Paint.exitSoundString, base.gameObject);
             overrideController.UnsetCommandSkills();
+            overrideController.inCommandMode = false;
             base.OnExit();
         }
 

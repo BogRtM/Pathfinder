@@ -35,7 +35,7 @@ namespace Pathfinder.Modules.Survivors
             characterPortrait = Assets.mainAssetBundle.LoadAsset<Texture>("texPathfinderIcon"),
             bodyColor = new Color(62f / 255f, 162f / 255f, 82f / 255f),
 
-            crosshair = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/UI/SimpleDotCrosshair.prefab").WaitForCompletion(),
+            crosshair = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/UI/StandardCrosshair.prefab").WaitForCompletion(),
             podPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
 
             maxHealth = 110f,
@@ -429,7 +429,7 @@ namespace Pathfinder.Modules.Survivors
                 requiredStock = 1,
                 stockToConsume = 1
             });
-            OverrideController.squallSpecial = squallSpecial;
+            OverrideController.specialCommand = squallSpecial;
             Modules.Content.AddSkillDef(squallSpecial);
             //Modules.Skills.AddSquallSpecial(bodyPrefab, squallSpecial);
             #endregion

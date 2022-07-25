@@ -61,8 +61,10 @@ namespace Pathfinder.Components
             laserLine.endColor = color;
         }
 
-        internal void ToggleTrails(bool onOff)
+        internal void ToggleVFX(bool onOff)
         {
+            laserLine.enabled = onOff;
+
             foreach(var i in trails)
             {
                 i.enabled = onOff;

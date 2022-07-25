@@ -18,11 +18,14 @@ namespace Pathfinder.Components
         private Animator modelAnimator;
         private SkillLocator skillLocator;
 
+        private CharacterBody selfBody;
+        //private CrosshairUtils.OverrideRequest overrideRequest;
+
         internal static SkillDef javelinSkill;
         internal static SkillDef attackCommand;
         internal static SkillDef followCommand;
         internal static SkillDef cancelCommand;
-        internal static SkillDef squallSpecial;
+        internal static SkillDef specialCommand;
         //internal GenericSkill squallSpecial;
 
         internal bool javelinReady;
@@ -34,9 +37,15 @@ namespace Pathfinder.Components
             skillLocator = base.GetComponent<SkillLocator>();
         }
 
+        private void Start()
+        {
+            selfBody = base.GetComponent<CharacterBody>();
+        }
+
         public void ReadyJavelin()
         {
             javelinReady = true;
+            //overrideRequest = CrosshairUtils.RequestOverrideForBody(selfBody, javelinCrosshair, CrosshairUtils.OverridePriority.PrioritySkill);
             skillLocator.primary.SetSkillOverride(base.gameObject, javelinSkill, GenericSkill.SkillOverridePriority.Contextual);
             if (modelAnimator)
             {
@@ -47,6 +56,7 @@ namespace Pathfinder.Components
         public void UnreadyJavelin()
         {
             javelinReady = false;
+            //overrideRequest.Dispose();
             skillLocator.primary.UnsetSkillOverride(base.gameObject, javelinSkill, GenericSkill.SkillOverridePriority.Contextual);
             if (modelAnimator)
             {
@@ -59,7 +69,7 @@ namespace Pathfinder.Components
             skillLocator.primary.SetSkillOverride(base.gameObject, attackCommand, GenericSkill.SkillOverridePriority.Contextual);
             skillLocator.secondary.SetSkillOverride(base.gameObject, followCommand, GenericSkill.SkillOverridePriority.Contextual);
             skillLocator.utility.SetSkillOverride(base.gameObject, cancelCommand, GenericSkill.SkillOverridePriority.Contextual);
-            skillLocator.special.SetSkillOverride(base.gameObject, squallSpecial, GenericSkill.SkillOverridePriority.Contextual);
+            skillLocator.special.SetSkillOverride(base.gameObject, specialCommand, GenericSkill.SkillOverridePriority.Contextual);
         }
 
         internal void UnsetCommandSkills()
@@ -67,7 +77,7 @@ namespace Pathfinder.Components
             skillLocator.primary.UnsetSkillOverride(base.gameObject, attackCommand, GenericSkill.SkillOverridePriority.Contextual);
             skillLocator.secondary.UnsetSkillOverride(base.gameObject, followCommand, GenericSkill.SkillOverridePriority.Contextual);
             skillLocator.utility.UnsetSkillOverride(base.gameObject, cancelCommand, GenericSkill.SkillOverridePriority.Contextual);
-            skillLocator.special.UnsetSkillOverride(base.gameObject, squallSpecial, GenericSkill.SkillOverridePriority.Contextual);
+            skillLocator.special.UnsetSkillOverride(base.gameObject, specialCommand, GenericSkill.SkillOverridePriority.Contextual);
         }
     }
 }

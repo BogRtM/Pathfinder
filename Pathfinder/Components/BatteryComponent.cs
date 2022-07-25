@@ -10,13 +10,14 @@ using System.Linq;
 
 namespace Pathfinder.Components
 {
+    [RequireComponent(typeof(SquallController))]
     internal class BatteryComponent : MonoBehaviour
     {
         public float maxCharge = 100f;
         public float maxOvercharge = 20f;
         private float currentCharge;
 
-        public static float drainRate = Modules.Config.batteryDrainRate.Value;
+        public static float drainRate = 1f; // Modules.Config.batteryDrainRate.Value;
         public static float rechargeRate = Modules.Config.batteryRechargeRate.Value;
         public static float rechargeDelay = 1f;
         internal float stopwatch;
@@ -24,20 +25,20 @@ namespace Pathfinder.Components
         private OverlayController overlayController;
 
         private Image batteryMeter;
-        private Image batteryRings;
-        private Image batteryGlow;
-        private Image batteryPip;
+        //private Image batteryRings;
+        //private Image batteryGlow;
+        //private Image batteryPip;
         private TMPro.TextMeshProUGUI batteryText;
 
-        private Color followColor = Color.green;
-        private Color attackColor = Color.red;
+        private Color followColor = new Color(0f, 1f, 0f, 0.6f);
+        private Color attackColor = new Color(1f, 0f, 0f, 0.6f);
 
         internal bool pauseDrain;
         private bool allCreated;
 
         internal SquallController squallController;
 
-        private CharacterBody selfBody;
+        //private CharacterBody selfBody;
 
         private void Awake()
         {
@@ -68,7 +69,7 @@ namespace Pathfinder.Components
                     Recharge(rechargeRate * Time.fixedDeltaTime, false);
             }
 
-            if (overlayController != null || !squallController.owner.GetComponent<CharacterBody>().isPlayerControlled) return;
+            if (overlayController != null || squallController.overlayController == null || !squallController.owner.GetComponent<CharacterBody>().isPlayerControlled) return;
 
             var ownerHUD = HUD.readOnlyInstanceList.Where(el => el.targetBodyObject == squallController.owner);
             foreach (HUD hud in ownerHUD)
@@ -114,22 +115,24 @@ namespace Pathfinder.Components
             overlayController = HudOverlayManager.AddOverlay(squallController.owner, overlayCreationParams);
             overlayController.onInstanceAdded += OverlayController_onInstanceAdded;
 
-            overlayController.alpha = 0.5f;
+            UpdateValues();
+            //overlayController.alpha = 0.5f;
         }
 
         private void OverlayController_onInstanceAdded(OverlayController overlayController, GameObject instance)
         {
-            instance.transform.localPosition = new Vector3(-100f, 0f, 0f);
-            instance.transform.localScale = new Vector3(0.18f, 0.18f, 0.18f);
+            instance.transform.localPosition = new Vector3(-100f, 70, 0f);
+            float sizeScale = 0.2f;
+            instance.transform.localScale = new Vector3(sizeScale, sizeScale, sizeScale);
 
 
-            batteryRings = instance.transform.Find("OuterRings").GetComponent<Image>();
+            //batteryRings = instance.transform.Find("OuterRings").GetComponent<Image>();
             batteryMeter = instance.transform.Find("Meter").GetComponent<Image>();
-            batteryGlow = instance.transform.Find("Glow").GetComponent<Image>();
+            //batteryGlow = instance.transform.Find("Glow").GetComponent<Image>();
             batteryText = instance.transform.Find("Text").GetComponent<TMPro.TextMeshProUGUI>();
-            batteryPip = instance.transform.Find("Pip").GetComponent<Image>();
+            //batteryPip = instance.transform.Find("Pip").GetComponent<Image>();
 
-            if(batteryRings && batteryMeter && batteryGlow && batteryText && batteryPip) allCreated = true;
+            if(batteryMeter && batteryText) allCreated = true;
 
             UpdateColor();
         }
@@ -142,8 +145,8 @@ namespace Pathfinder.Components
             float fill = Mathf.Clamp01(currentCharge / 100f);
 
             batteryMeter.fillAmount = fill;
-            batteryRings.fillAmount = fill;
-            batteryGlow.fillAmount = fill;
+            //batteryRings.fillAmount = fill;
+            //batteryGlow.fillAmount = fill;
             batteryText.SetText(Mathf.FloorToInt(currentCharge).ToString());
         }
 
@@ -162,9 +165,8 @@ namespace Pathfinder.Components
 
         private void UpdateColor(Color color)
         {
-            batteryPip.color = color;
-            batteryRings.color = color;
-            batteryGlow.color = color;
+            //batteryGlow.color = color;
+            batteryMeter.color = color;
             batteryText.color = color;
         }
         #endregion

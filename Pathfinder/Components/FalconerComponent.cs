@@ -25,8 +25,6 @@ namespace Pathfinder.Components
         internal SquallController squallController;
         internal BatteryComponent batteryComponent;
 
-        internal GameObject commandCrosshair;
-
         private void Start()
         {
             selfBody = base.GetComponent<CharacterBody>();

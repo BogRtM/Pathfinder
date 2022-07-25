@@ -48,7 +48,7 @@ namespace Skillstates.Pathfinder
             aimRay = base.GetAimRay();
             
             FireProjectileInfo fireProjectileInfo = new FireProjectileInfo();
-            fireProjectileInfo.crit = false;
+            fireProjectileInfo.crit = base.RollCrit();
             fireProjectileInfo.damage = 2f * base.damageStat;
             fireProjectileInfo.force = throwForce;
             fireProjectileInfo.owner = base.gameObject;

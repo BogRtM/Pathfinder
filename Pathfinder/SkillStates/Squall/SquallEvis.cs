@@ -48,7 +48,7 @@ namespace Skillstates.Squall
             squallVFXComponent = base.GetComponent<SquallVFXComponent>();
 
             batteryComponent.pauseDrain = true;
-            squallVFXComponent.ToggleTrails(false);
+            squallVFXComponent.ToggleVFX(false);
 
             characterModel.invisibilityCount++;
 
@@ -113,7 +113,7 @@ namespace Skillstates.Squall
         {
             characterModel.invisibilityCount--;
             batteryComponent.pauseDrain = false;
-            squallVFXComponent.ToggleTrails(true);
+            squallVFXComponent.ToggleVFX(true);
             base.OnExit();
         }
 

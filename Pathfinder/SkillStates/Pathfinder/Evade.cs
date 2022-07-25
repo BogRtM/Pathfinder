@@ -55,7 +55,7 @@ namespace Skillstates.Pathfinder
                 base.characterMotor.velocity.y = 0f;
             }
 
-            if(base.fixedAge >= baseDuration)
+            if(base.fixedAge >= baseDuration && base.isAuthority)
             {
                 base.outer.SetNextStateToMain();
             }

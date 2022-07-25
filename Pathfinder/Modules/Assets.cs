@@ -31,6 +31,7 @@ namespace Pathfinder.Modules
         internal static GameObject lightningRingEffect;
         internal static GameObject squallEvisEffect;
         internal static GameObject squallDashEffect;
+        internal static GameObject squallIndicator;
 
         // networked hit sounds
         internal static NetworkSoundEventDef swordHitSoundEvent;
@@ -156,6 +157,8 @@ namespace Pathfinder.Modules
             squallEvisEffect = Assets.LoadEffect("SquallEvisEffect");
 
             squallDashEffect = Assets.LoadEffect("SquallDash");
+
+            squallIndicator = mainAssetBundle.LoadAsset<GameObject>("SquallIndicator");
         }
 
         private static GameObject CreateTracer(string originalTracerName, string newTracerName)
