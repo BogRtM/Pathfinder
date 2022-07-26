@@ -76,8 +76,11 @@ namespace Skillstates.Squall
                     aimVector = aimRay.direction
                 };
 
-                FireBullet(leftAttack);
-                FireBullet(rightAttack);
+                if (base.isAuthority)
+                {
+                    FireBullet(leftAttack);
+                    FireBullet(rightAttack);
+                }
             }
         }
 

@@ -98,6 +98,27 @@ namespace Pathfinder
             On.RoR2.CharacterBody.RecalculateStats += CharacterBody_RecalculateStats;
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
             On.RoR2.PrimarySkillShurikenBehavior.OnSkillActivated += PrimarySkillShurikenBehavior_OnSkillActivated;
+            On.RoR2.SkillLocator.ApplyAmmoPack += SkillLocator_ApplyAmmoPack;
+        }
+
+        private void SkillLocator_ApplyAmmoPack(On.RoR2.SkillLocator.orig_ApplyAmmoPack orig, SkillLocator self)
+        {
+            orig(self);
+
+            FalconerComponent falconerComponent = self.GetComponent<FalconerComponent>();
+
+            if (!falconerComponent) return;
+
+            if (falconerComponent.squallController)
+            {
+                if (NetworkServer.active)
+                {
+                    foreach(var i in falconerComponent.squallController.skillLocator.allSkills)
+                    {
+                        if (i.CanApplyAmmoPack()) i.ApplyAmmoPack();
+                    }
+                }
+            }
         }
 
         private void PrimarySkillShurikenBehavior_OnSkillActivated(On.RoR2.PrimarySkillShurikenBehavior.orig_OnSkillActivated orig, PrimarySkillShurikenBehavior self, GenericSkill skill)
@@ -144,7 +165,7 @@ namespace Pathfinder
 
             if(damageInfo.HasModdedDamageType(shredding) && !damageInfo.rejected)
             {
-                if (NetworkServer.active) self.body.AddTimedBuff(Modules.Buffs.armorShred, 5f);
+                if (NetworkServer.active) self.body.AddTimedBuff(Modules.Buffs.armorShred, 7f);
             }
         }
 

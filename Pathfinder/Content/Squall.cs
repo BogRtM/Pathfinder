@@ -369,9 +369,9 @@ namespace Pathfinder.Content.NPC
             #region Primary
             SkillDef primarySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "_SQUALL_BODY_PRIMARY_DIVE_NAME",
-                skillNameToken = prefix + "_SQUALLL_BODY_PRIMARY_DIVE_NAME",
-                skillDescriptionToken = prefix + "_PATHFINDER_BODY_PRIMARY_DIVE_DESCRIPTION",
+                skillName = prefix + "_SQUALL_BODY_PRIMARY_GUNS_NAME",
+                skillNameToken = prefix + "_SQUALL_BODY_PRIMARY_GUNS_NAME",
+                skillDescriptionToken = prefix + "_SQUALL_BODY_PRIMARY_GUNS_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(MountedGuns)),
                 activationStateMachineName = "Weapon",
@@ -397,9 +397,9 @@ namespace Pathfinder.Content.NPC
             #region Secondary
             SkillDef secondarySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "_SQUALL_BODY_PRIMARY_MISSILE_NAME",
-                skillNameToken = prefix + "_SQUALLL_BODY_PRIMARY_MISSILE_NAME",
-                skillDescriptionToken = prefix + "_PATHFINDER_BODY_PRIMARY_MISSILE_DESCRIPTION",
+                skillName = prefix + "_SQUALL_BODY_SECONDARY_MISSILE_NAME",
+                skillNameToken = prefix + "_SQUALL_BODY_SECONDARY_MISSILE_NAME",
+                skillDescriptionToken = prefix + "_SQUALL_BODY_SECONDARY_MISSILE_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(MissileLauncher)),
                 activationStateMachineName = "Missiles",
@@ -425,8 +425,8 @@ namespace Pathfinder.Content.NPC
             SkillDef utilitySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = prefix + "_SQUALL_BODY_PRIMARY_MISSILE_NAME",
-                skillNameToken = prefix + "_SQUALLL_BODY_PRIMARY_MISSILE_NAME",
-                skillDescriptionToken = prefix + "_PATHFINDER_BODY_PRIMARY_MISSILE_DESCRIPTION",
+                skillNameToken = prefix + "_SQUALL_BODY_PRIMARY_MISSILE_NAME",
+                skillDescriptionToken = prefix + "_SQUALL_BODY_PRIMARY_MISSILE_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SquallMainState)),
                 activationStateMachineName = "Missiles",
@@ -450,9 +450,9 @@ namespace Pathfinder.Content.NPC
 
             SkillDef specialSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "_SQUALL_BODY_PRIMARY_MISSILE_NAME",
-                skillNameToken = prefix + "_SQUALLL_BODY_PRIMARY_MISSILE_NAME",
-                skillDescriptionToken = prefix + "_PATHFINDER_BODY_PRIMARY_MISSILE_DESCRIPTION",
+                skillName = prefix + "_SQUALL_BODY_SPECIAL_SQUALLEVIS_NAME",
+                skillNameToken = prefix + "_SQUALL_BODY_SPECIAL_SQUALLEVIS_NAME",
+                skillDescriptionToken = prefix + "_SQUALL_BODY_SPECIAL_SQUALLEVIS_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSquallEvisIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SquallMainState)),
                 activationStateMachineName = "Body",
