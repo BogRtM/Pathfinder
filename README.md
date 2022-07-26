@@ -18,7 +18,7 @@ This survivor was inspired by Insect Glaive from Monster Hunter, and Rexxar from
 ![PF_Image1](https://user-images.githubusercontent.com/55299061/181102728-f211865b-aee2-4930-82af-c6302d006d23.png)
 
 ## Important
-This is an early access, alpha release of a WIP survivor. He is still incomplete, and in active development. As such, please understand that he may be buggy, and that many things are still liable to change for the 1.0 release. My intent on releasing him as he is now is to find bugs and to gather external feedback. Please feel free to contact `Bog#4770` on discord with bug reports or feedback. For now, a config file has been provided for you to play around with *some* of his values.
+This is an early access, alpha release of a WIP survivor. He is still incomplete, and in active development. As such, please understand that he may be buggy, and that many things are still liable to change for the 1.0 release, even his gameplay and kit design. My intent on releasing him as he is now is to find bugs and to gather external feedback. Please feel free to contact `Bog#4770` on discord with bug reports or feedback. For now, a config file has been provided for you to play around with *some* of his values.
 
 ## Credits
 ```
@@ -67,8 +67,8 @@ Reach out to `Bog#4770` on Discord with feedback, or find me on the official Ris
 
 ## Special Thanks
 ```
-• EnforcerGang, for inspiring me to do this in the first place
-• The good people of the RoR2 modding server, for teaching me how to code and for being a great source of positivity
+• First and foremost, EnforcerGang, for inspiring me to do this in the first place
+• The good folk of the RoR2 modding server, for teaching me how to code and for being a great source of motivation
 • Vibe and Scruff
 • My friends from the netherweebs server
 ```
