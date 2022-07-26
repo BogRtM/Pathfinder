@@ -7,7 +7,8 @@ The Pathfinder is a glass cannon spear hunter who commands a robotic falcon, Squ
 
 • Squall can be commanded to focus on selected enemies, or return to you when necessary.<br/>
 • Unlike other melee survivors, you have low HP and no armor; poke from afar when necessary and choose your engagements wisely.<br/>
-• The Pathfinder benefits from items that increase his burst damage potential, while Squall benefits greatly from attack speed.
+• The Pathfinder benefits from items that increase his burst damage potential, while Squall benefits greatly from attack speed and critical chance.
+• Lysate Cell is highly recommended!
 
 This survivor was inspired by Insect Glaive from Monster Hunter, and Rexxar from the Warcraft series.
 
