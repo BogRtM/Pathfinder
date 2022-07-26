@@ -26,7 +26,8 @@ namespace Skillstates.Squall
 
             if (base.characterBody.isPlayerControlled)
             {
-                Chat.AddMessage("If you're seeing this, I do intend to make a little something special for Squall later on!");
+                Chat.AddMessage("You really shouldn't be seeing this, but if you are, I do have something special planned for Squall later on!");
+                Chat.AddMessage("Also your special doesn't work when player controlled, sorry.");
             }
         }
 

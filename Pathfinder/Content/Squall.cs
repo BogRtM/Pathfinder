@@ -404,7 +404,7 @@ namespace Pathfinder.Content.NPC
                 activationState = new EntityStates.SerializableEntityStateType(typeof(MissileLauncher)),
                 activationStateMachineName = "Missiles",
                 baseMaxStock = 1,
-                baseRechargeInterval = 6f,
+                baseRechargeInterval = 12f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,

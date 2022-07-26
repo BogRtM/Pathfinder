@@ -144,11 +144,13 @@ namespace Pathfinder.Components
         #region UI
         private void FixedUpdate()
         {
+            if (selfBody.isPlayerControlled) return;
+
             if(hasBubbetUI && overlayController != null && overlayInstance)
             {
                 if(overlayInstance.GetComponent<RectTransform>().anchoredPosition3D != new Vector3(355f, -155f))
                 {
-                    Chat.AddMessage("Readjusting icon transform");
+                    //Chat.AddMessage("Readjusting icon transform");
                     overlayInstance.GetComponent<RectTransform>().anchoredPosition = new Vector3(355f, -155f);
                     overlayInstance.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(355f, -155f, 0f);
                 }

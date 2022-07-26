@@ -14,14 +14,14 @@ namespace Pathfinder.Modules
             string prefix = PathfinderPlugin.DEVELOPER_PREFIX + "_PATHFINDER_BODY_";
             string squallPrefix = PathfinderPlugin.DEVELOPER_PREFIX + "_SQUALL_BODY_";
 
-            string modderNote = "<style=cShrine>Modder's Note:</style> <style=cUserSetting>Thank you so much for showing interest in The Pathfinder! " +
+            string modderNote = "<style=cShrine>Modder's Note:</style> <style=cUserSetting>Thank you so much for showing interest in <color=#3ea252>The Pathfinder</color>! " +
                 "This survivor is still in active development, thus many things are liable to change, and your feedback is highly requested. " +
                 "Please feel free to DM <style=cIsUtility>Bog#4770</style> on Discord, or find me on the official Risk of Rain 2 Modding server.</style>";
 
-            string desc = "The Pathfinder is a crafty, nimble hunter who fights alongside his trusty falcon, Squall.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
+            string desc = "The Pathfinder is a crafty, evasive skirmisher who fights alongside his trusty falcon, Squall.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
             desc += "< ! > You are quite fragile compared to other melee survivors; use your quick feet, long reach, and Squall's distractions to stay alive." + Environment.NewLine + Environment.NewLine;
-            desc += "< ! > Make sure to alternate between Fleetfoot and your javelin toss to throw as many javelins as possible." + Environment.NewLine + Environment.NewLine;
-            desc += "< ! > Shock Bolas are a great way to lock down large groups of enemies at once." + Environment.NewLine + Environment.NewLine;
+            desc += "< ! > Alternate between Fleetfoot and your javelin toss to get as many javelins as possible, but make sure to reserve a skill charge to dodge when necessary." + Environment.NewLine + Environment.NewLine;
+            desc += "< ! > Shock Bolas are a great way to lock down large groups of enemies at once, while Rending Talons can deal brutal damage when combined with items that increase your air time." + Environment.NewLine + Environment.NewLine;
             desc += "< ! > Squall is a highly capable fighter; command him liberally and prioritize attack speed items to help speed up the battery meter." + Environment.NewLine + Environment.NewLine + Environment.NewLine;
 
             desc += modderNote;
@@ -51,7 +51,8 @@ namespace Pathfinder.Modules
 
             #region Passive
             LanguageAPI.Add(prefix + "PASSIVE_NAME", "Falconer");
-            LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", "You are accompanied by your robot falcon, Squall. Squall is immune to damage, but runs on a <style=cIsUtility>battery</style>.");
+            LanguageAPI.Add(prefix + "PASSIVE_DESCRIPTION", "You are accompanied by your robot falcon, Squall. Squall inherits <style=cIsDamage>most</style> of " +
+                "your items and is immune to damage, but runs on a <style=cIsUtility>battery</style>.");
             #endregion
 
             #region Keywords

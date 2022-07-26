@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2770849397
+CRC: 3902934377
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 16c88890ce5c89e293ce970653267afe
+    Hash: 42dec409acd7ce375abb6124a84581d0
   TypeTreeHash:
     serializedVersion: 2
     Hash: 191fd58095c9dfffe22a38324962b7e7
@@ -89,7 +89,6 @@ Assets:
 - Assets/PathfinderAssets/VFX/HenryMaterials/texPunchImpact.png
 - Assets/PathfinderAssets/Animation/clips/Rig_JavelinToss.anim
 - Assets/PathfinderAssets/VFX/FlashFollow.prefab
-- Assets/PathfinderAssets/Icons/texMainSkin.png
 - Assets/PathfinderAssets/Animation/clips/Rig_BasicThrust SUPER Up.anim
 - Assets/PathfinderAssets/VFX/HenryMaterials/matAnimeShapes.mat
 - Assets/PathfinderAssets/UI/MeterPip.png
@@ -128,7 +127,6 @@ Assets:
 - Assets/PathfinderAssets/UI/Battery/BatteryIconAndMeter.png
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_RollLeft.anim
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/texPunchImpact 1.png
-- Assets/PathfinderAssets/UI/Battery/InnerRing.png
 - Assets/PathfinderAssets/Icons/texPathfinderIcon.png
 - Assets/PathfinderAssets/Textures/Bolas.png
 - Assets/PathfinderAssets/Animation/clips/Rig_Wave.anim
@@ -150,10 +148,8 @@ Assets:
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_FlyLeft.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_AirDash.anim
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_AimHeadYaw.anim
-- Assets/PathfinderAssets/UI/Battery/Pip.png
 - Assets/PathfinderAssets/Animation/animPFMenu.controller
 - Assets/PathfinderAssets/Animation/Squall/fightbird.fbx
-- Assets/PathfinderAssets/UI/Battery/OuterRings.png
 - Assets/PathfinderAssets/Animation/clips/Rig_JavGroundDash.anim
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_SpinDown.anim
 - Assets/PathfinderAssets/VFX/HenryMaterials/texFire.tga
@@ -182,6 +178,7 @@ Assets:
 - Assets/PathfinderAssets/Animation/clips/Rig_PolevaultKick.anim
 - Assets/PathfinderAssets/mdlPathfinder.prefab
 - Assets/PathfinderAssets/VFX/HenryMaterials/texSmoke.png
+- Assets/PathfinderAssets/Icons/texMainSkin.png
 - Assets/PathfinderAssets/Animation/clips/Rig_JavWalkL.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_BasicThrust Gesture Up.anim
 - Assets/PathfinderAssets/Icons/Skill Icons/texJavelinIcon.png
@@ -193,13 +190,11 @@ Assets:
 - Assets/PathfinderAssets/VFX/HenryMaterials/matFistSwing.mat
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/Barbed Wire.png
 - Assets/PathfinderAssets/VFX/HenryMaterials/matTrail.mat
-- Assets/PathfinderAssets/UI/Battery/Glow.png
 - Assets/PathfinderAssets/Textures/z - Copy.png
 - Assets/PathfinderAssets/VFX/HenryMaterials/matHitSpark.mat
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_FlyBack.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_Ascend USE.anim
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_DivePrep.anim
-- Assets/PathfinderAssets/UI/Battery/BatteryGlow.png
 - Assets/PathfinderAssets/Animation/clips/Rig_JavJump.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_JavAscend.anim
 - Assets/PathfinderAssets/UI/Battery/BatteryIcon.png
@@ -208,7 +203,6 @@ Assets:
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_RollRight2.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_AirFlip2.anim
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_DiveEnter.anim
-- Assets/PathfinderAssets/UI/Battery/BatteryIconCropped.png
 - Assets/PathfinderAssets/Animation/clips/Rig_WalkB.anim
 - Assets/PathfinderAssets/VFX/HenryMaterials/texSwingEffect.png
 - Assets/PathfinderAssets/JavelinGhost.prefab
@@ -217,6 +211,7 @@ Assets:
 - Assets/PathfinderAssets/Animation/clips/Rig_JavDescendFast.anim
 - Assets/PathfinderAssets/VFX/HenryMaterials/matSwingShadow.mat
 - Assets/PathfinderAssets/VFX/HenryMaterials/texSlash.png
+- Assets/PathfinderAssets/FBX/squallParticle.fbx
 - Assets/PathfinderAssets/VFX/EffectMaterials/Trail.mat
 - Assets/PathfinderAssets/Materials/matVest.mat
 - Assets/PathfinderAssets/mdlSquall.prefab
@@ -312,7 +307,6 @@ Assets:
 - Assets/PathfinderAssets/Animation/clips/Rig__Idle New USE.anim
 - Assets/PathfinderAssets/Icons/Skill Icons/texCommandIcon.png
 - Assets/PathfinderAssets/Animation/Squall/aimMaskSquall.mask
-- Assets/PathfinderAssets/UI/Battery/BatteryGlowCropped.png
 - Assets/PathfinderAssets/Animation/clips/Rig_JavSprintF.anim
 - Assets/PathfinderAssets/Icons/Skill Icons/texBolasIcon.png
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/texSlash.png
