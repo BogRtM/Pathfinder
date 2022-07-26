@@ -11,7 +11,7 @@ namespace Skillstates.Pathfinder.Command
         protected FalconerComponent falconerComponent;
         protected OverrideController overrideController;
 
-        public static float baseDuration = 0.5f;
+        public static float baseDuration = 0.7f;
         protected float duration;
         protected CommandTracker commandTracker;
         public override void OnEnter()
