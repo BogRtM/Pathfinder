@@ -56,7 +56,7 @@ namespace Pathfinder.Modules
             #endregion
 
             #region Secondary
-            JavelinDamage = plugin.Config.Bind<float>(secondarySectionTitle, "Javelin Damage Coefficient", 8f, "Damage coefficient of javelin toss");
+            JavelinDamage = plugin.Config.Bind<float>(secondarySectionTitle, "Javelin Damage Coefficient", 9f, "Damage coefficient of javelin toss");
             #endregion
 
             #region Utility

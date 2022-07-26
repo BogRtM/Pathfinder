@@ -4,10 +4,12 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.AddressableAssets;
 using Pathfinder.Content;
+using Pathfinder.Modules;
 using RoR2.UI;
 using System.Linq;
 using RoR2.Skills;
 using System.Collections.Generic;
+using RoR2.Projectile;
 //using Pathfinder.Modules.Misc;
 
 namespace Pathfinder.Components
@@ -45,7 +47,7 @@ namespace Pathfinder.Components
         public void ReadyJavelin()
         {
             javelinReady = true;
-            //overrideRequest = CrosshairUtils.RequestOverrideForBody(selfBody, javelinCrosshair, CrosshairUtils.OverridePriority.PrioritySkill);
+
             skillLocator.primary.SetSkillOverride(base.gameObject, javelinSkill, GenericSkill.SkillOverridePriority.Contextual);
             if (modelAnimator)
             {
@@ -56,7 +58,7 @@ namespace Pathfinder.Components
         public void UnreadyJavelin()
         {
             javelinReady = false;
-            //overrideRequest.Dispose();
+
             skillLocator.primary.UnsetSkillOverride(base.gameObject, javelinSkill, GenericSkill.SkillOverridePriority.Contextual);
             if (modelAnimator)
             {

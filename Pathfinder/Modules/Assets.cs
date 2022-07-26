@@ -29,9 +29,11 @@ namespace Pathfinder.Modules
 
         internal static GameObject thrustEffect;
         internal static GameObject lightningRingEffect;
+        internal static GameObject lineVisualizer;
+        internal static GameObject explosionVisualizer;
+
         internal static GameObject squallEvisEffect;
         internal static GameObject squallDashEffect;
-        internal static GameObject squallIndicator;
         internal static GameObject squallFollowFlash;
         internal static GameObject squallAttackFlash;
 
@@ -168,7 +170,8 @@ namespace Pathfinder.Modules
             squallEvisEffect = Assets.LoadEffect("SquallEvisEffect");
             squallDashEffect = Assets.LoadEffect("SquallDash");
 
-            squallIndicator = mainAssetBundle.LoadAsset<GameObject>("SquallIndicator");
+            lineVisualizer = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Common/VFX/BasicThrowableVisualizer.prefab").WaitForCompletion();
+            explosionVisualizer = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Huntress/HuntressArrowRainIndicator.prefab").WaitForCompletion();
         }
 
         private static GameObject CreateTracer(string originalTracerName, string newTracerName)

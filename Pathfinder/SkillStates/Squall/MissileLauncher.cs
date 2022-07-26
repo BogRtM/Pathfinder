@@ -30,7 +30,10 @@ namespace Skillstates.Squall
             missilePrefab = GlobalEventManager.CommonAssets.missilePrefab;
             squallController = base.GetComponent<SquallController>();
 
-            target = squallController.currentTarget;
+            if (!base.characterBody.isPlayerControlled)
+                target = squallController.currentTarget;
+            else
+                target = null;
 
             FireMissile();
         }

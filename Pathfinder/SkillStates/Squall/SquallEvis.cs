@@ -97,7 +97,7 @@ namespace Skillstates.Squall
                     EffectManager.SimpleImpactEffect(GroundLight.comboHitEffectPrefab, enemyPosition, enemyPosition, true);
                 }
             }
-            else if (base.fixedAge >= attackDuration + diveDuration && base.isAuthority && !attackFinished)
+            else if ((!target || base.fixedAge >= attackDuration + diveDuration) && base.isAuthority && !attackFinished)
             {
                 FinishAttack();
             }

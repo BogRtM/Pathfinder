@@ -14,15 +14,17 @@ namespace Pathfinder.Modules
             string prefix = PathfinderPlugin.DEVELOPER_PREFIX + "_PATHFINDER_BODY_";
             string squallPrefix = PathfinderPlugin.DEVELOPER_PREFIX + "_SQUALL_BODY_";
 
+            string modderNote = "<style=cShrine>Modder's Note:</style> <style=cUserSetting>Thank you so much for showing interest in The Pathfinder! " +
+                "This survivor is still in active development, thus many things are liable to change, and your feedback is highly requested;" +
+                "Please feel free to DM <style=cIsUtility>Bog#4770</style> on Discord, or find me on the official Risk of Rain 2 Modding server.</style>";
+
             string desc = "The Pathfinder is a crafty, nimble hunter who fights alongside his trusty falcon, Squall.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
             desc += "< ! > You are more fragile compared to other melee survivors; stay light on your feet and use Squall's distractions to your advantage." + Environment.NewLine + Environment.NewLine;
             desc += "< ! > Make sure to alternate between Fleetfoot and your javelin toss to get as many javelins as possible." + Environment.NewLine + Environment.NewLine;
             desc += "< ! > Use Shock Bolas to lock down large groups of enemies at once." + Environment.NewLine + Environment.NewLine;
             desc += "< ! > You benefit greatly from items that increase your burst damage potential, while Squall benefits greatly from attack speed." + Environment.NewLine + Environment.NewLine + Environment.NewLine;
-            
-            desc += "<style=cShrine>Modder's Note:</style> <style=cUserSetting>Thank you so much for showing interest in The Pathfinder! " +
-                "This survivor is still in active development, thus many things are liable to change, and your feedback is highly requested;" +
-                "Please feel free to DM <style=cIsUtility>Bog#4770</style> on Discord, or find me on the official Risk of Rain 2 Modding server.</style>";
+
+            desc += modderNote;
 
 
             string outro = "..and so they left, as the new apex predators of yet another planet.";
@@ -100,8 +102,8 @@ namespace Pathfinder.Modules
                 $"Upon landing, perform a horizontal sweep for <style=cIsDamage>{100f * Config.GroundSpinDamage.Value}% damage</style>.");
 
             LanguageAPI.Add(prefix + "UTILITY_BOLAS_NAME", "Shock Bolas");
-            LanguageAPI.Add(prefix + "UTILITY_BOLAS_DESCRIPTION", $"Throw electrically charged bolas, which deal " +
-                "leave behind an <style=cIsUtility>electrocuting</style> field for <style=cIsUtility>10 seconds</style>.");
+            LanguageAPI.Add(prefix + "UTILITY_BOLAS_DESCRIPTION", $"<style=cIsUtility>Shocking</style>. Throw electrically charged bolas, which deal " +
+                $"</style=cIsDamage>{Config.bolasExplosionDamage.Value * 100f}% damage</style> and leave behind an <style=cIsUtility>electrocuting</style> field for <style=cIsUtility>10 seconds</style>.");
             #endregion
 
             #region Special

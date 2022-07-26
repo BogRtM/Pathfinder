@@ -59,6 +59,14 @@ namespace Pathfinder.Components
 
         private void FixedUpdate()
         {
+            if (selfBody)
+            {
+                if (selfBody.isPlayerControlled)
+                {
+                    UnityEngine.Object.Destroy(this);
+                }
+            }
+
             if ((squallController.inAttackMode || currentCharge > maxCharge) && !pauseDrain)
             {
                 Drain(drainRate * Time.fixedDeltaTime);

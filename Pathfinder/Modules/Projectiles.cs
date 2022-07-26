@@ -14,7 +14,7 @@ namespace Pathfinder.Modules
         internal static GameObject bombPrefab;
         internal static GameObject javelinPrefab;
         internal static GameObject explodingJavelin;
-        internal static GameObject bolas;
+        internal static GameObject shockBolas;
         internal static GameObject bolasZone;
 
         internal static void RegisterProjectiles()
@@ -23,33 +23,33 @@ namespace Pathfinder.Modules
             CreateBolasZone();
             CreateBolas();
             AddProjectile(explodingJavelin);
-            AddProjectile(bolas);
+            AddProjectile(shockBolas);
             AddProjectile(bolasZone);
         }
 
         private static void CreateBolas()
         {
-            bolas = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Commando/CommandoGrenadeProjectile.prefab").WaitForCompletion(), "ShockBolas");
+            shockBolas = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Commando/CommandoGrenadeProjectile.prefab").WaitForCompletion(), "ShockBolas");
             //DestroyOnTimer destroyOnTimer = shockNet.AddComponent<DestroyOnTimer>();
             //destroyOnTimer.duration = 10f;
 
-            bolas.transform.localScale = new Vector3(2f, 1f, 1f);
+            shockBolas.transform.localScale = new Vector3(2f, 1f, 1f);
 
-            ProjectileController bolasController = bolas.GetComponent<ProjectileController>();
+            ProjectileController bolasController = shockBolas.GetComponent<ProjectileController>();
             bolasController.ghostPrefab = CreateGhostPrefab("BolasGhost");
 
             ProjectileSimple simple = bolasController.GetComponent<ProjectileSimple>();
             simple.desiredForwardSpeed = 200f;
 
-            ProjectileDamage projectileDamage = bolas.GetComponent<ProjectileDamage>();
+            ProjectileDamage projectileDamage = shockBolas.GetComponent<ProjectileDamage>();
             projectileDamage.damageType = DamageType.Shock5s;
             projectileDamage.force = 0f;
 
-            ApplyTorqueOnStart torque = bolas.GetComponent<ApplyTorqueOnStart>();
+            ApplyTorqueOnStart torque = shockBolas.GetComponent<ApplyTorqueOnStart>();
             torque.randomize = false;
-            torque.localTorque = new Vector3(0f, -600f, 0f);
+            torque.localTorque = new Vector3(0f, -800f, 0f);
 
-            ProjectileImpactExplosion impactExplosion = bolas.GetComponent<ProjectileImpactExplosion>();
+            ProjectileImpactExplosion impactExplosion = shockBolas.GetComponent<ProjectileImpactExplosion>();
             impactExplosion.lifetimeAfterImpact = 0f;
             impactExplosion.blastRadius = 18f;
             impactExplosion.falloffModel = BlastAttack.FalloffModel.None;
@@ -101,7 +101,7 @@ namespace Pathfinder.Modules
             Rigidbody rb = explodingJavelin.GetComponent<Rigidbody>();
             rb.useGravity = true;
 
-            explodingJavelin.GetComponent<Transform>().localScale = new Vector3(2.5f, 2.5f, 2.5f);
+            explodingJavelin.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
 
             ProjectileController javelinController = explodingJavelin.GetComponent<ProjectileController>();
             javelinController.ghostPrefab = CreateGhostPrefab("JavelinGhost");
@@ -110,7 +110,7 @@ namespace Pathfinder.Modules
             simple.desiredForwardSpeed = 200f;
 
             ProjectileImpactExplosion impactExplosion = explodingJavelin.GetComponent<ProjectileImpactExplosion>();
-            impactExplosion.blastRadius = 8f;
+            impactExplosion.blastRadius = 5f;
             impactExplosion.falloffModel = BlastAttack.FalloffModel.None;
             impactExplosion.impactEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/OmniImpactVFXLightningMage.prefab").WaitForCompletion();
             //impactExplosion.impactEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/EliteLightning/LightningStakeNova.prefab").WaitForCompletion();

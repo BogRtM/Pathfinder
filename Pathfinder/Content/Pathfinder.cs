@@ -84,7 +84,7 @@ namespace Pathfinder.Modules.Survivors
         public override ItemDisplaysBase itemDisplays => new PathfinderItemDisplays();
 
         //if you have more than one character, easily create a config to enable/disable them like this
-        public override ConfigEntry<bool> characterEnabledConfig => null; //Modules.Config.CharacterEnableConfig(bodyName);
+        public override ConfigEntry<bool> characterEnabledConfig => Modules.Config.CharacterEnableConfig(bodyName);
 
         private static UnlockableDef masterySkinUnlockableDef;
 
@@ -274,7 +274,7 @@ namespace Pathfinder.Modules.Survivors
                 skillNameToken = prefix + "_PATHFINDER_BODY_UTILITY_BOLAS_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_UTILITY_BOLAS_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texBolasIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(ThrowBolas)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(AimBolas)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = 16f,
@@ -290,7 +290,7 @@ namespace Pathfinder.Modules.Survivors
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1,
-                keywordTokens = new string[] {"KEYWORD_ELECTROCUTE"}
+                keywordTokens = new string[] {"KEYWORD_SHOCKING", "KEYWORD_ELECTROCUTE"}
             });
 
             Modules.Skills.AddUtilitySkills(bodyPrefab, bolaSkillDef, spinSkillDef);

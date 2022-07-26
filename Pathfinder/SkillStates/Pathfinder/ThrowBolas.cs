@@ -54,7 +54,7 @@ namespace Skillstates.Pathfinder
             fireProjectileInfo.owner = base.gameObject;
             fireProjectileInfo.position = aimRay.origin;
             fireProjectileInfo.rotation = Util.QuaternionSafeLookRotation(aimRay.direction);
-            fireProjectileInfo.projectilePrefab = Projectiles.bolas;
+            fireProjectileInfo.projectilePrefab = Projectiles.shockBolas;
             ProjectileManager.instance.FireProjectile(fireProjectileInfo);
         }
 

@@ -15,7 +15,7 @@ using Skillstates.Squall;
 using EntityStates;
 using System.Linq;
 
-namespace Pathfinder.Content
+namespace Pathfinder.Content.NPC
 {
     internal class Squall : CharacterBase
     {
@@ -24,7 +24,11 @@ namespace Pathfinder.Content
             bodyNameToClone = "Drone1",
             bodyName = "SquallBody",
             bodyNameToken = PathfinderPlugin.DEVELOPER_PREFIX + "_SQUALL_BODY_NAME",
-            crosshair = Modules.Assets.LoadCrosshair("Standard"),
+            crosshair = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/UI/StandardCrosshair.prefab").WaitForCompletion(),
+            maxHealth = 70f,
+            healthGrowth = 70f * 0.3f,
+            healthRegen = 1f,
+            armor = 0f,
             moveSpeed = 24f,
             acceleration = 150f,
             characterPortrait = Assets.mainAssetBundle.LoadAsset<Texture>("texBirdIcon")

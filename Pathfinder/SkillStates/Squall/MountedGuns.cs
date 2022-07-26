@@ -14,7 +14,8 @@ namespace Skillstates.Squall
 
         internal HealthComponent target;
 
-        private BulletAttack attack;
+        private BulletAttack leftAttack;
+        private BulletAttack rightAttack;
 
         private Vector3 shootVector;
         private Ray aimRay;
@@ -30,7 +31,7 @@ namespace Skillstates.Squall
 
             if (base.isAuthority)
             {
-                attack = new BulletAttack()
+                leftAttack = new BulletAttack()
                 {
                     owner = base.gameObject,
                     weapon = base.gameObject,
@@ -38,7 +39,7 @@ namespace Skillstates.Squall
                     muzzleName = "GunL",
                     minSpread = 0f,
                     maxSpread = 0f,
-                    bulletCount = 2U,
+                    bulletCount = 1U,
                     damage = Config.SquallGunDamage.Value * base.damageStat,
                     tracerEffectPrefab = FireBarrage.tracerEffectPrefab,
                     force = 1f,
@@ -53,7 +54,31 @@ namespace Skillstates.Squall
                     aimVector = aimRay.direction
                 };
 
-                FireBullet(attack);
+                rightAttack = new BulletAttack()
+                {
+                    owner = base.gameObject,
+                    weapon = base.gameObject,
+                    origin = aimRay.origin,
+                    muzzleName = "GunR",
+                    minSpread = 0f,
+                    maxSpread = 0f,
+                    bulletCount = 1U,
+                    damage = Config.SquallGunDamage.Value * base.damageStat,
+                    tracerEffectPrefab = FireBarrage.tracerEffectPrefab,
+                    force = 1f,
+                    hitEffectPrefab = FirePistol2.hitEffectPrefab,
+                    stopperMask = LayerIndex.entityPrecise.mask,
+                    isCrit = base.RollCrit(),
+                    radius = 1f,
+                    damageType = DamageType.Generic,
+                    falloffModel = BulletAttack.FalloffModel.DefaultBullet,
+                    procCoefficient = Config.SquallGunProc.Value,
+                    maxDistance = 200f,
+                    aimVector = aimRay.direction
+                };
+
+                FireBullet(leftAttack);
+                FireBullet(rightAttack);
             }
         }
 
@@ -70,8 +95,7 @@ namespace Skillstates.Squall
         public void FireBullet(BulletAttack attack)
         {
             Util.PlaySound(FireBarrage.fireBarrageSoundString, base.gameObject);
-            EffectManager.SimpleMuzzleFlash(FireBarrage.effectPrefab, base.gameObject, "GunL", false);
-            EffectManager.SimpleMuzzleFlash(FireBarrage.effectPrefab, base.gameObject, "GunR", false);
+            EffectManager.SimpleMuzzleFlash(FireBarrage.effectPrefab, base.gameObject, attack.muzzleName, false);
             attack.Fire();
         }
 

@@ -3,7 +3,7 @@ using RoR2;
 using RoR2.CharacterAI;
 using System;
 using System.Collections.Generic;
-using Pathfinder.Content;
+using Pathfinder.Content.NPC;
 using Skillstates.Squall;
 using RoR2.UI;
 using RoR2.HudOverlay;
@@ -19,7 +19,6 @@ namespace Pathfinder.Components
         private BaseAI baseAI;
         private AISkillDriver[] aISkillDrivers;
         internal GameObject currentTarget { get { return baseAI.currentEnemy.gameObject; } }
-        private HurtBox cachedHurtbox;
 
         private EntityStateMachine weaponMachine;
         private EntityStateMachine bodyMachine;
@@ -35,6 +34,8 @@ namespace Pathfinder.Components
         internal OverlayController overlayController;
         private GameObject overlayInstance;
 
+        private CharacterBody selfBody;
+
         internal Highlight targetHighlight;
 
         private bool hasBubbetUI;
@@ -48,7 +49,8 @@ namespace Pathfinder.Components
 
         private void Start()
         {
-            masterPrefab = base.GetComponent<CharacterBody>().master.gameObject;
+            selfBody = base.GetComponent<CharacterBody>();
+            masterPrefab = selfBody.master.gameObject;
             aISkillDrivers = masterPrefab.GetComponents<AISkillDriver>();
             baseAI = masterPrefab.GetComponent<BaseAI>();
             weaponMachine = EntityStateMachine.FindByCustomName(base.gameObject, "Weapon");
@@ -66,7 +68,7 @@ namespace Pathfinder.Components
 
                 baseAI.currentEnemy.gameObject = bodyObject;
                 baseAI.currentEnemy.bestHurtBox = target;
-                baseAI.enemyAttention = baseAI.enemyAttentionDuration;
+                baseAI.enemyAttention = 1f; //baseAI.enemyAttentionDuration;
                 baseAI.BeginSkillDriver(baseAI.EvaluateSkillDrivers());
             }
         }
@@ -146,6 +148,7 @@ namespace Pathfinder.Components
             {
                 if(overlayInstance.GetComponent<RectTransform>().anchoredPosition3D != new Vector3(355f, -155f))
                 {
+                    Chat.AddMessage("Readjusting icon transform");
                     overlayInstance.GetComponent<RectTransform>().anchoredPosition = new Vector3(355f, -155f);
                     overlayInstance.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(355f, -155f, 0f);
                 }
@@ -181,7 +184,7 @@ namespace Pathfinder.Components
                             {
                                 targetHighlight = target.AddComponent<Highlight>();
                                 targetHighlight.highlightColor = Highlight.HighlightColor.teleporter;
-                                targetHighlight.strength = 1f;
+                                targetHighlight.strength = 1.5f;
                                 targetHighlight.targetRenderer = rendererInfo.renderer;
                                 targetHighlight.isOn = true;
                                 return;
