@@ -97,19 +97,19 @@ namespace Pathfinder
             // run hooks here, disabling one is as simple as commenting out the line
             On.RoR2.CharacterBody.RecalculateStats += CharacterBody_RecalculateStats;
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
-            On.RoR2.PrimarySkillShurikenBehavior.FireShuriken += PrimarySkillShurikenBehavior_FireShuriken;
+            On.RoR2.PrimarySkillShurikenBehavior.OnSkillActivated += PrimarySkillShurikenBehavior_OnSkillActivated;
         }
 
-        private void PrimarySkillShurikenBehavior_FireShuriken(On.RoR2.PrimarySkillShurikenBehavior.orig_FireShuriken orig, PrimarySkillShurikenBehavior self)
+        private void PrimarySkillShurikenBehavior_OnSkillActivated(On.RoR2.PrimarySkillShurikenBehavior.orig_OnSkillActivated orig, PrimarySkillShurikenBehavior self, GenericSkill skill)
         {
             OverrideController overrideController = self.GetComponent<OverrideController>();
 
-            if(overrideController)
+            if (overrideController)
             {
                 if (overrideController.javelinReady || overrideController.inCommandMode) return;
             }
 
-            orig(self);
+            orig(self, skill);
         }
 
         private void GlobalEventManager_onClientDamageNotified(DamageDealtMessage msg)
