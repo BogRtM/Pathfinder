@@ -27,7 +27,7 @@ namespace Skillstates.Squall
         private Transform modelTransform;
         private CharacterModel characterModel;
         private BatteryComponent batteryComponent;
-        private SquallVFXComponent squallVFXComponent;
+        private SquallVFXComponents squallVFXComponent;
 
         private float attackInterval;
         private float stopwatch;
@@ -46,7 +46,7 @@ namespace Skillstates.Squall
             modelTransform = base.GetModelTransform();
             characterModel = modelTransform.GetComponent<CharacterModel>();
             batteryComponent = base.GetComponent<BatteryComponent>();
-            squallVFXComponent = base.GetComponent<SquallVFXComponent>();
+            squallVFXComponent = base.GetComponent<SquallVFXComponents>();
 
             batteryComponent.pauseDrain = true;
             squallVFXComponent.ToggleVFX(false);
@@ -93,11 +93,12 @@ namespace Skillstates.Squall
                     float chargeAmount = isCrit ? (2f * chargePerHit) : chargePerHit;
                     batteryComponent.Recharge(chargeAmount, true);
 
+                    //GroundLight.comboHitEffectPrefab
                     EffectManager.SimpleImpactEffect(Assets.squallEvisEffect, enemyPosition, enemyPosition, true);
-                    EffectManager.SimpleImpactEffect(GroundLight.comboHitEffectPrefab, enemyPosition, enemyPosition, true);
+                    EffectManager.SimpleImpactEffect(Assaulter.hitEffectPrefab, enemyPosition, enemyPosition, true);
                 }
             }
-            else if ((!target || base.fixedAge >= attackDuration + diveDuration) && base.isAuthority && !attackFinished)
+            else if ((!target.healthComponent.alive || base.fixedAge >= attackDuration + diveDuration) && base.isAuthority && !attackFinished)
             {
                 FinishAttack();
             }

@@ -52,7 +52,7 @@ namespace Pathfinder.Modules
         public static void ReadConfig(PathfinderPlugin plugin)
         {
             #region Pathfinder Primary
-            ThrustDamage = plugin.Config.Bind<float>(primarySectionTitle, "Thrust Damage Coefficient", 2.5f, "Damage coefficient of Thrust");
+            ThrustDamage = plugin.Config.Bind<float>(primarySectionTitle, "Thrust Damage Coefficient", 2.75f, "Damage coefficient of Thrust");
             #endregion
 
             #region Secondary

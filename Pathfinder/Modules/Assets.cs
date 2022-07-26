@@ -28,6 +28,9 @@ namespace Pathfinder.Modules
         */
 
         internal static GameObject thrustEffect;
+
+        internal static GameObject javEffect;
+
         internal static GameObject lightningRingEffect;
         internal static GameObject lineVisualizer;
         internal static GameObject explosionVisualizer;
@@ -138,6 +141,11 @@ namespace Pathfinder.Modules
             */
 
             thrustEffect = Assets.LoadEffect("SpearThrust", false);
+
+            javEffect = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Vagrant/VagrantTrackingBombExplosion.prefab").WaitForCompletion(),
+                "JavelinExplosionPrefab");
+
+            AddNewEffectDef(javEffect, "Play_mage_m2_impact");
 
             lightningRingEffect = mainAssetBundle.LoadAsset<GameObject>("LightningRing");
             Texture2D blots = mainAssetBundle.LoadAsset<Texture2D>("Blots");

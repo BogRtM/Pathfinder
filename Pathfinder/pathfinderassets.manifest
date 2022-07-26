@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1068094195
+CRC: 2770849397
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: be0593e76d09ed6f1fd98354e6a66d6c
+    Hash: 16c88890ce5c89e293ce970653267afe
   TypeTreeHash:
     serializedVersion: 2
     Hash: 191fd58095c9dfffe22a38324962b7e7
@@ -85,10 +85,12 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/PathfinderAssets/VFX/Cone Center.mesh
+- Assets/PathfinderAssets/VFX/EffectMaterials/Cone Center.mesh
 - Assets/PathfinderAssets/VFX/HenryMaterials/texPunchImpact.png
 - Assets/PathfinderAssets/Animation/clips/Rig_JavelinToss.anim
 - Assets/PathfinderAssets/VFX/FlashFollow.prefab
+- Assets/PathfinderAssets/Icons/texMainSkin.png
+- Assets/PathfinderAssets/Animation/clips/Rig_BasicThrust SUPER Up.anim
 - Assets/PathfinderAssets/VFX/HenryMaterials/matAnimeShapes.mat
 - Assets/PathfinderAssets/UI/MeterPip.png
 - Assets/PathfinderAssets/Materials/HitboxPreview.mat
@@ -98,9 +100,9 @@ Assets:
 - Assets/PathfinderAssets/Animation/clips/Rig_Point.anim
 - Assets/PathfinderAssets/Textures/PathfinderVest.png
 - Assets/PathfinderAssets/Animation/clips/Rig_AimPitch New USE.anim
-- Assets/PathfinderAssets/VFX/Cone.mesh
-- Assets/PathfinderAssets/Animation/clips/Rig_JavIdleIn.anim
+- Assets/PathfinderAssets/VFX/EffectMaterials/Cone.mesh
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/Javelin Trail.png
+- Assets/PathfinderAssets/Animation/clips/Rig_IdleIn.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_Sweep.anim
 - Assets/PathfinderAssets/VFX/HenryMaterials/SwordSwingMesh.fbx
 - Assets/PathfinderAssets/Animation/clips/Rig_OverhandThrow.anim
@@ -130,7 +132,7 @@ Assets:
 - Assets/PathfinderAssets/Icons/texPathfinderIcon.png
 - Assets/PathfinderAssets/Textures/Bolas.png
 - Assets/PathfinderAssets/Animation/clips/Rig_Wave.anim
-- Assets/PathfinderAssets/Animation/clips/Rig_JavGroundDash.anim
+- Assets/PathfinderAssets/Animation/clips/Rig_JavIdleIn.anim
 - Assets/PathfinderAssets/Materials/DisplayMats/matVest 1.mat
 - Assets/PathfinderAssets/Animation/clips/Rig_JavBolasThrow.anim
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/texFistSwing.png
@@ -140,7 +142,6 @@ Assets:
 - Assets/PathfinderAssets/Textures/BolasEM.png
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_FlapBack.anim
 - Assets/PathfinderAssets/Materials/DisplayMats/matPFDisplay.mat
-- Assets/PathfinderAssets/Animation/clips/Rig_GroundDashF New.anim
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_Flap.anim
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_RollLeft2.anim
 - Assets/PathfinderAssets/Textures/JavelinGhost.png
@@ -153,6 +154,7 @@ Assets:
 - Assets/PathfinderAssets/Animation/animPFMenu.controller
 - Assets/PathfinderAssets/Animation/Squall/fightbird.fbx
 - Assets/PathfinderAssets/UI/Battery/OuterRings.png
+- Assets/PathfinderAssets/Animation/clips/Rig_JavGroundDash.anim
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_SpinDown.anim
 - Assets/PathfinderAssets/VFX/HenryMaterials/texFire.tga
 - Assets/PathfinderAssets/Textures/tex_bird_diffuse.png
@@ -163,6 +165,7 @@ Assets:
 - Assets/PathfinderAssets/Icons/Skill Icons/texPassiveIcon.png
 - Assets/PathfinderAssets/Textures/DefaultMaterial_Normal_OpenGL.png
 - Assets/PathfinderAssets/Textures/PathfinderSkin.png
+- Assets/PathfinderAssets/Animation/clips/Rig_GroundDashF New.anim
 - Assets/PathfinderAssets/VFX/EffectMaterials/Blots.mat
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_AimHeadPitch.anim
 - Assets/PathfinderAssets/VFX/EffectMaterials/Barbed Wire2.png
@@ -180,11 +183,9 @@ Assets:
 - Assets/PathfinderAssets/mdlPathfinder.prefab
 - Assets/PathfinderAssets/VFX/HenryMaterials/texSmoke.png
 - Assets/PathfinderAssets/Animation/clips/Rig_JavWalkL.anim
-- Assets/PathfinderAssets/Animation/clips/Rig_BasicThrust SUPER Up.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_BasicThrust Gesture Up.anim
 - Assets/PathfinderAssets/Icons/Skill Icons/texJavelinIcon.png
 - Assets/PathfinderAssets/VFX/HenryMaterials/texFistSwing.png
-- Assets/PathfinderAssets/Animation/clips/Rig_GroundDashF.001.anim
 - Assets/PathfinderAssets/Icons/Skill Icons/texSpinIcon.png
 - Assets/PathfinderAssets/Animation/clips/Rig_Sweep1H.anim
 - Assets/PathfinderAssets/Icons/Skill Icons/texAttackIcon.png
@@ -202,8 +203,8 @@ Assets:
 - Assets/PathfinderAssets/Animation/clips/Rig_JavJump.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_JavAscend.anim
 - Assets/PathfinderAssets/UI/Battery/BatteryIcon.png
-- Assets/PathfinderAssets/VFX/matSlashOuter.mat
-- Assets/PathfinderAssets/VFX/squallParticle.mesh
+- Assets/PathfinderAssets/VFX/EffectMaterials/matSlashOuter.mat
+- Assets/PathfinderAssets/VFX/EffectMaterials/squallParticle.mesh
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_RollRight2.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_AirFlip2.anim
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_DiveEnter.anim
@@ -253,13 +254,13 @@ Assets:
 - Assets/PathfinderAssets/Textures/z.png
 - Assets/PathfinderAssets/VFX/SquallEvisEffect.prefab
 - Assets/PathfinderAssets/VFX/EffectMaterials/ShockField.mat
-- Assets/PathfinderAssets/Animation/clips/Rig_IdleIn.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_BolasLoop.anim
 - Assets/PathfinderAssets/BolasGhost.prefab
 - Assets/PathfinderAssets/Icons/Skill Icons/texSquallEvisIcon.png
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_DiveLoop.anim
+- Assets/PathfinderAssets/Icons/Skill Icons/texEvadeIcon.png
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/Flash.png
-- Assets/PathfinderAssets/VFX/matSlash.mat
+- Assets/PathfinderAssets/VFX/EffectMaterials/matSlash.mat
 - Assets/PathfinderAssets/VFX/HenryMaterials/matDust.mat
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/texSmoke.png
 - Assets/PathfinderAssets/VFX/EffectMaterials/wire.mat
@@ -296,11 +297,9 @@ Assets:
 - Assets/PathfinderAssets/Textures/spearEm.png
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/Blots.png
 - Assets/PathfinderAssets/Animation/clips/Rig_AimYaw New USE.anim
-- Assets/PathfinderAssets/Animation/clips/Rig_GroundDashF.anim
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/Javelin Trail 1.png
 - Assets/PathfinderAssets/Animation/clips/Rig_UnderhandThrow.anim
 - Assets/PathfinderAssets/Materials/matSpear.mat
-- Assets/PathfinderAssets/Icons/Skill Icons/texEvadeIcon.png
 - Assets/PathfinderAssets/UI/SquallIndicator.prefab
 - Assets/PathfinderAssets/Animation/clips/Rig_JavUnderhandThrow.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_JavWalkB.anim

@@ -1400,7 +1400,7 @@ AnimatorController:
       m_Motion: {fileID: 7400000, guid: 5c1c602b1e95a234d9d8391c6bdf959d, type: 2}
     - serializedVersion: 2
       m_State: {fileID: 1102264566570739738}
-      m_Motion: {fileID: 7400000, guid: 4a02f1c0bd80929419f949c247812946, type: 2}
+      m_Motion: {fileID: 7400000, guid: 2fcc181386df4f644970528ce6086073, type: 2}
     - serializedVersion: 2
       m_State: {fileID: 1102960202541341604}
       m_Motion: {fileID: 7400000, guid: 2467518ffe8e6454c90220cb89847bdf, type: 2}
@@ -1417,7 +1417,7 @@ AnimatorController:
   - serializedVersion: 5
     m_Name: Impact
     m_StateMachine: {fileID: 1107451939762505348}
-    m_Mask: {fileID: 31900000, guid: 296c9905b13ae3a4a93cb8d1be70d937, type: 2}
+    m_Mask: {fileID: 0}
     m_Motions: []
     m_Behaviours: []
     m_BlendingMode: 1
@@ -1489,7 +1489,7 @@ AnimatorController:
   - serializedVersion: 5
     m_Name: Idle, Additive
     m_StateMachine: {fileID: 1107183632269307924}
-    m_Mask: {fileID: 31900000, guid: 4679b6cdec58c914da532acbd9431777, type: 2}
+    m_Mask: {fileID: 0}
     m_Motions: []
     m_Behaviours: []
     m_BlendingMode: 1
@@ -2096,7 +2096,7 @@ BlendTree:
     m_DirectBlendParameter: forwardSpeed
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: d8dc3bc637d09f940a077116b97cda8c, type: 2}
+    m_Motion: {fileID: 7400000, guid: bfa7106003c75db438c373ed689a6bdf, type: 2}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -4205,7 +4205,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: bec24af3b862a2a4bb2878560158743b, type: 2}
+  m_Motion: {fileID: 7400000, guid: eff70f7528d14b34f9e340dc9115cec6, type: 2}
   m_Tag: 
   m_SpeedParameter: Dash.playbackRate
   m_MirrorParameter: 
@@ -4288,7 +4288,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: e0a22beb95030534eae9954a9bdd28b8, type: 2}
+  m_Motion: {fileID: 7400000, guid: 7b564901ec3b9dd439d80dc66925c1a7, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -5977,7 +5977,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: b3d6f81388b44784f95bbc9fca49390b, type: 2}
+  m_Motion: {fileID: 7400000, guid: ea6ce9b45c7d58242aa9f33cfb44c88b, type: 2}
   m_Tag: 
   m_SpeedParameter: Dash.playbackRate
   m_MirrorParameter: 

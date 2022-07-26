@@ -25,9 +25,7 @@ namespace Skillstates.Pathfinder
         public override void OnEnter()
         {
             controller = base.GetComponent<OverrideController>();
-            childLocator = base.GetModelChildLocator();
             if (controller.javelinReady) javReady = "Jav";
-            //bolas = childLocator.FindChild("Bolas").gameObject;
             bolas = base.FindModelChild("Bolas").gameObject;
             bolas.SetActive(true);
 
@@ -43,7 +41,6 @@ namespace Skillstates.Pathfinder
             projectileBaseSpeed = 200f;
             maxDistance = float.PositiveInfinity;
             baseMinimumDuration = 0.1f;
-
 
             base.OnEnter();
         }

@@ -17,7 +17,6 @@ namespace Skillstates.Squall
         private BulletAttack leftAttack;
         private BulletAttack rightAttack;
 
-        private Vector3 shootVector;
         private Ray aimRay;
 
         private float duration;

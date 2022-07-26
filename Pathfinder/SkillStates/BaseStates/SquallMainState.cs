@@ -23,6 +23,11 @@ namespace Skillstates.Squall
             modelAnimator = base.GetModelAnimator();
             PlayAnimation("Body", "Hover");
             modelAnimator.SetFloat("Fly.rate", 1f);
+
+            if (base.characterBody.isPlayerControlled)
+            {
+                Chat.AddMessage("If you're seeing this, I do intend to make a little something special for Squall later on!");
+            }
         }
 
         public override void FixedUpdate()

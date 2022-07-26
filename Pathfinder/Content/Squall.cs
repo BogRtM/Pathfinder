@@ -25,8 +25,8 @@ namespace Pathfinder.Content.NPC
             bodyName = "SquallBody",
             bodyNameToken = PathfinderPlugin.DEVELOPER_PREFIX + "_SQUALL_BODY_NAME",
             crosshair = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/UI/StandardCrosshair.prefab").WaitForCompletion(),
-            maxHealth = 70f,
-            healthGrowth = 70f * 0.3f,
+            maxHealth = 100f,
+            healthGrowth = 100f * 0.3f,
             healthRegen = 1f,
             armor = 0f,
             moveSpeed = 24f,
@@ -56,10 +56,10 @@ namespace Pathfinder.Content.NPC
             "TreasureCacheVoid",
             "FireRing",
             "IceRing",
-            "LunarPrimaryReplacement",
-            "LunarSecondaryReplacement",
-            "LunarSpecialReplacement",
-            "LunarUtilityReplacement",
+            //"LunarPrimaryReplacement",
+            //"LunarSecondaryReplacement",
+            //"LunarSpecialReplacement",
+            //"LunarUtilityReplacement",
 
         };
         public override void InitializeCharacter()
@@ -83,7 +83,7 @@ namespace Pathfinder.Content.NPC
 
             bodyPrefab.AddComponent<SquallController>();
             bodyPrefab.AddComponent<BatteryComponent>();
-            bodyPrefab.AddComponent<SquallVFXComponent>();
+            bodyPrefab.AddComponent<SquallVFXComponents>();
 
             foreach (var i in bodyPrefab.GetComponents<AkEvent>())
             {

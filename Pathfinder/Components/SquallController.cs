@@ -28,7 +28,7 @@ namespace Pathfinder.Components
 
         private bool attackMode = true;
 
-        private SquallVFXComponent squallVFX;
+        private SquallVFXComponents squallVFX;
         internal BatteryComponent batteryComponent;
 
         internal OverlayController overlayController;
@@ -42,7 +42,7 @@ namespace Pathfinder.Components
 
         private void Awake()
         {
-            squallVFX = base.GetComponent<SquallVFXComponent>();
+            squallVFX = base.GetComponent<SquallVFXComponents>();
             skillLocator = base.GetComponent<SkillLocator>();
             batteryComponent = base.GetComponent<BatteryComponent>();
         }
@@ -197,33 +197,22 @@ namespace Pathfinder.Components
 
         private void AddSkillOverlay(HUD hud)
         {
-            Transform iconContainer = hud.transform.Find("MainContainer").Find("MainUIArea").Find("SpringCanvas").Find("BottomRightCluster").Find("Scaler");
-
-            string childName = "Scaler";
-            
-            if (iconContainer.Find("SkillIconContainer"))
-            {
-                hasBubbetUI = true;
-                childName = "SkillIconContainer";
-                iconContainer = iconContainer.Find("SkillIconContainer");
-            };
+            GameObject skill4root = Array.Find<SkillIcon>(hud.skillIcons, icon => icon.name == "Skill4Root").gameObject;
 
             ChildLocator childLocator = hud.GetComponent<ChildLocator>();
             ChildLocator.NameTransformPair[] newArray = new ChildLocator.NameTransformPair[childLocator.transformPairs.Length + 1];
             childLocator.transformPairs.CopyTo(newArray, 0);
             newArray[newArray.Length - 1] = new ChildLocator.NameTransformPair
             {
-                name = childName,
-                transform = iconContainer
+                name = skill4root.transform.parent.name,
+                transform = skill4root.transform.parent
             };
             childLocator.transformPairs = newArray;
 
-            GameObject skillIcon = iconContainer.Find("Skill4Root").gameObject;
-
             OverlayCreationParams overlayCreationParams = new OverlayCreationParams()
             {
-                prefab = skillIcon,
-                childLocatorEntry = childName
+                prefab = skill4root,
+                childLocatorEntry = skill4root.transform.parent.name
             };
 
             overlayController = HudOverlayManager.AddOverlay(owner, overlayCreationParams);
@@ -236,6 +225,7 @@ namespace Pathfinder.Components
 
             if(overlayController.creationParams.childLocatorEntry == "SkillIconContainer")
             {
+                hasBubbetUI = true;
                 instance.transform.Find("BottomContainer").gameObject.SetActive(false);
                 instance.GetComponent<RectTransform>().anchoredPosition += new Vector2(80f, 0f);
             } 

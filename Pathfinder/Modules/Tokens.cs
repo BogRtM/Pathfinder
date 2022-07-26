@@ -15,19 +15,20 @@ namespace Pathfinder.Modules
             string squallPrefix = PathfinderPlugin.DEVELOPER_PREFIX + "_SQUALL_BODY_";
 
             string modderNote = "<style=cShrine>Modder's Note:</style> <style=cUserSetting>Thank you so much for showing interest in The Pathfinder! " +
-                "This survivor is still in active development, thus many things are liable to change, and your feedback is highly requested;" +
+                "This survivor is still in active development, thus many things are liable to change, and your feedback is highly requested. " +
                 "Please feel free to DM <style=cIsUtility>Bog#4770</style> on Discord, or find me on the official Risk of Rain 2 Modding server.</style>";
 
             string desc = "The Pathfinder is a crafty, nimble hunter who fights alongside his trusty falcon, Squall.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
-            desc += "< ! > You are more fragile compared to other melee survivors; stay light on your feet and use Squall's distractions to your advantage." + Environment.NewLine + Environment.NewLine;
-            desc += "< ! > Make sure to alternate between Fleetfoot and your javelin toss to get as many javelins as possible." + Environment.NewLine + Environment.NewLine;
-            desc += "< ! > Use Shock Bolas to lock down large groups of enemies at once." + Environment.NewLine + Environment.NewLine;
-            desc += "< ! > You benefit greatly from items that increase your burst damage potential, while Squall benefits greatly from attack speed." + Environment.NewLine + Environment.NewLine + Environment.NewLine;
+            desc += "< ! > You are quite fragile compared to other melee survivors; use your quick feet, long reach, and Squall's distractions to stay alive." + Environment.NewLine + Environment.NewLine;
+            desc += "< ! > Make sure to alternate between Fleetfoot and your javelin toss to throw as many javelins as possible." + Environment.NewLine + Environment.NewLine;
+            desc += "< ! > Shock Bolas are a great way to lock down large groups of enemies at once." + Environment.NewLine + Environment.NewLine;
+            desc += "< ! > Squall is a highly capable fighter; command him liberally and prioritize attack speed items to help speed up the battery meter." + Environment.NewLine + Environment.NewLine + Environment.NewLine;
 
             desc += modderNote;
 
+            string lore = "...";
 
-            string outro = "..and so they left, as the new apex predators of yet another planet.";
+            string outro = "..and so they left, the new conquerers of yet another food chain.";
             string outroFailure = "..and so they vanished, forever lost to the uncaring wilderness.";
 
             #region Squall
@@ -82,7 +83,7 @@ namespace Pathfinder.Modules
                 $"This skill can overcharge the battery up to <style=cIsUtility>120%</style>.</style>");
 
             LanguageAPI.Add("KEYWORD_UNPOLISHED", "<style=cKeywordName>Unpolished</style> " +
-                "<style=cSub>This skill is missing VFX and SFX, and is comparatively in need of more refinement.");
+                "<style=cSub>This skill is missing VFX and SFX, and is also probably buggier than the others.");
             #endregion
 
             #region Primary
@@ -103,7 +104,7 @@ namespace Pathfinder.Modules
 
             LanguageAPI.Add(prefix + "UTILITY_BOLAS_NAME", "Shock Bolas");
             LanguageAPI.Add(prefix + "UTILITY_BOLAS_DESCRIPTION", $"<style=cIsUtility>Shocking</style>. Throw electrically charged bolas, which deal " +
-                $"</style=cIsDamage>{Config.bolasExplosionDamage.Value * 100f}% damage</style> and leave behind an <style=cIsUtility>electrocuting</style> field for <style=cIsUtility>10 seconds</style>.");
+                $"<style=cIsDamage>{Config.bolasExplosionDamage.Value * 100f}% damage</style> and leave behind an <style=cIsUtility>electrocuting</style> field for <style=cIsUtility>10 seconds</style>.");
             #endregion
 
             #region Special
