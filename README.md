@@ -1,13 +1,13 @@
 ## Early Access - Alpha Release
 ### **DISCLAIMER : NOT A SINGLE THING HAS BEEN TESTED IN MULTIPLAYER**
-Whether or not it works in multiplayer, I do not know. Your feedback will be crucial in finding bugs and incompatibilities.
+Whether or not it works in multiplayer, I do not know. Honestly, I doubt it. Your feedback will be crucial.
 
 # The Pathfinder 
-The Pathfinder is a glass cannon spear hunter who commands a robotic falcon, Squall. Together, they can dish out tremendous DPS, and take down any game!
+The Pathfinder is a glass cannon melee survivor who commands a robotic falcon, Squall. Together, they can dish out tremendous DPS, and take down any game!
 
 • Squall can be commanded to focus on selected enemies, or return to you when necessary.<br/>
 • Unlike other melee survivors, you have low HP and no armor; poke from afar when necessary and choose your engagements wisely.<br/>
-• The Pathfinder benefits from items that increase his burst damage potential, while Squall benefits greatly from attack speed and critical chance.
+• The Pathfinder prefers items that increase his burst damage potential, while Squall benefits greatly from attack speed and critical chance.<br/>
 • Lysate Cell is highly recommended!
 
 This survivor was inspired by Insect Glaive from Monster Hunter, and Rexxar from the Warcraft series.
@@ -23,9 +23,21 @@ This is an early access, alpha release of a WIP survivor. He is still incomplete
 
 ## Credits
 ```
-• bruh - 3D modeling + rigging, Squall design
-• rob + TheTimeSweeper - Providing the Henry character base template
-• Bog - Character concept + design, coding, animations, skill icons, custom VFX, custom UI
+• bruh
+    - 3D modeling
+    - rigging
+    - Squall design
+    
+• rob + TheTimeSweeper
+    - Providing the Henry character base template
+    
+• Bog
+    - Character concept + design
+    - coding
+    - animations
+    - skill icons
+    - custom VFX
+    - custom UI
 ```
 Custom SFX sourced from
 ```
