@@ -22,7 +22,7 @@ namespace Pathfinder.Modules
             desc += "< ! > You are quite fragile compared to other melee survivors; use your quick feet, long reach, and Squall's distractions to stay alive." + Environment.NewLine + Environment.NewLine;
             desc += "< ! > Alternate between Fleetfoot and your javelin toss to get as many javelins as possible, but make sure to reserve a skill charge to dodge when necessary." + Environment.NewLine + Environment.NewLine;
             desc += "< ! > Shock Bolas are a great way to lock down large groups of enemies at once, while Rending Talons can deal brutal damage when combined with items that increase your air time." + Environment.NewLine + Environment.NewLine;
-            desc += "< ! > Squall is a highly capable fighter; command him liberally and prioritize attack speed items to help speed up the battery meter." + Environment.NewLine + Environment.NewLine + Environment.NewLine;
+            desc += "< ! > Squall is a highly capable fighter; command him liberally and prioritize attack speed and critical chance items to help speed up the battery meter." + Environment.NewLine + Environment.NewLine + Environment.NewLine;
 
             desc += modderNote;
 
@@ -80,7 +80,7 @@ namespace Pathfinder.Modules
             LanguageAPI.Add("KEYWORD_SQUALL_SPECIAL", "<style=cKeywordName><color=#efeb1c>Special - Go for the Throat!</color></style>" +
                 $"<style=cSub>Order Squall to repeatedly strike the targeted enemy for <style=cIsDamage>{100f * Config.specialDamageCoefficient.Value}% damage</style>. " +
                 $"Each strike reduces <style=cIsDamage>armor</style> by <style=cIsDamage>{Config.specialArmorShred.Value}</style>, " +
-                $"and <style=cIsUtility>regenerates {Config.specialRechargeAmount.Value}%</style> battery. " +
+                $"and <style=cIsUtility>regenerates {Config.specialRechargeAmount.Value}%</style> battery, doubled on Critical Strikes. " +
                 $"This skill can overcharge the battery up to <style=cIsUtility>120%</style>.</style>");
 
             LanguageAPI.Add("KEYWORD_UNPOLISHED", "<style=cKeywordName>Unpolished</style> " +

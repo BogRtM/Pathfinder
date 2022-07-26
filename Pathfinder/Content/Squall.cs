@@ -184,7 +184,7 @@ namespace Pathfinder.Content.NPC
             strafeMissile.minUserHealthFraction = float.NegativeInfinity;
             strafeMissile.maxUserHealthFraction = float.PositiveInfinity;
             strafeMissile.skillSlot = SkillSlot.Secondary;
-            attackDrivers.Add(strafeMissile.customName);
+            if(!attackDrivers.Contains(strafeMissile.customName)) attackDrivers.Add(strafeMissile.customName);
 
             AISkillDriver chaseMissile = masterPrefab.AddComponent<AISkillDriver>();
             chaseMissile.customName = "ShootMissilesChase";
@@ -209,7 +209,7 @@ namespace Pathfinder.Content.NPC
             chaseMissile.minUserHealthFraction = float.NegativeInfinity;
             chaseMissile.maxUserHealthFraction = float.PositiveInfinity;
             chaseMissile.skillSlot = SkillSlot.Secondary;
-            attackDrivers.Add(chaseMissile.customName);
+            if (!attackDrivers.Contains(chaseMissile.customName)) attackDrivers.Add(chaseMissile.customName);
 
             AISkillDriver strafeGun = masterPrefab.AddComponent<AISkillDriver>();
             strafeGun.customName = "ShootGunsStrafe";
@@ -234,7 +234,7 @@ namespace Pathfinder.Content.NPC
             strafeGun.minUserHealthFraction = float.NegativeInfinity;
             strafeGun.maxUserHealthFraction = float.PositiveInfinity;
             strafeGun.skillSlot = SkillSlot.Primary;
-            attackDrivers.Add(strafeGun.customName);
+            if (!attackDrivers.Contains(strafeGun.customName)) attackDrivers.Add(strafeGun.customName);
 
             AISkillDriver chaseGun = masterPrefab.AddComponent<AISkillDriver>();
             chaseGun.customName = "ShootGunsChase";
@@ -259,7 +259,7 @@ namespace Pathfinder.Content.NPC
             chaseGun.minUserHealthFraction = float.NegativeInfinity;
             chaseGun.maxUserHealthFraction = float.PositiveInfinity;
             chaseGun.skillSlot = SkillSlot.Primary;
-            attackDrivers.Add(chaseGun.customName);
+            if (!attackDrivers.Contains(chaseGun.customName)) attackDrivers.Add(chaseGun.customName);
 
             AISkillDriver chaseEnemies = masterPrefab.AddComponent<AISkillDriver>();
             chaseEnemies.customName = "ChaseEnemies";
@@ -284,7 +284,7 @@ namespace Pathfinder.Content.NPC
             chaseEnemies.minUserHealthFraction = float.NegativeInfinity;
             chaseEnemies.maxUserHealthFraction = float.PositiveInfinity;
             chaseEnemies.skillSlot = SkillSlot.None;
-            attackDrivers.Add(chaseEnemies.customName);
+            if (!attackDrivers.Contains(chaseEnemies.customName)) attackDrivers.Add(chaseEnemies.customName);
 
             AISkillDriver doNothing = masterPrefab.AddComponent<AISkillDriver>();
             doNothing.customName = "DoNothing";
@@ -309,7 +309,7 @@ namespace Pathfinder.Content.NPC
             doNothing.minUserHealthFraction = float.NegativeInfinity;
             doNothing.maxUserHealthFraction = float.PositiveInfinity;
             doNothing.skillSlot = SkillSlot.Primary;
-            attackDrivers.Add(doNothing.customName);
+            if (!attackDrivers.Contains(doNothing.customName)) attackDrivers.Add(doNothing.customName);
 
             AISkillDriver softLeash = masterPrefab.AddComponent<AISkillDriver>();
             softLeash.customName = "SoftLeashToLeader";

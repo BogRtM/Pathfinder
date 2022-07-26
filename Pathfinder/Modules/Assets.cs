@@ -144,7 +144,7 @@ namespace Pathfinder.Modules
 
             javEffect = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Vagrant/VagrantTrackingBombExplosion.prefab").WaitForCompletion(),
                 "JavelinExplosionPrefab");
-
+            if(!javEffect.GetComponent<NetworkIdentity>()) javEffect.AddComponent<NetworkIdentity>();
             AddNewEffectDef(javEffect, "Play_mage_m2_impact");
 
             lightningRingEffect = mainAssetBundle.LoadAsset<GameObject>("LightningRing");
