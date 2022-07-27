@@ -53,6 +53,7 @@ Custom SFX sourced from
 • Implement KingEnderBrine's Extra Skill Slots
 • Item displays
 • Write lore
+• Make custom master prefab for Pathfinder NPC
 • Mastery skin
 • Implement an alt secondary skill that encourages a more melee-focused playstyle
 • VFX + SFX for Rending Talons
@@ -60,6 +61,7 @@ Custom SFX sourced from
 ```
 ### Medium priority
 ```
+• Allow Squall to inherit equipment
 • Improve animations as necessary
 • Mod compatibility
 • Improve Fleetfoot VFX
