@@ -110,8 +110,11 @@ namespace Pathfinder.Modules
 
             #region Special
             LanguageAPI.Add(prefix + "SPECIAL_COMMAND_NAME", "Issue Command");
+            LanguageAPI.Add(prefix + "SPECIAL_COMMAND2_NAME", "Issue Command - Utility Override");
             LanguageAPI.Add(prefix + "SPECIAL_COMMAND_DESCRIPTION", "Prepare a command for Squall. You can issue an <color=#FF0000>Attack</color>, <color=#00FF00>Follow</color>, " +
                 "or <color=#efeb1c>Special</color> command.");
+            LanguageAPI.Add(prefix + "SPECIAL_COMMAND2_DESCRIPTION", "This is the same skill as <color=#3ea252>Issue Command</color>. However, Squall's <color=#efeb1c>Special</color> " +
+                "command now overrides your <style=cIsUtility>Utility</style> skill instead.");
             #endregion
             #endregion
 

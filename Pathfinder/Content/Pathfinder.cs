@@ -323,7 +323,32 @@ namespace Pathfinder.Modules.Survivors
                 keywordTokens = new string[] { "KEYWORD_ATTACK", "KEYWORD_FOLLOW", "KEYWORD_SQUALL_SPECIAL" }
             });
 
-            Modules.Skills.AddSpecialSkills(bodyPrefab, commandSkillDef);
+            SkillDef utilityCommandSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "_PATHFINDER_BODY_SPECIAL_COMMAND2_NAME",
+                skillNameToken = prefix + "_PATHFINDER_BODY_SPECIAL_COMMAND2_NAME",
+                skillDescriptionToken = prefix + "_PATHFINDER_BODY_SPECIAL_COMMAND2_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texCommandIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(CommandMode)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 0f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = EntityStates.InterruptPriority.Skill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = false,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1,
+                keywordTokens = new string[] { "KEYWORD_ATTACK", "KEYWORD_FOLLOW", "KEYWORD_SQUALL_SPECIAL" }
+            });
+            OverrideController.utilityCommandSkillDef = utilityCommandSkillDef;
+            Modules.Skills.AddSpecialSkills(bodyPrefab, commandSkillDef, utilityCommandSkillDef);
 
             AttackCommandSkillDef attackCommand = Modules.Skills.CreateAttackCommandSkillDef(new SkillDefInfo
             {
