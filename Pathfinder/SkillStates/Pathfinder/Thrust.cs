@@ -19,6 +19,7 @@ namespace Skillstates.Pathfinder
         private float earlyExitTime;
         private float fireTime;
 
+        public bool isCancelling;
         private bool hasHopped;
         private bool hasFired;
         private bool isCrit;
@@ -32,7 +33,12 @@ namespace Skillstates.Pathfinder
             animator.SetLayerWeight(animator.GetLayerIndex("AimPitch"), 0f);
 
             base.PlayAnimation("Gesture, Override", "Thrust", "Thrust.playbackRate", duration);
-            
+
+            PrimarySkillShurikenBehavior shurikenComponent = base.GetComponent<PrimarySkillShurikenBehavior>();
+            if (isCancelling && shurikenComponent)
+            {
+                shurikenComponent.OnSkillActivated(base.skillLocator.primary);
+            }
 
             Transform modelTransform = base.GetModelTransform();
             HitBoxGroup hitBoxGroup = null;
@@ -69,10 +75,13 @@ namespace Skillstates.Pathfinder
 
                 Util.PlaySound("PF_Thrust", base.gameObject);
 
-                if(this.attack.Fire() && !base.characterMotor.isGrounded && !hasHopped)
+                if(this.attack.Fire())
                 {
-                    base.SmallHop(base.characterMotor, smallHopVelocity);
-                    hasHopped = true;
+                    if(!base.characterMotor.isGrounded && !hasHopped)
+                    {
+                        base.SmallHop(base.characterMotor, smallHopVelocity);
+                        hasHopped = true;
+                    }
                 }
                 hasFired = true;
             }
@@ -82,10 +91,11 @@ namespace Skillstates.Pathfinder
                 animator.SetLayerWeight(animator.GetLayerIndex("AimPitch"), 1f);
             }
 
-            if(base.fixedAge >= earlyExitTime && base.inputBank.skill1.down && base.isAuthority)
+            if(base.fixedAge >= earlyExitTime && base.inputBank.skill1.down && base.isAuthority && hasFired)
             {
+                //base.skillLocator.primary.ExecuteIfReady();
                 base.characterBody.isSprinting = false;
-                this.outer.SetNextState(new Thrust());
+                this.outer.SetNextState(new Thrust() { isCancelling = true});
             } else if(base.fixedAge >= this.duration && base.isAuthority)
             {
                 base.outer.SetNextStateToMain();

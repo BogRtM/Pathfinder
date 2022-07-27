@@ -29,7 +29,7 @@ namespace Pathfinder.Modules
         #endregion
 
         #region Squall General
-        private static string squallGeneralTitle = squallPrefix + "Battery";
+        private static string squallBatteryTitle = squallPrefix + "Battery";
         public static ConfigEntry<float> batteryDrainRate;
         public static ConfigEntry<float> batteryRechargeRate;
         #endregion
@@ -69,8 +69,8 @@ namespace Pathfinder.Modules
             #endregion
 
             #region Squall General
-            batteryDrainRate = plugin.Config.Bind<float>(squallGeneralTitle, "Battery Drain Rate", 8f, "Amount battery drains per second while Squall is in Attack Mode");
-            batteryRechargeRate = plugin.Config.Bind<float>(squallGeneralTitle, "Battery Recharge Rate", 1f, "Base battery recharge rate while Squall is in Follow Mode");
+            batteryDrainRate = plugin.Config.Bind<float>(squallBatteryTitle, "Battery Drain Rate", 8f, "Amount battery drains per second while Squall is in Attack Mode");
+            batteryRechargeRate = plugin.Config.Bind<float>(squallBatteryTitle, "Battery Recharge Rate", 1f, "Base battery recharge rate while Squall is in Follow Mode");
             #endregion
 
             #region Squall Attack

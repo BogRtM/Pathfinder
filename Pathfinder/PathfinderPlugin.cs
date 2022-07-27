@@ -39,7 +39,7 @@ namespace Pathfinder
         //   this shouldn't even have to be said
         public const string MODUID = "com.Bog.Pathfinder";
         public const string MODNAME = "Pathfinder";
-        public const string MODVERSION = "0.1.0";
+        public const string MODVERSION = "0.1.1";
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
         public const string DEVELOPER_PREFIX = "BOG";
@@ -71,8 +71,8 @@ namespace Pathfinder
             Modules.ItemDisplays.PopulateDisplays(); // collect item display prefabs for use in our display rules
 
             shredding = DamageAPI.ReserveDamageType();
-            squallGun = DamageAPI.ReserveDamageType();
-            squallMissile = DamageAPI.ReserveDamageType();
+            //squallGun = DamageAPI.ReserveDamageType();
+            //squallMissile = DamageAPI.ReserveDamageType();
 
             //make bird
             new Content.NPC.Squall().Initialize();

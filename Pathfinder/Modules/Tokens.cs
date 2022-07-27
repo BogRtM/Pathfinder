@@ -11,8 +11,9 @@ namespace Pathfinder.Modules
         internal static void AddTokens()
         {
             #region Pathfinder
-            string prefix = PathfinderPlugin.DEVELOPER_PREFIX + "_PATHFINDER_BODY_";
-            string squallPrefix = PathfinderPlugin.DEVELOPER_PREFIX + "_SQUALL_BODY_";
+            string devPrefix = PathfinderPlugin.DEVELOPER_PREFIX;
+            string prefix = devPrefix + "_PATHFINDER_BODY_";
+            string squallPrefix = devPrefix + "_SQUALL_BODY_";
 
             string modderNote = "<style=cShrine>Modder's Note:</style> <style=cUserSetting>Thank you so much for showing interest in <color=#3ea252>The Pathfinder</color>! " +
                 "This survivor is still in active development, thus many things are liable to change, and your feedback is highly requested. " +
@@ -42,7 +43,6 @@ namespace Pathfinder.Modules
             LanguageAPI.Add(prefix + "LORE", "");
             LanguageAPI.Add(prefix + "OUTRO_FLAVOR", outro);
             LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);
-            #endregion
 
             #region Skins
             LanguageAPI.Add(prefix + "DEFAULT_SKIN_NAME", "Default");
@@ -113,10 +113,25 @@ namespace Pathfinder.Modules
             LanguageAPI.Add(prefix + "SPECIAL_COMMAND_DESCRIPTION", "Prepare a command for Squall. You can issue an <color=#FF0000>Attack</color>, <color=#00FF00>Follow</color>, " +
                 "or <color=#efeb1c>Special</color> command.");
             #endregion
+            #endregion
 
-            #region SquallSpecial
-            LanguageAPI.Add(prefix + "SQUALL_SPECIAL_GOFORTHROAT_NAME", "Go for the Throat!");
-            LanguageAPI.Add(prefix + "SQUALL_SPECIAL_GOFORTHROAT_DESCRIPTION", "Squall repeatedly strikes the target enemy for ");
+            #region Squall
+            LanguageAPI.Add(devPrefix + "_SQUALL_PRIMARY_GUNS_NAME", "Mounted Guns");
+            LanguageAPI.Add(devPrefix + "_SQUALL_PRIMARY_GUNS_DESCRIPTION", 
+                $"Fire your turrets for <style=cIsDamage>2x{Config.SquallGunDamage.Value}% damage</style>.");
+
+            LanguageAPI.Add(devPrefix + "_SECONDARY_MISSILE_NAME", "Missile Launcher");
+            LanguageAPI.Add(devPrefix + "_SECONDARY_MISSILE_DESCRIPTION", "Fire a volley of 4 missiles for <style=cIsDamage>150% damage</style> each.");
+
+            LanguageAPI.Add(devPrefix + "_SQUALL_UTILITY_DONOTHING_NAME", "Do Nothing");
+            LanguageAPI.Add(devPrefix + "_SQUALL_UTILITY_DONOTHING_DESCRIPTION", "This skill does nothing.");
+
+            LanguageAPI.Add(devPrefix + "_SQUALL_SPECIAL_GOFORTHROAT_NAME", "Go for the Throat!");
+            LanguageAPI.Add(devPrefix + "_SQUALL_SPECIAL_GOFORTHROAT_DESCRIPTION", "Order Squall to repeatedly strike the targeted enemy for " +
+                $"<style=cIsDamage>{100f * Config.specialDamageCoefficient.Value}% damage</style>. " +
+                $"Each strike reduces <style=cIsDamage>armor</style> by <style=cIsDamage>{Config.specialArmorShred.Value}</style>, " +
+                $"and <style=cIsUtility>regenerates {Config.specialRechargeAmount.Value}%</style> battery, doubled on Critical Strikes. " +
+                $"This skill can overcharge the battery up to <style=cIsUtility>120%</style>.");
             #endregion
 
             #region Achievements
@@ -125,7 +140,6 @@ namespace Pathfinder.Modules
             LanguageAPI.Add(prefix + "MASTERYUNLOCKABLE_UNLOCKABLE_NAME", "Pathfinder: Mastery");
             #endregion
             #endregion
-
             /*
             #region Henry
             string prefix = PathfinderPlugin.DEVELOPER_PREFIX + "_HENRY_BODY_";

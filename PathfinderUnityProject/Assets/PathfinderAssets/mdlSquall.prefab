@@ -137,36 +137,6 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!1 &196066171
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 196066172}
-  m_Layer: 0
-  m_Name: DiveHitbox
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &196066172
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 196066171}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.275, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4094349895305465380}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1152600639
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,7 +196,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4094349895305465380}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &1178506564
 LineRenderer:
@@ -272,13 +242,13 @@ LineRenderer:
   - {x: 33.18858, y: 61.15388, z: 373.0691}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.03
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.015872955
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -1617,7 +1587,6 @@ Transform:
   - {fileID: 210372722905408104}
   - {fileID: 3992817567792300357}
   - {fileID: 8336401171900179349}
-  - {fileID: 196066172}
   - {fileID: 1178506563}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1663,9 +1632,11 @@ MonoBehaviour:
   - name: GunR
     transform: {fileID: 3992817567792300357}
   - name: DiveHitbox
-    transform: {fileID: 196066172}
+    transform: {fileID: 0}
   - name: MissileLauncher
     transform: {fileID: 1152600640}
+  - name: UpperBody
+    transform: {fileID: 2814541679451004149}
 --- !u!1 &3824640237663195410
 GameObject:
   m_ObjectHideFlags: 0

@@ -228,7 +228,7 @@ namespace Pathfinder.Components
             if(overlayController.creationParams.childLocatorEntry == "SkillIconContainer")
             {
                 hasBubbetUI = true;
-                instance.transform.Find("BottomContainer").gameObject.SetActive(false);
+                instance.transform.Find("BottomContainer").Find("SkillBackgroundPanel").gameObject.SetActive(false);
                 instance.GetComponent<RectTransform>().anchoredPosition += new Vector2(80f, 0f);
             } 
             else

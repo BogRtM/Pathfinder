@@ -9,20 +9,27 @@ namespace Pathfinder.Components
     {
         private GameObject dashEffect = Assets.squallDashEffect;
 
+        private ModelLocator modelLocator;
+        private ChildLocator childLocator;
         private InputBankTest inputBank;
         private LineRenderer laserLine;
-
         private TrailRenderer[] trails;
 
         private CharacterBody selfBody;
+
+        private Transform lineStartTransform;
 
         private float maxAim = 1000f;
 
         private void Awake()
         {
+            modelLocator = base.GetComponent<ModelLocator>();
+            childLocator = modelLocator.modelTransform.GetComponent<ChildLocator>();
             laserLine = base.GetComponentInChildren<LineRenderer>();
             trails = base.GetComponentsInChildren<TrailRenderer>();
             laserLine.enabled = true;
+
+            lineStartTransform = childLocator.FindChild("UpperBody");
         }
 
         private void OnEnable()
@@ -36,10 +43,10 @@ namespace Pathfinder.Components
             laserLine.enabled = false;
         }
         
-        private void Update()
+        private void FixedUpdate()
         {
             Ray aimRay = inputBank.GetAimRay();
-            Vector3 origin = selfBody.corePosition;
+            Vector3 origin = lineStartTransform.position;
             Vector3 point = aimRay.GetPoint(maxAim);
 
             laserLine.SetPosition(0, origin);

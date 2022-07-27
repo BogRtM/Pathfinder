@@ -33,7 +33,8 @@ namespace Pathfinder.Modules.Survivors
             subtitleNameToken = PathfinderPlugin.DEVELOPER_PREFIX + "_PATHFINDER_BODY_SUBTITLE",
 
             characterPortrait = Assets.mainAssetBundle.LoadAsset<Texture>("texPathfinderIcon"),
-            bodyColor = new Color(62f / 255f, 162f / 255f, 82f / 255f),
+            //bodyColor = new Color(62f / 255f, 162f / 255f, 82f / 255f),
+            bodyColor = new Color32(62, 162, 82, 255),
 
             crosshair = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/UI/StandardCrosshair.prefab").WaitForCompletion(),
             podPrefab = RoR2.LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),

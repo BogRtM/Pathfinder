@@ -45,6 +45,7 @@ namespace Pathfinder.Components
             if (falconMaster)
             {
                 falconMaster.inventory.CopyItemsFrom(selfBody.inventory);
+                falconMaster.inventory.CopyEquipmentFrom(selfBody.inventory);
                 CleanSquallInventory(falconMaster.inventory);
             }
         }
