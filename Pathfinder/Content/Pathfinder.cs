@@ -348,7 +348,7 @@ namespace Pathfinder.Modules.Survivors
                 keywordTokens = new string[] { "KEYWORD_ATTACK", "KEYWORD_FOLLOW", "KEYWORD_SQUALL_SPECIAL" }
             });
             OverrideController.utilityCommandSkillDef = utilityCommandSkillDef;
-            Modules.Skills.AddSpecialSkills(bodyPrefab, commandSkillDef, utilityCommandSkillDef);
+            Modules.Skills.AddSpecialSkills(bodyPrefab, commandSkillDef); //utilityCommandSkillDef);
 
             AttackCommandSkillDef attackCommand = Modules.Skills.CreateAttackCommandSkillDef(new SkillDefInfo
             {
