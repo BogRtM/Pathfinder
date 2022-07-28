@@ -211,18 +211,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1178506564, guid: ef136bc9bbb243247abf89b36a177425, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1178506564, guid: ef136bc9bbb243247abf89b36a177425, type: 3}
-      propertyPath: m_Parameters.widthMultiplier
-      value: 0.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 1178506564, guid: ef136bc9bbb243247abf89b36a177425, type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3718246122337555614, guid: ef136bc9bbb243247abf89b36a177425,
         type: 3}
       propertyPath: m_Name
@@ -283,29 +271,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5426034422331514937, guid: ef136bc9bbb243247abf89b36a177425,
-        type: 3}
-      propertyPath: transformPairs.Array.size
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5426034422331514937, guid: ef136bc9bbb243247abf89b36a177425,
-        type: 3}
-      propertyPath: transformPairs.Array.data[6].name
-      value: UpperBody
-      objectReference: {fileID: 0}
-    - target: {fileID: 5426034422331514937, guid: ef136bc9bbb243247abf89b36a177425,
-        type: 3}
-      propertyPath: transformPairs.Array.data[6].transform
-      value: 
-      objectReference: {fileID: 1166033774}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef136bc9bbb243247abf89b36a177425, type: 3}
---- !u!4 &1166033774 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2814541679451004149, guid: ef136bc9bbb243247abf89b36a177425,
-    type: 3}
-  m_PrefabInstance: {fileID: 1166033773}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1693310204
 GameObject:
   m_ObjectHideFlags: 0
