@@ -93,6 +93,16 @@ Reach out to `Bog#4770` on Discord with feedback, or find me on the official Ris
 ![Concept2](https://user-images.githubusercontent.com/55299061/181116345-9c446691-d1a0-43c0-93b4-ba81e9415dbc.png)
 
 ## Change Log
+`0.1.1`
+```
+• Squall now inherits your equipment (but won't use it)
+• Added Gesture of the Drowned to Squall's item blacklist
+• Fixed some of Squall's language tokens
+• Fixed issue where holding down M1 would not throw shurikens properly
+• Fixed issue with RiskUI where Squall's special stock was not shown in the skill icon panel
+• Slightly thickened Squall's laser pointer for better visibility
+```
+
 `0.1.0`
 ```
 • Initial Release
