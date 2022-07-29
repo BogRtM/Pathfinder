@@ -156,37 +156,7 @@ namespace Pathfinder.Modules.Survivors
             //Modules.Skills.CreateSquallCommandFamilies(bodyPrefab);
             string prefix = PathfinderPlugin.DEVELOPER_PREFIX;
 
-            #region Empower
-            SkillDef javelinSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
-            {
-                skillName = prefix + "_PATHFINDER_BODY_EMPOWER_JAVELIN_NAME",
-                skillNameToken = prefix + "_PATHFINDER_BODY_EMPOWER_JAVELIN_NAME",
-                skillDescriptionToken = prefix + "_PATHFINDER_BODY_EMPOWER_JAVELIN_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texJavelinIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(JavelinToss)),
-                activationStateMachineName = "Weapon",
-                baseMaxStock = 1,
-                baseRechargeInterval = 0f,
-                beginSkillCooldownOnSkillEnd = true,
-                canceledFromSprinting = false,
-                forceSprintDuringState = false,
-                fullRestockOnAssign = true,
-                interruptPriority = EntityStates.InterruptPriority.Any,
-                resetCooldownTimerOnUse = false,
-                isCombatSkill = true,
-                mustKeyPress = false,
-                cancelSprintingOnActivation = false,
-                rechargeStock = 1,
-                requiredStock = 1,
-                stockToConsume = 1
-            });
-
-            OverrideController.javelinSkill = javelinSkillDef;
-            Modules.Content.AddSkillDef(javelinSkillDef);
-            #endregion
-
             #region Primary
-            //Creates a skilldef for a typical primary 
             SkillDef primarySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = prefix + "_PATHFINDER_BODY_PRIMARY_THRUST_NAME",
@@ -216,7 +186,34 @@ namespace Pathfinder.Modules.Survivors
             #endregion
 
             #region Secondary
-            SkillDef pursuitSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            SkillDef javelinSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "_PATHFINDER_BODY_SECONDARY_JAVELIN_NAME",
+                skillNameToken = prefix + "_PATHFINDER_BODY_SECONDARY_JAVELIN_NAME",
+                skillDescriptionToken = prefix + "_PATHFINDER_BODY_SECONDARY_JAVELIN_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texJavelinIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(JavelinToss)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 0f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.Any,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1
+            });
+
+            OverrideController.javelinSkill = javelinSkillDef;
+            Modules.Content.AddSkillDef(javelinSkillDef);
+
+            SkillDef dashSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
                 skillName = prefix + "_PATHFINDER_BODY_SECONDARY_DASH_NAME",
                 skillNameToken = prefix + "_PATHFINDER_BODY_SECONDARY_DASH_NAME",
@@ -240,7 +237,7 @@ namespace Pathfinder.Modules.Survivors
                 stockToConsume = 1
             });
 
-            Modules.Skills.AddSecondarySkills(bodyPrefab, pursuitSkillDef);
+            Modules.Skills.AddSecondarySkills(bodyPrefab, dashSkillDef);
             #endregion
 
             #region Utility
@@ -348,7 +345,7 @@ namespace Pathfinder.Modules.Survivors
                 keywordTokens = new string[] { "KEYWORD_ATTACK", "KEYWORD_FOLLOW", "KEYWORD_SQUALL_SPECIAL" }
             });
             OverrideController.utilityCommandSkillDef = utilityCommandSkillDef;
-            Modules.Skills.AddSpecialSkills(bodyPrefab, commandSkillDef, utilityCommandSkillDef);
+            Modules.Skills.AddSpecialSkills(bodyPrefab, commandSkillDef); // utilityCommandSkillDef);
 
             AttackCommandSkillDef attackCommand = Modules.Skills.CreateAttackCommandSkillDef(new SkillDefInfo
             {
@@ -435,9 +432,9 @@ namespace Pathfinder.Modules.Survivors
 
             SpecialCommandSkillDef squallSpecial = Modules.Skills.CreateSpecialSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "_PATHFINDER_BODY_SQUALL_SPECIAL_GOFORTHROAT_NAME",
-                skillNameToken = prefix + "_PATHFINDER_BODY_SQUALL_SPECIAL_GOFORTHROAT_NAME",
-                skillDescriptionToken = prefix + "_PATHFINDER_BODY_SQUALL_SPECIAL_GOFORTHROAT_DESCRIPTION",
+                skillName = prefix + "_SQUALL_SPECIAL_GOFORTHROAT_NAME",
+                skillNameToken = prefix + "_SQUALL_SPECIAL_GOFORTHROAT_NAME",
+                skillDescriptionToken = prefix + "_SQUALL_SPECIAL_GOFORTHROAT_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSquallEvisIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SpecialCommand)),
                 activationStateMachineName = "Weapon",

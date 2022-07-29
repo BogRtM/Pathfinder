@@ -15,7 +15,7 @@ namespace Pathfinder.Components
     {
         internal GameObject owner;
         
-        private GameObject masterPrefab;
+        private GameObject masterObject;
         private BaseAI baseAI;
         private AISkillDriver[] aISkillDrivers;
         internal GameObject currentTarget { get { return baseAI.currentEnemy.gameObject; } }
@@ -34,11 +34,11 @@ namespace Pathfinder.Components
         internal OverlayController overlayController;
         private GameObject overlayInstance;
 
-        private CharacterBody selfBody;
+        internal CharacterBody selfBody;
 
         internal Highlight targetHighlight;
 
-        private bool hasBubbetUI;
+        private bool hasRiskUI;
 
         private void Awake()
         {
@@ -50,9 +50,9 @@ namespace Pathfinder.Components
         private void Start()
         {
             selfBody = base.GetComponent<CharacterBody>();
-            masterPrefab = selfBody.master.gameObject;
-            aISkillDrivers = masterPrefab.GetComponents<AISkillDriver>();
-            baseAI = masterPrefab.GetComponent<BaseAI>();
+            masterObject = selfBody.master.gameObject;
+            aISkillDrivers = masterObject.GetComponents<AISkillDriver>();
+            baseAI = masterObject.GetComponent<BaseAI>();
             weaponMachine = EntityStateMachine.FindByCustomName(base.gameObject, "Weapon");
             bodyMachine = EntityStateMachine.FindByCustomName(base.gameObject, "Body");
             EnterFollowMode();
@@ -75,8 +75,11 @@ namespace Pathfinder.Components
 
         internal void EnterAttackMode()
         {
-            Util.PlaySound("BeepAttack", base.gameObject);
-            EffectManager.SimpleEffect(Modules.Assets.squallAttackFlash, base.transform.position, Quaternion.identity, false);
+            if (Util.HasEffectiveAuthority(owner))
+            {
+                Util.PlaySound("BeepAttack", base.gameObject);
+                EffectManager.SimpleEffect(Modules.Assets.squallAttackFlash, base.transform.position, Quaternion.identity, false);
+            }
 
             if (attackMode) return;
 
@@ -99,8 +102,11 @@ namespace Pathfinder.Components
 
         internal void EnterFollowMode()
         {
-            Util.PlaySound("BeepFollow", base.gameObject);
-            EffectManager.SimpleEffect(Modules.Assets.squallFollowFlash, base.transform.position, Quaternion.identity, false);
+            if (Util.HasEffectiveAuthority(owner))
+            {
+                Util.PlaySound("BeepFollow", base.gameObject);
+                EffectManager.SimpleEffect(Modules.Assets.squallFollowFlash, base.transform.position, Quaternion.identity, false);
+            }
 
             if (!attackMode) return;
 
@@ -130,9 +136,9 @@ namespace Pathfinder.Components
             }
         }
 
-        internal void DiveToPoint(Vector3 position, float minDistance)
+        internal void DiveToPoint(Vector3 position, float minDistance, EntityStates.InterruptPriority priority)
         {
-            this.bodyMachine.SetInterruptState(new DiveToPoint() { divePosition = position, minDistanceFromPoint = minDistance }, EntityStates.InterruptPriority.PrioritySkill);
+            this.bodyMachine.SetInterruptState(new DiveToPoint() { divePosition = position, minDistanceFromPoint = minDistance }, priority);
         }
 
         internal void DoSpecialAttack(HurtBox target)
@@ -146,7 +152,7 @@ namespace Pathfinder.Components
         {
             if (selfBody.isPlayerControlled) return;
 
-            if(hasBubbetUI && overlayController != null && overlayInstance)
+            if(hasRiskUI && overlayController != null && overlayInstance)
             {
                 if(overlayInstance.GetComponent<RectTransform>().anchoredPosition3D != new Vector3(355f, -155f))
                 {
@@ -227,7 +233,7 @@ namespace Pathfinder.Components
 
             if(overlayController.creationParams.childLocatorEntry == "SkillIconContainer")
             {
-                hasBubbetUI = true;
+                hasRiskUI = true;
                 instance.transform.Find("BottomContainer").Find("SkillBackgroundPanel").gameObject.SetActive(false);
                 instance.GetComponent<RectTransform>().anchoredPosition += new Vector2(80f, 0f);
             } 
