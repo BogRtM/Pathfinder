@@ -97,6 +97,11 @@ Reach out to `Bog#4770` on Discord with feedback, or find me on the official Ris
 ![Concept2](https://user-images.githubusercontent.com/55299061/181116345-9c446691-d1a0-43c0-93b4-ba81e9415dbc.png)
 
 ## Change Log
+`0.1.4`
+```
+• Forgot to actually implement the config changes last time
+```
+
 `0.1.3`
 ```
 • Activating Follow mode now teleports Squall to you if the distance is great enough
@@ -107,6 +112,7 @@ Reach out to `Bog#4770` on Discord with feedback, or find me on the official Ris
 • Fixed issue with Rending Talons where being frozen would cause you to get stuck mid spinning animation
 • Fixed more language tokens
 ```
+
 `0.1.2`
 ```
 • Actually included the right readme this time
