@@ -458,7 +458,7 @@ namespace Pathfinder.Modules.NPC
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SquallMainState)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
-                baseRechargeInterval = Modules.Survivors.Pathfinder.goForThroatCD,
+                baseRechargeInterval = Config.goForThroatCD.Value,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,

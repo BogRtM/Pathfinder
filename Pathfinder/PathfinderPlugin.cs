@@ -186,6 +186,11 @@ namespace Pathfinder
                     self.armor -= (Modules.Config.specialArmorShred.Value * self.GetBuffCount(Modules.Buffs.armorShred));
                 }
 
+                if (self.HasBuff(Modules.Buffs.rendingTalonMS))
+                {
+                    self.moveSpeed += 0.2f;
+                }
+
                 BatteryComponent batteryComponent = self.GetComponent<BatteryComponent>();
                 if (!batteryComponent) return;
                 batteryComponent.rechargeRate = Modules.Config.batteryRechargeRate.Value * self.attackSpeed;
