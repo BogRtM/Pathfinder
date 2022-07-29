@@ -39,7 +39,7 @@ namespace Pathfinder
         //   this shouldn't even have to be said
         public const string MODUID = "com.Bog.Pathfinder";
         public const string MODNAME = "Pathfinder";
-        public const string MODVERSION = "0.1.3";
+        public const string MODVERSION = "0.1.4";
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
         public const string DEVELOPER_PREFIX = "BOG";
