@@ -79,7 +79,7 @@ namespace Pathfinder.Modules
 
             LanguageAPI.Add("KEYWORD_SQUALL_SPECIAL", "<style=cKeywordName><color=#efeb1c>Special - Go for the Throat!</color></style>" +
                 $"<style=cSub>Order Squall to repeatedly strike the targeted enemy for <style=cIsDamage>{100f * Config.specialDamageCoefficient.Value}% damage</style>. " +
-                $"Each strike reduces <style=cIsDamage>armor</style> by <style=cIsDamage>{Config.specialArmorShred.Value}</style>, " +
+                $"Each strike briefly shreds <style=cIsDamage>armor</style> by <style=cIsDamage>{Config.specialArmorShred.Value}</style>, " +
                 $"and <style=cIsUtility>regenerates {Config.specialRechargeAmount.Value}%</style> battery, doubled on Critical Strikes. " +
                 $"This skill can overcharge the battery up to <style=cIsUtility>120%</style>.</style>");
 
@@ -132,7 +132,7 @@ namespace Pathfinder.Modules
             LanguageAPI.Add(devPrefix + "_SQUALL_SPECIAL_GOFORTHROAT_NAME", "Go for the Throat!");
             LanguageAPI.Add(devPrefix + "_SQUALL_SPECIAL_GOFORTHROAT_DESCRIPTION", "Order Squall to repeatedly strike the targeted enemy for " +
                 $"<style=cIsDamage>{100f * Config.specialDamageCoefficient.Value}% damage</style>. " +
-                $"Each strike reduces <style=cIsDamage>armor</style> by <style=cIsDamage>{Config.specialArmorShred.Value}</style>, " +
+                $"Each strike briefly shreds <style=cIsDamage>armor</style> by <style=cIsDamage>{Config.specialArmorShred.Value}</style>, " +
                 $"and <style=cIsUtility>regenerates {Config.specialRechargeAmount.Value}%</style> battery, doubled on Critical Strikes. " +
                 $"This skill can overcharge the battery up to <style=cIsUtility>120%</style>.");
             #endregion
