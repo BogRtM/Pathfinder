@@ -47,6 +47,9 @@ namespace Pathfinder.Components
                 falconMaster.inventory.CopyItemsFrom(selfBody.inventory);
                 falconMaster.inventory.CopyEquipmentFrom(selfBody.inventory);
                 CleanSquallInventory(falconMaster.inventory);
+
+                if (falconMaster.inventory.GetItemCount(RoR2Content.Items.MinionLeash) < 1)
+                    falconMaster.inventory.GiveItem(RoR2Content.Items.MinionLeash);
             }
         }
 
@@ -87,6 +90,7 @@ namespace Pathfinder.Components
             if(falconMaster = minionSummon.Perform())
             {
                 if (!falconMaster.godMode && selfBody.isPlayerControlled) falconMaster.ToggleGod();
+                falconMaster.inventory.GiveItem(RoR2Content.Items.MinionLeash);
                 CleanSquallInventory(falconMaster.inventory);
                 squallController = falconMaster.bodyInstanceObject.GetComponent<SquallController>();
                 batteryComponent = falconMaster.bodyInstanceObject.GetComponent<BatteryComponent>();
@@ -115,7 +119,7 @@ namespace Pathfinder.Components
             {
                 squallController.EnterAttackMode();
                 Vector3 divePosition = target.transform.position + verticalOffset;
-                squallController.DiveToPoint(divePosition, 20f);
+                squallController.DiveToPoint(divePosition, 20f, EntityStates.InterruptPriority.Skill);
                 squallController.SetTarget(target);
             }
         }
@@ -123,7 +127,7 @@ namespace Pathfinder.Components
         internal void FollowOrder()
         {
             Vector3 divePosition = selfBody.corePosition + verticalOffset;
-            squallController.DiveToPoint(divePosition, 10f);
+            squallController.DiveToPoint(divePosition, 10f, EntityStates.InterruptPriority.PrioritySkill);
             squallController.EnterFollowMode();
         }
 

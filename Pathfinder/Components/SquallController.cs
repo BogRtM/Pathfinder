@@ -136,9 +136,9 @@ namespace Pathfinder.Components
             }
         }
 
-        internal void DiveToPoint(Vector3 position, float minDistance)
+        internal void DiveToPoint(Vector3 position, float minDistance, EntityStates.InterruptPriority priority)
         {
-            this.bodyMachine.SetInterruptState(new DiveToPoint() { divePosition = position, minDistanceFromPoint = minDistance }, EntityStates.InterruptPriority.PrioritySkill);
+            this.bodyMachine.SetInterruptState(new DiveToPoint() { divePosition = position, minDistanceFromPoint = minDistance }, priority);
         }
 
         internal void DoSpecialAttack(HurtBox target)

@@ -435,9 +435,9 @@ namespace Pathfinder.Modules.Survivors
 
             SpecialCommandSkillDef squallSpecial = Modules.Skills.CreateSpecialSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "_PATHFINDER_BODY_SQUALL_SPECIAL_GOFORTHROAT_NAME",
-                skillNameToken = prefix + "_PATHFINDER_BODY_SQUALL_SPECIAL_GOFORTHROAT_NAME",
-                skillDescriptionToken = prefix + "_PATHFINDER_BODY_SQUALL_SPECIAL_GOFORTHROAT_DESCRIPTION",
+                skillName = prefix + "_SQUALL_BODY_SPECIAL_GOFORTHROAT_NAME",
+                skillNameToken = prefix + "_SQUALL_BODY_SPECIAL_GOFORTHROAT_NAME",
+                skillDescriptionToken = prefix + "_SQUALL_SPECIAL_GOFORTHROAT_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSquallEvisIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SpecialCommand)),
                 activationStateMachineName = "Weapon",

@@ -14,15 +14,18 @@ namespace Pathfinder.Modules
         #endregion
 
         #region Pathfinder Secondary
-        private static string secondarySectionTitle= pathfinderPrefix + "Secondary";
+        private static string secondarySectionTitle = pathfinderPrefix + "Secondary";
+        public static ConfigEntry<float> dashCD;
         public static ConfigEntry<float> JavelinDamage;
         #endregion
 
         #region Pathfinder Utility
         private static string utilitySectionTitle = pathfinderPrefix + "Utility";
+        public static ConfigEntry<float> rendingTalonsCD;
         public static ConfigEntry<float> AirSpinDamage;
         public static ConfigEntry<float> GroundSpinDamage;
 
+        public static ConfigEntry<float> bolasCD;
         public static ConfigEntry<float> bolasExplosionDamage;
         public static ConfigEntry<float> electrocuteDPS;
         public static ConfigEntry<float> electrocuteSlowAmount;
@@ -44,6 +47,7 @@ namespace Pathfinder.Modules
 
         #region Squall Special
         public static string squallSpecialTitle = squallPrefix + "Special";
+        public static ConfigEntry<float> goForThroatCD;
         public static ConfigEntry<float> specialDamageCoefficient;
         public static ConfigEntry<float> specialRechargeAmount;
         public static ConfigEntry<float> specialArmorShred;
@@ -56,14 +60,17 @@ namespace Pathfinder.Modules
             #endregion
 
             #region Secondary
+            dashCD = plugin.Config.Bind<float>(secondarySectionTitle, "Fleetfoot Cooldown", 6f, "Cooldown of Fleetfoot");
             JavelinDamage = plugin.Config.Bind<float>(secondarySectionTitle, "Javelin Damage Coefficient", 9f, "Damage coefficient of javelin toss");
             #endregion
 
             #region Utility
+            bolasCD = plugin.Config.Bind<float>(utilitySectionTitle, "Shock Bolas Cooldown", 18f, "Cooldown of Shock Bolas");
             bolasExplosionDamage = plugin.Config.Bind<float>(utilitySectionTitle, "Bolas Explosion Damage", 1.5f, "Damage coefficient of Shock Bolas' explosion");
             electrocuteDPS = plugin.Config.Bind<float>(utilitySectionTitle, "Electrocute Damage per Second", 1f, "Damage % per second of Electrocute DoT");
             electrocuteSlowAmount = plugin.Config.Bind<float>(utilitySectionTitle, "Electrocute Slow Multiplier", 0.5f, "Movespeed multiplier of Electrocute DoT");
 
+            rendingTalonsCD = plugin.Config.Bind<float>(utilitySectionTitle, "Rending Talons Cooldown", 8f, "Cooldown of Rending Talons");
             AirSpinDamage = plugin.Config.Bind<float>(utilitySectionTitle, "Air Spin Damage Coefficient", 3f, "Damage coefficient of Rending Talons aerial spin attack");
             GroundSpinDamage = plugin.Config.Bind<float>(utilitySectionTitle, "Ground Spin Damage Coefficient", 8f, "Damage coefficient of Rending Talons ground spin attack");
             #endregion
@@ -80,6 +87,7 @@ namespace Pathfinder.Modules
             #endregion
 
             #region Squall Special
+            goForThroatCD = plugin.Config.Bind<float>(squallSpecialTitle, "Go for the Throat Cooldown", 12f, "Cooldown of Go for the Throat.");
             specialDamageCoefficient = plugin.Config.Bind<float>(squallSpecialTitle, "Go for the Throat Damage Coefficient", 0.7f, "Damage coefficient per strike of Go for the Throat.");
             specialRechargeAmount = plugin.Config.Bind<float>(squallSpecialTitle, "Go for the Throat Recharge Amount", 1f, "Percentage of battery recharged per strike of Go for the Throat.");
             specialArmorShred = plugin.Config.Bind<float>(squallSpecialTitle, "Go for the Throat Armor Shred Amount", 2f, "Flat amount of armor deducted per strike of Go for the Throat.");
@@ -87,7 +95,8 @@ namespace Pathfinder.Modules
         }
 
         // this helper automatically makes config entries for disabling survivors
-        public static ConfigEntry<bool> CharacterEnableConfig(string characterName, string description = "Set to false to disable this character", bool enabledDefault = true) {
+        public static ConfigEntry<bool> CharacterEnableConfig(string characterName, string description = "Set to false to disable this character", bool enabledDefault = true)
+        {
             return PathfinderPlugin.instance.Config.Bind<bool>("General",
                                                           "Enable " + characterName,
                                                           enabledDefault,

@@ -68,7 +68,7 @@ namespace Pathfinder.Modules
 
             LanguageAPI.Add("KEYWORD_ATTACK", "<style=cKeywordName><color=#FF0000>Attack</color></style>" +
                 "<style=cSub>Direct Squall's attention to the targeted enemy, and activate <color=#FF0000>Attack Mode</style>, " +
-                $" granting access to machine guns that deal <style=cIsDamage>2x{100f * Config.SquallGunDamage.Value}% damage</style>, " +
+                $"granting access to machine guns that deal <style=cIsDamage>2x{100f * Config.SquallGunDamage.Value}% damage</style>, " +
                 $"and a missile launcher that deals <style=cIsDamage>{MissileLauncher.maxMissileCount}x{100f * Config.SquallMissileDamage.Value}% damage</style>.</style>");
 
             LanguageAPI.Add("KEYWORD_FOLLOW", "<style=cKeywordName><color=#00FF00>Follow</color></style>" +
@@ -95,7 +95,11 @@ namespace Pathfinder.Modules
             #region Secondary
             LanguageAPI.Add(prefix + "SECONDARY_DASH_NAME", "Fleetfoot");
             LanguageAPI.Add(prefix + "SECONDARY_DASH_DESCRIPTION", $"<style=cIsUtility>Dash</style> a short distance. The next time you use your primary skill, throw an " +
-                $"<style=cIsUtility>explosive</style> javelin for <style=cIsDamage>{100f * Config.JavelinDamage.Value}% damage</style>.");
+                $"<style=cIsDamage>explosive</style> javelin for <style=cIsDamage>{100f * Config.JavelinDamage.Value}% damage</style>.");
+
+            LanguageAPI.Add(prefix + "SECONDARY_JAVELIN_NAME", "Explosive Javelin");
+            LanguageAPI.Add(prefix + "SECONDARY_JAVELIN_DESCRIPTION", "Throw an <style=cIsDamage>explosive</style> javelin for " +
+                $"<style=cIsDamage>{100f * Config.JavelinDamage.Value}% damage</style>.");
             #endregion
 
             #region Utility
@@ -104,8 +108,8 @@ namespace Pathfinder.Modules
                 $"Upon landing, perform a horizontal sweep for <style=cIsDamage>{100f * Config.GroundSpinDamage.Value}% damage</style>.");
 
             LanguageAPI.Add(prefix + "UTILITY_BOLAS_NAME", "Shock Bolas");
-            LanguageAPI.Add(prefix + "UTILITY_BOLAS_DESCRIPTION", $"<style=cIsUtility>Shocking</style>. Throw electrically charged bolas, which deal " +
-                $"<style=cIsDamage>{Config.bolasExplosionDamage.Value * 100f}% damage</style> and leave behind an <style=cIsUtility>electrocuting</style> field for <style=cIsUtility>10 seconds</style>.");
+            LanguageAPI.Add(prefix + "UTILITY_BOLAS_DESCRIPTION", $"Throw electrically charged bolas, which <style=cIsUtility>shock</style> " +
+                $"nearby enemies, and leave behind an <style=cIsUtility>electrocuting</style> field for <style=cIsUtility>10 seconds</style>.");
             #endregion
 
             #region Special
@@ -115,12 +119,31 @@ namespace Pathfinder.Modules
                 "or <color=#efeb1c>Special</color> command.");
             LanguageAPI.Add(prefix + "SPECIAL_COMMAND2_DESCRIPTION", "This is the same skill as <color=#3ea252>Issue Command</color>. However, Squall's <color=#efeb1c>Special</color> " +
                 "command now overrides your <style=cIsUtility>Utility</style> skill instead.");
+
+            LanguageAPI.Add(prefix + "SPECIAL_ATTACK_NAME", "Attack Command");
+            LanguageAPI.Add(prefix + "SPECIAL_ATTACK_DESCRIPTION", "Direct Squall's attention to the targeted enemy, and activate <color=#FF0000>Attack Mode</style>, " +
+                $"granting access to machine guns that deal <style=cIsDamage>2x{100f * Config.SquallGunDamage.Value}% damage</style>, " +
+                $"and a missile launcher that deals <style=cIsDamage>{MissileLauncher.maxMissileCount}x{100f * Config.SquallMissileDamage.Value}% damage</style>.");
+
+            LanguageAPI.Add(prefix + "SPECIAL_FOLLOW_NAME", "Follow Command");
+            LanguageAPI.Add(prefix + "SPECIAL_FOLLOW_DESCRIPTION", $"Return Squall to yourself, and activate <color=#00FF00>Follow Mode</color>, " +
+                $"causing him to stay close to you.");
+
+            LanguageAPI.Add(prefix + "SPECIAL_CANCEL_NAME", "Cancel Command Mode");
+            LanguageAPI.Add(prefix + "SPECIAL_CANCEL_DESCRIPTION", "Cancel Command Mode.");
+
+            LanguageAPI.Add(devPrefix + "_SQUALL_SPECIAL_GOFORTHROAT_NAME", "Go for the Throat!");
+            LanguageAPI.Add(devPrefix + "_SQUALL_SPECIAL_GOFORTHROAT_DESCRIPTION", "Order Squall to repeatedly strike the targeted enemy for " +
+                $"<style=cIsDamage>{100f * Config.specialDamageCoefficient.Value}% damage</style>. " +
+                $"Each strike briefly shreds <style=cIsDamage>armor</style> by <style=cIsDamage>{Config.specialArmorShred.Value}</style>, " +
+                $"and <style=cIsUtility>regenerates {Config.specialRechargeAmount.Value}%</style> battery, doubled on Critical Strikes. " +
+                $"This skill can overcharge the battery up to <style=cIsUtility>120%</style>.");
             #endregion
             #endregion
 
             #region Squall
             LanguageAPI.Add(devPrefix + "_SQUALL_PRIMARY_GUNS_NAME", "Mounted Guns");
-            LanguageAPI.Add(devPrefix + "_SQUALL_PRIMARY_GUNS_DESCRIPTION", 
+            LanguageAPI.Add(devPrefix + "_SQUALL_PRIMARY_GUNS_DESCRIPTION",
                 $"Fire your turrets for <style=cIsDamage>2x{Config.SquallGunDamage.Value}% damage</style>.");
 
             LanguageAPI.Add(devPrefix + "_SECONDARY_MISSILE_NAME", "Missile Launcher");
