@@ -1,6 +1,10 @@
-## Early Access - Alpha Release
-### **DISCLAIMER : NOT A SINGLE THING HAS BEEN TESTED IN MULTIPLAYER**
-Whether or not it works in multiplayer, I do not know. Honestly, I doubt it. Your feedback will be crucial.
+## News
+Balance patch will be coming within the next few days; various nerfs will be applied.
+
+## Known issues
+https://github.com/BogRtM/Pathfinder/issues
+
+For the moment, multiplayer seems to be broken when playing as client; highly recommended to host when you can.
 
 # The Pathfinder 
 The Pathfinder is a glass cannon melee survivor who commands a robotic falcon, Squall. Together, they can dish out tremendous DPS, and take down any game!
@@ -93,6 +97,16 @@ Reach out to `Bog#4770` on Discord with feedback, or find me on the official Ris
 ![Concept2](https://user-images.githubusercontent.com/55299061/181116345-9c446691-d1a0-43c0-93b4-ba81e9415dbc.png)
 
 ## Change Log
+`0.1.3`
+```
+• Activating Follow mode now teleports Squall to you if the distance is great enough
+    - this should fix Squall not appearing in Voidling's phases 2 and 3
+• Issuing an Attack Command will no longer cancel Go For the Throat
+• Added config options for some skill CDs
+• In multiplayer, Squall's beeping sounds should now only be audible to his owner
+• Fixed issue with Rending Talons where being frozen would cause you to get stuck mid spinning animation
+• Fixed more language tokens
+```
 `0.1.2`
 ```
 • Actually included the right readme this time
