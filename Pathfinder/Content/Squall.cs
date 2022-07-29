@@ -15,7 +15,7 @@ using Skillstates.Squall;
 using EntityStates;
 using System.Linq;
 
-namespace Pathfinder.Content.NPC
+namespace Pathfinder.Modules.NPC
 {
     internal class Squall : CharacterBase
     {
@@ -458,7 +458,7 @@ namespace Pathfinder.Content.NPC
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SquallMainState)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
-                baseRechargeInterval = Modules.Survivors.Pathfinder.goForThroatCD,
+                baseRechargeInterval = Config.goForThroatCD.Value,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,

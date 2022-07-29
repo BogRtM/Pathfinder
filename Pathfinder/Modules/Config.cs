@@ -61,6 +61,7 @@ namespace Pathfinder.Modules
 
             #region Secondary
             dashCD = plugin.Config.Bind<float>(secondarySectionTitle, "Fleetfoot Cooldown", 6f, "Cooldown of Fleetfoot");
+
             JavelinDamage = plugin.Config.Bind<float>(secondarySectionTitle, "Javelin Damage Coefficient", 9f, "Damage coefficient of javelin toss");
             #endregion
 

@@ -75,7 +75,7 @@ namespace Pathfinder
             //squallMissile = DamageAPI.ReserveDamageType();
 
             //make bird
-            new Content.NPC.Squall().Initialize();
+            new Modules.NPC.Squall().Initialize();
 
             // survivor initialization
             new Modules.Survivors.Pathfinder().Initialize();
@@ -184,6 +184,11 @@ namespace Pathfinder
                 if(self.HasBuff(Modules.Buffs.armorShred))
                 {
                     self.armor -= (Modules.Config.specialArmorShred.Value * self.GetBuffCount(Modules.Buffs.armorShred));
+                }
+
+                if (self.HasBuff(Modules.Buffs.rendingTalonMS))
+                {
+                    self.moveSpeed += 0.2f;
                 }
 
                 BatteryComponent batteryComponent = self.GetComponent<BatteryComponent>();

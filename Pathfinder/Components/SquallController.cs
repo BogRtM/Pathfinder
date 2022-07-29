@@ -3,7 +3,7 @@ using RoR2;
 using RoR2.CharacterAI;
 using System;
 using System.Collections.Generic;
-using Pathfinder.Content.NPC;
+using Pathfinder.Modules.NPC;
 using Skillstates.Squall;
 using RoR2.UI;
 using RoR2.HudOverlay;
@@ -147,10 +147,17 @@ namespace Pathfinder.Components
                 this.bodyMachine.SetInterruptState(new SquallEvis() { target = target }, EntityStates.InterruptPriority.PrioritySkill);
         }
 
-        #region UI
+        
         private void FixedUpdate()
         {
             if (selfBody.isPlayerControlled) return;
+
+            if (!owner && masterObject)
+            {
+                owner = masterObject.GetComponent<CharacterMaster>().minionOwnership.ownerMaster.bodyInstanceObject;
+                owner.GetComponent<FalconerComponent>().squallController = this;
+                owner.GetComponent<FalconerComponent>().batteryComponent = this.batteryComponent;
+            }
 
             if(hasRiskUI && overlayController != null && overlayInstance)
             {
@@ -171,6 +178,7 @@ namespace Pathfinder.Components
             }
         }
 
+        #region UI
         private void CreateHighlight(GameObject target)
         {
             if (targetHighlight) UnityEngine.Object.Destroy(targetHighlight);
