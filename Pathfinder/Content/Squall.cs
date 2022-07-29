@@ -451,7 +451,7 @@ namespace Pathfinder.Content.NPC
 
             SkillDef specialSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "_SQUALL_BODY_SPECIAL_GOFORTHROAT_NAME",
+                skillName = prefix + "_SQUALL_SPECIAL_GOFORTHROAT_NAME",
                 skillNameToken = prefix + "_SQUALL_SPECIAL_GOFORTHROAT_NAME",
                 skillDescriptionToken = prefix + "_SQUALL_SPECIAL_GOFORTHROAT_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSquallEvisIcon"),

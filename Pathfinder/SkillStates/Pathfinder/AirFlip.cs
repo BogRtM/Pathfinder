@@ -181,6 +181,8 @@ namespace Skillstates.Pathfinder
             animator.SetLayerWeight(animator.GetLayerIndex("AimYaw"), 1f);
             animator.SetLayerWeight(animator.GetLayerIndex("AimPitch"), 1f);
 
+            base.PlayCrossfade("FullBody, Override", "BufferEmpty", 0.2f);
+
             base.characterBody.bodyFlags &= ~RoR2.CharacterBody.BodyFlags.IgnoreFallDamage;
             //base.characterMotor.airControl = previousAirControl;
             base.OnExit();
