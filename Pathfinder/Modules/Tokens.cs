@@ -145,10 +145,10 @@ namespace Pathfinder.Modules
             #region Squall
             LanguageAPI.Add(devPrefix + "_SQUALL_PRIMARY_GUNS_NAME", "Mounted Guns");
             LanguageAPI.Add(devPrefix + "_SQUALL_PRIMARY_GUNS_DESCRIPTION",
-                $"Fire your turrets for <style=cIsDamage>2x{Config.SquallGunDamage.Value}% damage</style>.");
+                $"Fire your turrets for <style=cIsDamage>2x{100f * Config.SquallGunDamage.Value}% damage</style>.");
 
-            LanguageAPI.Add(devPrefix + "_SECONDARY_MISSILE_NAME", "Missile Launcher");
-            LanguageAPI.Add(devPrefix + "_SECONDARY_MISSILE_DESCRIPTION", "Fire a volley of 4 missiles for <style=cIsDamage>150% damage</style> each.");
+            LanguageAPI.Add(devPrefix + "_SQUALL_SECONDARY_MISSILE_NAME", "Missile Launcher");
+            LanguageAPI.Add(devPrefix + "_SQUALL_SECONDARY_MISSILE_DESCRIPTION", "Fire a volley of 4 missiles for <style=cIsDamage>150% damage</style> each.");
 
             LanguageAPI.Add(devPrefix + "_SQUALL_UTILITY_DONOTHING_NAME", "Do Nothing");
             LanguageAPI.Add(devPrefix + "_SQUALL_UTILITY_DONOTHING_DESCRIPTION", "This skill does nothing.");
