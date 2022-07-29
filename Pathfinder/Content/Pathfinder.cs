@@ -348,7 +348,7 @@ namespace Pathfinder.Modules.Survivors
                 keywordTokens = new string[] { "KEYWORD_ATTACK", "KEYWORD_FOLLOW", "KEYWORD_SQUALL_SPECIAL" }
             });
             OverrideController.utilityCommandSkillDef = utilityCommandSkillDef;
-            Modules.Skills.AddSpecialSkills(bodyPrefab, commandSkillDef, utilityCommandSkillDef);
+            Modules.Skills.AddSpecialSkills(bodyPrefab, commandSkillDef); // utilityCommandSkillDef);
 
             AttackCommandSkillDef attackCommand = Modules.Skills.CreateAttackCommandSkillDef(new SkillDefInfo
             {
@@ -435,8 +435,8 @@ namespace Pathfinder.Modules.Survivors
 
             SpecialCommandSkillDef squallSpecial = Modules.Skills.CreateSpecialSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "_SQUALL_BODY_SPECIAL_GOFORTHROAT_NAME",
-                skillNameToken = prefix + "_SQUALL_BODY_SPECIAL_GOFORTHROAT_NAME",
+                skillName = prefix + "_SQUALL_SPECIAL_GOFORTHROAT_NAME",
+                skillNameToken = prefix + "_SQUALL_SPECIAL_GOFORTHROAT_NAME",
                 skillDescriptionToken = prefix + "_SQUALL_SPECIAL_GOFORTHROAT_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSquallEvisIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SpecialCommand)),

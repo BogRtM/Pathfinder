@@ -67,7 +67,7 @@ namespace Pathfinder.Modules
                 $"and take <style=cIsDamage>{100f * Config.electrocuteDPS.Value}% damage</style> per second.</style>");
 
             LanguageAPI.Add("KEYWORD_ATTACK", "<style=cKeywordName><color=#FF0000>Attack</color></style>" +
-                "<style=cSub>Direct Squall's attention to the targeted enemy, and activate <color=#FF0000>Attack Mode</style>, " +
+                "<style=cSub>Direct Squall's attention to the targeted enemy, and activate <color=#FF0000>Attack Mode</color>, " +
                 $"granting access to machine guns that deal <style=cIsDamage>2x{100f * Config.SquallGunDamage.Value}% damage</style>, " +
                 $"and a missile launcher that deals <style=cIsDamage>{MissileLauncher.maxMissileCount}x{100f * Config.SquallMissileDamage.Value}% damage</style>.</style>");
 
@@ -108,8 +108,9 @@ namespace Pathfinder.Modules
                 $"Upon landing, perform a horizontal sweep for <style=cIsDamage>{100f * Config.GroundSpinDamage.Value}% damage</style>.");
 
             LanguageAPI.Add(prefix + "UTILITY_BOLAS_NAME", "Shock Bolas");
-            LanguageAPI.Add(prefix + "UTILITY_BOLAS_DESCRIPTION", $"Throw electrically charged bolas, which <style=cIsUtility>shock</style> " +
-                $"nearby enemies, and leave behind an <style=cIsUtility>electrocuting</style> field for <style=cIsUtility>10 seconds</style>.");
+            LanguageAPI.Add(prefix + "UTILITY_BOLAS_DESCRIPTION", $"<style=cIsUtility>Shocking</style>. Throw electrically charged bolas, which deal " +
+                $"<style=cIsDamage>{Config.bolasExplosionDamage.Value * 100f}% damage</style> and leave behind an " +
+                $"<style=cIsUtility>electrocuting</style> field for <style=cIsUtility>10 seconds</style>.");
             #endregion
 
             #region Special
@@ -121,7 +122,7 @@ namespace Pathfinder.Modules
                 "command now overrides your <style=cIsUtility>Utility</style> skill instead.");
 
             LanguageAPI.Add(prefix + "SPECIAL_ATTACK_NAME", "Attack Command");
-            LanguageAPI.Add(prefix + "SPECIAL_ATTACK_DESCRIPTION", "Direct Squall's attention to the targeted enemy, and activate <color=#FF0000>Attack Mode</style>, " +
+            LanguageAPI.Add(prefix + "SPECIAL_ATTACK_DESCRIPTION", "Direct Squall's attention to the targeted enemy, and activate <color=#FF0000>Attack Mode</color>, " +
                 $"granting access to machine guns that deal <style=cIsDamage>2x{100f * Config.SquallGunDamage.Value}% damage</style>, " +
                 $"and a missile launcher that deals <style=cIsDamage>{MissileLauncher.maxMissileCount}x{100f * Config.SquallMissileDamage.Value}% damage</style>.");
 

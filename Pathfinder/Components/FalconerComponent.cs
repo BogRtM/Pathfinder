@@ -48,7 +48,7 @@ namespace Pathfinder.Components
                 falconMaster.inventory.CopyEquipmentFrom(selfBody.inventory);
                 CleanSquallInventory(falconMaster.inventory);
 
-                if (falconMaster.inventory.GetItemCount(RoR2Content.Items.MinionLeash) < 1)
+                if (falconMaster.inventory.GetItemCount(RoR2Content.Items.MinionLeash) < 1) { }
                     falconMaster.inventory.GiveItem(RoR2Content.Items.MinionLeash);
             }
         }
@@ -117,17 +117,32 @@ namespace Pathfinder.Components
         {
             if(target && target.healthComponent && target.healthComponent.alive)
             {
-                squallController.EnterAttackMode();
                 Vector3 divePosition = target.transform.position + verticalOffset;
                 squallController.DiveToPoint(divePosition, 20f, EntityStates.InterruptPriority.Skill);
                 squallController.SetTarget(target);
+                squallController.EnterAttackMode();
             }
         }
 
         internal void FollowOrder()
         {
-            Vector3 divePosition = selfBody.corePosition + verticalOffset;
-            squallController.DiveToPoint(divePosition, 10f, EntityStates.InterruptPriority.PrioritySkill);
+            if(Vector3.Distance(selfBody.corePosition, squallController.selfBody.corePosition) >= 1000f)
+            {
+                Vector3 teleportPosition = selfBody.corePosition + verticalOffset;
+                TeleportHelper.TeleportBody(squallController.selfBody, teleportPosition);
+
+                GameObject teleportEffectPrefab = Run.instance.GetTeleportEffectPrefab(base.gameObject);
+                if (teleportEffectPrefab)
+                {
+                    EffectManager.SimpleEffect(teleportEffectPrefab, teleportPosition, Quaternion.identity, true);
+                }
+            }
+            else
+            {
+                Vector3 divePosition = selfBody.corePosition + verticalOffset;
+                squallController.DiveToPoint(divePosition, 10f, EntityStates.InterruptPriority.PrioritySkill);
+            }
+
             squallController.EnterFollowMode();
         }
 

@@ -34,7 +34,7 @@ namespace Pathfinder.Components
         internal OverlayController overlayController;
         private GameObject overlayInstance;
 
-        private CharacterBody selfBody;
+        internal CharacterBody selfBody;
 
         internal Highlight targetHighlight;
 
