@@ -96,6 +96,7 @@ namespace Pathfinder.Modules
             LanguageAPI.Add(prefix + "SECONDARY_DASH_NAME", "Fleetfoot");
             LanguageAPI.Add(prefix + "SECONDARY_DASH_DESCRIPTION", $"<style=cIsUtility>Dash</style> a short distance. The next time you use your primary skill, throw an " +
                 $"<style=cIsDamage>explosive</style> javelin for <style=cIsDamage>{100f * Config.JavelinDamage.Value}% damage</style>.");
+
             LanguageAPI.Add(prefix + "SECONDARY_JAVELIN_NAME", "Explosive Javelin");
             LanguageAPI.Add(prefix + "SECONDARY_JAVELIN_DESCRIPTION", "Throw an <style=cIsDamage>explosive</style> javelin for " +
                 $"<style=cIsDamage>{100f * Config.JavelinDamage.Value}% damage</style>.");
@@ -107,8 +108,8 @@ namespace Pathfinder.Modules
                 $"Upon landing, perform a horizontal sweep for <style=cIsDamage>{100f * Config.GroundSpinDamage.Value}% damage</style>.");
 
             LanguageAPI.Add(prefix + "UTILITY_BOLAS_NAME", "Shock Bolas");
-            LanguageAPI.Add(prefix + "UTILITY_BOLAS_DESCRIPTION", $"<style=cIsUtility>Shocking</style>. Throw electrically charged bolas, which deal " +
-                $"<style=cIsDamage>{Config.bolasExplosionDamage.Value * 100f}% damage</style> and leave behind an <style=cIsUtility>electrocuting</style> field for <style=cIsUtility>10 seconds</style>.");
+            LanguageAPI.Add(prefix + "UTILITY_BOLAS_DESCRIPTION", $"Throw electrically charged bolas, which <style=cIsUtility>shock</style> " +
+                $"nearby enemies, and leave behind an <style=cIsUtility>electrocuting</style> field for <style=cIsUtility>10 seconds</style>.");
             #endregion
 
             #region Special

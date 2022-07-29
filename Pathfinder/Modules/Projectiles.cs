@@ -10,8 +10,8 @@ namespace Pathfinder.Modules
 {
     internal static class Projectiles
     {
-        internal static GameObject bombPrefab;
-        internal static GameObject javelinPrefab;
+        //internal static GameObject bombPrefab;
+        //internal static GameObject javelinPrefab;
         internal static GameObject explodingJavelin;
         internal static GameObject shockBolas;
         internal static GameObject bolasZone;

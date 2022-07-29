@@ -66,7 +66,7 @@ namespace Pathfinder.Modules
 
             #region Utility
             bolasCD = plugin.Config.Bind<float>(utilitySectionTitle, "Shock Bolas Cooldown", 18f, "Cooldown of Shock Bolas");
-            bolasExplosionDamage = plugin.Config.Bind<float>(utilitySectionTitle, "Bolas Explosion Damage", 1.5f, "Damage coefficient of Shock Bolas' explosion");
+            //bolasExplosionDamage = plugin.Config.Bind<float>(utilitySectionTitle, "Bolas Explosion Damage", 1.5f, "Damage coefficient of Shock Bolas' explosion");
             electrocuteDPS = plugin.Config.Bind<float>(utilitySectionTitle, "Electrocute Damage per Second", 1f, "Damage % per second of Electrocute DoT");
             electrocuteSlowAmount = plugin.Config.Bind<float>(utilitySectionTitle, "Electrocute Slow Multiplier", 0.5f, "Movespeed multiplier of Electrocute DoT");
 

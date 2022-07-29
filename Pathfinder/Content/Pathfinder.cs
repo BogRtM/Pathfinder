@@ -251,7 +251,7 @@ namespace Pathfinder.Modules.Survivors
                 activationState = new EntityStates.SerializableEntityStateType(typeof(AirFlip)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 8f,
+                baseRechargeInterval = Config.rendingTalonsCD.Value,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -276,7 +276,7 @@ namespace Pathfinder.Modules.Survivors
                 activationState = new EntityStates.SerializableEntityStateType(typeof(AimBolas)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
-                baseRechargeInterval = 16f,
+                baseRechargeInterval = Config.bolasCD.Value,
                 beginSkillCooldownOnSkillEnd = true,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -346,7 +346,7 @@ namespace Pathfinder.Modules.Survivors
                 keywordTokens = new string[] { "KEYWORD_ATTACK", "KEYWORD_FOLLOW", "KEYWORD_SQUALL_SPECIAL" }
             });
             OverrideController.utilityCommandSkillDef = utilityCommandSkillDef;
-            Modules.Skills.AddSpecialSkills(bodyPrefab, commandSkillDef, utilityCommandSkillDef);
+            Modules.Skills.AddSpecialSkills(bodyPrefab, commandSkillDef); //, utilityCommandSkillDef);
 
             AttackCommandSkillDef attackCommand = Modules.Skills.CreateAttackCommandSkillDef(new SkillDefInfo
             {
@@ -365,7 +365,7 @@ namespace Pathfinder.Modules.Survivors
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
                 resetCooldownTimerOnUse = false,
                 isCombatSkill = true,
-                mustKeyPress = true,
+                mustKeyPress = false,
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,

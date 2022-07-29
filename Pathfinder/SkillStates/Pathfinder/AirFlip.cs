@@ -161,6 +161,23 @@ namespace Skillstates.Pathfinder
             Util.PlayAttackSpeedSound(GroundLight.finisherAttackSoundString, base.gameObject, GroundLight.slashPitch);
         }
 
+        public override void OnExit()
+        {
+            animator.SetLayerWeight(animator.GetLayerIndex("AimYaw"), 1f);
+            animator.SetLayerWeight(animator.GetLayerIndex("AimPitch"), 1f);
+
+            base.PlayCrossfade("FullBody, Override", "BufferEmpty", 0.1f);
+
+            base.characterBody.bodyFlags &= ~RoR2.CharacterBody.BodyFlags.IgnoreFallDamage;
+            //base.characterMotor.airControl = previousAirControl;
+            base.OnExit();
+        }
+
+        public override InterruptPriority GetMinimumInterruptPriority()
+        {
+            return InterruptPriority.PrioritySkill;
+        }
+
         /*
         public void FireAttack(OverlapAttack attack)
         {
@@ -180,22 +197,6 @@ namespace Skillstates.Pathfinder
             }
         }
         */
-        public override void OnExit()
-        {
-            animator.SetLayerWeight(animator.GetLayerIndex("AimYaw"), 1f);
-            animator.SetLayerWeight(animator.GetLayerIndex("AimPitch"), 1f);
-
-            base.PlayCrossfade("FullBody, Override", "BufferEmpty", 0.1f);
-
-            base.characterBody.bodyFlags &= ~RoR2.CharacterBody.BodyFlags.IgnoreFallDamage;
-            //base.characterMotor.airControl = previousAirControl;
-            base.OnExit();
-        }
-
-        public override InterruptPriority GetMinimumInterruptPriority()
-        {
-            return InterruptPriority.PrioritySkill;
-        }
 
         /*
         public void FireAirSpin()
@@ -234,5 +235,5 @@ namespace Skillstates.Pathfinder
             }
         }
         */
-        }
+    }
     }
