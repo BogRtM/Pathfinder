@@ -110,7 +110,7 @@ namespace Pathfinder.Modules
 
             ProjectileImpactExplosion impactExplosion = explodingJavelin.GetComponent<ProjectileImpactExplosion>();
             impactExplosion.blastRadius = 8f;
-            impactExplosion.falloffModel = BlastAttack.FalloffModel.None;
+            impactExplosion.falloffModel = BlastAttack.FalloffModel.Linear;
 
             //impactExplosion.impactEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/OmniImpactVFXLightningMage.prefab").WaitForCompletion();
             impactExplosion.impactEffect = Assets.javEffect;

@@ -95,7 +95,10 @@ namespace Pathfinder.Modules
             #region Secondary
             LanguageAPI.Add(prefix + "SECONDARY_DASH_NAME", "Fleetfoot");
             LanguageAPI.Add(prefix + "SECONDARY_DASH_DESCRIPTION", $"<style=cIsUtility>Dash</style> a short distance. The next time you use your primary skill, throw an " +
-                $"<style=cIsUtility>explosive</style> javelin for <style=cIsDamage>{100f * Config.JavelinDamage.Value}% damage</style>.");
+                $"<style=cIsDamage>explosive</style> javelin for <style=cIsDamage>{100f * Config.JavelinDamage.Value}% damage</style>.");
+            LanguageAPI.Add(prefix + "SECONDARY_JAVELIN_NAME", "Explosive Javelin");
+            LanguageAPI.Add(prefix + "SECONDARY_JAVELIN_DESCRIPTION", "Throw an <style=cIsDamage>explosive</style> javelin for " +
+                $"<style=cIsDamage>{100f * Config.JavelinDamage.Value}% damage</style>.");
             #endregion
 
             #region Utility

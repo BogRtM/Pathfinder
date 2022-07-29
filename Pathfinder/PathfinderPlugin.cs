@@ -75,7 +75,7 @@ namespace Pathfinder
             //squallMissile = DamageAPI.ReserveDamageType();
 
             //make bird
-            new Content.NPC.Squall().Initialize();
+            new Modules.NPC.Squall().Initialize();
 
             // survivor initialization
             new Modules.Survivors.Pathfinder().Initialize();

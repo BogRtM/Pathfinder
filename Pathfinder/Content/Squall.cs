@@ -15,7 +15,7 @@ using Skillstates.Squall;
 using EntityStates;
 using System.Linq;
 
-namespace Pathfinder.Content.NPC
+namespace Pathfinder.Modules.NPC
 {
     internal class Squall : CharacterBase
     {

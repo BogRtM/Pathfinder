@@ -3,7 +3,7 @@ using RoR2;
 using RoR2.CharacterAI;
 using System;
 using System.Collections.Generic;
-using Pathfinder.Content.NPC;
+using Pathfinder.Modules.NPC;
 using Skillstates.Squall;
 using RoR2.UI;
 using RoR2.HudOverlay;

@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.AddressableAssets;
-using Pathfinder.Content;
+using Pathfinder.Modules;
 using Pathfinder.Modules;
 using RoR2.UI;
 using System.Linq;
