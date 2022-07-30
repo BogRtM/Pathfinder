@@ -1,4 +1,5 @@
-﻿using EntityStates;
+﻿/*
+using EntityStates;
 using UnityEngine;
 using RoR2;
 using RoR2.Projectile;
@@ -49,7 +50,7 @@ namespace Skillstates.Pathfinder
             
             FireProjectileInfo fireProjectileInfo = new FireProjectileInfo();
             fireProjectileInfo.crit = base.RollCrit();
-            fireProjectileInfo.damage = Config.bolasExplosionDamage.Value * base.damageStat;
+            fireProjectileInfo.damage = 1f; // Config.bolasExplosionDamage.Value * base.damageStat;
             fireProjectileInfo.force = throwForce;
             fireProjectileInfo.owner = base.gameObject;
             fireProjectileInfo.position = aimRay.origin;
@@ -72,3 +73,4 @@ namespace Skillstates.Pathfinder
         }
     }
 }
+*/

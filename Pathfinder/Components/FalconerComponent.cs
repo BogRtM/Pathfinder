@@ -53,6 +53,14 @@ namespace Pathfinder.Components
             }
         }
 
+        private void FixedUpdate()
+        {
+            if(!squallController || !falconMaster || !batteryComponent)
+            {
+                FindOrSummonSquall();
+            }
+        }
+
         private void FindOrSummonSquall()
         {
             var minions = CharacterMaster.readOnlyInstancesList.Where(el => el.minionOwnership.ownerMaster == selfMaster);

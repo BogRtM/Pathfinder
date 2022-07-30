@@ -28,6 +28,7 @@ namespace Pathfinder.Modules
         */
 
         internal static GameObject thrustEffect;
+        internal static GameObject thrustTipImpact;
 
         internal static GameObject javEffect;
 
@@ -141,6 +142,7 @@ namespace Pathfinder.Modules
             */
 
             thrustEffect = Assets.LoadEffect("SpearThrust", false);
+            thrustTipImpact = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Merc/ImpactMercFocusedAssault.prefab").WaitForCompletion();
 
             javEffect = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Vagrant/VagrantTrackingBombExplosion.prefab").WaitForCompletion(),
                 "JavelinExplosionPrefab");

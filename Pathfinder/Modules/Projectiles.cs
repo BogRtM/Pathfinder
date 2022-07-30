@@ -38,7 +38,7 @@ namespace Pathfinder.Modules
             bolasController.ghostPrefab = CreateGhostPrefab("BolasGhost");
 
             ProjectileSimple simple = bolasController.GetComponent<ProjectileSimple>();
-            simple.desiredForwardSpeed = 200f;
+            simple.desiredForwardSpeed = 150f;
 
             ProjectileDamage projectileDamage = shockBolas.GetComponent<ProjectileDamage>();
             projectileDamage.damageType = DamageType.Shock5s;
@@ -52,7 +52,7 @@ namespace Pathfinder.Modules
             impactExplosion.lifetimeAfterImpact = 0f;
             impactExplosion.blastRadius = 18f;
             impactExplosion.falloffModel = BlastAttack.FalloffModel.None;
-            impactExplosion.blastProcCoefficient = 0f;
+            //impactExplosion.blastProcCoefficient = 0f;
             impactExplosion.impactEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainTazerNova.prefab").WaitForCompletion();
 
             impactExplosion.fireChildren = true;

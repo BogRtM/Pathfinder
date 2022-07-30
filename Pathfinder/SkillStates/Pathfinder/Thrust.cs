@@ -1,9 +1,11 @@
 ﻿using RoR2;
+using R2API;
 using EntityStates;
 using EntityStates.Merc;
 using UnityEngine;
 using System;
 using Pathfinder.Modules;
+using Pathfinder;
 
 namespace Skillstates.Pathfinder
 {
@@ -57,10 +59,10 @@ namespace Skillstates.Pathfinder
             attack.isCrit = base.RollCrit();
             attack.forceVector = Vector3.zero;
             attack.pushAwayForce = 1f;
-            attack.damage = 2.8f * base.damageStat;
+            attack.damage = Config.ThrustDamage.Value * base.damageStat;
             attack.hitBoxGroup = hitBoxGroup;
-            attack.hitEffectPrefab = GroundLight.comboHitEffectPrefab;
-            
+            attack.hitEffectPrefab = null;
+            attack.AddModdedDamageType(PathfinderPlugin.piercing);
         }
 
         public override void FixedUpdate()

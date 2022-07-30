@@ -89,7 +89,7 @@ namespace Skillstates.Squall
                     target.healthComponent.TakeDamage(info);
                     GlobalEventManager.instance.OnHitEnemy(info, target.healthComponent.gameObject);
                     GlobalEventManager.instance.OnHitAll(info, target.healthComponent.gameObject);
-                    
+
                     float chargeAmount = isCrit ? (2f * chargePerHit) : chargePerHit;
                     batteryComponent.Recharge(chargeAmount, true);
 

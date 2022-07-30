@@ -13,6 +13,7 @@ using UnityEngine.Networking;
 using Pathfinder.Components;
 using UnityEngine.UI;
 using System;
+using EntityStates.Merc;
 
 [module: UnverifiableCode]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
@@ -54,8 +55,7 @@ namespace Pathfinder
         public static SkillDef javelinSkill;
 
         internal static DamageAPI.ModdedDamageType shredding;
-        internal static DamageAPI.ModdedDamageType squallGun;
-        internal static DamageAPI.ModdedDamageType squallMissile;
+        internal static DamageAPI.ModdedDamageType piercing;
 
         private void Awake()
         {
@@ -71,6 +71,7 @@ namespace Pathfinder
             Modules.ItemDisplays.PopulateDisplays(); // collect item display prefabs for use in our display rules
 
             shredding = DamageAPI.ReserveDamageType();
+            piercing = DamageAPI.ReserveDamageType();
             //squallGun = DamageAPI.ReserveDamageType();
             //squallMissile = DamageAPI.ReserveDamageType();
 
@@ -161,6 +162,23 @@ namespace Pathfinder
 
         private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
         {
+            if(damageInfo.HasModdedDamageType(piercing) && !damageInfo.rejected && !damageInfo.crit)
+            {
+                CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
+                float distance = Vector3.Distance(attackerBody.corePosition, damageInfo.position);
+                if (distance >= 11f)
+                {
+                    damageInfo.damage *= 1.5f;
+                    damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;
+                    damageInfo.damageType = DamageType.BypassArmor;
+                    EffectManager.SimpleImpactEffect(Modules.Assets.thrustTipImpact, damageInfo.position, Vector3.zero, true);
+                } 
+                else
+                {
+                    EffectManager.SimpleImpactEffect(GroundLight.comboHitEffectPrefab, damageInfo.position, Vector3.zero, true);
+                }
+            }
+
             orig(self, damageInfo);
 
             if(damageInfo.HasModdedDamageType(shredding) && !damageInfo.rejected)

@@ -63,13 +63,16 @@ namespace Pathfinder.Modules
                 $"scaling with <style=cIsUtility>his attack speed</style>. " +
                 $"If the meter hits 0, Squall is forced into <color=#00FF00>Follow Mode</color>.</style>");
 
+            LanguageAPI.Add("KEYWORD_PIERCE", $"<style=cKeywordName>Piercing</style><style=cSub>Striking with the <style=cIsUtility>tip</style> " +
+                $"deals <style=cIsDamage>{100f * Config.ThrustDamage.Value * 1.5}% damage</style> and <style=cIsDamage>bypasses armor</style> instead.</style>");
+
             LanguageAPI.Add("KEYWORD_ELECTROCUTE", $"<style=cKeywordName>Electrocute</style><style=cSub>Targets have their movespeed reduced by {100f * Config.electrocuteSlowAmount.Value}%, " +
                 $"and take <style=cIsDamage>{100f * Config.electrocuteDPS.Value}% damage</style> per second.</style>");
 
             LanguageAPI.Add("KEYWORD_ATTACK", "<style=cKeywordName><color=#FF0000>Attack</color></style>" +
                 "<style=cSub>Direct Squall's attention to the targeted enemy, and activate <color=#FF0000>Attack Mode</color>, " +
                 $"granting access to machine guns that deal <style=cIsDamage>2x{100f * Config.SquallGunDamage.Value}% damage</style>, " +
-                $"and a missile launcher that deals <style=cIsDamage>{MissileLauncher.maxMissileCount}x{100f * Config.SquallMissileDamage.Value}% damage</style>.</style>");
+                $"and a missile launcher that deals <style=cIsDamage>{100f * Config.SquallMissileDamage.Value}% damage</style>.</style>");
 
             LanguageAPI.Add("KEYWORD_FOLLOW", "<style=cKeywordName><color=#00FF00>Follow</color></style>" +
                 $"<style=cSub>Return Squall to yourself, and activate <color=#00FF00>Follow Mode</color>, causing him to stay close to you.</style>");
@@ -89,7 +92,8 @@ namespace Pathfinder.Modules
 
             #region Primary
             LanguageAPI.Add(prefix + "PRIMARY_THRUST_NAME", "Thrust");
-            LanguageAPI.Add(prefix + "PRIMARY_THRUST_DESCRIPTION", $"Thrust your spear forward for <style=cIsDamage>{100f * Config.ThrustDamage.Value}% damage</style>.");
+            LanguageAPI.Add(prefix + "PRIMARY_THRUST_DESCRIPTION", $"<style=cIsUtility>Piercing</style>. Thrust your spear forward for " +
+                $"<style=cIsDamage>{100f * Config.ThrustDamage.Value}% damage</style>.");
             #endregion
 
             #region Secondary

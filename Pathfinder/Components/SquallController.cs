@@ -8,11 +8,14 @@ using Skillstates.Squall;
 using RoR2.UI;
 using RoR2.HudOverlay;
 using System.Linq;
+using RoR2.Skills;
 
 namespace Pathfinder.Components
 {
     internal class SquallController : MonoBehaviour
     {
+        internal static SkillDef missileSkillDef;
+
         internal GameObject owner;
         
         private GameObject masterObject;
@@ -24,9 +27,8 @@ namespace Pathfinder.Components
         private EntityStateMachine bodyMachine;
         internal SkillLocator skillLocator;
 
-        internal bool inAttackMode { get { return attackMode; } }
-
         private bool attackMode = true;
+        internal bool inAttackMode { get { return attackMode; } }
 
         private SquallVFXComponents squallVFX;
         internal BatteryComponent batteryComponent;
