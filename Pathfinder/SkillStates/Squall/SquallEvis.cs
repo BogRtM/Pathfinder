@@ -32,6 +32,9 @@ namespace Skillstates.Squall
         private float attackInterval;
         private float stopwatch;
 
+        private float maxHits;
+        private float hitCount;
+
         private Vector3 startPosition;
         private Vector3 enemyPosition;
 
@@ -42,6 +45,7 @@ namespace Skillstates.Squall
         {
             base.OnEnter();
             attackInterval = baseAttackInterval / base.attackSpeedStat;
+            maxHits = attackDuration / attackInterval;
             isCrit = base.RollCrit();
             modelTransform = base.GetModelTransform();
             characterModel = modelTransform.GetComponent<CharacterModel>();
@@ -70,7 +74,7 @@ namespace Skillstates.Squall
 
             base.rigidbodyMotor.moveVector = Vector3.zero;
 
-            if(stopwatch >= attackInterval && target.healthComponent.alive && base.fixedAge >= diveDuration && !attackFinished)
+            if(stopwatch >= attackInterval && target.healthComponent.alive && base.fixedAge >= diveDuration && !attackFinished && hitCount < maxHits)
             {
                 stopwatch = 0f;
 
@@ -96,6 +100,8 @@ namespace Skillstates.Squall
                     //GroundLight.comboHitEffectPrefab
                     EffectManager.SimpleImpactEffect(Assets.squallEvisEffect, enemyPosition, enemyPosition, true);
                     EffectManager.SimpleImpactEffect(Assaulter.hitEffectPrefab, enemyPosition, enemyPosition, true);
+
+                    hitCount++;
                 }
             }
             else if ((!target.healthComponent.alive || base.fixedAge >= attackDuration + diveDuration) && base.isAuthority && !attackFinished)

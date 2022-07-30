@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3603575768
+CRC: 2051357955
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 41587e2e5db19bfa6156edd2055c353e
+    Hash: f702e1c7eeb376ba68adefae74e58d80
   TypeTreeHash:
     serializedVersion: 2
     Hash: 191fd58095c9dfffe22a38324962b7e7
@@ -207,6 +207,7 @@ Assets:
 - Assets/PathfinderAssets/VFX/HenryMaterials/texSwingEffect.png
 - Assets/PathfinderAssets/JavelinGhost.prefab
 - Assets/PathfinderAssets/Materials/matBolas.mat
+- Assets/PathfinderAssets/Icons/PathfinderPortrait - Copy.png
 - Assets/PathfinderAssets/Animation/clips/Rig_JavDescend.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_JavDescendFast.anim
 - Assets/PathfinderAssets/VFX/HenryMaterials/matSwingShadow.mat

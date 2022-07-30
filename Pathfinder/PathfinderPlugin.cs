@@ -40,7 +40,7 @@ namespace Pathfinder
         //   this shouldn't even have to be said
         public const string MODUID = "com.Bog.Pathfinder";
         public const string MODNAME = "Pathfinder";
-        public const string MODVERSION = "0.1.3";
+        public const string MODVERSION = "0.2.0";
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
         public const string DEVELOPER_PREFIX = "BOG";
@@ -162,7 +162,7 @@ namespace Pathfinder
 
         private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
         {
-            if(damageInfo.HasModdedDamageType(piercing) && !damageInfo.rejected && !damageInfo.crit)
+            if(damageInfo.HasModdedDamageType(piercing) && !damageInfo.rejected)
             {
                 CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
                 float distance = Vector3.Distance(attackerBody.corePosition, damageInfo.position);
@@ -170,7 +170,9 @@ namespace Pathfinder
                 {
                     damageInfo.damage *= 1.5f;
                     damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;
-                    damageInfo.damageType = DamageType.BypassArmor;
+                    if(self.body.armor > 0f) 
+                        damageInfo.damageType = DamageType.BypassArmor;
+
                     EffectManager.SimpleImpactEffect(Modules.Assets.thrustTipImpact, damageInfo.position, Vector3.zero, true);
                 } 
                 else
