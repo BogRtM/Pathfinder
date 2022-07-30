@@ -155,7 +155,6 @@ namespace Skillstates.Pathfinder
         {
             airFlipFinished = true;
             base.characterMotor.velocity = Vector3.zero;
-            base.characterBody.RemoveBuff(Buffs.rendingTalonMS);
             if (controller.javelinReady) javString = "Jav";
             base.PlayAnimation("FullBody, Override", javString + "SpinSweep", "Flip.playbackRate", spinDuration);
             Util.PlayAttackSpeedSound(GroundLight.finisherAttackSoundString, base.gameObject, GroundLight.slashPitch);
@@ -165,9 +164,8 @@ namespace Skillstates.Pathfinder
         {
             animator.SetLayerWeight(animator.GetLayerIndex("AimYaw"), 1f);
             animator.SetLayerWeight(animator.GetLayerIndex("AimPitch"), 1f);
-
+            base.characterBody.RemoveBuff(Buffs.rendingTalonMS);
             base.PlayCrossfade("FullBody, Override", "BufferEmpty", 0.1f);
-
             base.characterBody.bodyFlags &= ~RoR2.CharacterBody.BodyFlags.IgnoreFallDamage;
             //base.characterMotor.airControl = previousAirControl;
             base.OnExit();
