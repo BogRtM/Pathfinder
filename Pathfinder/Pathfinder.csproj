@@ -50,6 +50,21 @@
     <Reference Include="MMHOOK_RoR2">
       <HintPath>..\libs\MMHOOK_RoR2.dll</HintPath>
     </Reference>
+    <Reference Include="UNetWeaverPatcher">
+      <HintPath>..\..\..\..\..\AppData\Roaming\r2modmanPlus-local\RiskOfRain2\profiles\Modding\BepInEx\patchers\UNetWeaver\UNetWeaverPatcher.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Cecil">
+      <HintPath>..\..\..\..\..\AppData\Roaming\r2modmanPlus-local\RiskOfRain2\profiles\Modding\BepInEx\patchers\UNetWeaver\Unity.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Cecil.Mdb">
+      <HintPath>..\..\..\..\..\AppData\Roaming\r2modmanPlus-local\RiskOfRain2\profiles\Modding\BepInEx\patchers\UNetWeaver\Unity.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Cecil.Pdb">
+      <HintPath>..\..\..\..\..\AppData\Roaming\r2modmanPlus-local\RiskOfRain2\profiles\Modding\BepInEx\patchers\UNetWeaver\Unity.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.UNetWeaver">
+      <HintPath>..\..\..\..\..\AppData\Roaming\r2modmanPlus-local\RiskOfRain2\profiles\Modding\BepInEx\patchers\UNetWeaver\Unity.UNetWeaver.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">

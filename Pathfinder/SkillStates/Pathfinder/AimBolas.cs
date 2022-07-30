@@ -36,7 +36,7 @@ namespace Skillstates.Pathfinder
             endpointVisualizerPrefab = Assets.explosionVisualizer;
             endpointVisualizerRadiusScale = 18f;
             detonationRadius = 18f;
-            damageCoefficient = Config.bolasExplosionDamage.Value;
+            damageCoefficient = 0f; //Config.bolasExplosionDamage.Value;
             setFuse = false;
             projectileBaseSpeed = 200f;
             maxDistance = float.PositiveInfinity;

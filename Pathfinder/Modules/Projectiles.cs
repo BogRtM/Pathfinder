@@ -10,8 +10,8 @@ namespace Pathfinder.Modules
 {
     internal static class Projectiles
     {
-        internal static GameObject bombPrefab;
-        internal static GameObject javelinPrefab;
+        //internal static GameObject bombPrefab;
+        //internal static GameObject javelinPrefab;
         internal static GameObject explodingJavelin;
         internal static GameObject shockBolas;
         internal static GameObject bolasZone;
@@ -38,7 +38,7 @@ namespace Pathfinder.Modules
             bolasController.ghostPrefab = CreateGhostPrefab("BolasGhost");
 
             ProjectileSimple simple = bolasController.GetComponent<ProjectileSimple>();
-            simple.desiredForwardSpeed = 200f;
+            simple.desiredForwardSpeed = 150f;
 
             ProjectileDamage projectileDamage = shockBolas.GetComponent<ProjectileDamage>();
             projectileDamage.damageType = DamageType.Shock5s;
@@ -52,6 +52,7 @@ namespace Pathfinder.Modules
             impactExplosion.lifetimeAfterImpact = 0f;
             impactExplosion.blastRadius = 18f;
             impactExplosion.falloffModel = BlastAttack.FalloffModel.None;
+            //impactExplosion.blastProcCoefficient = 0f;
             impactExplosion.impactEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainTazerNova.prefab").WaitForCompletion();
 
             impactExplosion.fireChildren = true;
@@ -110,7 +111,7 @@ namespace Pathfinder.Modules
 
             ProjectileImpactExplosion impactExplosion = explodingJavelin.GetComponent<ProjectileImpactExplosion>();
             impactExplosion.blastRadius = 8f;
-            impactExplosion.falloffModel = BlastAttack.FalloffModel.None;
+            impactExplosion.falloffModel = BlastAttack.FalloffModel.SweetSpot;
 
             //impactExplosion.impactEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/OmniImpactVFXLightningMage.prefab").WaitForCompletion();
             impactExplosion.impactEffect = Assets.javEffect;

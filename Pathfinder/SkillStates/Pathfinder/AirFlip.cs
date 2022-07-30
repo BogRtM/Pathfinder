@@ -1,6 +1,7 @@
 ﻿using EntityStates;
 using EntityStates.Merc;
 using EntityStates.Croco;
+using Pathfinder.Modules;
 using Pathfinder.Components;
 using UnityEngine;
 using RoR2;
@@ -26,7 +27,7 @@ namespace Skillstates.Pathfinder
         //public static float baseHopVelocity = 0.5f;
 
         private bool isCrit;
-        private bool flipFinished;
+        private bool airFlipFinished;
 
         private float flipStopwatch;
         private float flipDuration;
@@ -52,6 +53,8 @@ namespace Skillstates.Pathfinder
             base.PlayAnimation("FullBody, Override", "AirFlip2", "Flip.playbackRate", flipDuration);
 
             base.characterBody.bodyFlags |= RoR2.CharacterBody.BodyFlags.IgnoreFallDamage;
+
+            base.characterBody.AddBuff(Buffs.rendingTalonMS);
 
             flipVector = base.inputBank.moveVector;
 
@@ -104,7 +107,7 @@ namespace Skillstates.Pathfinder
 
             base.StartAimMode(0.1f, false);
 
-            if(flipFinished)
+            if(airFlipFinished)
             {
                 spinStopwatch += Time.fixedDeltaTime;
             }
@@ -114,7 +117,7 @@ namespace Skillstates.Pathfinder
                 this.outer.SetNextStateToMain();
             }
 
-            if (!base.characterMotor.isGrounded && !flipFinished && base.isAuthority)
+            if (!base.characterMotor.isGrounded && !airFlipFinished && base.isAuthority)
             {
                 flipStopwatch += Time.fixedDeltaTime;
 
@@ -127,12 +130,12 @@ namespace Skillstates.Pathfinder
                 airSpinAttack.Fire();
             }
 
-            if (base.characterMotor.isGrounded && !flipFinished && base.fixedAge >= Leap.minimumDuration)
+            if (base.characterMotor.isGrounded && !airFlipFinished && base.fixedAge >= Leap.minimumDuration)
             {
                 StartGroundSpin();
             }
 
-            if (flipFinished && (spinStopwatch <= spinFinishTime) && base.isAuthority)
+            if (airFlipFinished && (spinStopwatch <= spinFinishTime) && base.isAuthority)
             {
                 groundSpinAttack.Fire();
             }
@@ -150,11 +153,29 @@ namespace Skillstates.Pathfinder
 
         public void StartGroundSpin()
         {
-            flipFinished = true;
+            airFlipFinished = true;
             base.characterMotor.velocity = Vector3.zero;
+            base.characterBody.RemoveBuff(Buffs.rendingTalonMS);
             if (controller.javelinReady) javString = "Jav";
             base.PlayAnimation("FullBody, Override", javString + "SpinSweep", "Flip.playbackRate", spinDuration);
             Util.PlayAttackSpeedSound(GroundLight.finisherAttackSoundString, base.gameObject, GroundLight.slashPitch);
+        }
+
+        public override void OnExit()
+        {
+            animator.SetLayerWeight(animator.GetLayerIndex("AimYaw"), 1f);
+            animator.SetLayerWeight(animator.GetLayerIndex("AimPitch"), 1f);
+
+            base.PlayCrossfade("FullBody, Override", "BufferEmpty", 0.1f);
+
+            base.characterBody.bodyFlags &= ~RoR2.CharacterBody.BodyFlags.IgnoreFallDamage;
+            //base.characterMotor.airControl = previousAirControl;
+            base.OnExit();
+        }
+
+        public override InterruptPriority GetMinimumInterruptPriority()
+        {
+            return InterruptPriority.PrioritySkill;
         }
 
         /*
@@ -176,22 +197,6 @@ namespace Skillstates.Pathfinder
             }
         }
         */
-        public override void OnExit()
-        {
-            animator.SetLayerWeight(animator.GetLayerIndex("AimYaw"), 1f);
-            animator.SetLayerWeight(animator.GetLayerIndex("AimPitch"), 1f);
-
-            base.PlayCrossfade("FullBody, Override", "BufferEmpty", 0.2f);
-
-            base.characterBody.bodyFlags &= ~RoR2.CharacterBody.BodyFlags.IgnoreFallDamage;
-            //base.characterMotor.airControl = previousAirControl;
-            base.OnExit();
-        }
-
-        public override InterruptPriority GetMinimumInterruptPriority()
-        {
-            return InterruptPriority.PrioritySkill;
-        }
 
         /*
         public void FireAirSpin()
@@ -230,5 +235,5 @@ namespace Skillstates.Pathfinder
             }
         }
         */
-        }
+    }
     }

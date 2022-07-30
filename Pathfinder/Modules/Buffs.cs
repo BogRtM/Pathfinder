@@ -11,6 +11,7 @@ namespace Pathfinder.Modules
     {
         internal static BuffDef electrocute;
         internal static BuffDef armorShred;
+        internal static BuffDef rendingTalonMS;
 
         internal static DotController.DotIndex electrocuteDoT;
 
@@ -18,9 +19,11 @@ namespace Pathfinder.Modules
         {
             BuffDef teslaField = Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/ShockNearby/bdTeslaField.asset").WaitForCompletion();
             BuffDef pulverized = Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/ArmorReductionOnHit/bdPulverized.asset").WaitForCompletion();
+            BuffDef whipBoost = Addressables.LoadAssetAsync<BuffDef>("RoR2/Base/SprintOutOfCombat/bdWhipBoost.asset").WaitForCompletion();
 
             electrocute = AddNewBuff("Electrocuted", teslaField.iconSprite, Color.cyan, false, true);
             armorShred = AddNewBuff("ArmorShred", pulverized.iconSprite, Color.cyan, true, true);
+            rendingTalonMS = AddNewBuff("RendingTalonsMS", whipBoost.iconSprite, Color.white, false, false);
 
             RegisterDoTs();
         }

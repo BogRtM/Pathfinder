@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.AddressableAssets;
-using Pathfinder.Content.NPC;
+using Pathfinder.Modules.NPC;
 using RoR2.UI;
 using System.Linq;
 using RoR2.Skills;
@@ -50,6 +50,14 @@ namespace Pathfinder.Components
 
                 if (falconMaster.inventory.GetItemCount(RoR2Content.Items.MinionLeash) < 1) { }
                     falconMaster.inventory.GiveItem(RoR2Content.Items.MinionLeash);
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            if(!squallController || !falconMaster || !batteryComponent)
+            {
+                FindOrSummonSquall();
             }
         }
 

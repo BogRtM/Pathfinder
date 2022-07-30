@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Networking;
 using RoR2;
 using RoR2.UI;
 using RoR2.HudOverlay;
@@ -11,10 +12,12 @@ using System.Linq;
 namespace Pathfinder.Components
 {
     [RequireComponent(typeof(SquallController))]
-    internal class BatteryComponent : MonoBehaviour
+    internal class BatteryComponent : NetworkBehaviour
     {
         public float maxCharge = 100f;
         public float maxOvercharge = 20f;
+
+        [SyncVar]
         private float currentCharge;
 
         public static float drainRate = Modules.Config.batteryDrainRate.Value;
