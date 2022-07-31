@@ -41,7 +41,7 @@ namespace Pathfinder
         public const string MODUID = "com.Bog.Pathfinder";
         public const string MODNAME = "Pathfinder";
 
-        public const string MODVERSION = "0.2.2";
+        public const string MODVERSION = "0.2.4";
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
         public const string DEVELOPER_PREFIX = "BOG";
@@ -178,31 +178,41 @@ namespace Pathfinder
 
         private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
         {
-            CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
-            if (attackerBody.bodyIndex == BodyCatalog.FindBodyIndex("TeslaTrooperBody") && self.body.bodyIndex == BodyCatalog.FindBodyIndex(squallBodyPrefab))
+            if (damageInfo.attacker)
             {
-                if(attackerBody.teamComponent.teamIndex == self.body.teamComponent.teamIndex)
+                CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
+                if(attackerBody)
                 {
-                    if(NetworkServer.active)
-                        self.body.AddBuff(BuffCatalog.FindBuffIndex("Charged"));
+                    if (attackerBody.bodyIndex == BodyCatalog.FindBodyIndex("TeslaTrooperBody") && self.body.bodyIndex == BodyCatalog.FindBodyIndex(squallBodyPrefab))
+                    {
+                        if (attackerBody.teamComponent.teamIndex == self.body.teamComponent.teamIndex)
+                        {
+                            if (NetworkServer.active)
+                                self.body.AddBuff(BuffCatalog.FindBuffIndex("Charged"));
+                        }
+                    }
                 }
             }
 
-            if(damageInfo.HasModdedDamageType(piercing) && !damageInfo.rejected)
+            if(damageInfo.HasModdedDamageType(piercing) && !damageInfo.rejected && damageInfo.attacker)
             {
-                float distance = Vector3.Distance(attackerBody.corePosition, damageInfo.position);
-                if (distance >= 11f)
+                CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
+                if (attackerBody)
                 {
-                    damageInfo.damage *= 1.3f;
-                    damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;
-                    if(self.body.armor > 0f) 
-                        damageInfo.damageType = DamageType.BypassArmor;
+                    float distance = Vector3.Distance(attackerBody.corePosition, damageInfo.position);
+                    if (distance >= 11f)
+                    {
+                        damageInfo.damage *= 1.3f;
+                        damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;
+                        if (self.body.armor > 0f)
+                            damageInfo.damageType = DamageType.BypassArmor;
 
-                    EffectManager.SimpleImpactEffect(Modules.Assets.thrustTipImpact, damageInfo.position, Vector3.zero, true);
-                } 
-                else
-                {
-                    EffectManager.SimpleImpactEffect(GroundLight.comboHitEffectPrefab, damageInfo.position, Vector3.zero, true);
+                        EffectManager.SimpleImpactEffect(Modules.Assets.thrustTipImpact, damageInfo.position, Vector3.zero, true);
+                    }
+                    else
+                    {
+                        EffectManager.SimpleImpactEffect(GroundLight.comboHitEffectPrefab, damageInfo.position, Vector3.zero, true);
+                    }
                 }
             }
 
