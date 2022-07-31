@@ -99,6 +99,10 @@ Reach out to `Bog#4770` on Discord with feedback, or find me on the official Ris
 ![Concept2](https://user-images.githubusercontent.com/55299061/181116345-9c446691-d1a0-43c0-93b4-ba81e9415dbc.png)
 
 ## Change Log
+`0.2.2`
+```
+• Allied Tesla Troopers' Tesla Gauntlet now recharges Squall's battery
+```
 `0.2.1`
 ```
 • Thrust
