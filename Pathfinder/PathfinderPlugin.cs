@@ -183,7 +183,8 @@ namespace Pathfinder
             {
                 if(attackerBody.teamComponent.teamIndex == self.body.teamComponent.teamIndex)
                 {
-                    self.body.AddBuff(BuffCatalog.FindBuffIndex("Charged"));
+                    if(NetworkServer.active)
+                        self.body.AddBuff(BuffCatalog.FindBuffIndex("Charged"));
                 }
             }
 
