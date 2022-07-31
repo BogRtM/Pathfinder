@@ -1,6 +1,12 @@
-## Early Access - Alpha Release
-### **DISCLAIMER : NOT A SINGLE THING HAS BEEN TESTED IN MULTIPLAYER**
-Whether or not it works in multiplayer, I do not know. Honestly, I doubt it. Your feedback will be crucial.
+# News
+First balance patch is out. Pathfinder came out hitting a bit too hard, so I will be dialing his strength back a tad. The javelin + bolas kit that I dropped was intended to be a melee + ranged hybrid build, but it was too much ranged and not enough melee. I shifted some power from his javelin and bolas into his Thrust, to reward you greater for accuracy, and for fighting in melee range. Additionally, Squall's missile launcher has received a rework that spreads out its volley of missiles more over time, so that he must remain in Attack mode longer to get the same amount of missiles. Check the change log for more detailed notes.
+
+I do not yet have an opinion on Squall's power or battery gauge. It seems to me that he is scaling extremely well into the late game far too consistently, but I will hold off and wait before making any more changes to him.
+
+## Known issues
+https://github.com/BogRtM/Pathfinder/issues
+
+Seems like the two primary concerns in multiplayer are that as a guest, sometimes Squall does not follow orders, and Go for the Throat does not recharge Squall's battery. I am looking into this, but if you encounter one of these two scenarios, please don't hesitate to send me the log. If you want stability, it is recommended to host yourself.
 
 # The Pathfinder 
 The Pathfinder is a glass cannon melee survivor who commands a robotic falcon, Squall. Together, they can dish out tremendous DPS, and take down any game!
@@ -93,6 +99,48 @@ Reach out to `Bog#4770` on Discord with feedback, or find me on the official Ris
 ![Concept2](https://user-images.githubusercontent.com/55299061/181116345-9c446691-d1a0-43c0-93b4-ba81e9415dbc.png)
 
 ## Change Log
+`0.2.0`
+
+Pathfinder
+```
+• Thrust : New functionality
+    - Piercing. Thrust your spear forward for 200% damage.
+    - Piercing Keyword: Striking with the tip of the spear deals 300% damage and bypasses armor instead.
+• Explosive Javelin
+    - Damage reduced 900% > 800%
+    - Explosion now has "sweetspot" type damage falloff
+• Shock Bolas
+    - No longer deals damage on initial impact
+    - CD increased 16s > 18s
+    - Flight speed reduced 200 > 150
+• Rending Talons
+    - Added 20% movement speed buff while spinning
+```
+Squall
+```
+• Missile Launcher
+    - Cooldown reduced 12s > 3s
+    - Number of missiles reduced 4 > 2
+    - Missiles now fire at the halfway point and end of the skill cast
+• Attempted to network Squall's battery gauge. Let me know how this works in multiplayer.
+• Fixed bug where, at extremely high attack speeds, Go for the Throat would strike infinitely
+```
+`0.1.4`
+```
+• Forgot to actually implement the config changes last time
+```
+
+`0.1.3`
+```
+• Activating Follow mode now teleports Squall to you if the distance is great enough
+    - this should fix Squall not appearing in Voidling's phases 2 and 3
+• Issuing an Attack Command will no longer cancel Go For the Throat
+• Added config options for some skill CDs
+• In multiplayer, Squall's beeping sounds should now only be audible to his owner
+• Fixed issue with Rending Talons where being frozen would cause you to get stuck mid spinning animation
+• Fixed more language tokens
+```
+
 `0.1.2`
 ```
 • Actually included the right readme this time

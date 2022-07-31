@@ -26,7 +26,7 @@ namespace Pathfinder.Modules
         public static ConfigEntry<float> GroundSpinDamage;
 
         public static ConfigEntry<float> bolasCD;
-        public static ConfigEntry<float> bolasExplosionDamage;
+        //public static ConfigEntry<float> bolasExplosionDamage;
         public static ConfigEntry<float> electrocuteDPS;
         public static ConfigEntry<float> electrocuteSlowAmount;
         #endregion
@@ -56,18 +56,19 @@ namespace Pathfinder.Modules
         public static void ReadConfig(PathfinderPlugin plugin)
         {
             #region Pathfinder Primary
-            ThrustDamage = plugin.Config.Bind<float>(primarySectionTitle, "Thrust Damage Coefficient", 2.75f, "Damage coefficient of Thrust");
+            ThrustDamage = plugin.Config.Bind<float>(primarySectionTitle, "Thrust Damage Coefficient", 2f, "Damage coefficient of Thrust");
             #endregion
 
             #region Secondary
             dashCD = plugin.Config.Bind<float>(secondarySectionTitle, "Fleetfoot Cooldown", 6f, "Cooldown of Fleetfoot");
-            JavelinDamage = plugin.Config.Bind<float>(secondarySectionTitle, "Javelin Damage Coefficient", 9f, "Damage coefficient of javelin toss");
+
+            JavelinDamage = plugin.Config.Bind<float>(secondarySectionTitle, "Javelin Damage Coefficient", 8f, "Damage coefficient of javelin toss");
             #endregion
 
             #region Utility
-            bolasCD = plugin.Config.Bind<float>(utilitySectionTitle, "Shock Bolas Cooldown", 16f, "Cooldown of Shock Bolas");
-            bolasExplosionDamage = plugin.Config.Bind<float>(utilitySectionTitle, "Bolas Explosion Damage", 1.5f, "Damage coefficient of Shock Bolas' explosion");
-            electrocuteDPS = plugin.Config.Bind<float>(utilitySectionTitle, "Electrocute Damage per Second", 1f, "Damage % per second of Electrocute DoT");
+            bolasCD = plugin.Config.Bind<float>(utilitySectionTitle, "Shock Bolas Cooldown", 18f, "Cooldown of Shock Bolas");
+            //bolasExplosionDamage = plugin.Config.Bind<float>(utilitySectionTitle, "Bolas Explosion Damage", 1.5f, "Damage coefficient of Shock Bolas' explosion");
+            electrocuteDPS = plugin.Config.Bind<float>(utilitySectionTitle, "Electrocute Damage per Second", 1.2f, "Damage % per second of Electrocute DoT");
             electrocuteSlowAmount = plugin.Config.Bind<float>(utilitySectionTitle, "Electrocute Slow Multiplier", 0.5f, "Movespeed multiplier of Electrocute DoT");
 
             rendingTalonsCD = plugin.Config.Bind<float>(utilitySectionTitle, "Rending Talons Cooldown", 8f, "Cooldown of Rending Talons");

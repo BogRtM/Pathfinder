@@ -13,6 +13,7 @@ using UnityEngine.Networking;
 using Pathfinder.Components;
 using UnityEngine.UI;
 using System;
+using EntityStates.Merc;
 
 [module: UnverifiableCode]
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
@@ -39,7 +40,8 @@ namespace Pathfinder
         //   this shouldn't even have to be said
         public const string MODUID = "com.Bog.Pathfinder";
         public const string MODNAME = "Pathfinder";
-        public const string MODVERSION = "0.1.3";
+
+        public const string MODVERSION = "0.2.0";
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
         public const string DEVELOPER_PREFIX = "BOG";
@@ -54,8 +56,7 @@ namespace Pathfinder
         public static SkillDef javelinSkill;
 
         internal static DamageAPI.ModdedDamageType shredding;
-        internal static DamageAPI.ModdedDamageType squallGun;
-        internal static DamageAPI.ModdedDamageType squallMissile;
+        internal static DamageAPI.ModdedDamageType piercing;
 
         private void Awake()
         {
@@ -71,11 +72,12 @@ namespace Pathfinder
             Modules.ItemDisplays.PopulateDisplays(); // collect item display prefabs for use in our display rules
 
             shredding = DamageAPI.ReserveDamageType();
+            piercing = DamageAPI.ReserveDamageType();
             //squallGun = DamageAPI.ReserveDamageType();
             //squallMissile = DamageAPI.ReserveDamageType();
 
             //make bird
-            new Content.NPC.Squall().Initialize();
+            new Modules.NPC.Squall().Initialize();
 
             // survivor initialization
             new Modules.Survivors.Pathfinder().Initialize();
@@ -161,6 +163,25 @@ namespace Pathfinder
 
         private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
         {
+            if(damageInfo.HasModdedDamageType(piercing) && !damageInfo.rejected)
+            {
+                CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
+                float distance = Vector3.Distance(attackerBody.corePosition, damageInfo.position);
+                if (distance >= 11f)
+                {
+                    damageInfo.damage *= 1.5f;
+                    damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;
+                    if(self.body.armor > 0f) 
+                        damageInfo.damageType = DamageType.BypassArmor;
+
+                    EffectManager.SimpleImpactEffect(Modules.Assets.thrustTipImpact, damageInfo.position, Vector3.zero, true);
+                } 
+                else
+                {
+                    EffectManager.SimpleImpactEffect(GroundLight.comboHitEffectPrefab, damageInfo.position, Vector3.zero, true);
+                }
+            }
+
             orig(self, damageInfo);
 
             if(damageInfo.HasModdedDamageType(shredding) && !damageInfo.rejected)
@@ -184,6 +205,11 @@ namespace Pathfinder
                 if(self.HasBuff(Modules.Buffs.armorShred))
                 {
                     self.armor -= (Modules.Config.specialArmorShred.Value * self.GetBuffCount(Modules.Buffs.armorShred));
+                }
+
+                if (self.HasBuff(Modules.Buffs.rendingTalonMS))
+                {
+                    self.moveSpeed += 0.2f;
                 }
 
                 BatteryComponent batteryComponent = self.GetComponent<BatteryComponent>();

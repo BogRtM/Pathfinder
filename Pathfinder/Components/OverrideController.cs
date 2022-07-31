@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.AddressableAssets;
-using Pathfinder.Content;
+using Pathfinder.Modules;
 using Pathfinder.Modules;
 using RoR2.UI;
 using System.Linq;
@@ -72,13 +72,14 @@ namespace Pathfinder.Components
         {
             skillLocator.primary.SetSkillOverride(base.gameObject, attackCommand, GenericSkill.SkillOverridePriority.Contextual);
             skillLocator.secondary.SetSkillOverride(base.gameObject, followCommand, GenericSkill.SkillOverridePriority.Contextual);
-
+            /*
             if(skillLocator.special.baseSkill == utilityCommandSkillDef)
             {
                 skillLocator.special.SetSkillOverride(base.gameObject, cancelCommand, GenericSkill.SkillOverridePriority.Contextual);
                 skillLocator.utility.SetSkillOverride(base.gameObject, specialCommand, GenericSkill.SkillOverridePriority.Contextual);
                 return;
             }
+            */
 
             skillLocator.utility.SetSkillOverride(base.gameObject, cancelCommand, GenericSkill.SkillOverridePriority.Contextual);
             skillLocator.special.SetSkillOverride(base.gameObject, specialCommand, GenericSkill.SkillOverridePriority.Contextual);
@@ -89,13 +90,15 @@ namespace Pathfinder.Components
             
             skillLocator.primary.UnsetSkillOverride(base.gameObject, attackCommand, GenericSkill.SkillOverridePriority.Contextual);
             skillLocator.secondary.UnsetSkillOverride(base.gameObject, followCommand, GenericSkill.SkillOverridePriority.Contextual);
-
+            
+            /*
             if (skillLocator.special.baseSkill == utilityCommandSkillDef)
             {
                 skillLocator.special.UnsetSkillOverride(base.gameObject, cancelCommand, GenericSkill.SkillOverridePriority.Contextual);
                 skillLocator.utility.UnsetSkillOverride(base.gameObject, specialCommand, GenericSkill.SkillOverridePriority.Contextual);
                 return;
             }
+            */
 
             skillLocator.utility.UnsetSkillOverride(base.gameObject, cancelCommand, GenericSkill.SkillOverridePriority.Contextual);
             skillLocator.special.UnsetSkillOverride(base.gameObject, specialCommand, GenericSkill.SkillOverridePriority.Contextual);

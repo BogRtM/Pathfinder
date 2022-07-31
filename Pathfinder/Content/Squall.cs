@@ -15,7 +15,7 @@ using Skillstates.Squall;
 using EntityStates;
 using System.Linq;
 
-namespace Pathfinder.Content.NPC
+namespace Pathfinder.Modules.NPC
 {
     internal class Squall : CharacterBase
     {
@@ -402,10 +402,10 @@ namespace Pathfinder.Content.NPC
                 skillNameToken = prefix + "_SQUALL_SECONDARY_MISSILE_NAME",
                 skillDescriptionToken = prefix + "_SQUALL_SECONDARY_MISSILE_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(MissileLauncher)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(ReworkedMissiles)),
                 activationStateMachineName = "Missiles",
                 baseMaxStock = 1,
-                baseRechargeInterval = 12f,
+                baseRechargeInterval = 3f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -420,7 +420,6 @@ namespace Pathfinder.Content.NPC
                 stockToConsume = 1,
             });
             #endregion
-
             Modules.Skills.AddSecondarySkills(bodyPrefab, secondarySkillDef);
 
             SkillDef utilitySkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
@@ -458,7 +457,7 @@ namespace Pathfinder.Content.NPC
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SquallMainState)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
-                baseRechargeInterval = Modules.Survivors.Pathfinder.goForThroatCD,
+                baseRechargeInterval = Config.goForThroatCD.Value,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
