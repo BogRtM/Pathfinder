@@ -15,7 +15,6 @@ namespace Skillstates.Squall
         private SquallController squallController;
 
         public static float baseDuration = 1f;
-        public static int maxMissileCount = 4;
 
         private float duration;
         private float halfwayPoint;
@@ -33,17 +32,13 @@ namespace Skillstates.Squall
                 target = squallController.currentTarget;
             else
                 target = null;
+
+            FireMissile();
         }
 
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-
-            if(base.fixedAge >= halfwayPoint && !pastHalfway)
-            {
-                pastHalfway = true;
-                FireMissile();
-            }
 
             if (base.fixedAge >= duration && base.isAuthority)
             {
@@ -68,7 +63,7 @@ namespace Skillstates.Squall
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.PrioritySkill;
+            return InterruptPriority.Skill;
         }
     }
 }

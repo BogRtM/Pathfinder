@@ -86,7 +86,7 @@ namespace Pathfinder.Components
                     Recharge(rechargeRate * Time.fixedDeltaTime, false);
             }
 
-            if (overlayController != null || squallController.overlayController == null || !squallController.owner.GetComponent<CharacterBody>().isPlayerControlled) return;
+            if (overlayController != null || !squallController.owner.GetComponent<CharacterBody>().isPlayerControlled) return;
 
             var ownerHUD = HUD.readOnlyInstanceList.Where(el => el.targetBodyObject == squallController.owner);
             foreach (HUD hud in ownerHUD)
@@ -119,6 +119,7 @@ namespace Pathfinder.Components
                 overlayController.onInstanceAdded -= OverlayController_onInstanceAdded;
                 HudOverlayManager.RemoveOverlay(overlayController);
             }
+
         }
 
         private void CreateOverlay()
@@ -157,7 +158,7 @@ namespace Pathfinder.Components
         private void UpdateValues()
         {
             if (overlayController == null) return;
-            if (!allCreated) return;
+            if (!batteryMeter || !batteryText) return;
 
             float fill = Mathf.Clamp01(currentCharge / 100f);
 
@@ -170,6 +171,7 @@ namespace Pathfinder.Components
         internal void UpdateColor()
         {
             if (overlayController == null) return;
+            if (!batteryMeter || !batteryText) return;
 
             if (squallController.inAttackMode)
             {
