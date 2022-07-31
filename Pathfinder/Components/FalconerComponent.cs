@@ -89,7 +89,7 @@ namespace Pathfinder.Components
             
             if(falconMaster = minionSummon.Perform())
             {
-                if (!falconMaster.godMode) falconMaster.ToggleGod();
+                if (!falconMaster.godMode && selfBody.isPlayerControlled) falconMaster.ToggleGod();
                 falconMaster.inventory.GiveItem(RoR2Content.Items.MinionLeash);
                 CleanSquallInventory(falconMaster.inventory);
                 squallController = falconMaster.bodyInstanceObject.GetComponent<SquallController>();
