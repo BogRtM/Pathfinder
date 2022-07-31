@@ -101,7 +101,7 @@ Reach out to `Bog#4770` on Discord with feedback, or find me on the official Ris
 ## Change Log
 `0.2.3`
 ```
-• Emergency rollback because I'm a dumbass and broke some shit
+• Emergency update cause I'm a dumbass and broke some serious shit
 ```
 `0.2.2`
 ```
