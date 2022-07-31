@@ -56,7 +56,7 @@ namespace Pathfinder.Modules
         public static void ReadConfig(PathfinderPlugin plugin)
         {
             #region Pathfinder Primary
-            ThrustDamage = plugin.Config.Bind<float>(primarySectionTitle, "Thrust Damage Coefficient", 2f, "Damage coefficient of Thrust");
+            ThrustDamage = plugin.Config.Bind<float>(primarySectionTitle, "Thrust Damage Coefficient", 2.5f, "Damage coefficient of Thrust");
             #endregion
 
             #region Secondary
@@ -67,7 +67,6 @@ namespace Pathfinder.Modules
 
             #region Utility
             bolasCD = plugin.Config.Bind<float>(utilitySectionTitle, "Shock Bolas Cooldown", 18f, "Cooldown of Shock Bolas");
-            //bolasExplosionDamage = plugin.Config.Bind<float>(utilitySectionTitle, "Bolas Explosion Damage", 1.5f, "Damage coefficient of Shock Bolas' explosion");
             electrocuteDPS = plugin.Config.Bind<float>(utilitySectionTitle, "Electrocute Damage per Second", 1.2f, "Damage % per second of Electrocute DoT");
             electrocuteSlowAmount = plugin.Config.Bind<float>(utilitySectionTitle, "Electrocute Slow Multiplier", 0.5f, "Movespeed multiplier of Electrocute DoT");
 
@@ -84,7 +83,7 @@ namespace Pathfinder.Modules
             #region Squall Attack
             SquallGunDamage = plugin.Config.Bind<float>(squallAttackTitle, "Machine Guns Damage Coefficient", 0.3f, "Damage coefficient of Squall's machine guns. Each attack fires two bullets.");
             SquallGunProc = plugin.Config.Bind<float>(squallAttackTitle, "Machine Guns Proc Coefficient", 0.3f, "Proc coefficient of Squall's machine guns. Each attack fires two bullets.");
-            SquallMissileDamage = plugin.Config.Bind<float>(squallAttackTitle, "Missile Launcher Damage Coefficient", 1.5f, "Damage coefficient of Squall's missile launcher. Each volley fires four missiles.");
+            SquallMissileDamage = plugin.Config.Bind<float>(squallAttackTitle, "Missile Launcher Damage Coefficient", 1.5f, "Damage coefficient of Squall's missile launcher.");
             #endregion
 
             #region Squall Special

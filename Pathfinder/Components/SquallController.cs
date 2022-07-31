@@ -157,8 +157,14 @@ namespace Pathfinder.Components
             if (!owner && masterObject)
             {
                 owner = masterObject.GetComponent<CharacterMaster>().minionOwnership.ownerMaster.bodyInstanceObject;
-                owner.GetComponent<FalconerComponent>().squallController = this;
-                owner.GetComponent<FalconerComponent>().batteryComponent = this.batteryComponent;
+                FalconerComponent falconerComponent = owner.GetComponent<FalconerComponent>();
+                if(!falconerComponent)
+                {
+                    if (selfBody.master.godMode) selfBody.master.ToggleGod();
+                    selfBody.master.TrueKill();
+                }
+                falconerComponent.squallController = this;
+                falconerComponent.batteryComponent = this.batteryComponent;
             }
 
             if(hasRiskUI && overlayController != null && overlayInstance)
@@ -181,6 +187,7 @@ namespace Pathfinder.Components
         }
 
         #region UI
+
         private void CreateHighlight(GameObject target)
         {
             if (targetHighlight) UnityEngine.Object.Destroy(targetHighlight);

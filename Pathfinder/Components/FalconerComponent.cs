@@ -53,14 +53,6 @@ namespace Pathfinder.Components
             }
         }
 
-        private void FixedUpdate()
-        {
-            if(!squallController || !falconMaster || !batteryComponent)
-            {
-                FindOrSummonSquall();
-            }
-        }
-
         private void FindOrSummonSquall()
         {
             var minions = CharacterMaster.readOnlyInstancesList.Where(el => el.minionOwnership.ownerMaster == selfMaster);
@@ -123,6 +115,7 @@ namespace Pathfinder.Components
 
         internal void AttackOrder(HurtBox target)
         {
+            if (!squallController) FindOrSummonSquall();
             if(target && target.healthComponent && target.healthComponent.alive)
             {
                 Vector3 divePosition = target.transform.position + verticalOffset;
@@ -134,7 +127,8 @@ namespace Pathfinder.Components
 
         internal void FollowOrder()
         {
-            if(Vector3.Distance(selfBody.corePosition, squallController.selfBody.corePosition) >= 1000f)
+            if (!squallController) FindOrSummonSquall();
+            if (Vector3.Distance(selfBody.corePosition, squallController.selfBody.corePosition) >= 1000f)
             {
                 Vector3 teleportPosition = selfBody.corePosition + verticalOffset;
                 TeleportHelper.TeleportBody(squallController.selfBody, teleportPosition);
@@ -156,6 +150,7 @@ namespace Pathfinder.Components
 
         internal void SpecialOrder(HurtBox target)
         {
+            if (!squallController) FindOrSummonSquall();
             squallController.DoSpecialAttack(target);
         }
 

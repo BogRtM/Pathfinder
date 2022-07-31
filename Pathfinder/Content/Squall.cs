@@ -56,7 +56,9 @@ namespace Pathfinder.Modules.NPC
             "TreasureCacheVoid",
             "FireRing",
             "IceRing",
-            "AutoCastEquipment"
+            "AutoCastEquipment",
+            "ExtraLife",
+            "ExtraLifeVoid"
             //"LunarPrimaryReplacement",
             //"LunarSecondaryReplacement",
             //"LunarSpecialReplacement",
