@@ -41,7 +41,7 @@ namespace Pathfinder
         public const string MODUID = "com.Bog.Pathfinder";
         public const string MODNAME = "Pathfinder";
 
-        public const string MODVERSION = "0.2.1";
+        public const string MODVERSION = "0.2.2";
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
         public const string DEVELOPER_PREFIX = "BOG";
@@ -101,6 +101,21 @@ namespace Pathfinder
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
             On.RoR2.PrimarySkillShurikenBehavior.OnSkillActivated += PrimarySkillShurikenBehavior_OnSkillActivated;
             On.RoR2.SkillLocator.ApplyAmmoPack += SkillLocator_ApplyAmmoPack;
+            On.RoR2.CharacterBody.AddBuff_BuffIndex += CharacterBody_AddBuff_BuffIndex;
+        }
+
+        private void CharacterBody_AddBuff_BuffIndex(On.RoR2.CharacterBody.orig_AddBuff_BuffIndex orig, CharacterBody self, BuffIndex buffType)
+        {
+            orig(self, buffType);
+
+            if(buffType == BuffCatalog.FindBuffIndex("Charged") && self.bodyIndex == BodyCatalog.FindBodyIndex(squallBodyPrefab))
+            {
+                BatteryComponent batteryComponent = self.GetComponent<BatteryComponent>();
+                if(batteryComponent)
+                {
+                    batteryComponent.Recharge(3f, true);
+                }
+            }
         }
 
         private void SkillLocator_ApplyAmmoPack(On.RoR2.SkillLocator.orig_ApplyAmmoPack orig, SkillLocator self)
@@ -163,9 +178,17 @@ namespace Pathfinder
 
         private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
         {
+            CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
+            if (attackerBody.bodyIndex == BodyCatalog.FindBodyIndex("TeslaTrooperBody") && self.body.bodyIndex == BodyCatalog.FindBodyIndex(squallBodyPrefab))
+            {
+                if(attackerBody.teamComponent.teamIndex == self.body.teamComponent.teamIndex)
+                {
+                    self.body.AddBuff(BuffCatalog.FindBuffIndex("Charged"));
+                }
+            }
+
             if(damageInfo.HasModdedDamageType(piercing) && !damageInfo.rejected)
             {
-                CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
                 float distance = Vector3.Distance(attackerBody.corePosition, damageInfo.position);
                 if (distance >= 11f)
                 {
