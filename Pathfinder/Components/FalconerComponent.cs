@@ -55,24 +55,27 @@ namespace Pathfinder.Components
 
         private void FindOrSummonSquall()
         {
-            var minions = CharacterMaster.readOnlyInstancesList.Where(el => el.minionOwnership.ownerMaster == selfMaster);
-            foreach (CharacterMaster minion in minions)
+            if (NetworkServer.active)
             {
-                if (minion.masterIndex == MasterCatalog.FindMasterIndex(summonPrefab))
+                var minions = CharacterMaster.readOnlyInstancesList.Where(el => el.minionOwnership.ownerMaster == selfMaster);
+                foreach (CharacterMaster minion in minions)
                 {
-                    falconMaster = minion;
-                    if (!falconMaster.hasBody) falconMaster.Respawn(base.transform.position + verticalOffset, Quaternion.identity);
-                    if (!falconMaster.godMode) falconMaster.ToggleGod();
-                    squallController = minion.bodyInstanceObject.GetComponent<SquallController>();
-                    batteryComponent = minion.bodyInstanceObject.GetComponent<BatteryComponent>();
-                    squallController.owner = base.gameObject;
-                    return;
+                    if (minion.masterIndex == MasterCatalog.FindMasterIndex(summonPrefab))
+                    {
+                        falconMaster = minion;
+                        if (!falconMaster.hasBody) falconMaster.Respawn(base.transform.position + verticalOffset, Quaternion.identity);
+                        if (!falconMaster.godMode) falconMaster.ToggleGod();
+                        squallController = minion.bodyInstanceObject.GetComponent<SquallController>();
+                        batteryComponent = minion.bodyInstanceObject.GetComponent<BatteryComponent>();
+                        squallController.owner = base.gameObject;
+                        return;
+                    }
                 }
-            }
 
-            if (NetworkServer.active && !falconMaster)
-            {
-                SpawnSquall(selfBody);
+                if (!falconMaster)
+                {
+                    SpawnSquall(selfBody);
+                }
             }
         }
 
@@ -151,7 +154,9 @@ namespace Pathfinder.Components
         internal void SpecialOrder(HurtBox target)
         {
             if (!squallController) FindOrSummonSquall();
-            squallController.DoSpecialAttack(target);
+
+            if(target && target.healthComponent && target.healthComponent.alive)
+                squallController.DoSpecialAttack(target);
         }
 
         public void OnDeathStart()

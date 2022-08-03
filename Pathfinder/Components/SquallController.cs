@@ -157,6 +157,7 @@ namespace Pathfinder.Components
             if (!owner && masterObject)
             {
                 owner = masterObject.GetComponent<CharacterMaster>().minionOwnership.ownerMaster.bodyInstanceObject;
+                if (!owner) return;
                 FalconerComponent falconerComponent = owner.GetComponent<FalconerComponent>();
                 if(!falconerComponent)
                 {
@@ -177,6 +178,7 @@ namespace Pathfinder.Components
                 }
             }
 
+            if (!owner) return;
             if (overlayController != null || !owner.GetComponent<CharacterBody>().isPlayerControlled) return;
 
             var ownerHUD = HUD.readOnlyInstanceList.Where(el => el.targetBodyObject == owner);

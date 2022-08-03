@@ -76,11 +76,8 @@ namespace Skillstates.Squall
                     aimVector = aimRay.direction
                 };
 
-                if (base.isAuthority)
-                {
-                    FireBullet(leftAttack);
-                    FireBullet(rightAttack);
-                }
+                FireBullet(leftAttack);
+                FireBullet(rightAttack);
             }
         }
 
@@ -98,7 +95,9 @@ namespace Skillstates.Squall
         {
             Util.PlaySound(FireBarrage.fireBarrageSoundString, base.gameObject);
             EffectManager.SimpleMuzzleFlash(FireBarrage.effectPrefab, base.gameObject, attack.muzzleName, false);
-            attack.Fire();
+            
+            if(base.isAuthority)
+                attack.Fire();
         }
 
         public override void OnExit()

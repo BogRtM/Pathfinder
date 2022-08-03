@@ -238,6 +238,30 @@ namespace Pathfinder.Modules.Survivors
                 stockToConsume = 1
             });
 
+            SkillDef diveSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "_PATHFINDER_BODY_SECONDARY_DASH_NAME",
+                skillNameToken = prefix + "_PATHFINDER_BODY_SECONDARY_DASH_NAME",
+                skillDescriptionToken = prefix + "_PATHFINDER_BODY_SECONDARY_DASH_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texEvadeIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(Evade)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 2,
+                baseRechargeInterval = Config.dashCD.Value,
+                beginSkillCooldownOnSkillEnd = false,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = false,
+                interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = false,
+                mustKeyPress = true,
+                cancelSprintingOnActivation = false,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1
+            });
+
             Modules.Skills.AddSecondarySkills(bodyPrefab, dashSkillDef);
             #endregion
 

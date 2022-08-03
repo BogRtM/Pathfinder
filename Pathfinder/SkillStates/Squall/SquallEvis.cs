@@ -23,6 +23,7 @@ namespace Skillstates.Squall
         public static float chargePerHit = Config.specialRechargeAmount.Value;
 
         internal HurtBox target;
+        internal HurtBoxGroup targetHurtBoxes;
 
         private Transform modelTransform;
         private CharacterModel characterModel;
@@ -45,7 +46,7 @@ namespace Skillstates.Squall
         {
             base.OnEnter();
             attackInterval = baseAttackInterval / base.attackSpeedStat;
-            maxHits = attackDuration / attackInterval;
+            maxHits = Mathf.Floor(attackDuration / attackInterval);
             isCrit = base.RollCrit();
             modelTransform = base.GetModelTransform();
             characterModel = modelTransform.GetComponent<CharacterModel>();
@@ -59,6 +60,7 @@ namespace Skillstates.Squall
 
             if (target)
             {
+                targetHurtBoxes = target.hurtBoxGroup;
                 startPosition = base.transform.position;
                 enemyPosition = target.transform.position;
                 squallVFXComponent.PlayDashEffect(startPosition, enemyPosition);
@@ -72,47 +74,66 @@ namespace Skillstates.Squall
 
             stopwatch += Time.fixedDeltaTime;
 
-            base.rigidbodyMotor.moveVector = Vector3.zero;
+            if(base.isAuthority)
+                base.rigidbodyMotor.moveVector = Vector3.zero;
 
-            if(stopwatch >= attackInterval && target.healthComponent.alive && base.fixedAge >= diveDuration && !attackFinished && hitCount < maxHits)
+            if(targetHurtBoxes)
+                target = targetHurtBoxes.hurtBoxes[UnityEngine.Random.Range(0, targetHurtBoxes.hurtBoxes.Length - 1)];
+
+            if (target)
             {
-                stopwatch = 0f;
-
-                if(NetworkServer.active)
+                if(target.healthComponent)
                 {
-                    enemyPosition = target.transform.position;
-
-                    DamageInfo info = new DamageInfo();
-                    info.attacker = base.gameObject;
-                    info.procCoefficient = 1f;
-                    info.crit = isCrit;
-                    info.position = enemyPosition;
-                    info.damage = base.damageStat * damageCoefficient;
-                    info.AddModdedDamageType(PathfinderPlugin.shredding);
-
-                    target.healthComponent.TakeDamage(info);
-                    GlobalEventManager.instance.OnHitEnemy(info, target.healthComponent.gameObject);
-                    GlobalEventManager.instance.OnHitAll(info, target.healthComponent.gameObject);
-
-                    float chargeAmount = isCrit ? (2f * chargePerHit) : chargePerHit;
-                    batteryComponent.Recharge(chargeAmount, true);
-
-                    //GroundLight.comboHitEffectPrefab
-                    EffectManager.SimpleImpactEffect(Assets.squallEvisEffect, enemyPosition, enemyPosition, true);
-                    EffectManager.SimpleImpactEffect(Assaulter.hitEffectPrefab, enemyPosition, enemyPosition, true);
-
-                    hitCount++;
+                    if (stopwatch >= attackInterval && target.healthComponent.alive && base.fixedAge >= diveDuration && !attackFinished && hitCount < maxHits)
+                    {
+                        stopwatch = 0f;
+                        DoAttack();
+                    }
+                    else if(!target.healthComponent.alive && base.isAuthority && !attackFinished)
+                    {
+                        FinishAttack();
+                    }
                 }
             }
-            else if ((!target.healthComponent.alive || base.fixedAge >= attackDuration + diveDuration) && base.isAuthority && !attackFinished)
+
+            if ((hitCount >= maxHits || base.fixedAge >= (diveDuration + attackDuration))  && base.isAuthority && !attackFinished)
             {
                 FinishAttack();
             }
 
-            if(attackFinished && stopwatch >= diveDuration)
+            if (attackFinished && stopwatch >= diveDuration)
             {
                 this.outer.SetNextStateToMain();
             }
+        }
+
+        private void DoAttack()
+        {
+            if (NetworkServer.active)
+            {
+                enemyPosition = target.transform.position;
+
+                DamageInfo info = new DamageInfo();
+                info.attacker = base.gameObject;
+                info.procCoefficient = 1f;
+                info.crit = isCrit;
+                info.position = enemyPosition;
+                info.damage = base.damageStat * damageCoefficient;
+                info.AddModdedDamageType(PathfinderPlugin.shredding);
+
+                target.healthComponent.TakeDamage(info);
+                GlobalEventManager.instance.OnHitEnemy(info, target.healthComponent.gameObject);
+                GlobalEventManager.instance.OnHitAll(info, target.healthComponent.gameObject);
+            }
+
+            float chargeAmount = isCrit ? (2f * chargePerHit) : chargePerHit;
+            batteryComponent.Recharge(chargeAmount, true);
+
+            //GroundLight.comboHitEffectPrefab
+            EffectManager.SimpleImpactEffect(Assets.squallEvisEffect, enemyPosition, enemyPosition, true);
+            EffectManager.SimpleImpactEffect(Assaulter.hitEffectPrefab, enemyPosition, enemyPosition, true);
+
+            hitCount++;
         }
 
         private void FinishAttack()
