@@ -1,14 +1,9 @@
-# News
-Unfortunately you will have to update your config to receive the updated values.
-
-First balance patch is out. Pathfinder came out hitting a bit too hard, so I will be dialing his strength back a tad. The javelin + bolas kit that I dropped was intended to be a melee + ranged hybrid build, but it was too much ranged and not enough melee. I shifted some power from his javelin and bolas into his Thrust, to reward you greater for accuracy, and for fighting in melee range. Additionally, Squall's missile launcher has received a rework that spreads out its volley of missiles more over time, so that he must remain in Attack mode longer to get the same amount of missiles. Check the change log for more detailed notes.
-
-I do not yet have an opinion on Squall's power or battery gauge. It seems to me that he is scaling extremely well into the late game far too consistently, but I will hold off and wait before making any more changes to him.
-
 ## Known issues
 https://github.com/BogRtM/Pathfinder/issues
 
-Seems like the two primary concerns in multiplayer are that as a guest, sometimes Squall does not follow orders, and Go for the Throat does not recharge Squall's battery. I am looking into this, but if you encounter one of these two scenarios, please don't hesitate to send me the log. For now, it is highly recommended to be the host yourself if you plan to play him in multiplayer.
+Seems like the two primary concerns in multiplayer are that as a guest, sometimes Squall does not follow orders, and Go for the Throat does not recharge Squall's battery. I am looking into this, but if you encounter one of these two scenarios, please don't hesitate to send me the log.
+
+Regardless, commanding Squall as a guest still incurs lags, so it is highly recommended to be the host yourself if you plan to play him in multiplayer.
 
 # The Pathfinder 
 The Pathfinder is a glass cannon melee survivor who commands a robotic falcon, Squall. Together, they can dish out tremendous DPS, and take down any game!
@@ -99,6 +94,12 @@ Reach out to `Bog#4770` on Discord with feedback, or find me on the official Ris
 ![Concept2](https://user-images.githubusercontent.com/55299061/181116345-9c446691-d1a0-43c0-93b4-ba81e9415dbc.png)
 
 ## Change Log
+`0.2.5`
+```
+• (Hopefully) Fixed issue where Go for the Throat would not recharge Squall's battery as a guest in multiplayer
+    - Might require further testing. Please contact me if the issue persists
+• Minor code optimization
+```
 `0.2.4`
 ```
 • This time for sure (please)
