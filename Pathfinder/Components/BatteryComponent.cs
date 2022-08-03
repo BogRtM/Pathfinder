@@ -86,6 +86,7 @@ namespace Pathfinder.Components
                     Recharge(rechargeRate * Time.fixedDeltaTime, false);
             }
 
+            if (!squallController.owner) return;
             if (overlayController != null || !squallController.owner.GetComponent<CharacterBody>().isPlayerControlled) return;
 
             var ownerHUD = HUD.readOnlyInstanceList.Where(el => el.targetBodyObject == squallController.owner);

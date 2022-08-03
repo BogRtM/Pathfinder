@@ -28,7 +28,7 @@ namespace Skillstates.Pathfinder.Command
         {
             base.FixedUpdate();
 
-            if (base.fixedAge >= duration)
+            if (base.fixedAge >= duration && base.isAuthority)
             {
                 this.outer.SetNextStateToMain();
             }

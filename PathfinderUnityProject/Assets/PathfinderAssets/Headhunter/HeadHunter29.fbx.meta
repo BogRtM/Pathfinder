@@ -1,0 +1,313 @@
+fileFormatVersion: 2
+guid: 474e6fac81804c74bb950532a9ac3d7f
+ModelImporter:
+  serializedVersion: 19301
+  internalIDToNameTable:
+  - first:
+      74: 8698898814219620275
+    second: Rig|Rig|Rig|_Idle New USE|Rig|_Idle New USE
+  - first:
+      74: -1664874361356309399
+    second: Rig|Rig|Rig|AimPitch New USE|Rig|AimPitch New USE
+  - first:
+      74: 1376105281109564940
+    second: Rig|Rig|Rig|AimYaw New USE|Rig|AimYaw New USE
+  - first:
+      74: -4773103038004805279
+    second: Rig|Rig|Rig|AirDash|Rig|AirDash
+  - first:
+      74: 2984553611074346044
+    second: Rig|Rig|Rig|AirFlip2|Rig|AirFlip2
+  - first:
+      74: -2077442694813980874
+    second: Rig|Rig|Rig|AirFlip|Rig|AirFlip
+  - first:
+      74: 258571922883418786
+    second: Rig|Rig|Rig|Ascend USE|Rig|Ascend USE
+  - first:
+      74: -4672001949199232783
+    second: Rig|Rig|Rig|BasicThrust Down Fix|Rig|BasicThrust Down Fix
+  - first:
+      74: -3155292006501548493
+    second: Rig|Rig|Rig|BasicThrust Gesture Down|Rig|BasicThrust Gesture Down
+  - first:
+      74: 6300007402339329680
+    second: Rig|Rig|Rig|BasicThrust New|Rig|BasicThrust New
+  - first:
+      74: 4666850862564360128
+    second: Rig|Rig|Rig|BasicThrust SUPER Up|Rig|BasicThrust SUPER Up
+  - first:
+      74: -2001807580956532063
+    second: Rig|Rig|Rig|BasicThrust|Rig|BasicThrust
+  - first:
+      74: 8252459916712139884
+    second: Rig|Rig|Rig|BolasAction|Rig|BolasAction
+  - first:
+      74: -6202250262191703394
+    second: Rig|Rig|Rig|BolasLoop|Rig|BolasLoop
+  - first:
+      74: 1276202665361287587
+    second: Rig|Rig|Rig|BolasThrow|Rig|BolasThrow
+  - first:
+      74: 2368304026304035123
+    second: Rig|Rig|Rig|ComboSlash1|Rig|ComboSlash1
+  - first:
+      74: 1126772542056708982
+    second: Rig|Rig|Rig|ComboSlash2|Rig|ComboSlash2
+  - first:
+      74: 2189522751075589008
+    second: Rig|Rig|Rig|ComboSlash3|Rig|ComboSlash3
+  - first:
+      74: 4631775298711863211
+    second: Rig|Rig|Rig|Descend Fast|Rig|Descend Fast
+  - first:
+      74: 2764055597180247351
+    second: Rig|Rig|Rig|Descend|Rig|Descend
+  - first:
+      74: 1709506433203754786
+    second: Rig|Rig|Rig|GroundDashB|Rig|GroundDashB
+  - first:
+      74: 7379134562182273534
+    second: Rig|Rig|Rig|GroundDashF New|Rig|GroundDashF New
+  - first:
+      74: -5559649991874689916
+    second: Rig|Rig|Rig|GroundDashF|Rig|GroundDashF
+  - first:
+      74: -3765349268022551964
+    second: Rig|Rig|Rig|IdleIn|Rig|IdleIn
+  - first:
+      74: -7512526527557296425
+    second: Rig|Rig|Rig|JavAscend|Rig|JavAscend
+  - first:
+      74: 9010859073019544771
+    second: Rig|Rig|Rig|JavBolasLoop|Rig|JavBolasLoop
+  - first:
+      74: 910113412334309228
+    second: Rig|Rig|Rig|JavBolasThrow|Rig|JavBolasThrow
+  - first:
+      74: -7947934276518951053
+    second: Rig|Rig|Rig|JavDescendFast|Rig|JavDescendFast
+  - first:
+      74: 478279455138586473
+    second: Rig|Rig|Rig|JavDescend|Rig|JavDescend
+  - first:
+      74: 2323450963509951604
+    second: Rig|Rig|Rig|JavelinToss Gesture|Rig|JavelinToss Gesture
+  - first:
+      74: 2413428022805876465
+    second: Rig|Rig|Rig|JavelinToss|Rig|JavelinToss
+  - first:
+      74: 226970837965995709
+    second: Rig|Rig|Rig|JavGroundDash|Rig|JavGroundDash
+  - first:
+      74: 5262586265364338352
+    second: Rig|Rig|Rig|JavIdleIn|Rig|JavIdleIn
+  - first:
+      74: 1139771914804927302
+    second: Rig|Rig|Rig|JavIdle|Rig|JavIdle
+  - first:
+      74: 4870464354808953544
+    second: Rig|Rig|Rig|JavJump|Rig|JavJump
+  - first:
+      74: -1405262090056983935
+    second: Rig|Rig|Rig|JavPoint|Rig|JavPoint
+  - first:
+      74: 3864823260906472242
+    second: Rig|Rig|Rig|JavSpinSweep|Rig|JavSpinSweep
+  - first:
+      74: -6511790042599186969
+    second: Rig|Rig|Rig|JavSprintF|Rig|JavSprintF
+  - first:
+      74: 4319023514161461688
+    second: Rig|Rig|Rig|JavUnderhandThrow|Rig|JavUnderhandThrow
+  - first:
+      74: 6074058438957470949
+    second: Rig|Rig|Rig|JavWalkB|Rig|JavWalkB
+  - first:
+      74: 2021016728385958854
+    second: Rig|Rig|Rig|JavWalkF|Rig|JavWalkF
+  - first:
+      74: 866850885183061059
+    second: Rig|Rig|Rig|JavWalkL|Rig|JavWalkL
+  - first:
+      74: -2707535076046167624
+    second: Rig|Rig|Rig|JavWalkR|Rig|JavWalkR
+  - first:
+      74: -7858790961843934230
+    second: Rig|Rig|Rig|JavWave|Rig|JavWave
+  - first:
+      74: 6866621271402661701
+    second: Rig|Rig|Rig|Jump|Rig|Jump
+  - first:
+      74: -1779485355962820228
+    second: Rig|Rig|Rig|Lunge|Rig|Lunge
+  - first:
+      74: -5588931459946644341
+    second: Rig|Rig|Rig|MenuIdlle|Rig|MenuIdlle
+  - first:
+      74: 3098602965776136531
+    second: Rig|Rig|Rig|OLD_Idle|Rig|OLD_Idle
+  - first:
+      74: 2032730086720828840
+    second: Rig|Rig|Rig|OverhandThrow|Rig|OverhandThrow
+  - first:
+      74: -1863432291484915343
+    second: Rig|Rig|Rig|PathfinderAction.003|Rig|PathfinderAction.003
+  - first:
+      74: -173922329651135348
+    second: Rig|Rig|Rig|PathfinderAction.004|Rig|PathfinderAction.004
+  - first:
+      74: -4207607941383538865
+    second: Rig|Rig|Rig|PathfinderAction|Rig|PathfinderAction
+  - first:
+      74: 1654554163331674277
+    second: Rig|Rig|Rig|Point|Rig|Point
+  - first:
+      74: 5214184047874772574
+    second: Rig|Rig|Rig|PolevaultKick|Rig|PolevaultKick
+  - first:
+      74: 1658351862889369232
+    second: Rig|Rig|Rig|PolevaultTwirl|Rig|PolevaultTwirl
+  - first:
+      74: -584995582776420869
+    second: Rig|Rig|Rig|Polevault|Rig|Polevault
+  - first:
+      74: -945063780835315862
+    second: Rig|Rig|Rig|Rest.001|Rig|Rest.001
+  - first:
+      74: -34465858097377390
+    second: Rig|Rig|Rig|Rest|Rig|Rest
+  - first:
+      74: 8553671166958591930
+    second: Rig|Rig|Rig|RisingSpin|Rig|RisingSpin
+  - first:
+      74: -3328547860270366709
+    second: Rig|Rig|Rig|SpinSweep|Rig|SpinSweep
+  - first:
+      74: -8863066254839105434
+    second: Rig|Rig|Rig|SprintF|Rig|SprintF
+  - first:
+      74: -5273340596392239198
+    second: Rig|Rig|Rig|Sweep1H|Rig|Sweep1H
+  - first:
+      74: -3883020820412895609
+    second: Rig|Rig|Rig|Sweep|Rig|Sweep
+  - first:
+      74: 6080075657265582120
+    second: Rig|Rig|Rig|Tri-Combo|Rig|Tri-Combo
+  - first:
+      74: -6668003483242937302
+    second: Rig|Rig|Rig|UnderhandThrow|Rig|UnderhandThrow
+  - first:
+      74: -1513637674369627855
+    second: Rig|Rig|Rig|WalkB|Rig|WalkB
+  - first:
+      74: -6665988621166297159
+    second: Rig|Rig|Rig|WalkF|Rig|WalkF
+  - first:
+      74: -4564560001344753118
+    second: Rig|Rig|Rig|WalkL|Rig|WalkL
+  - first:
+      74: -3945925226338961035
+    second: Rig|Rig|Rig|WalkR|Rig|WalkR
+  - first:
+      74: -6673442579089755599
+    second: Rig|Rig|Rig|Wave|Rig|Wave
+  - first:
+      74: -2946636429454980095
+    second: Rig|Rig|Rig|Zer0Action.001|Rig|Zer0Action.001
+  - first:
+      74: -8811711352560547971
+    second: Rig|Rig|Rig|Zer0Action|Rig|Zer0Action
+  externalObjects: {}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
