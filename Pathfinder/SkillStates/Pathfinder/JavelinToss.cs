@@ -66,7 +66,7 @@ namespace Skillstates.Pathfinder
                 if(base.isAuthority) this.FireJavelin();
             }
 
-            if (base.fixedAge >= this.duration)
+            if (base.fixedAge >= this.duration && base.isAuthority)
             {
                 base.outer.SetNextStateToMain();
             }

@@ -30,7 +30,9 @@ namespace Pathfinder.Modules
         internal static GameObject thrustEffect;
         internal static GameObject thrustTipImpact;
 
-        internal static GameObject javEffect;
+        internal static GameObject javExplosionEffect;
+
+        internal static GameObject vaultEffect;
 
         internal static GameObject lightningRingEffect;
         internal static GameObject lineVisualizer;
@@ -114,40 +116,15 @@ namespace Pathfinder.Modules
                 return;
             }
 
-            // feel free to delete everything in here and load in your own assets instead
-            // it should work fine even if left as is- even if the assets aren't in the bundle
-            /*
-            swordHitSoundEvent = CreateNetworkSoundEventDef("HenrySwordHit");
-
-            bombExplosionEffect = LoadEffect("BombExplosionEffect", "HenryBombExplosion");
-
-            if (bombExplosionEffect)
-            {
-                ShakeEmitter shakeEmitter = bombExplosionEffect.AddComponent<ShakeEmitter>();
-                shakeEmitter.amplitudeTimeDecay = true;
-                shakeEmitter.duration = 0.5f;
-                shakeEmitter.radius = 200f;
-                shakeEmitter.scaleShakeRadiusWithLocalScale = false;
-
-                shakeEmitter.wave = new Wave
-                {
-                    amplitude = 1f,
-                    frequency = 40f,
-                    cycleOffset = 0f
-                };
-            }
-
-            swordSwingEffect = Assets.LoadEffect("HenrySwordSwingEffect", true);
-            swordHitImpactEffect = Assets.LoadEffect("ImpactHenrySlash");
-            */
-
             thrustEffect = Assets.LoadEffect("SpearThrust", false);
             thrustTipImpact = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Merc/ImpactMercFocusedAssault.prefab").WaitForCompletion();
 
-            javEffect = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Vagrant/VagrantTrackingBombExplosion.prefab").WaitForCompletion(),
+            javExplosionEffect = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Vagrant/VagrantTrackingBombExplosion.prefab").WaitForCompletion(),
                 "JavelinExplosionPrefab");
-            if(!javEffect.GetComponent<NetworkIdentity>()) javEffect.AddComponent<NetworkIdentity>();
-            AddNewEffectDef(javEffect, "Play_mage_m2_impact");
+            if(!javExplosionEffect.GetComponent<NetworkIdentity>()) javExplosionEffect.AddComponent<NetworkIdentity>();
+            AddNewEffectDef(javExplosionEffect, "Play_mage_m2_impact");
+
+            vaultEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Feather/FeatherEffect.prefab").WaitForCompletion();
 
             lightningRingEffect = mainAssetBundle.LoadAsset<GameObject>("LightningRing");
             Texture2D blots = mainAssetBundle.LoadAsset<Texture2D>("Blots");

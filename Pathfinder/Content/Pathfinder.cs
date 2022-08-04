@@ -243,8 +243,8 @@ namespace Pathfinder.Modules.Survivors
                 skillName = prefix + "_PATHFINDER_BODY_SECONDARY_DASH_NAME",
                 skillNameToken = prefix + "_PATHFINDER_BODY_SECONDARY_DASH_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_SECONDARY_DASH_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texEvadeIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(Evade)),
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("tex"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(Heartseeker)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 2,
                 baseRechargeInterval = Config.dashCD.Value,
@@ -262,7 +262,7 @@ namespace Pathfinder.Modules.Survivors
                 stockToConsume = 1
             });
 
-            Modules.Skills.AddSecondarySkills(bodyPrefab, dashSkillDef);
+            Modules.Skills.AddSecondarySkills(bodyPrefab, diveSkillDef, dashSkillDef);
             #endregion
 
             #region Utility
@@ -272,7 +272,7 @@ namespace Pathfinder.Modules.Survivors
                 skillNameToken = prefix + "_PATHFINDER_BODY_UTILITY_SPIN_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_UTILITY_SPIN_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSpinIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(AirFlip)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(RendingTalons)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = Config.rendingTalonsCD.Value,

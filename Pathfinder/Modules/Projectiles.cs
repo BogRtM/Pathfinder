@@ -114,7 +114,7 @@ namespace Pathfinder.Modules
             impactExplosion.falloffModel = BlastAttack.FalloffModel.SweetSpot;
 
             //impactExplosion.impactEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/OmniImpactVFXLightningMage.prefab").WaitForCompletion();
-            impactExplosion.impactEffect = Assets.javEffect;
+            impactExplosion.impactEffect = Assets.javExplosionEffect;
         }
         /*
         private static void CreateJavelin()

@@ -9,7 +9,7 @@ using System;
 
 namespace Skillstates.Pathfinder
 {
-    internal class AirFlip : BaseState
+    internal class RendingTalons : BaseState
     {
         private Animator animator;
         Vector3 flipVector;
