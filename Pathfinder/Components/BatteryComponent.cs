@@ -39,7 +39,6 @@ namespace Pathfinder.Components
         private Color attackColor = new Color(1f, 0f, 0f, 0.6f);
 
         internal bool pauseDrain;
-        private bool allCreated;
 
         internal SquallController squallController;
 
@@ -150,8 +149,6 @@ namespace Pathfinder.Components
             //batteryGlow = instance.transform.Find("Glow").GetComponent<Image>();
             batteryText = instance.transform.Find("Text").GetComponent<TMPro.TextMeshProUGUI>();
             //batteryPip = instance.transform.Find("Pip").GetComponent<Image>();
-
-            if(batteryMeter && batteryText) allCreated = true;
 
             UpdateColor();
         }

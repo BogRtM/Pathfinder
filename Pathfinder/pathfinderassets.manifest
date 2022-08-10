@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2051357955
+CRC: 2843575221
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: f702e1c7eeb376ba68adefae74e58d80
+    Hash: 64ed837eea5cc52d55d5873196b0b661
   TypeTreeHash:
     serializedVersion: 2
     Hash: 191fd58095c9dfffe22a38324962b7e7
@@ -100,6 +100,7 @@ Assets:
 - Assets/PathfinderAssets/Textures/PathfinderVest.png
 - Assets/PathfinderAssets/Animation/clips/Rig_AimPitch New USE.anim
 - Assets/PathfinderAssets/VFX/EffectMaterials/Cone.mesh
+- Assets/PathfinderAssets/Textures/HeadHunter_D.png
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/Javelin Trail.png
 - Assets/PathfinderAssets/Animation/clips/Rig_IdleIn.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_Sweep.anim
@@ -152,6 +153,7 @@ Assets:
 - Assets/PathfinderAssets/Animation/Squall/fightbird.fbx
 - Assets/PathfinderAssets/Animation/clips/Rig_JavGroundDash.anim
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_SpinDown.anim
+- Assets/PathfinderAssets/Textures/HeadHunter_E.png
 - Assets/PathfinderAssets/VFX/HenryMaterials/texFire.tga
 - Assets/PathfinderAssets/Textures/tex_bird_diffuse.png
 - Assets/PathfinderAssets/Animation/clips/Rig_Polevault.anim
@@ -265,6 +267,7 @@ Assets:
 - Assets/PathfinderAssets/Animation/clips/Rig_JavWalkR.anim
 - Assets/PathfinderAssets/FBX/PFDisplayNew.fbx
 - Assets/PathfinderAssets/Animation/animPF.controller
+- Assets/PathfinderAssets/Headhunter/HeadHunter29.fbx
 - Assets/PathfinderAssets/Textures/PathfinderC.png
 - Assets/PathfinderAssets/Animation/clips/Rig_Lunge.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_JavPoint.anim
@@ -281,6 +284,7 @@ Assets:
 - Assets/PathfinderAssets/Animation/clips/Rig_JavWalkF.anim
 - Assets/PathfinderAssets/FBX/MenuIdleIn.fbx
 - Assets/PathfinderAssets/Materials/matPathfinder.mat
+- Assets/PathfinderAssets/Materials/matHeadhunter.mat
 - Assets/PathfinderAssets/Animation/clips/Rig_BasicThrust.anim
 - Assets/PathfinderAssets/VFX/EffectMaterials/ShockOuter.mat
 - Assets/PathfinderAssets/VFX/HenryMaterials/matFire.mat

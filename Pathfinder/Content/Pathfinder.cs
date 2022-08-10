@@ -247,7 +247,7 @@ namespace Pathfinder.Modules.Survivors
                 activationState = new EntityStates.SerializableEntityStateType(typeof(Heartseeker)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 2,
-                baseRechargeInterval = Config.dashCD.Value,
+                baseRechargeInterval = 1f,
                 beginSkillCooldownOnSkillEnd = false,
                 canceledFromSprinting = false,
                 forceSprintDuringState = false,
@@ -535,10 +535,7 @@ namespace Pathfinder.Modules.Survivors
             Material masteryMat = Modules.Materials.CreateHopooMaterial("matPATHFINDERAlt");
             CharacterModel.RendererInfo[] masteryRendererInfos = SkinRendererInfos(defaultRenderers, new Material[]
             {
-                masteryMat,
-                masteryMat,
-                masteryMat,
-                masteryMat
+                matHeadhunter
             });
 
             SkinDef masterySkin = Modules.Skins.CreateSkinDef(PATHFINDERPlugin.DEVELOPER_PREFIX + "_PATHFINDER_BODY_MASTERY_SKIN_NAME",

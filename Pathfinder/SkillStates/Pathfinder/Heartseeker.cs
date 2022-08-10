@@ -23,8 +23,52 @@ namespace Skillstates.Pathfinder
             aimDirection = aimRay.direction;
             aimDirection.y = 0f;
 
-            jumpVector = ((base.inputBank.moveVector == Vector3.zero) ? aimDirection : base.inputBank.moveVector).normalized;
+            jumpVector = ((base.inputBank.moveVector == Vector3.zero) ? base.characterDirection.forward : base.inputBank.moveVector).normalized;
 
+            if (NetworkServer.active)
+                base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
+
+            jumpVector += Vector3.up;
+            if (base.isAuthority)
+            {
+                base.characterMotor.Motor.ForceUnground();
+                base.characterMotor.velocity.y = 0f;
+                base.characterMotor.velocity += jumpVector * base.moveSpeedStat * jumpPower;
+            }
+
+            EffectData effectData = new EffectData
+            {
+                origin = base.characterBody.footPosition
+            };
+
+            EffectManager.SpawnEffect(Assets.vaultEffect, effectData, false);
+
+            base.StartAimMode(baseDuration + 0.1f, true);
+        }
+
+        public override void FixedUpdate()
+        {
+            base.FixedUpdate();
+
+            if (base.fixedAge >= baseDuration && base.isAuthority)
+                this.outer.SetNextState(new Lunge());
+        }
+
+        public override void OnExit()
+        {
+            if (NetworkServer.active)
+                base.characterBody.RemoveBuff(RoR2Content.Buffs.HiddenInvincibility);
+
+            base.OnExit();
+        }
+
+        public override InterruptPriority GetMinimumInterruptPriority()
+        {
+            return InterruptPriority.PrioritySkill;
+        }
+
+        public void GetInputDirection()
+        {
             Vector3 cross = Vector3.Cross(aimDirection, Vector3.up);
 
             switch (Mathf.Round(Vector3.Dot(jumpVector, aimDirection)))
@@ -59,47 +103,6 @@ namespace Skillstates.Pathfinder
                 default:
                     break;
             }
-
-            if (NetworkServer.active)
-                base.characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility);
-
-            jumpVector += Vector3.up;
-            if (base.isAuthority)
-            {
-                base.characterMotor.Motor.ForceUnground();
-                base.characterMotor.velocity.y = 0f;
-                base.characterMotor.velocity += jumpVector * base.moveSpeedStat * jumpPower;
-            }
-
-            EffectData effectData = new EffectData
-            {
-                origin = base.characterBody.footPosition
-            };
-
-            EffectManager.SpawnEffect(Assets.vaultEffect, effectData, false);
-
-            base.StartAimMode(baseDuration + 0.1f, true);
-        }
-
-        public override void FixedUpdate()
-        {
-            base.FixedUpdate();
-
-            if (base.fixedAge >= baseDuration && base.isAuthority)
-                this.outer.SetNextStateToMain();
-        }
-
-        public override void OnExit()
-        {
-            if (NetworkServer.active)
-                base.characterBody.RemoveBuff(RoR2Content.Buffs.HiddenInvincibility);
-
-            base.OnExit();
-        }
-
-        public override InterruptPriority GetMinimumInterruptPriority()
-        {
-            return InterruptPriority.PrioritySkill;
         }
     }
 }
