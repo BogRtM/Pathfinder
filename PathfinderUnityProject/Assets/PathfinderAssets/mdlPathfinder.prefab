@@ -58,7 +58,7 @@ Transform:
   m_LocalScale: {x: 25, y: 7, z: 25}
   m_Children: []
   m_Father: {fileID: 9052393363503133841}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1206975796
 GameObject:
@@ -88,38 +88,8 @@ Transform:
   m_LocalScale: {x: 25, y: 7, z: 25}
   m_Children: []
   m_Father: {fileID: 9052393363503133841}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90.00001}
---- !u!1 &1252000596
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1252000597}
-  m_Layer: 0
-  m_Name: RisingKick
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1252000597
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1252000596}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.79, z: 0}
-  m_LocalScale: {x: 1.5, y: 1, z: 1.5}
-  m_Children: []
-  m_Father: {fileID: 9052393363503133841}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2095460635
 GameObject:
   m_ObjectHideFlags: 0
@@ -5259,7 +5229,6 @@ Transform:
   - {fileID: 4612869856200233857}
   - {fileID: 1235690160738502230}
   - {fileID: 2027641462681515321}
-  - {fileID: 1252000597}
   - {fileID: 842378251}
   - {fileID: 1206975797}
   m_Father: {fileID: 0}
@@ -5331,6 +5300,38 @@ MonoBehaviour:
     transform: {fileID: 395513451769970562}
   - name: SpearTip
     transform: {fileID: 2095460636}
+  - name: StomachBone
+    transform: {fileID: 4152483963249128635}
+  - name: ChestBone
+    transform: {fileID: 3119024269359770285}
+  - name: ClavicleL
+    transform: {fileID: 3952496114449652956}
+  - name: UpperArmL
+    transform: {fileID: 136624470288326858}
+  - name: LowerArmL
+    transform: {fileID: 5218154173433786626}
+  - name: ShaftBone
+    transform: {fileID: 2817446817746165058}
+  - name: ClavicleR
+    transform: {fileID: 2738514334523270452}
+  - name: UpperArmR
+    transform: {fileID: 5462562460843826433}
+  - name: LowerArmR
+    transform: {fileID: 7836845603139360947}
+  - name: Pelvis
+    transform: {fileID: 763371189482780791}
+  - name: ThighL
+    transform: {fileID: 7315892059851849925}
+  - name: CalfL
+    transform: {fileID: 2672425656910670755}
+  - name: ThighR
+    transform: {fileID: 1616696557422466790}
+  - name: CalfR
+    transform: {fileID: 65722416220662664}
+  - name: HeadBone
+    transform: {fileID: 298860584591391099}
+  - name: Base
+    transform: {fileID: 8514928799314990965}
 --- !u!114 &2122905855
 MonoBehaviour:
   m_ObjectHideFlags: 0

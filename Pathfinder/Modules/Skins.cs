@@ -122,7 +122,6 @@ namespace Pathfinder.Modules
                     continue;
                 }
 
-                Log.Warning("Loading mesh: " + meshes[i]);
                 meshReplacements.Add(
                 new SkinDef.MeshReplacement
                 {
