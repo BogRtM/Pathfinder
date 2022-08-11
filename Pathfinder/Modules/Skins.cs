@@ -69,7 +69,17 @@ namespace Pathfinder.Modules
             internal string Name;
         }
 
-        private static CharacterModel.RendererInfo[] getRendererMaterials(CharacterModel.RendererInfo[] defaultRenderers, params Material[] materials)
+        public static List<GameObject> createAllActivatedGameObjectsList(ChildLocator childLocator, params string[] allChildren)
+        {
+            List<GameObject> list = new List<GameObject>();
+            for (int i = 0; i < allChildren.Length; i++)
+            {
+                list.Add(childLocator.FindChildGameObject(allChildren[i]));
+            }
+            return list;
+        }
+
+        internal static CharacterModel.RendererInfo[] getRendererMaterials(CharacterModel.RendererInfo[] defaultRenderers, params Material[] materials)
         {
             CharacterModel.RendererInfo[] newRendererInfos = new CharacterModel.RendererInfo[defaultRenderers.Length];
             defaultRenderers.CopyTo(newRendererInfos, 0);
@@ -78,7 +88,7 @@ namespace Pathfinder.Modules
             {
                 try
                 {
-                    newRendererInfos[i].defaultMaterial = materials[i];
+                    newRendererInfos[i].defaultMaterial = materials[i] ? materials[i] : materials[0];
                 }
                 catch
                 {
@@ -108,8 +118,11 @@ namespace Pathfinder.Modules
             for (int i = 0; i < rendererinfos.Length; i++)
             {
                 if (string.IsNullOrEmpty(meshes[i]))
+                {
                     continue;
+                }
 
+                Log.Warning("Loading mesh: " + meshes[i]);
                 meshReplacements.Add(
                 new SkinDef.MeshReplacement
                 {

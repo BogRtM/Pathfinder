@@ -505,68 +505,62 @@ namespace Pathfinder.Modules.Survivors
                 mainRenderer,
                 model);
 
-            defaultSkin.meshReplacements = new SkinDef.MeshReplacement[]
+            string meshString = "mesh";
+            defaultSkin.meshReplacements = Skins.getMeshReplacements(defaultRenderers, new string[]
             {
-                //place your mesh replacements here
-                //unnecessary if you don't have multiple skins
-                //new SkinDef.MeshReplacement
-                //{
-                //    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshPATHFINDERSword"),
-                //    renderer = defaultRenderers[0].renderer
-                //},
-                //new SkinDef.MeshReplacement
-                //{
-                //    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshPATHFINDERGun"),
-                //    renderer = defaultRenderers[1].renderer
-                //},
-                //new SkinDef.MeshReplacement
-                //{
-                //    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshPATHFINDER"),
-                //    renderer = defaultRenderers[2].renderer
-                //}
-            };
+                meshString + "Pathfinder",
+                meshString + "Shaft",
+                meshString + "Spearhead",
+                meshString + "Vest",
+                meshString + "Drape",
+                meshString + "Poncho",
+                null
+            });
 
             skins.Add(defaultSkin);
             #endregion
-
-            //uncomment this when you have a mastery skin
+            
             #region MasterySkin
-            /*
-            Material masteryMat = Modules.Materials.CreateHopooMaterial("matPATHFINDERAlt");
-            CharacterModel.RendererInfo[] masteryRendererInfos = SkinRendererInfos(defaultRenderers, new Material[]
-            {
-                masteryMat,
-                masteryMat,
-                masteryMat,
-                masteryMat
-            });
+            Material masteryMat = Modules.Materials.CreateHopooMaterial("matHeadhunter");
 
-            SkinDef masterySkin = Modules.Skins.CreateSkinDef(PATHFINDERPlugin.DEVELOPER_PREFIX + "_PATHFINDER_BODY_MASTERY_SKIN_NAME",
+            Material[] matArray = new Material[defaultRenderers.Length];
+            for(int i = 0; i < matArray.Length; i++)
+            {
+                matArray[i] = masteryMat;
+            }
+
+            CharacterModel.RendererInfo[] masteryRendererInfos = Skins.getRendererMaterials(defaultRenderers, matArray);
+
+            SkinDef masterySkin = Modules.Skins.CreateSkinDef(PathfinderPlugin.DEVELOPER_PREFIX + "_PATHFINDER_BODY_MASTERY_SKIN_NAME",
                 Assets.mainAssetBundle.LoadAsset<Sprite>("texMasteryAchievement"),
                 masteryRendererInfos,
                 mainRenderer,
                 model,
                 masterySkinUnlockableDef);
 
-            masterySkin.meshReplacements = new SkinDef.MeshReplacement[]
+            string headhunter = "HeadHunter";
+            masterySkin.meshReplacements = Skins.getMeshReplacements(masteryRendererInfos, new string[]
             {
-                new SkinDef.MeshReplacement
-                {
-                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshPATHFINDERSwordAlt"),
-                    renderer = defaultRenderers[0].renderer
-                },
-                new SkinDef.MeshReplacement
-                {
-                    mesh = Modules.Assets.mainAssetBundle.LoadAsset<Mesh>("meshPATHFINDERAlt"),
-                    renderer = defaultRenderers[2].renderer
-                }
-            };
+                headhunter + "Body",
+                headhunter + "Shaft",
+                headhunter + "Spearhead",
+                headhunter + "Vest",
+                headhunter + "Drape",
+                headhunter + "Backpack",
+                null
+            });
+
+            for(int i = 0; i < masterySkin.rendererInfos.Length - 1; i++)
+            {
+                masterySkin.rendererInfos[i].defaultMaterial = masteryMat;
+            }
 
             skins.Add(masterySkin);
-            */
+            
             #endregion
-
+            
             skinController.skins = skins.ToArray();
+            
         }
     }
 }

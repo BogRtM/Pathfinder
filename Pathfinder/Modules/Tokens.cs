@@ -46,7 +46,7 @@ namespace Pathfinder.Modules
 
             #region Skins
             LanguageAPI.Add(prefix + "DEFAULT_SKIN_NAME", "Default");
-            LanguageAPI.Add(prefix + "MASTERY_SKIN_NAME", "Taiga");
+            LanguageAPI.Add(prefix + "MASTERY_SKIN_NAME", "Headhunter");
             #endregion
 
             #region Passive
