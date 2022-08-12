@@ -127,7 +127,7 @@ namespace Pathfinder.Modules
             LanguageAPI.Add(prefix + "SPECIAL_ATTACK_NAME", "Attack Command");
             LanguageAPI.Add(prefix + "SPECIAL_ATTACK_DESCRIPTION", "Direct Squall's attention to the targeted enemy, and activate <color=#FF0000>Attack Mode</color>, " +
                 $"granting access to machine guns that deal <style=cIsDamage>2x{100f * Config.SquallGunDamage.Value}% damage</style>, " +
-                $"and a missile launcher that deals <style=cIsDamage>{MissileLauncher.maxMissileCount}x{100f * Config.SquallMissileDamage.Value}% damage</style>.");
+                $"and a missile launcher that deals <style=cIsDamage>{100f * Config.SquallMissileDamage.Value}% damage</style>.");
 
             LanguageAPI.Add(prefix + "SPECIAL_FOLLOW_NAME", "Follow Command");
             LanguageAPI.Add(prefix + "SPECIAL_FOLLOW_DESCRIPTION", $"Return Squall to yourself, and activate <color=#00FF00>Follow Mode</color>, " +

@@ -521,6 +521,7 @@ namespace Pathfinder.Modules.Survivors
             #endregion
             
             #region MasterySkin
+            /*
             Material masteryMat = Modules.Materials.CreateHopooMaterial("matHeadhunter");
 
             Material[] matArray = new Material[defaultRenderers.Length];
@@ -556,7 +557,7 @@ namespace Pathfinder.Modules.Survivors
             }
 
             skins.Add(masterySkin);
-            
+            */
             #endregion
             
             skinController.skins = skins.ToArray();
