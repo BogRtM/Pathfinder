@@ -42,7 +42,7 @@ namespace Pathfinder.Modules.Characters
             InitializeHurtboxes();
 
             InitializeSkins();
-            //InitializeItemDisplays();
+            InitializeItemDisplays();
 
             AddMyComponents();
 

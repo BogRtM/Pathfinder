@@ -22,6 +22,7 @@ namespace Pathfinder.Components
         private BaseAI baseAI;
         private AISkillDriver[] aISkillDrivers;
         internal GameObject currentTarget { get { return baseAI.currentEnemy.gameObject; } }
+        internal HurtBox currentBestHurtbox { get { return baseAI.currentEnemy.bestHurtBox; } }
 
         private EntityStateMachine weaponMachine;
         private EntityStateMachine bodyMachine;

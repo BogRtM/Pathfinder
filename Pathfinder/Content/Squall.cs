@@ -45,6 +45,8 @@ namespace Pathfinder.Modules.NPC
         public override Type characterMainState => typeof(SquallMainState);
         public override Type characterSpawnState => typeof(SquallMainState);
 
+        public override ItemDisplaysBase itemDisplays => new SquallItemDisplays();
+
         public override string bodyName => "Squall";
 
         internal static List<string> followDrivers = new List<string>();
@@ -54,8 +56,8 @@ namespace Pathfinder.Modules.NPC
             "FreeChest",
             "TreasureCache",
             "TreasureCacheVoid",
-            "FireRing",
-            "IceRing",
+            //"FireRing",
+            //"IceRing",
             "AutoCastEquipment",
             "ExtraLife",
             "ExtraLifeVoid"
@@ -404,7 +406,7 @@ namespace Pathfinder.Modules.NPC
                 skillNameToken = prefix + "_SQUALL_SECONDARY_MISSILE_NAME",
                 skillDescriptionToken = prefix + "_SQUALL_SECONDARY_MISSILE_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(ReworkedMissiles)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(MissileLauncher)),
                 activationStateMachineName = "Missiles",
                 baseMaxStock = 1,
                 baseRechargeInterval = 3f,

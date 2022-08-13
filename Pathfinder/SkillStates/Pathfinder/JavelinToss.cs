@@ -14,8 +14,11 @@ namespace Skillstates.Pathfinder
     {
         private Animator animator;
         private ChildLocator childLocator;
+
         private GameObject shaft;
         private GameObject spearhead;
+        private GameObject shaftBone;
+
         private Ray aimRay;
         private OverrideController controller;
 
@@ -37,6 +40,7 @@ namespace Skillstates.Pathfinder
             childLocator = base.GetModelChildLocator();
 
             shaft = childLocator.FindChild("Shaft").gameObject;
+            shaftBone = childLocator.FindChild("ShaftBone").gameObject;
             spearhead = childLocator.FindChild("Spearhead").gameObject;
 
             if (animator)
@@ -61,6 +65,7 @@ namespace Skillstates.Pathfinder
             if(base.fixedAge >= fireTime && !hasFired)
             {
                 shaft.SetActive(false);
+                shaftBone.SetActive(false);
                 spearhead.SetActive(false);
                 
                 if(base.isAuthority) this.FireJavelin();
@@ -90,6 +95,7 @@ namespace Skillstates.Pathfinder
         public override void OnExit()
         {
             shaft.SetActive(true);
+            shaftBone.SetActive(true);
             spearhead.SetActive(true);
             base.OnExit();
         }

@@ -1,37 +1,33 @@
 ﻿using UnityEngine;
 using EntityStates;
+using EntityStates.Drone.DroneWeapon;
 using RoR2;
+using RoR2.Orbs;
 using Pathfinder.Components;
 using Pathfinder.Modules;
+using UnityEngine.Networking;
 
 namespace Skillstates.Squall
 {
     internal class MissileLauncher : BaseState
     {
-        public GameObject target;
+        public HurtBox target;
         public bool isCrit;
 
-        private GameObject missilePrefab;
         private SquallController squallController;
 
-        public static float baseDuration = 1f;
-        public static int maxMissileCount = 4;
+        public static float baseDuration = 0.5f;
 
         private float duration;
-        private float fireTime;
-        private float fireStopwatch;
-        private int missileCount;
         public override void OnEnter()
         {
             base.OnEnter();
             duration = baseDuration / base.attackSpeedStat;
-            fireTime = duration / maxMissileCount;
             isCrit = base.RollCrit();
-            missilePrefab = GlobalEventManager.CommonAssets.missilePrefab;
             squallController = base.GetComponent<SquallController>();
 
             if (!base.characterBody.isPlayerControlled)
-                target = squallController.currentTarget;
+                target = squallController.currentBestHurtbox;
             else
                 target = null;
 
@@ -42,13 +38,6 @@ namespace Skillstates.Squall
         {
             base.FixedUpdate();
 
-            fireStopwatch += Time.fixedDeltaTime;
-            if(fireStopwatch >= fireTime && missileCount < maxMissileCount)
-            {
-                fireStopwatch = 0f;
-                FireMissile();
-            }
-
             if (base.fixedAge >= duration && base.isAuthority)
             {
                 this.outer.SetNextStateToMain();
@@ -57,17 +46,31 @@ namespace Skillstates.Squall
 
         private void FireMissile()
         {
-            if (base.isAuthority)
+            if (NetworkServer.active && target)
             {
-                MissileUtils.FireMissile(base.characterBody.corePosition, base.characterBody, default(ProcChainMask), target,
-                    Config.SquallMissileDamage.Value * base.damageStat, isCrit, missilePrefab, DamageColorIndex.Default, Vector3.up, 200f, false);
-
-                missileCount++;
+                if(target.healthComponent.alive)
+                {
+                    MicroMissileOrb orb = new MicroMissileOrb();
+                    orb.target = target;
+                    orb.origin = base.characterBody.corePosition;
+                    orb.damageValue = Config.SquallMissileDamage.Value * base.damageStat;
+                    orb.attacker = base.gameObject;
+                    orb.teamIndex = base.teamComponent.teamIndex;
+                    orb.isCrit = isCrit;
+                    orb.procChainMask = default(ProcChainMask);
+                    orb.procCoefficient = 1f;
+                    orb.damageColorIndex = DamageColorIndex.Default;
+                    orb.damageType = DamageType.Generic;
+                    OrbManager.instance.AddOrb(orb);
+                }
             }
+
+            EffectManager.SimpleMuzzleFlash(FireMissileBarrage.effectPrefab, base.gameObject, "MissileLauncher", true);
         }
 
         public override void OnExit()
         {
+            FireMissile();
             base.OnExit();
         }
 

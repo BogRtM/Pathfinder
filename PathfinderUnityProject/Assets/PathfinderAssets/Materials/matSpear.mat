@@ -180,5 +180,5 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0.9765709, g: 0.9765709, b: 0.9765709, a: 1}
+    - _EmissionColor: {r: 0.33490568, g: 0.9601499, b: 1, a: 1}
     - _FlashColor: {r: 0, g: 0, b: 0, a: 1}
