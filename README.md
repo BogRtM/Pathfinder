@@ -1,9 +1,11 @@
+## News
+
+Mastery skin is on the way I promise
+
 ## Known issues
 https://github.com/BogRtM/Pathfinder/issues
 
-Seems like the two primary concerns in multiplayer are that as a guest, sometimes Squall does not follow orders, and Go for the Throat does not recharge Squall's battery. I am looking into this, but if you encounter one of these two scenarios, please don't hesitate to send me the log.
-
-Regardless, commanding Squall as a guest still incurs lags, so it is highly recommended to be the host yourself if you plan to play him in multiplayer.
+Due to the fact that summons are controlled by the server in multiplayer, it is highly recommended that the Pathfinder player be the host, otherwise there will be latency in commanding Squall.
 
 # The Pathfinder 
 The Pathfinder is a glass cannon melee survivor who commands a robotic falcon, Squall. Together, they can dish out tremendous DPS, and take down any game!
