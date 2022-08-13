@@ -53,7 +53,6 @@ Custom SFX sourced from
 ```
 • Fix bugs and incompatibilities
 • Ensure working multiplayer functionality
-• Item displays
 • Write lore
 • Make custom master prefab for Pathfinder NPC
 • Mastery skin
@@ -75,9 +74,6 @@ Custom SFX sourced from
 ```
 And some other stuff I'm probably forgetting
 
-## Volunteers Wanted
-I am still very much a beginner when it comes to coding and modding, and am requesting the aid of more experienced coders who can help me diagnose bugs, optimize code, and help ensure working multiplayer functionality. If you have advice or suggestions on how to improve my code, please reach out to me.
-
 ## Contact Me
 Reach out to `Bog#4770` on Discord with feedback, or find me on the official Risk of Rain 2 modding server.
 
@@ -94,6 +90,15 @@ Reach out to `Bog#4770` on Discord with feedback, or find me on the official Ris
 ![Concept2](https://user-images.githubusercontent.com/55299061/181116345-9c446691-d1a0-43c0-93b4-ba81e9415dbc.png)
 
 ## Change Log
+`0.3.0`
+```
+• Added item displays for vanilla + SotV items
+• Squall's missile launcher now fires an orb instead of a projectile
+    - This should result in better performance and 100% accuracy, but missiles will no longer retarget
+• Removed Kjaro's and Runald's bands from Squall's item blacklist
+• Config should now update automatically with new patches
+```
+
 `0.2.5`
 ```
 • (Hopefully) Fixed issue where Go for the Throat would not recharge Squall's battery as a guest in multiplayer
