@@ -45,6 +45,8 @@ namespace Pathfinder.Modules.NPC
         public override Type characterMainState => typeof(SquallMainState);
         public override Type characterSpawnState => typeof(SquallMainState);
 
+        public override ItemDisplaysBase itemDisplays => new SquallItemDisplays();
+
         public override string bodyName => "Squall";
 
         internal static List<string> followDrivers = new List<string>();
@@ -70,11 +72,6 @@ namespace Pathfinder.Modules.NPC
             base.InitializeCharacter();
             InitializeSquall();
             PathfinderPlugin.squallBodyPrefab = this.bodyPrefab;
-        }
-
-        public override void InitializeItemDisplays()
-        {
-            
         }
 
         public void InitializeSquall()

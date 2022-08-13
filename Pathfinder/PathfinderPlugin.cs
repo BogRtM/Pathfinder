@@ -202,7 +202,7 @@ namespace Pathfinder
                     float distance = Vector3.Distance(attackerBody.corePosition, damageInfo.position);
                     if (distance >= 11f)
                     {
-                        damageInfo.damage *= 1.4f;
+                        damageInfo.damage *= 1.3f;
                         damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;
                         if (self.body.armor > 0f)
                             damageInfo.damageType = DamageType.BypassArmor;

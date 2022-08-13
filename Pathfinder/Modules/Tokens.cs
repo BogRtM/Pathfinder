@@ -29,7 +29,7 @@ namespace Pathfinder.Modules
 
             string lore = "...";
 
-            string outro = "..and so they left, the new conquerers of yet another food chain.";
+            string outro = "..and so they left, another food chain conquered.";
             string outroFailure = "..and so they vanished, forever lost to the uncaring wilderness.";
 
             #region Squall
@@ -64,7 +64,7 @@ namespace Pathfinder.Modules
                 $"If the meter hits 0, Squall is forced into <color=#00FF00>Follow Mode</color>.</style>");
 
             LanguageAPI.Add("KEYWORD_PIERCE", $"<style=cKeywordName>Piercing</style><style=cSub>Striking with the <style=cIsUtility>tip</style> " +
-                $"deals <style=cIsDamage>{100f * Config.ThrustDamage.Value * 1.4}% damage</style> and <style=cIsDamage>bypasses armor</style> instead.</style>");
+                $"deals <style=cIsDamage>{100f * Config.ThrustDamage.Value * 1.3f}% damage</style> and <style=cIsDamage>bypasses armor</style> instead.</style>");
 
             LanguageAPI.Add("KEYWORD_ELECTROCUTE", $"<style=cKeywordName>Electrocute</style><style=cSub>Targets have their movespeed reduced by {100f * Config.electrocuteSlowAmount.Value}%, " +
                 $"and take <style=cIsDamage>{100f * Config.electrocuteDPS.Value}% damage</style> per second.</style>");

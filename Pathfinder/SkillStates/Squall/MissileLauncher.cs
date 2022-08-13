@@ -16,7 +16,7 @@ namespace Skillstates.Squall
 
         private SquallController squallController;
 
-        public static float baseDuration = 1f;
+        public static float baseDuration = 0.5f;
 
         private float duration;
         public override void OnEnter()

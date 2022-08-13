@@ -1637,6 +1637,50 @@ MonoBehaviour:
     transform: {fileID: 1152600640}
   - name: UpperBody
     transform: {fileID: 2814541679451004149}
+  - name: LowerBody
+    transform: {fileID: 2555971043170828796}
+  - name: Pelvis
+    transform: {fileID: 4730696516824464111}
+  - name: UpperLegL
+    transform: {fileID: 3006817687531611186}
+  - name: LowerLegL
+    transform: {fileID: 7608388310830463674}
+  - name: FootL
+    transform: {fileID: 861268782064475552}
+  - name: UpperLegR
+    transform: {fileID: 6907038898303422790}
+  - name: LowerLegR
+    transform: {fileID: 6752825966383239073}
+  - name: FootR
+    transform: {fileID: 8065277384426532694}
+  - name: TailBase
+    transform: {fileID: 5464760242815248487}
+  - name: TailFeatherL1
+    transform: {fileID: 8258726291461263778}
+  - name: TailFeatherL2
+    transform: {fileID: 1503636451707033896}
+  - name: TailFeatherR1
+    transform: {fileID: 3050934664409499839}
+  - name: TailFeatherR2
+    transform: {fileID: 6181834948624408889}
+  - name: Neck
+    transform: {fileID: 312944565221851753}
+  - name: Head
+    transform: {fileID: 8939162404918153622}
+  - name: WingL1
+    transform: {fileID: 6887721025109567464}
+  - name: WingL2
+    transform: {fileID: 1368125221111442861}
+  - name: WingL3
+    transform: {fileID: 6684042738645184268}
+  - name: WingR1
+    transform: {fileID: 4168431127053646472}
+  - name: WingR2
+    transform: {fileID: 3274170614479728227}
+  - name: WingR3
+    transform: {fileID: 6540978268457611920}
+  - name: Root
+    transform: {fileID: 1065177603109307768}
 --- !u!1 &3824640237663195410
 GameObject:
   m_ObjectHideFlags: 0
