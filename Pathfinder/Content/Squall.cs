@@ -60,7 +60,8 @@ namespace Pathfinder.Modules.NPC
             //"IceRing",
             "AutoCastEquipment",
             "ExtraLife",
-            "ExtraLifeVoid"
+            "ExtraLifeVoid",
+            "DroneWeapons"
             //"LunarPrimaryReplacement",
             //"LunarSecondaryReplacement",
             //"LunarSpecialReplacement",

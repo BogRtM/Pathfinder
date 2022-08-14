@@ -41,7 +41,7 @@ namespace Pathfinder
         public const string MODUID = "com.Bog.Pathfinder";
         public const string MODNAME = "Pathfinder";
 
-        public const string MODVERSION = "0.3.0";
+        public const string MODVERSION = "0.3.1";
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
         public const string DEVELOPER_PREFIX = "BOG";
@@ -178,17 +178,20 @@ namespace Pathfinder
 
         private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
         {
-            if (damageInfo.attacker)
+            if (self.body.bodyIndex == BodyCatalog.FindBodyIndex(squallBodyPrefab))
             {
-                CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
-                if(attackerBody)
+                if(damageInfo.attacker)
                 {
-                    if (attackerBody.bodyIndex == BodyCatalog.FindBodyIndex("TeslaTrooperBody") && self.body.bodyIndex == BodyCatalog.FindBodyIndex(squallBodyPrefab))
+                    CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
+                    if (attackerBody)
                     {
-                        if (attackerBody.teamComponent.teamIndex == self.body.teamComponent.teamIndex)
+                        if (attackerBody.bodyIndex == BodyCatalog.FindBodyIndex("TeslaTrooperBody"))
                         {
-                            if (NetworkServer.active)
-                                self.body.AddBuff(BuffCatalog.FindBuffIndex("Charged"));
+                            if (attackerBody.teamComponent.teamIndex == self.body.teamComponent.teamIndex)
+                            {
+                                if (NetworkServer.active)
+                                    self.body.AddBuff(BuffCatalog.FindBuffIndex("Charged"));
+                            }
                         }
                     }
                 }

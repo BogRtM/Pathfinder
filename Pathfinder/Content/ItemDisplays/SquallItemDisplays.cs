@@ -2227,7 +2227,7 @@ localScale = new Vector3(0.15121F, 0.15121F, 0.15121F),
                     }
                 }
             });
-
+            /*
             itemDisplayRules.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
             {
                 keyAsset = DLC1Content.Items.DroneWeaponsDisplay1,
@@ -2289,6 +2289,7 @@ localScale = new Vector3(0.3F, 0.3F, 0.3F),
                     }
                 }
             });
+            */
             #endregion
         }
     }

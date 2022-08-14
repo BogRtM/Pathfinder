@@ -2474,7 +2474,7 @@ localScale = new Vector3(1F, 1F, 1F),
                     }
                 }
             });
-
+            /*
             itemDisplayRules.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
             {
                 keyAsset = RoR2Content.Equipment.Saw,
@@ -2495,7 +2495,7 @@ localScale = new Vector3(0.1F, 0.1F, 0.1F),
                     }
                 }
             });
-
+            */
             itemDisplayRules.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
             {
                 keyAsset = RoR2Content.Equipment.Blackhole,
@@ -3275,7 +3275,7 @@ localScale = new Vector3(0.3627F, 0.3627F, 0.3627F),
                     }
                 }
             });
-
+            /*
             itemDisplayRules.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
             {
                 keyAsset = DLC1Content.Items.DroneWeapons,
@@ -3296,7 +3296,7 @@ localScale = new Vector3(0.3627F, 0.3627F, 0.3627F),
                     }
                 }
             });
-
+            */
             itemDisplayRules.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
             {
                 keyAsset = DLC1Content.Items.MinorConstructOnKill,
@@ -3317,7 +3317,7 @@ localScale = new Vector3(0.3F, 0.3F, 0.3F),
                     }
                 }
             });
-
+            /*
             itemDisplayRules.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
             {
                 keyAsset = DLC1Content.Equipment.BossHunter,
@@ -3348,7 +3348,7 @@ localScale = new Vector3(1F, 1F, 1F),
                     }
                 }
             });
-
+            */
             itemDisplayRules.Add(new ItemDisplayRuleSet.KeyAssetRuleGroup
             {
                 keyAsset = DLC1Content.Equipment.Molotov,
