@@ -92,12 +92,19 @@ Reach out to `Bog#4770` on Discord with feedback, or find me on the official Ris
 ![Concept2](https://user-images.githubusercontent.com/55299061/181116345-9c446691-d1a0-43c0-93b4-ba81e9415dbc.png)
 
 ## Change Log
+`0.3.2`
+```
+• Improved logic for Go for the Throat
+    - Should no longer interfere with Nemmando's Gouge (let me know if it still does)
+```
+
 `0.3.1`
 ```
 • Item displays for Trophy Hunter's Tricorn and Sawmerang were producing wonky bugs so I'm temporarily disabling them while I work on a fix
 • Spare Drone Parts added to Squall's item blacklist
     - He will still benefit from their effects should you pick up the item
 ```
+
 `0.3.0`
 ```
 • Added item displays for vanilla + SotV items
