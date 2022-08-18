@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1664982766
+CRC: 562159725
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a2382a1311847ee2888fe17c624b2848
+    Hash: 79960f4cabb39a89e918d23785522459
   TypeTreeHash:
     serializedVersion: 2
     Hash: 191fd58095c9dfffe22a38324962b7e7
@@ -152,6 +152,7 @@ Assets:
 - Assets/PathfinderAssets/VFX/HenryMaterials/matPunchImpact.mat
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_FlyLeft.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_AirDash.anim
+- Assets/PathfinderAssets/Materials/matShaft.mat
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_AimHeadYaw.anim
 - Assets/PathfinderAssets/Animation/animPFMenu.controller
 - Assets/PathfinderAssets/Animation/Squall/fightbird.fbx
@@ -203,6 +204,7 @@ Assets:
 - Assets/PathfinderAssets/Mesh/meshBolas.mesh
 - Assets/PathfinderAssets/Textures/z - Copy.png
 - Assets/PathfinderAssets/VFX/HenryMaterials/matHitSpark.mat
+- Assets/PathfinderAssets/VFX/RendingTalonsAir.prefab
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_FlyBack.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_Ascend USE.anim
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_DivePrep.anim
@@ -220,6 +222,7 @@ Assets:
 - Assets/PathfinderAssets/JavelinGhost.prefab
 - Assets/PathfinderAssets/Materials/matBolas.mat
 - Assets/PathfinderAssets/Mesh/meshSpearhead.mesh
+- Assets/PathfinderAssets/VFX/EffectMaterials/matRendingTalons.mat
 - Assets/PathfinderAssets/Icons/PathfinderPortrait - Copy.png
 - Assets/PathfinderAssets/Animation/clips/Rig_JavDescend.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_JavDescendFast.anim

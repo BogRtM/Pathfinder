@@ -41,7 +41,7 @@ namespace Pathfinder
         public const string MODUID = "com.Bog.Pathfinder";
         public const string MODNAME = "Pathfinder";
 
-        public const string MODVERSION = "0.3.1";
+        public const string MODVERSION = "0.3.2";
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
         public const string DEVELOPER_PREFIX = "BOG";
@@ -55,7 +55,7 @@ namespace Pathfinder
 
         public static SkillDef javelinSkill;
 
-        internal static DamageAPI.ModdedDamageType goForThroat;
+        //internal static DamageAPI.ModdedDamageType goForThroat;
         internal static DamageAPI.ModdedDamageType piercing;
 
         private void Awake()
@@ -71,7 +71,7 @@ namespace Pathfinder
             Modules.Tokens.AddTokens(); // register name tokens
             Modules.ItemDisplays.PopulateDisplays(); // collect item display prefabs for use in our display rules
 
-            goForThroat = DamageAPI.ReserveDamageType();
+            //goForThroat = DamageAPI.ReserveDamageType();
             piercing = DamageAPI.ReserveDamageType();
             //squallGun = DamageAPI.ReserveDamageType();
             //squallMissile = DamageAPI.ReserveDamageType();
@@ -221,10 +221,12 @@ namespace Pathfinder
 
             orig(self, damageInfo);
 
+            /*
             if(damageInfo.HasModdedDamageType(goForThroat) && !damageInfo.rejected)
             {
                 if (NetworkServer.active) self.body.AddTimedBuff(Modules.Buffs.armorShred, 7f);
             }
+            */
         }
 
         private void CharacterBody_RecalculateStats(On.RoR2.CharacterBody.orig_RecalculateStats orig, CharacterBody self)
