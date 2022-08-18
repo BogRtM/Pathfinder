@@ -55,7 +55,7 @@ namespace Pathfinder
 
         public static SkillDef javelinSkill;
 
-        internal static DamageAPI.ModdedDamageType shredding;
+        internal static DamageAPI.ModdedDamageType goForThroat;
         internal static DamageAPI.ModdedDamageType piercing;
 
         private void Awake()
@@ -71,7 +71,7 @@ namespace Pathfinder
             Modules.Tokens.AddTokens(); // register name tokens
             Modules.ItemDisplays.PopulateDisplays(); // collect item display prefabs for use in our display rules
 
-            shredding = DamageAPI.ReserveDamageType();
+            goForThroat = DamageAPI.ReserveDamageType();
             piercing = DamageAPI.ReserveDamageType();
             //squallGun = DamageAPI.ReserveDamageType();
             //squallMissile = DamageAPI.ReserveDamageType();
@@ -221,7 +221,7 @@ namespace Pathfinder
 
             orig(self, damageInfo);
 
-            if(damageInfo.HasModdedDamageType(shredding) && !damageInfo.rejected)
+            if(damageInfo.HasModdedDamageType(goForThroat) && !damageInfo.rejected)
             {
                 if (NetworkServer.active) self.body.AddTimedBuff(Modules.Buffs.armorShred, 7f);
             }

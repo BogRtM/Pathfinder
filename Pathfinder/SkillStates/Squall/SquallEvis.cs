@@ -119,7 +119,7 @@ namespace Skillstates.Squall
                 info.crit = isCrit;
                 info.position = enemyPosition;
                 info.damage = base.damageStat * damageCoefficient;
-                info.AddModdedDamageType(PathfinderPlugin.shredding);
+                info.AddModdedDamageType(PathfinderPlugin.goForThroat);
 
                 target.healthComponent.TakeDamage(info);
                 GlobalEventManager.instance.OnHitEnemy(info, target.healthComponent.gameObject);
