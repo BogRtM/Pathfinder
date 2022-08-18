@@ -89,14 +89,16 @@ namespace Skillstates.Squall
                         stopwatch = 0f;
                         DoAttack();
                     }
+                    /*
                     else if(!target.healthComponent.alive && base.isAuthority && !attackFinished)
                     {
                         FinishAttack();
                     }
+                    */
                 }
             }
 
-            if ((hitCount >= maxHits || base.fixedAge >= (diveDuration + attackDuration))  && base.isAuthority && !attackFinished)
+            if ((hitCount >= maxHits || base.fixedAge >= (diveDuration + attackDuration) || !target.healthComponent.alive)  && base.isAuthority && !attackFinished)
             {
                 FinishAttack();
             }
@@ -119,9 +121,15 @@ namespace Skillstates.Squall
                 info.crit = isCrit;
                 info.position = enemyPosition;
                 info.damage = base.damageStat * damageCoefficient;
-                info.AddModdedDamageType(PathfinderPlugin.goForThroat);
+                //info.AddModdedDamageType(PathfinderPlugin.goForThroat);
 
                 target.healthComponent.TakeDamage(info);
+
+                if (target.healthComponent.alive)
+                {
+                    target.healthComponent.body.AddTimedBuff(Buffs.armorShred, 7f);
+                }
+
                 GlobalEventManager.instance.OnHitEnemy(info, target.healthComponent.gameObject);
                 GlobalEventManager.instance.OnHitAll(info, target.healthComponent.gameObject);
             }
