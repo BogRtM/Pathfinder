@@ -17,7 +17,7 @@ namespace Pathfinder.Modules
             Modules.Content.AddEntityState(typeof(Evade));
             Modules.Content.AddEntityState(typeof(JavelinToss));
 
-            Modules.Content.AddEntityState(typeof(AirFlip));
+            Modules.Content.AddEntityState(typeof(RendingTalons));
             Modules.Content.AddEntityState(typeof(AimBolas));
 
             Modules.Content.AddEntityState(typeof(CommandMode));

@@ -132,8 +132,6 @@ namespace Pathfinder.Modules.Survivors
         protected override void InitializeDisplayPrefab()
         {
             base.InitializeDisplayPrefab();
-            CharacterSelectSurvivorPreviewDisplayController CSSpreview = displayPrefab.AddComponent<CharacterSelectSurvivorPreviewDisplayController>();
-            CSSpreview.bodyPrefab = this.bodyPrefab;
         }
 
         public override void InitializeHitboxes()
@@ -295,7 +293,7 @@ namespace Pathfinder.Modules.Survivors
                 skillNameToken = prefix + "_PATHFINDER_BODY_UTILITY_SPIN_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_UTILITY_SPIN_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSpinIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(AirFlip)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(RendingTalons)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
                 baseRechargeInterval = Config.rendingTalonsCD.Value,
@@ -584,19 +582,6 @@ namespace Pathfinder.Modules.Survivors
             };
 
             HeadhunterSkin = masterySkin;
-
-            var CSSpreview = displayPrefab.GetComponent<CharacterSelectSurvivorPreviewDisplayController>();
-
-            List<CharacterSelectSurvivorPreviewDisplayController.SkinChangeResponse> responses = new List<CharacterSelectSurvivorPreviewDisplayController.SkinChangeResponse>();
-
-            CharacterSelectSurvivorPreviewDisplayController.SkinChangeResponse skinChangeResponse = new CharacterSelectSurvivorPreviewDisplayController.SkinChangeResponse
-            {
-                triggerSkin = masterySkin
-            };
-
-            responses.Add(skinChangeResponse);
-
-            CSSpreview.skinChangeResponses = responses.ToArray();
 
             skins.Add(masterySkin);
             #endregion

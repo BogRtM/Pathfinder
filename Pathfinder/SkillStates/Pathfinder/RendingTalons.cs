@@ -9,13 +9,13 @@ using System;
 
 namespace Skillstates.Pathfinder
 {
-    internal class AirFlip : BaseState
+    internal class RendingTalons : BaseState
     {
         private Animator animator;
         Vector3 flipVector;
 
         private OverrideController controller;
-        private ChildLocator childLocator;
+        private GameObject spearTrail;
 
         private OverlapAttack airSpinAttack;
         private OverlapAttack groundSpinAttack;
@@ -40,11 +40,13 @@ namespace Skillstates.Pathfinder
         {
             base.OnEnter();
             animator = base.GetModelAnimator();
-            childLocator = base.GetModelChildLocator();
             flipDuration = flipBaseDuration / base.attackSpeedStat;
             controller = base.GetComponent<OverrideController>();
             spinDuration = spinBaseDuration / base.attackSpeedStat;
             spinFinishTime = spinDuration * 0.325f;
+
+            spearTrail = base.FindModelChild("SpearTrail").gameObject;
+            spearTrail.SetActive(true);
             //currentHopVelocity = baseHopVelocity;
 
             animator.SetLayerWeight(animator.GetLayerIndex("AimYaw"), 0f);
@@ -164,6 +166,7 @@ namespace Skillstates.Pathfinder
         {
             animator.SetLayerWeight(animator.GetLayerIndex("AimYaw"), 1f);
             animator.SetLayerWeight(animator.GetLayerIndex("AimPitch"), 1f);
+            spearTrail.SetActive(false);
             base.characterBody.RemoveBuff(Buffs.rendingTalonMS);
             base.PlayCrossfade("FullBody, Override", "BufferEmpty", 0.1f);
             base.characterBody.bodyFlags &= ~RoR2.CharacterBody.BodyFlags.IgnoreFallDamage;
