@@ -6,7 +6,7 @@ using Pathfinder.Modules;
 
 namespace Skillstates.Squall
 {
-    internal class ReworkedMissiles : BaseState
+    internal class ProjectileMissiles : BaseState
     {
         public GameObject target;
         public bool isCrit;

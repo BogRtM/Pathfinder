@@ -13,6 +13,7 @@ using R2API;
 using Pathfinder.Modules.CustomSkillDefs;
 using UnityEngine.UI;
 using EntityStates;
+using Pathfinder.Modules.NPC;
 
 namespace Pathfinder.Modules.Survivors
 {
@@ -88,12 +89,27 @@ namespace Pathfinder.Modules.Survivors
         public override ConfigEntry<bool> characterEnabledConfig => Modules.Config.CharacterEnableConfig(bodyName);
 
         private static UnlockableDef masterySkinUnlockableDef;
+        public static SkinDef HeadhunterSkin;
 
         public override void InitializeCharacter()
         {
             base.InitializeCharacter();
             PathfinderPlugin.pathfinderBodyPrefab = this.bodyPrefab;
+            Hooks();
             //SetCoreTransform();
+        }
+
+        private void Hooks()
+        {
+            On.RoR2.ModelSkinController.ApplySkin += ModelSkinController_ApplySkin;
+        }
+
+        private void ModelSkinController_ApplySkin(On.RoR2.ModelSkinController.orig_ApplySkin orig, ModelSkinController self, int skinIndex)
+        {
+            if (self.skins[skinIndex].skinIndex == HeadhunterSkin.skinIndex)
+            {
+                Log.Warning("Changing to Headhunter");
+            }
         }
 
         private void SetCoreTransform()
@@ -111,6 +127,13 @@ namespace Pathfinder.Modules.Survivors
         {
             //uncomment this when you have a mastery skin. when you do, make sure you have an icon too
             //masterySkinUnlockableDef = Modules.Unlockables.AddUnlockable<Modules.Achievements.MasteryAchievement>();
+        }
+
+        protected override void InitializeDisplayPrefab()
+        {
+            base.InitializeDisplayPrefab();
+            CharacterSelectSurvivorPreviewDisplayController CSSpreview = displayPrefab.AddComponent<CharacterSelectSurvivorPreviewDisplayController>();
+            CSSpreview.bodyPrefab = this.bodyPrefab;
         }
 
         public override void InitializeHitboxes()
@@ -521,7 +544,6 @@ namespace Pathfinder.Modules.Survivors
             #endregion
             
             #region MasterySkin
-            /*
             Material masteryMat = Modules.Materials.CreateHopooMaterial("matHeadhunter");
 
             Material[] matArray = new Material[defaultRenderers.Length];
@@ -556,12 +578,30 @@ namespace Pathfinder.Modules.Survivors
                 masterySkin.rendererInfos[i].defaultMaterial = masteryMat;
             }
 
+            masterySkin.minionSkinReplacements = new SkinDef.MinionSkinReplacement[]
+            {
+                Squall.HHSquallReplacements
+            };
+
+            HeadhunterSkin = masterySkin;
+
+            var CSSpreview = displayPrefab.GetComponent<CharacterSelectSurvivorPreviewDisplayController>();
+
+            List<CharacterSelectSurvivorPreviewDisplayController.SkinChangeResponse> responses = new List<CharacterSelectSurvivorPreviewDisplayController.SkinChangeResponse>();
+
+            CharacterSelectSurvivorPreviewDisplayController.SkinChangeResponse skinChangeResponse = new CharacterSelectSurvivorPreviewDisplayController.SkinChangeResponse
+            {
+                triggerSkin = masterySkin
+            };
+
+            responses.Add(skinChangeResponse);
+
+            CSSpreview.skinChangeResponses = responses.ToArray();
+
             skins.Add(masterySkin);
-            */
             #endregion
             
             skinController.skins = skins.ToArray();
-            
         }
     }
 }

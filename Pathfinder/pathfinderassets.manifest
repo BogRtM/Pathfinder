@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 562159725
+CRC: 55104979
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 79960f4cabb39a89e918d23785522459
+    Hash: 84ce5ea9df9fd71bad8ff838d37982d9
   TypeTreeHash:
     serializedVersion: 2
     Hash: 191fd58095c9dfffe22a38324962b7e7
@@ -92,6 +92,7 @@ Assets:
 - Assets/PathfinderAssets/Mesh/meshVest.mesh
 - Assets/PathfinderAssets/Animation/clips/Rig_BasicThrust SUPER Up.anim
 - Assets/PathfinderAssets/VFX/HenryMaterials/matAnimeShapes.mat
+- Assets/PathfinderAssets/Mesh/meshSquall.mesh
 - Assets/PathfinderAssets/UI/MeterPip.png
 - Assets/PathfinderAssets/Materials/HitboxPreview.mat
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/texPunchImpactShadow.png
@@ -214,6 +215,7 @@ Assets:
 - Assets/PathfinderAssets/VFX/EffectMaterials/matSlashOuter.mat
 - Assets/PathfinderAssets/VFX/EffectMaterials/squallParticle.mesh
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_RollRight2.anim
+- Assets/PathfinderAssets/Mesh/Headhunter/FBX/SquallHH.fbx
 - Assets/PathfinderAssets/Animation/clips/Rig_AirFlip2.anim
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_DiveEnter.anim
 - Assets/PathfinderAssets/Mesh/meshShaft.mesh
@@ -264,7 +266,7 @@ Assets:
 - Assets/PathfinderAssets/Animation/RightArm.mask
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/Motion lines.png
 - Assets/PathfinderAssets/UI/AttackIndicator.png
-- Assets/PathfinderAssets/Mesh/Headhunter/HeadHunter29.fbx
+- Assets/PathfinderAssets/Mesh/Headhunter/FBX/HeadHunter29.fbx
 - Assets/PathfinderAssets/Textures/z.png
 - Assets/PathfinderAssets/VFX/SquallEvisEffect.prefab
 - Assets/PathfinderAssets/VFX/EffectMaterials/ShockField.mat
@@ -313,6 +315,7 @@ Assets:
 - Assets/PathfinderAssets/Textures/spearEm.png
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/Blots.png
 - Assets/PathfinderAssets/Animation/clips/Rig_AimYaw New USE.anim
+- Assets/PathfinderAssets/Mesh/Headhunter/HeadHunterSquall.mesh
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/Javelin Trail 1.png
 - Assets/PathfinderAssets/Animation/clips/Rig_UnderhandThrow.anim
 - Assets/PathfinderAssets/Materials/matSpear.mat

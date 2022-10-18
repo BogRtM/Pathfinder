@@ -47,6 +47,10 @@ namespace Pathfinder.Modules.NPC
 
         public override ItemDisplaysBase itemDisplays => new SquallItemDisplays();
 
+        public static SkinDef HHSquallSkin;
+
+        public static SkinDef.MinionSkinReplacement HHSquallReplacements;
+
         public override string bodyName => "Squall";
 
         internal static List<string> followDrivers = new List<string>();
@@ -407,7 +411,7 @@ namespace Pathfinder.Modules.NPC
                 skillNameToken = prefix + "_SQUALL_SECONDARY_MISSILE_NAME",
                 skillDescriptionToken = prefix + "_SQUALL_SECONDARY_MISSILE_DESCRIPTION",
                 skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(MissileLauncher)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(ProjectileMissiles)),
                 activationStateMachineName = "Missiles",
                 baseMaxStock = 1,
                 baseRechargeInterval = 3f,
@@ -480,8 +484,79 @@ namespace Pathfinder.Modules.NPC
             Modules.Skills.AddSpecialSkills(bodyPrefab, specialSkillDef);
         }
 
-        public override void InitializeDoppelganger(string clone)
+        public override void InitializeSkins()
         {
+            GameObject model = bodyPrefab.GetComponentInChildren<ModelLocator>().modelTransform.gameObject;
+            CharacterModel characterModel = model.GetComponent<CharacterModel>();
+
+            ModelSkinController skinController = model.AddComponent<ModelSkinController>();
+            ChildLocator childLocator = model.GetComponent<ChildLocator>();
+
+            SkinnedMeshRenderer mainRenderer = characterModel.mainSkinnedMeshRenderer;
+
+            CharacterModel.RendererInfo[] defaultRenderers = characterModel.baseRendererInfos;
+
+            List<SkinDef> skins = new List<SkinDef>();
+
+            #region DefaultSkin
+            SkinDef defaultSkin = Modules.Skins.CreateSkinDef(PathfinderPlugin.DEVELOPER_PREFIX + "_SQUALL_BODY_DEFAULT_SKIN_NAME",
+                Assets.mainAssetBundle.LoadAsset<Sprite>("texMainSkin"),
+                defaultRenderers,
+                mainRenderer,
+                model);
+
+            string meshString = "mesh";
+            defaultSkin.meshReplacements = Skins.getMeshReplacements(defaultRenderers, new string[]
+            {
+                meshString + "Squall"
+            });
+
+            skins.Add(defaultSkin);
+            #endregion
+
+            #region MasterySkin
+            Material masteryMat = Modules.Materials.CreateHopooMaterial("matHeadhunter");
+
+            Material[] matArray = new Material[defaultRenderers.Length];
+            for (int i = 0; i < matArray.Length; i++)
+            {
+                matArray[i] = masteryMat;
+            }
+
+            CharacterModel.RendererInfo[] masteryRendererInfos = Skins.getRendererMaterials(defaultRenderers, matArray);
+
+            SkinDef masterySkin = Modules.Skins.CreateSkinDef(PathfinderPlugin.DEVELOPER_PREFIX + "_SQUALL_BODY_MASTERY_SKIN_NAME",
+                Assets.mainAssetBundle.LoadAsset<Sprite>("texMasteryAchievement"),
+                masteryRendererInfos,
+                mainRenderer,
+                model,
+                null);
+
+            string headhunter = "HeadHunter";
+            masterySkin.meshReplacements = Skins.getMeshReplacements(masteryRendererInfos, new string[]
+            {
+                headhunter + "Squall"
+            });
+
+            masterySkin.rendererInfos[0].defaultMaterial = masteryMat;
+
+            /*
+            for (int i = 0; i < masterySkin.rendererInfos.Length - 1; i++)
+            {
+                masterySkin.rendererInfos[i].defaultMaterial = masteryMat;
+            }
+            */
+            Squall.HHSquallSkin = masterySkin;
+            Squall.HHSquallReplacements = new SkinDef.MinionSkinReplacement
+            {
+                minionBodyPrefab = bodyPrefab,
+                minionSkin = masterySkin
+            };
+
+            skins.Add(masterySkin);
+            #endregion
+
+            skinController.skins = skins.ToArray();
         }
     }
 }

@@ -32,7 +32,7 @@ namespace Pathfinder.Modules
             Modules.Content.AddEntityState(typeof(DiveToPoint));
             Modules.Content.AddEntityState(typeof(MountedGuns));
             Modules.Content.AddEntityState(typeof(MissileLauncher));
-            Modules.Content.AddEntityState(typeof(ReworkedMissiles));
+            Modules.Content.AddEntityState(typeof(ProjectileMissiles));
             Modules.Content.AddEntityState(typeof(SquallEvis));
             #endregion
         }
