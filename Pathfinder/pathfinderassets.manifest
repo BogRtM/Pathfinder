@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2294052357
+CRC: 4268620579
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: dd6bfe44a647f2cdb773b81ccb0dd435
+    Hash: 221a49640d22c3cc81c60b56ad185eb6
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 191fd58095c9dfffe22a38324962b7e7
+    Hash: ddf75641606b85c703cea6d6b8143106
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -57,6 +57,10 @@ ClassTypes:
   Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 751bd37d2e55f5f448dbb0d97812d9ba, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 45bec9d38e8d7d54987195624595ebce, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 50c84fba3bb720848b29678fcf6a6526, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 120
@@ -122,7 +126,7 @@ Assets:
 - Assets/PathfinderAssets/VFX/HenryMaterials/matSmoke.mat
 - Assets/PathfinderAssets/FBX/BolasGhostFBX.fbx
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/texSwingEffect.png
-- Assets/PathfinderAssets/Materials/matJavelin.mat
+- Assets/PathfinderAssets/Materials/matJavelinHH.mat
 - Assets/PathfinderAssets/VFX/HenryMaterials/matHenrySwing2.mat
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_Backflip.anim
 - Assets/PathfinderAssets/VFX/HenryMaterials/texHenrySwing2.png
@@ -182,12 +186,14 @@ Assets:
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/texHitSpark.png
 - Assets/PathfinderAssets/FBX/fightbirdDive.fbx
 - Assets/PathfinderAssets/Animation/clips/Rig_WalkL.anim
+- Assets/PathfinderAssets/FBX/HHJavelin.fbx
 - Assets/PathfinderAssets/VFX/HenryMaterials/meshSwordSwing.mesh
 - Assets/PathfinderAssets/VFX/HenryMaterials/matPunchImpactShadow.mat
 - Assets/PathfinderAssets/Mesh/meshPoncho.mesh
 - Assets/PathfinderAssets/Animation/clips/Rig_PolevaultKick.anim
 - Assets/PathfinderAssets/Mesh/meshDrape.mesh
 - Assets/PathfinderAssets/Mesh/Headhunter/HeadHunterSpearhead.mesh
+- Assets/PathfinderAssets/HHJavelinGhost.prefab
 - Assets/PathfinderAssets/mdlPathfinder.prefab
 - Assets/PathfinderAssets/VFX/HenryMaterials/texSmoke.png
 - Assets/PathfinderAssets/Icons/texMainSkin.png
@@ -305,6 +311,7 @@ Assets:
 - Assets/PathfinderAssets/Animation/clips/Rig_BasicThrust.anim
 - Assets/PathfinderAssets/VFX/EffectMaterials/ShockOuter.mat
 - Assets/PathfinderAssets/VFX/HenryMaterials/matFire.mat
+- Assets/PathfinderAssets/Materials/matJavelin.mat
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_GlideF.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_JavWave.anim
 - Assets/PathfinderAssets/FBX/Pathfinder.fbx

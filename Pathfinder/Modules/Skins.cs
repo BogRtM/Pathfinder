@@ -98,6 +98,26 @@ namespace Pathfinder.Modules
 
             return newRendererInfos;
         }
+
+        internal static CharacterModel.RendererInfo[] getRendererMaterials(CharacterModel.RendererInfo[] defaultRenderers, Material material)
+        {
+            CharacterModel.RendererInfo[] newRendererInfos = new CharacterModel.RendererInfo[defaultRenderers.Length];
+            defaultRenderers.CopyTo(newRendererInfos, 0);
+
+            for (int i = 0; i < newRendererInfos.Length; i++)
+            {
+                try
+                {
+                    newRendererInfos[i].defaultMaterial = material;
+                }
+                catch
+                {
+                    Log.Error("error adding skin rendererinfo material. make sure you're not passing in too many");
+                }
+            }
+
+            return newRendererInfos;
+        }
         /// <summary>
         /// pass in strings for mesh assets in your project. pass the same amount and order as you have renderers, filling with null as needed
         /// <code>

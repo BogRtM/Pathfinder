@@ -95,21 +95,7 @@ namespace Pathfinder.Modules.Survivors
         {
             base.InitializeCharacter();
             PathfinderPlugin.pathfinderBodyPrefab = this.bodyPrefab;
-            Hooks();
             //SetCoreTransform();
-        }
-
-        private void Hooks()
-        {
-            On.RoR2.ModelSkinController.ApplySkin += ModelSkinController_ApplySkin;
-        }
-
-        private void ModelSkinController_ApplySkin(On.RoR2.ModelSkinController.orig_ApplySkin orig, ModelSkinController self, int skinIndex)
-        {
-            if (self.skins[skinIndex].skinIndex == HeadhunterSkin.skinIndex)
-            {
-                Log.Warning("Changing to Headhunter");
-            }
         }
 
         private void SetCoreTransform()
@@ -132,6 +118,8 @@ namespace Pathfinder.Modules.Survivors
         protected override void InitializeDisplayPrefab()
         {
             base.InitializeDisplayPrefab();
+            var component = displayPrefab.GetComponent<CharacterSelectSurvivorPreviewDisplayController>();
+            component.bodyPrefab = this.bodyPrefab;
         }
 
         public override void InitializeHitboxes()
@@ -538,6 +526,7 @@ namespace Pathfinder.Modules.Survivors
                 null
             });
 
+            AddCssPreviewSkin(0, defaultSkin);
             skins.Add(defaultSkin);
             #endregion
             
@@ -581,8 +570,14 @@ namespace Pathfinder.Modules.Survivors
                 Squall.HHSquallReplacements
             };
 
-            HeadhunterSkin = masterySkin;
+            masterySkin.projectileGhostReplacements = new SkinDef.ProjectileGhostReplacement[1];
+            masterySkin.projectileGhostReplacements[0] = new SkinDef.ProjectileGhostReplacement
+            {
+                projectilePrefab = Projectiles.explodingJavelin,
+                projectileGhostReplacementPrefab = Projectiles.HeadHunterJavelinGhost
+            };
 
+            AddCssPreviewSkin(1, masterySkin);
             skins.Add(masterySkin);
             #endregion
             

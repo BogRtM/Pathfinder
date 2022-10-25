@@ -13,6 +13,7 @@ namespace Pathfinder.Modules
         //internal static GameObject bombPrefab;
         //internal static GameObject javelinPrefab;
         internal static GameObject explodingJavelin;
+        internal static GameObject HeadHunterJavelinGhost;
         internal static GameObject shockBolas;
         internal static GameObject bolasZone;
 
@@ -105,6 +106,7 @@ namespace Pathfinder.Modules
 
             ProjectileController javelinController = explodingJavelin.GetComponent<ProjectileController>();
             javelinController.ghostPrefab = CreateGhostPrefab("JavelinGhost");
+            HeadHunterJavelinGhost = CreateGhostPrefab("HHJavelinGhost");
 
             ProjectileSimple simple = explodingJavelin.GetComponent<ProjectileSimple>();
             simple.desiredForwardSpeed = 200f;

@@ -540,12 +540,6 @@ namespace Pathfinder.Modules.NPC
 
             masterySkin.rendererInfos[0].defaultMaterial = masteryMat;
 
-            /*
-            for (int i = 0; i < masterySkin.rendererInfos.Length - 1; i++)
-            {
-                masterySkin.rendererInfos[i].defaultMaterial = masteryMat;
-            }
-            */
             Squall.HHSquallSkin = masterySkin;
             Squall.HHSquallReplacements = new SkinDef.MinionSkinReplacement
             {

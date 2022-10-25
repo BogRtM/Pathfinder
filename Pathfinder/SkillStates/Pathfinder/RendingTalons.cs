@@ -156,6 +156,7 @@ namespace Skillstates.Pathfinder
         public void StartGroundSpin()
         {
             airFlipFinished = true;
+            spearTrail.SetActive(false);
             base.characterMotor.velocity = Vector3.zero;
             if (controller.javelinReady) javString = "Jav";
             base.PlayAnimation("FullBody, Override", javString + "SpinSweep", "Flip.playbackRate", spinDuration);
@@ -166,7 +167,7 @@ namespace Skillstates.Pathfinder
         {
             animator.SetLayerWeight(animator.GetLayerIndex("AimYaw"), 1f);
             animator.SetLayerWeight(animator.GetLayerIndex("AimPitch"), 1f);
-            spearTrail.SetActive(false);
+            if(spearTrail.active) spearTrail.SetActive(false);
             base.characterBody.RemoveBuff(Buffs.rendingTalonMS);
             base.PlayCrossfade("FullBody, Override", "BufferEmpty", 0.1f);
             base.characterBody.bodyFlags &= ~RoR2.CharacterBody.BodyFlags.IgnoreFallDamage;

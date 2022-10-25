@@ -1,0 +1,349 @@
+fileFormatVersion: 2
+guid: f047118c94ad02246ac0b5172a8b1a22
+ModelImporter:
+  serializedVersion: 19301
+  internalIDToNameTable:
+  - first:
+      74: 7754454806276208820
+    second: Rig|_Idle New USE
+  - first:
+      74: 3785877973976678465
+    second: Rig|AimPitch New USE
+  - first:
+      74: -2403483296778902260
+    second: Rig|AimYaw New USE
+  - first:
+      74: -7646656529865922585
+    second: Rig|AirDash
+  - first:
+      74: 9202690171202305428
+    second: Rig|AirFlip
+  - first:
+      74: -8862805413099213746
+    second: Rig|AirFlip2
+  - first:
+      74: -2862409121824801805
+    second: Rig|Ascend USE
+  - first:
+      74: -7555895893386714477
+    second: Rig|BasicThrust
+  - first:
+      74: -4348392431520400841
+    second: Rig|BasicThrust Down Fix
+  - first:
+      74: 1148223507562202717
+    second: Rig|BasicThrust Gesture Down
+  - first:
+      74: -1289661824701736160
+    second: Rig|BasicThrust New
+  - first:
+      74: -3862901834650937737
+    second: Rig|BasicThrust SUPER Up
+  - first:
+      74: 5020880339012552907
+    second: Rig|BolasAction
+  - first:
+      74: 879988261492319863
+    second: Rig|BolasLoop
+  - first:
+      74: -445581111036316908
+    second: Rig|BolasThrow
+  - first:
+      74: -1290377267327084909
+    second: Rig|ComboSlash1
+  - first:
+      74: 3016363670847648244
+    second: Rig|ComboSlash2
+  - first:
+      74: -3133045023773725856
+    second: Rig|ComboSlash3
+  - first:
+      74: 5768110121315746154
+    second: Rig|Descend
+  - first:
+      74: 4086129448032850874
+    second: Rig|Descend Fast
+  - first:
+      74: -5530666554451376544
+    second: Rig|GroundDashB
+  - first:
+      74: 1819541441999894131
+    second: Rig|GroundDashF
+  - first:
+      74: 4704594255337913795
+    second: Rig|GroundDashF New
+  - first:
+      74: 1998774479056566944
+    second: Rig|HS_Backflip
+  - first:
+      74: -1347962916053737980
+    second: Rig|HS_FrontFlip
+  - first:
+      74: 3993246917550220301
+    second: Rig|HS_LeftFlip
+  - first:
+      74: -3481921892469908149
+    second: Rig|HS_RightFlip
+  - first:
+      74: 4950275335156227797
+    second: Rig|IdleIn
+  - first:
+      74: -674757503462374740
+    second: Rig|JavAscend
+  - first:
+      74: -871398726036230927
+    second: Rig|JavBolasLoop
+  - first:
+      74: -141716265842782007
+    second: Rig|JavBolasThrow
+  - first:
+      74: -2571516279020014705
+    second: Rig|JavDescend
+  - first:
+      74: 3556311058124972401
+    second: Rig|JavDescendFast
+  - first:
+      74: -6577787131361947327
+    second: Rig|JavelinToss
+  - first:
+      74: 8766849088231358248
+    second: Rig|JavelinToss Gesture
+  - first:
+      74: -9083999163838712162
+    second: Rig|JavGroundDash
+  - first:
+      74: -4121355242742387513
+    second: Rig|JavIdle
+  - first:
+      74: -2761151410331671948
+    second: Rig|JavIdleIn
+  - first:
+      74: -4455392638238900349
+    second: Rig|JavJump
+  - first:
+      74: 5183185370685301376
+    second: Rig|JavPoint
+  - first:
+      74: 155212669161182326
+    second: Rig|JavSpinSweep
+  - first:
+      74: -2582699558200930764
+    second: Rig|JavSprintF
+  - first:
+      74: 8376098815376479712
+    second: Rig|JavUnderhandThrow
+  - first:
+      74: -1074241613782642403
+    second: Rig|JavWalkB
+  - first:
+      74: -2239414598479527005
+    second: Rig|JavWalkF
+  - first:
+      74: -5843726769898709174
+    second: Rig|JavWalkL
+  - first:
+      74: -7219462392918274953
+    second: Rig|JavWalkR
+  - first:
+      74: 434270028699899933
+    second: Rig|JavWave
+  - first:
+      74: -8790922266539588141
+    second: Rig|Jump
+  - first:
+      74: -2280664048464269527
+    second: Rig|Lunge
+  - first:
+      74: -8477686084571986334
+    second: Rig|MenuIdlle
+  - first:
+      74: 4092057647232323502
+    second: Rig|OLD_Idle
+  - first:
+      74: 3649908577852114153
+    second: Rig|OverhandThrow
+  - first:
+      74: -3726522734754296244
+    second: Rig|PathfinderAction
+  - first:
+      74: 6795448528072254588
+    second: Rig|Point
+  - first:
+      74: -6986224915103115039
+    second: Rig|Polevault
+  - first:
+      74: 5181327436320596019
+    second: Rig|PolevaultKick
+  - first:
+      74: 4649982978840883146
+    second: Rig|PolevaultTwirl
+  - first:
+      74: -9028930080473200540
+    second: Rig|Rest
+  - first:
+      74: -2080606337418561767
+    second: Rig|Rest.001
+  - first:
+      74: -5143595753259070549
+    second: Rig|RisingSpin
+  - first:
+      74: 4590784889217845664
+    second: Rig|SpinSweep
+  - first:
+      74: -7500021426160318536
+    second: Rig|SprintF
+  - first:
+      74: 3959327337080416874
+    second: Rig|StrongThrustGround
+  - first:
+      74: -3894903646712143502
+    second: Rig|Sweep
+  - first:
+      74: -5140278854152774368
+    second: Rig|Sweep1H
+  - first:
+      74: 8837341304710638068
+    second: Rig|Tri-Combo
+  - first:
+      74: -7808076860440366569
+    second: Rig|UnderhandThrow
+  - first:
+      74: -8624112453254416862
+    second: Rig|WalkB
+  - first:
+      74: -8387823710654232549
+    second: Rig|WalkF
+  - first:
+      74: 8249226553071247934
+    second: Rig|WalkL
+  - first:
+      74: -9132706148026830890
+    second: Rig|WalkR
+  - first:
+      74: 5990254550801997555
+    second: Rig|Wave
+  - first:
+      74: -3291152411991894968
+    second: Pathfinder|BolasAction
+  - first:
+      74: -8803580971137887375
+    second: Pathfinder|PathfinderAction
+  - first:
+      74: -3560897346808899613
+    second: Drape|BolasAction
+  - first:
+      74: -843668831397120024
+    second: Drape|PathfinderAction
+  - first:
+      74: -3811416348206762151
+    second: Poncho Uncut|BasicThrust
+  - first:
+      74: 890482169843914895
+    second: Poncho Uncut|BolasAction
+  - first:
+      74: 2550353724513021287
+    second: Poncho Uncut|PathfinderAction
+  - first:
+      74: -1293330244419841273
+    second: Shaft|BolasAction
+  - first:
+      74: -9045701739256964778
+    second: Shaft|PathfinderAction
+  - first:
+      74: -5261042136066873538
+    second: Speartip|BolasAction
+  - first:
+      74: -5835796026677002254
+    second: Speartip|PathfinderAction
+  externalObjects: {}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
