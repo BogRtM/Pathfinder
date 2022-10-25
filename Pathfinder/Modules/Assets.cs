@@ -141,14 +141,17 @@ namespace Pathfinder.Modules
             swordHitImpactEffect = Assets.LoadEffect("ImpactHenrySlash");
             */
 
+            //Thrust effect
             thrustEffect = Assets.LoadEffect("SpearThrust", false);
             thrustTipImpact = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Merc/ImpactMercFocusedAssault.prefab").WaitForCompletion();
 
+            //Javelin explosion effect
             javEffect = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Vagrant/VagrantTrackingBombExplosion.prefab").WaitForCompletion(),
                 "JavelinExplosionPrefab");
             if(!javEffect.GetComponent<NetworkIdentity>()) javEffect.AddComponent<NetworkIdentity>();
             AddNewEffectDef(javEffect, "Play_mage_m2_impact");
 
+            //Bolas Zone effect
             lightningRingEffect = mainAssetBundle.LoadAsset<GameObject>("LightningRing");
             Texture2D blots = mainAssetBundle.LoadAsset<Texture2D>("Blots");
             Texture2D lightningCloud = Addressables.LoadAssetAsync<Texture2D>("RoR2/Base/Common/texCloudLightning1.png").WaitForCompletion();
@@ -171,6 +174,7 @@ namespace Pathfinder.Modules
             outerRing.material.SetFloat("_RimPower", 7f);
             outerRing.material.SetColor("_TintColor", Color.green);
 
+            //Battery UI
             BatteryMeter = mainAssetBundle.LoadAsset<GameObject>("BatteryMeter");
             TextMeshProUGUI text = BatteryMeter.GetComponentInChildren<TextMeshProUGUI>();
             text.font = Addressables.LoadAssetAsync<TMP_FontAsset>("RoR2/Base/Common/Fonts/Bombardier/tmpBombDropshadow.asset").WaitForCompletion();
