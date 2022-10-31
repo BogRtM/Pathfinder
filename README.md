@@ -107,12 +107,13 @@ Reach out to `Bog#4770` on Discord with feedback, or find me on the official Ris
     - To compensate, the base distance has been increased.
     - This will result in a greater dash distance at below ~185% movement speed, and lower distance at greater values.
     
-• Rending talons default cooldown reduced from 8 to 6 seconds.
+• Rending Talons default cooldown reduced from 8 to 6 seconds.
     
 • Rending Talons now grants a movement speed buff and 100% air control while airborne.
 
-• Added a VFX trail to Rending Talons to reflect its hitbox. This is a temporary measure while I work on real VFX for it.
-    - I might just keep it as is.
+• Added a VFX trail to Rending Talons to better reflect its hitbox.
+    - This is a temporary measure while I work on real VFX.
+    - But I might just keep it as is.
 ```
 
 <details>
