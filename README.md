@@ -1,6 +1,8 @@
 ## News
 
-Mastery skin is on the way I promise
+I'm really really *REALLY* sorry that it took this long for an update. In particular I would like to greatly apologize to Mr. Bones, for taking so long to implement the mastery skin.
+
+Pathfinder isn't dead; I have just been slacking greatly. I intend to finish him entirety within the next couple of months.
 
 ## Known issues
 https://github.com/BogRtM/Pathfinder/issues
@@ -29,9 +31,11 @@ This is an early access, alpha release of a WIP survivor. He is still incomplete
 ## Credits
 ```
 • bruh
-    - 3D modeling
-    - rigging
+    - Base skin
     - Squall design
+    
+• Mr. Bones
+    - Mastery skin
     
 • rob + TheTimeSweeper
     - Providing the Henry character base template
@@ -57,7 +61,6 @@ Custom SFX sourced from
 • Ensure working multiplayer functionality
 • Write lore
 • Make custom master prefab for Pathfinder NPC
-• Mastery skin
 • Implement an alt secondary skill that encourages a more melee-focused playstyle
 • VFX + SFX for Rending Talons
 • alt skills for Squall
@@ -65,9 +68,7 @@ Custom SFX sourced from
 ### Medium priority
 ```
 • Improve animations as necessary
-• Mod compatibility
-• Improve Fleetfoot VFX
-• Make custom UI elements for command mode
+• Compatibility for Ancient Scepter mod
 ```
 ### Low priority
 ```
@@ -94,14 +95,32 @@ Reach out to `Bog#4770` on Discord with feedback, or find me on the official Ris
 ## Change Log
 
 ### Latest Patch
+
+`0.4.0`
+```
+• Added Mastery skin
+
+• Squall's missile launcher is back to firing projectiles instead of orbs
+    - The orb missiles had poor synergy with Backup Mags, so I am reverting the change.
+    
+• Fleetfoot's dash distance will now receive diminishing returns from movement speed
+    - To compensate, the base distance has been increased.
+    - This will result in a greater dash distance at below ~185% movement speed, and lower distance at greater values.
+    
+• Rending Talons now grants a movement speed buff and 100% air control while airborne.
+
+• Added a VFX trail to Rending Talons to reflect its hitbox. This is a temporary measure while I work on real VFX for it.
+    - I might just keep it as is.
+```
+
+<details>
+    <summary>Previous patches</summary>
+    
 `0.3.2`
 ```
 • Improved logic for Go for the Throat
     - Should no longer interfere with Nemmando's Gouge (let me know if it still does)
 ```
-
-<details>
-    <summary>Previous patches</summary>
     
 `0.3.1`
 ```
