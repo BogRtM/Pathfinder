@@ -26,6 +26,8 @@ namespace Skillstates.Pathfinder
         public static float upwardVelocity = 25f;
         //public static float baseHopVelocity = 0.5f;
 
+        private float previousAirControl;
+
         private bool isCrit;
         private bool airFlipFinished;
 
@@ -44,6 +46,9 @@ namespace Skillstates.Pathfinder
             controller = base.GetComponent<OverrideController>();
             spinDuration = spinBaseDuration / base.attackSpeedStat;
             spinFinishTime = spinDuration * 0.325f;
+
+            previousAirControl = base.characterMotor.airControl;
+            base.characterMotor.airControl = 1f;
 
             spearTrail = base.FindModelChild("SpearTrail").gameObject;
             spearTrail.SetActive(true);
@@ -141,22 +146,15 @@ namespace Skillstates.Pathfinder
             {
                 groundSpinAttack.Fire();
             }
+            else if(spinStopwatch > spinFinishTime)
+            {
+                spearTrail.SetActive(false);
+            }
         }
-
-        /*
-        public void StartDrop()
-        {
-            inAirSpin = true;
-            base.PlayAnimation("FullBody, Override", "AirFlip2");
-            base.characterMotor.velocity.y = 0;
-            base.characterMotor.velocity.y -= 90f;
-        }
-        */
 
         public void StartGroundSpin()
         {
             airFlipFinished = true;
-            spearTrail.SetActive(false);
             base.characterMotor.velocity = Vector3.zero;
             if (controller.javelinReady) javString = "Jav";
             base.PlayAnimation("FullBody, Override", javString + "SpinSweep", "Flip.playbackRate", spinDuration);
@@ -167,8 +165,9 @@ namespace Skillstates.Pathfinder
         {
             animator.SetLayerWeight(animator.GetLayerIndex("AimYaw"), 1f);
             animator.SetLayerWeight(animator.GetLayerIndex("AimPitch"), 1f);
-            if(spearTrail.active) spearTrail.SetActive(false);
+            spearTrail.SetActive(false);
             base.characterBody.RemoveBuff(Buffs.rendingTalonMS);
+            base.characterMotor.airControl = previousAirControl;
             base.PlayCrossfade("FullBody, Override", "BufferEmpty", 0.1f);
             base.characterBody.bodyFlags &= ~RoR2.CharacterBody.BodyFlags.IgnoreFallDamage;
             //base.characterMotor.airControl = previousAirControl;

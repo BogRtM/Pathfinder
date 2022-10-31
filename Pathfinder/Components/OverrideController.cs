@@ -26,6 +26,8 @@ namespace Pathfinder.Components
         internal static SkillDef utilityCommandSkillDef;
 
         internal static SkillDef javelinSkill;
+        internal static SkillDef strongThrustSkill;
+
         internal static SkillDef attackCommand;
         internal static SkillDef followCommand;
         internal static SkillDef cancelCommand;
@@ -33,6 +35,7 @@ namespace Pathfinder.Components
         //internal GenericSkill squallSpecial;
 
         internal bool javelinReady;
+        internal bool heartseekerReady;
         internal bool inCommandMode;
 
         private void Awake()
@@ -66,6 +69,20 @@ namespace Pathfinder.Components
             {
                 modelAnimator.SetLayerWeight(modelAnimator.GetLayerIndex("JavelinReady"), 0f);
             }
+        }
+
+        public void ReadyHeartseeker()
+        {
+            heartseekerReady = true;
+
+            skillLocator.primary.SetSkillOverride(base.gameObject, strongThrustSkill, GenericSkill.SkillOverridePriority.Contextual);
+        }
+
+        public void UnreadyHeartseeker()
+        {
+            heartseekerReady = false;
+
+            skillLocator.primary.UnsetSkillOverride(base.gameObject, strongThrustSkill, GenericSkill.SkillOverridePriority.Contextual);
         }
 
         internal void SetCommandSkills()

@@ -31,7 +31,6 @@ namespace Pathfinder.Components
             selfMaster = selfBody.master;
 
             FindOrSummonSquall();
-
             Subscriptions();
         }
 
@@ -68,6 +67,7 @@ namespace Pathfinder.Components
                         squallController = minion.bodyInstanceObject.GetComponent<SquallController>();
                         batteryComponent = minion.bodyInstanceObject.GetComponent<BatteryComponent>();
                         squallController.owner = base.gameObject;
+                        squallController.ApplySquallSkin(selfBody);
                         return;
                     }
                 }
@@ -116,7 +116,7 @@ namespace Pathfinder.Components
             }
         }
 
-        internal void AttackOrder(HurtBox target)
+        public void AttackOrder(HurtBox target)
         {
             if (!squallController) FindOrSummonSquall();
             if(target && target.healthComponent && target.healthComponent.alive)
@@ -128,7 +128,7 @@ namespace Pathfinder.Components
             }
         }
 
-        internal void FollowOrder()
+        public void FollowOrder()
         {
             if (!squallController) FindOrSummonSquall();
             if (Vector3.Distance(selfBody.corePosition, squallController.selfBody.corePosition) >= 1000f)
@@ -151,7 +151,7 @@ namespace Pathfinder.Components
             squallController.EnterFollowMode();
         }
 
-        internal void SpecialOrder(HurtBox target)
+        public void SpecialOrder(HurtBox target)
         {
             if (!squallController) FindOrSummonSquall();
 

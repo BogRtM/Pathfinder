@@ -53,12 +53,41 @@ namespace Pathfinder.Components
         private void Start()
         {
             selfBody = base.GetComponent<CharacterBody>();
+
+            if (owner && selfBody)
+            {
+                CharacterBody ownerBody = owner.GetComponent<CharacterBody>();
+                if(ownerBody.skinIndex != selfBody.skinIndex)
+                {
+                    ApplySquallSkin(ownerBody);
+                }
+            }
+
             masterObject = selfBody.master.gameObject;
             aISkillDrivers = masterObject.GetComponents<AISkillDriver>();
             baseAI = masterObject.GetComponent<BaseAI>();
             weaponMachine = EntityStateMachine.FindByCustomName(base.gameObject, "Weapon");
             bodyMachine = EntityStateMachine.FindByCustomName(base.gameObject, "Body");
             EnterFollowMode();
+        }
+
+        internal void ApplySquallSkin(CharacterBody ownerBody)
+        {
+            if (ownerBody && selfBody)
+            {
+                selfBody.skinIndex = ownerBody.skinIndex;
+
+                ModelLocator modelLocator = base.GetComponent<ModelLocator>();
+                if (modelLocator)
+                {
+                    GameObject modelObject = modelLocator.modelTransform.gameObject;
+                    if (modelObject)
+                    {
+                        ModelSkinController MSC = modelObject.GetComponent<ModelSkinController>();
+                        MSC.ApplySkin((int)selfBody.skinIndex);
+                    }
+                }
+            }
         }
 
         internal void SetTarget(HurtBox target)

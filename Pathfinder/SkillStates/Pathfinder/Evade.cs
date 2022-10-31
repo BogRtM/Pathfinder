@@ -5,13 +5,18 @@ using Pathfinder.Modules;
 using Pathfinder.Components;
 using RoR2;
 using RoR2.Skills;
+using RoR2.Items;
 
 namespace Skillstates.Pathfinder
 {
     internal class Evade : BaseState
     {
         public static float baseDuration = 0.2f;
-        public static float speedCoefficient = 8f;
+        public static float speedCoefficient = 12f;
+        public static float flatBonus = 65f;
+
+        private float bonusFromMovespeed;
+        private float totalDashBonus;
 
         public static SkillDef javelinSkill;
 
@@ -33,6 +38,14 @@ namespace Skillstates.Pathfinder
 
             dustPrefab = UnityEngine.Object.Instantiate<GameObject>(SlideState.slideEffectPrefab, base.FindModelChild("Pathfinder"));
 
+            EffectData effectData = new EffectData()
+            {
+                origin = base.characterBody.corePosition,
+                rotation = Util.QuaternionSafeLookRotation(dashVector)
+            };
+
+            EffectManager.SpawnEffect(Assets.dashEffect, effectData, false);
+
             if (!controller.javelinReady)
             {
                 PlayAnimation("FullBody, Override", "GroundDashF", "Dash.playbackRate", baseDuration);
@@ -42,6 +55,9 @@ namespace Skillstates.Pathfinder
                 PlayAnimation("FullBody, Override", "JavGroundDash", "Dash.playbackRate", baseDuration);
             }
 
+            float bonusMS = base.moveSpeedStat - base.characterBody.baseMoveSpeed;
+            bonusFromMovespeed = (bonusMS * base.characterBody.baseMoveSpeed) / (base.moveSpeedStat);
+            totalDashBonus = speedCoefficient * bonusFromMovespeed + flatBonus;
         }
 
         public override void FixedUpdate()
@@ -51,7 +67,7 @@ namespace Skillstates.Pathfinder
             if(base.isAuthority)
             {
                 base.characterDirection.forward = dashVector;
-                base.characterMotor.rootMotion += dashVector * (speedCoefficient * base.moveSpeedStat * Time.fixedDeltaTime);
+                base.characterMotor.rootMotion += dashVector * totalDashBonus * Time.fixedDeltaTime;
                 base.characterMotor.velocity.y = 0f;
             }
 

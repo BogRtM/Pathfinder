@@ -12,7 +12,7 @@ namespace RoR2 {
         //public GameObject bodyPrefab;
 
         // Token: 0x04000A87 RID: 2695
-        public CharacterSelectSurvivorPreviewDisplayController.SkillChangeResponse[] skillChangeResponses;
+        //public CharacterSelectSurvivorPreviewDisplayController.SkillChangeResponse[] skillChangeResponses;
 
         // Token: 0x04000A88 RID: 2696
         public CharacterSelectSurvivorPreviewDisplayController.SkinChangeResponse[] skinChangeResponses;
@@ -20,6 +20,7 @@ namespace RoR2 {
         // Token: 0x04000A8A RID: 2698
         //private Loadout currentLoadout;
 
+        /*
         // Token: 0x020001E9 RID: 489
         [Serializable]
         public struct SkillChangeResponse {
@@ -34,6 +35,7 @@ namespace RoR2 {
             // Token: 0x04000A8D RID: 2701
             public UnityEvent response;
         }
+        */
 
         // Token: 0x020001EA RID: 490
         [Serializable]

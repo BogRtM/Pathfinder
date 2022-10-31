@@ -14,16 +14,13 @@ namespace Skillstates.Squall
         private GameObject missilePrefab;
         private SquallController squallController;
 
-        public static float baseDuration = 1f;
+        public static float baseDuration = 0.5f;
 
         private float duration;
-        private float halfwayPoint;
-        private bool pastHalfway;
         public override void OnEnter()
         {
             base.OnEnter();
             duration = baseDuration / base.attackSpeedStat;
-            halfwayPoint = duration / 2f;
             isCrit = base.RollCrit();
             missilePrefab = GlobalEventManager.CommonAssets.missilePrefab;
             squallController = base.GetComponent<SquallController>();

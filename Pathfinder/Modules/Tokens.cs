@@ -27,7 +27,8 @@ namespace Pathfinder.Modules
 
             desc += modderNote;
 
-            string lore = "...";
+            string lore =
+                "";
 
             string outro = "..and so they left, another food chain conquered.";
             string outroFailure = "..and so they vanished, forever lost to the uncaring wilderness.";
@@ -40,7 +41,7 @@ namespace Pathfinder.Modules
             LanguageAPI.Add(prefix + "NAME", "Pathfinder");
             LanguageAPI.Add(prefix + "DESCRIPTION", desc);
             LanguageAPI.Add(prefix + "SUBTITLE", "Birds of Prey");
-            LanguageAPI.Add(prefix + "LORE", "");
+            //LanguageAPI.Add(prefix + "LORE", lore);
             LanguageAPI.Add(prefix + "OUTRO_FLAVOR", outro);
             LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);
 

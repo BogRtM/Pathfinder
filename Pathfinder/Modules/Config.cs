@@ -87,7 +87,7 @@ namespace Pathfinder.Modules
             electrocuteDPS = plugin.Config.Bind<float>(utilitySectionTitle, "Electrocute Damage per Second" , 1.2f, "Damage % per second of Electrocute DoT");
             electrocuteSlowAmount = plugin.Config.Bind<float>(utilitySectionTitle, "Electrocute Slow Multiplier" , 0.5f, "Movespeed multiplier of Electrocute DoT");
 
-            rendingTalonsCD = plugin.Config.Bind<float>(utilitySectionTitle, "Rending Talons Cooldown" , 8f, "Cooldown of Rending Talons");
+            rendingTalonsCD = plugin.Config.Bind<float>(utilitySectionTitle, "Rending Talons Cooldown" , 6f, "Cooldown of Rending Talons");
             AirSpinDamage = plugin.Config.Bind<float>(utilitySectionTitle, "Air Spin Damage Coefficient" , 3f, "Damage coefficient of Rending Talons aerial spin attack");
             GroundSpinDamage = plugin.Config.Bind<float>(utilitySectionTitle, "Ground Spin Damage Coefficient" , 8f, "Damage coefficient of Rending Talons ground spin attack");
             #endregion

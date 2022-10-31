@@ -30,7 +30,10 @@ namespace Pathfinder.Modules
         internal static GameObject thrustEffect;
         internal static GameObject thrustTipImpact;
 
+        internal static GameObject dashEffect;
         internal static GameObject javEffect;
+
+        internal static GameObject vaultEffect;
 
         internal static GameObject lightningRingEffect;
         internal static GameObject lineVisualizer;
@@ -145,11 +148,15 @@ namespace Pathfinder.Modules
             thrustEffect = Assets.LoadEffect("SpearThrust", false);
             thrustTipImpact = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Merc/ImpactMercFocusedAssault.prefab").WaitForCompletion();
 
-            //Javelin explosion effect
+            //Javelin effects
+            dashEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/SprintOutOfCombat/SprintActivate.prefab").WaitForCompletion();
             javEffect = PrefabAPI.InstantiateClone(Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Vagrant/VagrantTrackingBombExplosion.prefab").WaitForCompletion(),
                 "JavelinExplosionPrefab");
             if(!javEffect.GetComponent<NetworkIdentity>()) javEffect.AddComponent<NetworkIdentity>();
             AddNewEffectDef(javEffect, "Play_mage_m2_impact");
+
+            //Vault effect
+            vaultEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Feather/FeatherEffect.prefab").WaitForCompletion();
 
             //Bolas Zone effect
             lightningRingEffect = mainAssetBundle.LoadAsset<GameObject>("LightningRing");

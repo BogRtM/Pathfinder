@@ -245,7 +245,7 @@ namespace Pathfinder
 
                 if (self.HasBuff(Modules.Buffs.rendingTalonMS))
                 {
-                    self.moveSpeed += 0.2f;
+                    self.moveSpeed *= 1.2f;
                 }
 
                 BatteryComponent batteryComponent = self.GetComponent<BatteryComponent>();

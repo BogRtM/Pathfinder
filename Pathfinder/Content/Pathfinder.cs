@@ -220,8 +220,34 @@ namespace Pathfinder.Modules.Survivors
                 stockToConsume = 1
             });
 
+            SkillDef strongThrustSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            {
+                skillName = prefix + "_PATHFINDER_BODY_SECONDARY_STRONGTHRUST_NAME",
+                skillNameToken = prefix + "_PATHFINDER_BODY_SECONDARY_STRONGTHRUST_NAME",
+                skillDescriptionToken = prefix + "_PATHFINDER_BODY_SECONDARY_STRONGTHRUST_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texAttackIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(StrongThrust)),
+                activationStateMachineName = "Weapon",
+                baseMaxStock = 1,
+                baseRechargeInterval = 0f,
+                beginSkillCooldownOnSkillEnd = true,
+                canceledFromSprinting = false,
+                forceSprintDuringState = false,
+                fullRestockOnAssign = true,
+                interruptPriority = EntityStates.InterruptPriority.Any,
+                resetCooldownTimerOnUse = false,
+                isCombatSkill = true,
+                mustKeyPress = false,
+                cancelSprintingOnActivation = true,
+                rechargeStock = 1,
+                requiredStock = 1,
+                stockToConsume = 1
+            });
+
             OverrideController.javelinSkill = javelinSkillDef;
+            OverrideController.strongThrustSkill = strongThrustSkillDef;
             Modules.Content.AddSkillDef(javelinSkillDef);
+            Modules.Content.AddSkillDef(strongThrustSkillDef);
 
             SkillDef dashSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
@@ -247,13 +273,13 @@ namespace Pathfinder.Modules.Survivors
                 stockToConsume = 1
             });
 
-            SkillDef diveSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
+            /*SkillDef diveSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
             {
-                skillName = prefix + "_PATHFINDER_BODY_SECONDARY_DASH_NAME",
-                skillNameToken = prefix + "_PATHFINDER_BODY_SECONDARY_DASH_NAME",
-                skillDescriptionToken = prefix + "_PATHFINDER_BODY_SECONDARY_DASH_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texEvadeIcon"),
-                activationState = new EntityStates.SerializableEntityStateType(typeof(Evade)),
+                skillName = prefix + "_PATHFINDER_BODY_SECONDARY_JUMP_NAME",
+                skillNameToken = prefix + "_PATHFINDER_BODY_SECONDARY_JUMP_NAME",
+                skillDescriptionToken = prefix + "_PATHFINDER_BODY_SECONDARY_JUMP_DESCRIPTION",
+                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texThrustIcon"),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(Heartseeker)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 2,
                 baseRechargeInterval = Config.dashCD.Value,
@@ -269,7 +295,7 @@ namespace Pathfinder.Modules.Survivors
                 rechargeStock = 1,
                 requiredStock = 1,
                 stockToConsume = 1
-            });
+            });*/
 
             Modules.Skills.AddSecondarySkills(bodyPrefab, dashSkillDef);
             #endregion
@@ -509,7 +535,7 @@ namespace Pathfinder.Modules.Survivors
 
             #region DefaultSkin
             SkinDef defaultSkin = Modules.Skins.CreateSkinDef(PathfinderPlugin.DEVELOPER_PREFIX + "_PATHFINDER_BODY_DEFAULT_SKIN_NAME",
-                Assets.mainAssetBundle.LoadAsset<Sprite>("texMainSkin"),
+                Assets.mainAssetBundle.LoadAsset<Sprite>("texMainSkin"), 
                 defaultRenderers,
                 mainRenderer,
                 model);
@@ -542,7 +568,7 @@ namespace Pathfinder.Modules.Survivors
             CharacterModel.RendererInfo[] masteryRendererInfos = Skins.getRendererMaterials(defaultRenderers, matArray);
 
             SkinDef masterySkin = Modules.Skins.CreateSkinDef(PathfinderPlugin.DEVELOPER_PREFIX + "_PATHFINDER_BODY_MASTERY_SKIN_NAME",
-                Assets.mainAssetBundle.LoadAsset<Sprite>("texMasteryAchievement"),
+                Assets.mainAssetBundle.LoadAsset<Sprite>("texMasterySkin"),
                 masteryRendererInfos,
                 mainRenderer,
                 model,
