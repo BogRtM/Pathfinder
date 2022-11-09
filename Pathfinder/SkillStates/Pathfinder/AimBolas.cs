@@ -40,9 +40,10 @@ namespace Skillstates.Pathfinder
             setFuse = false;
             projectileBaseSpeed = 200f;
             maxDistance = float.PositiveInfinity;
-            baseMinimumDuration = 0.1f;
 
             base.OnEnter();
+
+            minimumDuration = 0.1f;
         }
 
         public override void FixedUpdate()

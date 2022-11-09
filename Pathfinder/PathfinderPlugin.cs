@@ -41,7 +41,7 @@ namespace Pathfinder
         public const string MODUID = "com.Bog.Pathfinder";
         public const string MODNAME = "Pathfinder";
 
-        public const string MODVERSION = "0.4.0";
+        public const string MODVERSION = "0.4.1";
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
         public const string DEVELOPER_PREFIX = "BOG";
@@ -248,9 +248,13 @@ namespace Pathfinder
                     self.moveSpeed *= 1.2f;
                 }
 
-                BatteryComponent batteryComponent = self.GetComponent<BatteryComponent>();
-                if (!batteryComponent) return;
-                batteryComponent.rechargeRate = Modules.Config.batteryRechargeRate.Value * self.attackSpeed;
+                if(self.bodyIndex == BodyCatalog.FindBodyIndex(squallBodyPrefab))
+                {
+                    BatteryComponent batteryComponent = self.GetComponent<BatteryComponent>();
+
+                    if(batteryComponent)
+                        batteryComponent.rechargeRate = Modules.Config.batteryRechargeRate.Value * self.attackSpeed;
+                }
             }
         }
     }

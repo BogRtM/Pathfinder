@@ -63,6 +63,7 @@ namespace Pathfinder.Modules.Survivors
             survivorDef.primaryColor = charColor;
 
             survivorDef.displayNameToken = tokenPrefix + "NAME";
+            survivorDef.cachedName = survivorDef.displayNameToken;
             survivorDef.descriptionToken = tokenPrefix + "DESCRIPTION";
             survivorDef.outroFlavorToken = tokenPrefix + "OUTRO_FLAVOR";
             survivorDef.mainEndingEscapeFailureFlavorToken = tokenPrefix + "OUTRO_FAILURE";
