@@ -2,7 +2,7 @@
 
 I'm really really *REALLY* sorry that it took this long for an update. In particular I would like to greatly apologize to Mr. Bones, for taking so long to implement the mastery skin.
 
-Pathfinder isn't dead; I have just been slacking greatly. I intend to finish him entirety within the next couple of months.
+Pathfinder isn't dead; I have just been slacking greatly. I intend to finish him entirely within the next couple of months.
 
 ## Known issues
 https://github.com/BogRtM/Pathfinder/issues
@@ -96,6 +96,18 @@ Reach out to `Bog#4770` on Discord with feedback, or find me on the official Ris
 
 ### Latest Patch
 
+`0.4.1`
+```
+• Updated cachedName in SurvivorDef
+
+• Shock Bolas now always has a minimum 0.1 second aim duration
+
+• Improved logic for RecalculateStats() hook
+```
+
+<details>
+    <summary>Previous patches</summary>
+    
 `0.4.0`
 ```
 • Added Mastery skin
@@ -115,9 +127,6 @@ Reach out to `Bog#4770` on Discord with feedback, or find me on the official Ris
     - This is a temporary measure while I work on real VFX.
     - But I might just keep it as is.
 ```
-
-<details>
-    <summary>Previous patches</summary>
     
 `0.3.2`
 ```
