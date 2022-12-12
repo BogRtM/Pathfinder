@@ -1,9 +1,3 @@
-## News
-
-I'm really really *REALLY* sorry that it took this long for an update. In particular I would like to greatly apologize to Mr. Bones, for taking so long to implement the mastery skin.
-
-Pathfinder isn't dead; I have just been slacking greatly. I intend to finish him entirely within the next couple of months.
-
 ## Known issues
 https://github.com/BogRtM/Pathfinder/issues
 
@@ -92,10 +86,28 @@ Reach out to `Bog#4770` on Discord with feedback, or find me on the official Ris
 ![Concept1](https://user-images.githubusercontent.com/55299061/181116317-8ae8084a-a07a-42b5-8508-ad3ecd54b14f.png)
 ![Concept2](https://user-images.githubusercontent.com/55299061/181116345-9c446691-d1a0-43c0-93b4-ba81e9415dbc.png)
 
+## DISCLAIMER
+
+In the case that this mod becomes deprecated or unplayable, and I have completely disappeared for an extended period of time and cannot be contacted, I grant full permission to update and maintain this mod to anybody who wishes to do so, as long as proper credit is given to myself and all others who have worked on Pathfinder. I will do my best to keep the github repo updated with all the latest project files.
+
 ## Change Log
 
 ### Latest Patch
 
+`0.4.2`
+```
+• Base duration of Thrust reduced from 0.8 to 0.7 seconds
+
+• Slightly altered jump + descent animations
+
+• Icons do not generate mipmaps anymore
+
+• Added important disclaimer to ReadMe
+```
+
+<details>
+    <summary>Previous patches</summary>
+    
 `0.4.1`
 ```
 • Updated cachedName in SurvivorDef
@@ -104,9 +116,6 @@ Reach out to `Bog#4770` on Discord with feedback, or find me on the official Ris
 
 • Improved logic for RecalculateStats() hook
 ```
-
-<details>
-    <summary>Previous patches</summary>
     
 `0.4.0`
 ```
