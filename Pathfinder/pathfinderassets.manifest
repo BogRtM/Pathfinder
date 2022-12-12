@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3222235911
+CRC: 59518762
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 2a8c29e0e3c84f3a2d2e294d106713cb
+    Hash: 394dfb958df77f4435737d17806bb605
   TypeTreeHash:
     serializedVersion: 2
     Hash: 3b5b48f7f4bead342b21a97ff2426166
@@ -107,6 +107,7 @@ Assets:
 - Assets/PathfinderAssets/Animation/clips/Rig_AimPitch New USE.anim
 - Assets/PathfinderAssets/VFX/EffectMaterials/Cone.mesh
 - Assets/PathfinderAssets/Textures/HeadHunter_D.png
+- Assets/PathfinderAssets/Animation/clips/Rig_JavDescend2.anim
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/Javelin Trail.png
 - Assets/PathfinderAssets/Animation/clips/Rig_IdleIn.anim
 - Assets/PathfinderAssets/Animation/clips/Rig_Sweep.anim
@@ -128,6 +129,7 @@ Assets:
 - Assets/PathfinderAssets/FBX/BolasGhostFBX.fbx
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/texSwingEffect.png
 - Assets/PathfinderAssets/Materials/matJavelinHH.mat
+- Assets/PathfinderAssets/Animation/clips/Rig_Descend2.anim
 - Assets/PathfinderAssets/VFX/HenryMaterials/matHenrySwing2.mat
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_Backflip.anim
 - Assets/PathfinderAssets/VFX/HenryMaterials/texHenrySwing2.png
@@ -177,6 +179,7 @@ Assets:
 - Assets/PathfinderAssets/Textures/DefaultMaterial_Normal_OpenGL.png
 - Assets/PathfinderAssets/Textures/PathfinderSkin.png
 - Assets/PathfinderAssets/Animation/clips/Rig_GroundDashF New.anim
+- Assets/PathfinderAssets/Animation/clips/Rig_JavDescendFast2.anim
 - Assets/PathfinderAssets/VFX/EffectMaterials/Blots.mat
 - Assets/PathfinderAssets/Mesh/Headhunter/HeadHunterBackpack.mesh
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_AimHeadPitch.anim
@@ -322,6 +325,7 @@ Assets:
 - Assets/PathfinderAssets/FBX/Pathfinder.fbx
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/Speartip.png
 - Assets/PathfinderAssets/Animation/clips/Display/Rig_MenuIdle.anim
+- Assets/PathfinderAssets/Animation/clips/Rig_JavJump2.anim
 - Assets/PathfinderAssets/Mesh/meshSpear.mesh
 - Assets/PathfinderAssets/Animation/Squall/animSquall.controller
 - Assets/PathfinderAssets/Textures/spearEm.png
@@ -338,9 +342,11 @@ Assets:
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_EmptyAction.anim
 - Assets/PathfinderAssets/Animation/clips/Display/Rig_MenuIdleIn.anim
 - Assets/PathfinderAssets/VFX/EffectMaterials/matLightning.mat
+- Assets/PathfinderAssets/Animation/clips/Rig_Jump2.anim
 - Assets/PathfinderAssets/VFX/HenryMaterials/texDust.png
 - Assets/PathfinderAssets/VFX/EffectMaterials/Blots Inner.mat
 - Assets/PathfinderAssets/Mesh/Headhunter/HeadHunterVest.mesh
+- Assets/PathfinderAssets/Animation/clips/Rig_DescendFast2.anim
 - Assets/PathfinderAssets/Animation/clips/Rig__Idle New USE.anim
 - Assets/PathfinderAssets/Icons/Skill Icons/texCommandIcon.png
 - Assets/PathfinderAssets/Animation/Squall/aimMaskSquall.mask

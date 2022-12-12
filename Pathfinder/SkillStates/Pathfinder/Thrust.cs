@@ -14,7 +14,7 @@ namespace Skillstates.Pathfinder
         private Animator animator;
         private OverlapAttack attack;
 
-        public static float baseDuration = 0.8f;
+        public static float baseDuration = 0.7f; //0.8f;
         public static float smallHopVelocity = 5.5f;
 
         private float duration;
