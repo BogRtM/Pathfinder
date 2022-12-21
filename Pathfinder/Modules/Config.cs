@@ -40,6 +40,7 @@ namespace Pathfinder.Modules
         private static string squallBatteryTitle = squallPrefix + "Battery";// + versionSuffix;
         public static ConfigEntry<float> batteryDrainRate;
         public static ConfigEntry<float> batteryRechargeRate;
+        public static ConfigEntry<bool> laserLineEnabled;
         #endregion
 
         #region Squall Attack
@@ -95,6 +96,7 @@ namespace Pathfinder.Modules
             #region Squall General
             batteryDrainRate = plugin.Config.Bind<float>(squallBatteryTitle, "Battery Drain Rate" , 8f, "Amount battery drains per second while Squall is in Attack Mode");
             batteryRechargeRate = plugin.Config.Bind<float>(squallBatteryTitle, "Battery Recharge Rate" , 1f, "Base battery recharge rate while Squall is in Follow Mode");
+            laserLineEnabled = plugin.Config.Bind<bool>("General", "Enable Squall Laser Pointer", true, "Shows Squall's laser pointer");
             #endregion
 
             #region Squall Attack

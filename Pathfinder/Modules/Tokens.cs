@@ -27,8 +27,18 @@ namespace Pathfinder.Modules
 
             desc += modderNote;
 
-            string lore =
-                "";
+            string lore = "";
+            /*
+                "\"You bloody idiot, what the hell did you shoot it for!? We were supposed to capture it alive!\"\n\n" + 
+                
+                "\"The bastard charged straight at me, so I got a little nervous, alright? Big deal, we'll find another one.\"\n\n" +
+
+                "\"Yes, big bloody deal, you mongrel! Woolly Bullhogs are endangered! <i>Critically</i> endangered. " +
+                "If our client finds out about this, we're looking at ten years behind bars, minimum.\n\n" +
+                
+                "\"So what, you're gonna rat me out? Hardly anyone ever visits this \"\n\n";
+            */
+
 
             string outro = "..and so they left, another food chain conquered.";
             string outroFailure = "..and so they vanished, forever lost to the uncaring wilderness.";

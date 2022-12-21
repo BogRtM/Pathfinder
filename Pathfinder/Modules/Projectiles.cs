@@ -57,6 +57,7 @@ namespace Pathfinder.Modules
             impactExplosion.impactEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Captain/CaptainTazerNova.prefab").WaitForCompletion();
 
             impactExplosion.fireChildren = true;
+            impactExplosion.bonusBlastForce = new Vector3(0f, -500f, 0f);
             impactExplosion.childrenProjectilePrefab = bolasZone;
             impactExplosion.childrenCount = 1;
             impactExplosion.childrenDamageCoefficient = 0f;

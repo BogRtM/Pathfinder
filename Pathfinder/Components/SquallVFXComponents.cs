@@ -25,9 +25,13 @@ namespace Pathfinder.Components
         {
             modelLocator = base.GetComponent<ModelLocator>();
             childLocator = modelLocator.modelTransform.GetComponent<ChildLocator>();
+
             laserLine = base.GetComponentInChildren<LineRenderer>();
+            
             trails = base.GetComponentsInChildren<TrailRenderer>();
-            laserLine.enabled = true;
+
+            if (Config.laserLineEnabled.Value)
+                laserLine.enabled = true;
 
             lineStartTransform = childLocator.FindChild("UpperBody");
         }
@@ -45,12 +49,15 @@ namespace Pathfinder.Components
         
         private void FixedUpdate()
         {
-            Ray aimRay = inputBank.GetAimRay();
-            Vector3 origin = lineStartTransform.position;
-            Vector3 point = aimRay.GetPoint(maxAim);
+            if (laserLine.enabled)
+            {
+                Ray aimRay = inputBank.GetAimRay();
+                Vector3 origin = lineStartTransform.position;
+                Vector3 point = aimRay.GetPoint(maxAim);
 
-            laserLine.SetPosition(0, origin);
-            laserLine.SetPosition(1, point);
+                laserLine.SetPosition(0, origin);
+                laserLine.SetPosition(1, point);
+            }
         }
 
         internal void SetTrailColor(Color color)
@@ -64,13 +71,19 @@ namespace Pathfinder.Components
 
         internal void SetLineColor(Color color)
         {
-            laserLine.startColor = color;
-            laserLine.endColor = color;
+            if (Config.laserLineEnabled.Value)
+            {
+                laserLine.startColor = color;
+                laserLine.endColor = color;
+            }
         }
 
         internal void ToggleVFX(bool onOff)
         {
-            laserLine.enabled = onOff;
+            if (Config.laserLineEnabled.Value)
+            {
+                laserLine.enabled = onOff;
+            }
 
             foreach(var i in trails)
             {

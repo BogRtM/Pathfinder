@@ -5431,7 +5431,7 @@ MonoBehaviour:
     transform: {fileID: 3423032363701999318}
   - name: StomachBone
     transform: {fileID: 4152483963249128635}
-  - name: ChestBone
+  - name: Chest
     transform: {fileID: 3119024269359770285}
   - name: ClavicleL
     transform: {fileID: 3952496114449652956}

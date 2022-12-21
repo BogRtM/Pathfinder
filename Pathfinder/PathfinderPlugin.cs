@@ -41,7 +41,7 @@ namespace Pathfinder
         public const string MODUID = "com.Bog.Pathfinder";
         public const string MODNAME = "Pathfinder";
 
-        public const string MODVERSION = "0.4.2";
+        public const string MODVERSION = "0.4.3";
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
         public const string DEVELOPER_PREFIX = "BOG";
@@ -52,6 +52,9 @@ namespace Pathfinder
         public static GameObject squallBodyPrefab;
         //public static GameObject squallMasterPrefab;
         public static GameObject commandCrosshair;
+
+        public static BodyIndex squallBodyIndex;
+        public static BodyIndex teslaTrooperBodyIndex;
 
         public static SkillDef javelinSkill;
 
@@ -94,6 +97,7 @@ namespace Pathfinder
         private void Hook()
         {
             // run hooks here, disabling one is as simple as commenting out the line
+            On.RoR2.BodyCatalog.SetBodyPrefabs += BodyCatalog_SetBodyPrefabs;
             On.RoR2.CharacterBody.RecalculateStats += CharacterBody_RecalculateStats;
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
             On.RoR2.PrimarySkillShurikenBehavior.OnSkillActivated += PrimarySkillShurikenBehavior_OnSkillActivated;
@@ -101,11 +105,20 @@ namespace Pathfinder
             On.RoR2.CharacterBody.AddBuff_BuffIndex += CharacterBody_AddBuff_BuffIndex;
         }
 
+        private void BodyCatalog_SetBodyPrefabs(On.RoR2.BodyCatalog.orig_SetBodyPrefabs orig, GameObject[] newBodyPrefabs)
+        {
+            orig(newBodyPrefabs);
+
+            squallBodyIndex = BodyCatalog.FindBodyIndex(squallBodyPrefab);
+            teslaTrooperBodyIndex = BodyCatalog.FindBodyIndex("TeslaTrooperBody");
+            Log.Warning("Squall's body index is: " + squallBodyIndex);
+        }
+
         private void CharacterBody_AddBuff_BuffIndex(On.RoR2.CharacterBody.orig_AddBuff_BuffIndex orig, CharacterBody self, BuffIndex buffType)
         {
             orig(self, buffType);
 
-            if(buffType == BuffCatalog.FindBuffIndex("Charged") && self.bodyIndex == BodyCatalog.FindBodyIndex(squallBodyPrefab))
+            if(buffType == BuffCatalog.FindBuffIndex("Charged") && self.bodyIndex == squallBodyIndex)
             {
                 BatteryComponent batteryComponent = self.GetComponent<BatteryComponent>();
                 if(batteryComponent)
@@ -149,7 +162,7 @@ namespace Pathfinder
 
         private void GlobalEventManager_onClientDamageNotified(DamageDealtMessage msg)
         {
-            if (BodyCatalog.FindBodyIndex(msg.attacker) != BodyCatalog.FindBodyIndex(squallBodyPrefab)) return;
+            if (!msg.attacker) return;
 
             SquallController squallController = msg.attacker.GetComponent<SquallController>();
             if (!squallController || !squallController.owner) return;
@@ -175,14 +188,14 @@ namespace Pathfinder
 
         private void HealthComponent_TakeDamage(On.RoR2.HealthComponent.orig_TakeDamage orig, HealthComponent self, DamageInfo damageInfo)
         {
-            if (self.body.bodyIndex == BodyCatalog.FindBodyIndex(squallBodyPrefab))
+            if (self.body.bodyIndex == squallBodyIndex)
             {
                 if(damageInfo.attacker)
                 {
                     CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
                     if (attackerBody)
                     {
-                        if (attackerBody.bodyIndex == BodyCatalog.FindBodyIndex("TeslaTrooperBody"))
+                        if (attackerBody.bodyIndex == teslaTrooperBodyIndex)
                         {
                             if (attackerBody.teamComponent.teamIndex == self.body.teamComponent.teamIndex)
                             {
@@ -248,10 +261,13 @@ namespace Pathfinder
                     self.moveSpeed *= 1.2f;
                 }
 
-                BatteryComponent batteryComponent = self.GetComponent<BatteryComponent>();
+                if(self.bodyIndex == squallBodyIndex)
+                {
+                    BatteryComponent batteryComponent = self.GetComponent<BatteryComponent>();
 
-                if (batteryComponent)
-                    batteryComponent.rechargeRate = Modules.Config.batteryRechargeRate.Value * self.attackSpeed;
+                    if (batteryComponent)
+                        batteryComponent.rechargeRate = Modules.Config.batteryRechargeRate.Value * self.attackSpeed;
+                }
             }
         }
     }

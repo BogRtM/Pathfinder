@@ -147,30 +147,6 @@ namespace Pathfinder.Modules.NPC
                 UnityEngine.Object.DestroyImmediate(i);
             }
 
-            AISkillDriver hardLeash = masterPrefab.AddComponent<AISkillDriver>();
-            hardLeash.customName = "HardLeashToLeader";
-            hardLeash.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
-            hardLeash.moveTargetType = AISkillDriver.TargetType.CurrentLeader;
-            hardLeash.activationRequiresAimConfirmation = false;
-            hardLeash.activationRequiresTargetLoS = false;
-            hardLeash.selectionRequiresTargetLoS = false;
-            hardLeash.maxTimesSelected = -1;
-            hardLeash.maxDistance = float.PositiveInfinity;
-            hardLeash.minDistance = 120f;
-            hardLeash.requireSkillReady = false;
-            hardLeash.aimType = AISkillDriver.AimType.AtCurrentLeader;
-            hardLeash.ignoreNodeGraph = false;
-            hardLeash.moveInputScale = 1f;
-            hardLeash.driverUpdateTimerOverride = -1f;
-            hardLeash.shouldSprint = true;
-            hardLeash.shouldFireEquipment = false;
-            hardLeash.buttonPressType = AISkillDriver.ButtonPressType.Hold;
-            hardLeash.minTargetHealthFraction = Mathf.NegativeInfinity;
-            hardLeash.maxTargetHealthFraction = Mathf.Infinity;
-            hardLeash.minUserHealthFraction = float.NegativeInfinity;
-            hardLeash.maxUserHealthFraction = float.PositiveInfinity;
-            hardLeash.skillSlot = SkillSlot.None;
-
             AISkillDriver strafeMissile = masterPrefab.AddComponent<AISkillDriver>();
             strafeMissile.customName = "ShootMissilesStrafe";
             strafeMissile.movementType = AISkillDriver.MovementType.StrafeMovetarget;
@@ -320,6 +296,30 @@ namespace Pathfinder.Modules.NPC
             doNothing.maxUserHealthFraction = float.PositiveInfinity;
             doNothing.skillSlot = SkillSlot.Primary;
             if (!attackDrivers.Contains(doNothing.customName)) attackDrivers.Add(doNothing.customName);
+
+            AISkillDriver hardLeash = masterPrefab.AddComponent<AISkillDriver>();
+            hardLeash.customName = "HardLeashToLeader";
+            hardLeash.movementType = AISkillDriver.MovementType.ChaseMoveTarget;
+            hardLeash.moveTargetType = AISkillDriver.TargetType.CurrentLeader;
+            hardLeash.activationRequiresAimConfirmation = false;
+            hardLeash.activationRequiresTargetLoS = false;
+            hardLeash.selectionRequiresTargetLoS = false;
+            hardLeash.maxTimesSelected = -1;
+            hardLeash.maxDistance = float.PositiveInfinity;
+            hardLeash.minDistance = 120f;
+            hardLeash.requireSkillReady = false;
+            hardLeash.aimType = AISkillDriver.AimType.AtCurrentLeader;
+            hardLeash.ignoreNodeGraph = false;
+            hardLeash.moveInputScale = 1f;
+            hardLeash.driverUpdateTimerOverride = -1f;
+            hardLeash.shouldSprint = true;
+            hardLeash.shouldFireEquipment = false;
+            hardLeash.buttonPressType = AISkillDriver.ButtonPressType.Hold;
+            hardLeash.minTargetHealthFraction = Mathf.NegativeInfinity;
+            hardLeash.maxTargetHealthFraction = Mathf.Infinity;
+            hardLeash.minUserHealthFraction = float.NegativeInfinity;
+            hardLeash.maxUserHealthFraction = float.PositiveInfinity;
+            hardLeash.skillSlot = SkillSlot.None;
 
             AISkillDriver softLeash = masterPrefab.AddComponent<AISkillDriver>();
             softLeash.customName = "SoftLeashToLeader";
