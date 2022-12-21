@@ -94,6 +94,22 @@ In the case that this mod becomes deprecated or unplayable, and I have completel
 
 ### Latest Patch
 
+`0.4.3`
+```
+• Created new config option to enable/disable Squall's laser pointer
+
+• Fixed camera not following the ragdoll post-death
+
+• Shock Bolas' initial explosion now applies slight downward force to airborne enemies
+
+• Squall will no longer leash to you while in Attack mode
+
+• Minor code optimization
+```
+
+<details>
+    <summary>Previous patches</summary>
+    
 `0.4.2`
 ```
 • Base duration of Thrust reduced from 0.8 to 0.7 seconds
@@ -104,9 +120,6 @@ In the case that this mod becomes deprecated or unplayable, and I have completel
 
 • Added important disclaimer to ReadMe
 ```
-
-<details>
-    <summary>Previous patches</summary>
     
 `0.4.1`
 ```
