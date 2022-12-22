@@ -94,6 +94,14 @@ In the case that this mod becomes deprecated or unplayable, and I have completel
 
 ### Latest Patch
 
+`0.5.0`
+```
+• Added lore entry
+```
+
+<details>
+    <summary>Previous patches</summary>
+    
 `0.4.3`
 ```
 • Created new config option to enable/disable Squall's laser pointer
@@ -106,9 +114,6 @@ In the case that this mod becomes deprecated or unplayable, and I have completel
 
 • Minor code optimization
 ```
-
-<details>
-    <summary>Previous patches</summary>
     
 `0.4.2`
 ```
