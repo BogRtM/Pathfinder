@@ -27,17 +27,28 @@ namespace Pathfinder.Modules
 
             desc += modderNote;
 
-            string lore = "";
-            /*
-                "\"You bloody idiot, what the hell did you shoot it for!? We were supposed to capture it alive!\"\n\n" + 
-                
-                "\"The bastard charged straight at me, so I got a little nervous, alright? Big deal, we'll find another one.\"\n\n" +
+            string lore =
+                "\"You bloody idiot, that's not a Red Snubtail, that's a Rosy Quillback rat! You caught the wrong rodent.\"\n\n" +
 
-                "\"Yes, big bloody deal, you mongrel! Woolly Bullhogs are endangered! <i>Critically</i> endangered. " +
-                "If our client finds out about this, we're looking at ten years behind bars, minimum.\n\n" +
+                "\"So what? It's got red fur and a stubby tail, I say we just take it and finish the job.\"\n\n" +
+
+                "\"We've been over this, snubtails mimic quillbacks to deter predators; you have to check their fur for tiny spines. Also, quillbacks are strict insectivores; " +
+                "that's why I told you not to use the live insect bait, so you wouldn't accidentally attract one. Did you even read the bestiary entries that I showed you?\"\n\n" +
+
+                "\"So it's got some puny needles on its arse, big deal. We've been chasing after a damn rat for three days now. Besides, our " +
+                "client's just some rich snob looking for a fancy exotic pet to show off in front of their other rich snob friends; " +
+                "they'll never tell the difference. This one's just a tiny bit prickly, they won't mind.\"\n\n" +
+
+                "\"Did you forget that quillbacks are <i>poisonous</i>, genius? They'll damn well be able to tell the bloody difference when they pet the bugger, then wake up the next morning, " +
+                "paralyzed head to toe. Do you want to earn us a manslaughter charge, you mongrel?\"\n\n" + 
                 
-                "\"So what, you're gonna rat me out? Hardly anyone ever visits this \"\n\n";
-            */
+                "\"They're poisonous?\"\n\n" +
+
+                "\"... Where are your gloves?\"\n\n" +
+
+                "\"...\"\n\n" +
+
+                "\"I'm finding a new partner.\"\n\n"; 
 
 
             string outro = "..and so they left, another food chain conquered.";
@@ -51,7 +62,7 @@ namespace Pathfinder.Modules
             LanguageAPI.Add(prefix + "NAME", "Pathfinder");
             LanguageAPI.Add(prefix + "DESCRIPTION", desc);
             LanguageAPI.Add(prefix + "SUBTITLE", "Birds of Prey");
-            //LanguageAPI.Add(prefix + "LORE", lore);
+            LanguageAPI.Add(prefix + "LORE", lore);
             LanguageAPI.Add(prefix + "OUTRO_FLAVOR", outro);
             LanguageAPI.Add(prefix + "OUTRO_FAILURE", outroFailure);
 
