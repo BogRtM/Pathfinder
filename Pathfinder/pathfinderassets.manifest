@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3109110863
+CRC: 928555675
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 1f70639833f31a8a8a5eab0ff274012d
+    Hash: be0f2100f56f5c640f616c662e5dfbd4
   TypeTreeHash:
     serializedVersion: 2
     Hash: 3b5b48f7f4bead342b21a97ff2426166
@@ -128,6 +128,7 @@ Assets:
 - Assets/PathfinderAssets/VFX/HenryMaterials/matSmoke.mat
 - Assets/PathfinderAssets/FBX/BolasGhostFBX.fbx
 - Assets/PathfinderAssets/VFX/EffectMaterials/Textures/texSwingEffect.png
+- Assets/PathfinderAssets/VFX/EffectMaterials/Blots Weak Emit.mat
 - Assets/PathfinderAssets/Materials/matJavelinHH.mat
 - Assets/PathfinderAssets/Animation/clips/Rig_Descend2.anim
 - Assets/PathfinderAssets/VFX/HenryMaterials/matHenrySwing2.mat
@@ -168,6 +169,7 @@ Assets:
 - Assets/PathfinderAssets/Animation/clips/Rig_JavGroundDash.anim
 - Assets/PathfinderAssets/Animation/Squall/SquallClips/Armature_SpinDown.anim
 - Assets/PathfinderAssets/Textures/HeadHunter_E.png
+- Assets/PathfinderAssets/VFX/EffectMaterials/Blots Inner No Emit.mat
 - Assets/PathfinderAssets/VFX/HenryMaterials/texFire.tga
 - Assets/PathfinderAssets/Textures/tex_bird_diffuse.png
 - Assets/PathfinderAssets/Animation/clips/Rig_Polevault.anim

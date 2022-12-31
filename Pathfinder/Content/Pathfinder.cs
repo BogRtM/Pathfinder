@@ -45,6 +45,7 @@ namespace Pathfinder.Modules.Survivors
             healthRegen = 1f,
             armor = 0f,
             jumpCount = 1,
+            sortPosition = Config.sortPosition.Value
         };
 
         public override CustomRendererInfo[] customRendererInfos { get; set; } = new CustomRendererInfo[]

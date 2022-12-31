@@ -12,6 +12,7 @@ namespace Pathfinder.Modules
         private static string pathfinderPrefix = "Pathfinder - ";
         private static string squallPrefix = "Squall - ";
         private static string versionSuffix = " - " + PathfinderPlugin.MODVERSION;
+        public static ConfigEntry<float> sortPosition;
 
         #region Pathfinder Primary
         private static string primarySectionTitle = pathfinderPrefix + "Primary";// + versionSuffix;
@@ -66,6 +67,8 @@ namespace Pathfinder.Modules
             plugin.Config.Clear();
 
             modVersion = plugin.Config.Bind<string>("General", "Mod Version", PathfinderPlugin.MODVERSION, "Current version; don't touch this or it will reset your config");
+
+            sortPosition = plugin.Config.Bind<float>("General", "Lobby Sort Position", 9.5f, "Sort position of Pathfinder in the character select lobby");
 
             if (modVersion.Value != modVersion.DefaultValue.ToString())
             {
