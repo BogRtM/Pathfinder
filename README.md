@@ -94,13 +94,21 @@ In the case that this mod becomes deprecated or unplayable, and I have completel
 
 ### Latest Patch
 
-`0.5.0`
+`0.5.1`
 ```
-• Added lore entry
+• Massively reduced emission strength of the Thrust VFX
+
+• Changed Pathfinder's default sort order in the character select lobby to be right after Loader
+    - This can be configured
 ```
 
 <details>
     <summary>Previous patches</summary>
+    
+`0.5.0`
+```
+• Added lore entry
+```
     
 `0.4.3`
 ```
