@@ -55,9 +55,20 @@ namespace Skillstates.Pathfinder
                 PlayAnimation("FullBody, Override", "JavGroundDash", "Dash.playbackRate", baseDuration);
             }
 
-            float bonusMS = base.moveSpeedStat - base.characterBody.baseMoveSpeed;
-            bonusFromMovespeed = (bonusMS * base.characterBody.baseMoveSpeed) / (base.moveSpeedStat);
-            totalDashBonus = speedCoefficient * bonusFromMovespeed + flatBonus;
+            if(base.moveSpeedStat <= 0f)
+            {
+                totalDashBonus = 0f;
+            }
+            else if (base.moveSpeedStat <= base.characterBody.baseMoveSpeed)
+            {
+                totalDashBonus = flatBonus * (base.moveSpeedStat / base.characterBody.baseMoveSpeed);
+            }
+            else
+            {
+                float bonusMS = base.moveSpeedStat - base.characterBody.baseMoveSpeed;
+                bonusFromMovespeed = (bonusMS * base.characterBody.baseMoveSpeed) / (base.moveSpeedStat);
+                totalDashBonus = speedCoefficient * bonusFromMovespeed + flatBonus;
+            }
         }
 
         public override void FixedUpdate()
