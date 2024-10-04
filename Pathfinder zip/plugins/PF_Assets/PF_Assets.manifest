@@ -1,0 +1,7 @@
+ManifestFileVersion: 0
+CRC: 516918199
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: pathfinderassets
+      Dependencies: {}
