@@ -32,8 +32,8 @@ namespace Skillstates.Pathfinder
             base.PlayAnimation("Gesture, Override", javReady + "BolasLoop", "Hand.playbackRate", loopDuration);
 
             projectilePrefab = Projectiles.shockBolas;
-            arcVisualizerPrefab = Assets.lineVisualizer;
-            endpointVisualizerPrefab = Assets.explosionVisualizer;
+            arcVisualizerPrefab = PathfinderAssets.lineVisualizer;
+            endpointVisualizerPrefab = PathfinderAssets.explosionVisualizer;
             endpointVisualizerRadiusScale = 18f;
             detonationRadius = 18f;
             damageCoefficient = 0f; //Config.bolasExplosionDamage.Value;

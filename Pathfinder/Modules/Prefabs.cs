@@ -16,7 +16,7 @@ namespace Pathfinder.Modules {
 
         public static GameObject CreateDisplayPrefab(string displayModelName, GameObject prefab, BodyInfo bodyInfo)
         {
-            GameObject model = Assets.LoadSurvivorModel(displayModelName);
+            GameObject model = PathfinderAssets.LoadSurvivorModel(displayModelName);
 
             CharacterModel characterModel = model.GetComponent<CharacterModel>();
             if (!characterModel) {
@@ -24,7 +24,7 @@ namespace Pathfinder.Modules {
             }
             characterModel.baseRendererInfos = prefab.GetComponentInChildren<CharacterModel>().baseRendererInfos;
 
-            Modules.Assets.ConvertAllRenderersToHopooShader(model);
+            Modules.PathfinderAssets.ConvertAllRenderersToHopooShader(model);
 
             return model.gameObject;
         }
@@ -44,7 +44,7 @@ namespace Pathfinder.Modules {
             GameObject model = null;
             if (modelName != "mdl")
             {
-                model = Assets.LoadSurvivorModel(modelName);
+                model = PathfinderAssets.LoadSurvivorModel(modelName);
                 if (model == null) model = newBodyPrefab.GetComponentInChildren<CharacterModel>().gameObject;
 
                     modelBaseTransform = AddCharacterModelToSurvivorBody(newBodyPrefab, model.transform, bodyInfo);
@@ -174,7 +174,7 @@ namespace Pathfinder.Modules {
 
             characterModel.autoPopulateLightInfos = true;
             characterModel.invisibilityCount = 0;
-            characterModel.temporaryOverlays = new List<TemporaryOverlay>();
+            characterModel.temporaryOverlays = new List<TemporaryOverlayInstance>();
 
             if (!preattached) {
                 SetupCustomRendererInfos(characterModel, customInfos);

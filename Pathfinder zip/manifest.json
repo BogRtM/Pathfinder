@@ -1,0 +1,10 @@
+{
+    "name": "Pathfinder",
+    "version_number": "0.5.2",
+    "website_url": "https://github.com/BogRtM/Pathfinder",
+    "description": "(Early Access) Adds The Pathfinder as a playable survivor. The Pathfinder is an interplanetary hunter who fights alongside his falcon, Squall.",
+    "dependencies": [
+	"bbepis-BepInExPack-5.4.1905",
+	"tristanmcpherson-R2API-4.4.1"
+	]
+}

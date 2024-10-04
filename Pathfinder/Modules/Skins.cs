@@ -146,7 +146,7 @@ namespace Pathfinder.Modules
                 new SkinDef.MeshReplacement
                 {
                     renderer = rendererinfos[i].renderer,
-                    mesh = Assets.mainAssetBundle.LoadAsset<Mesh>(meshes[i])
+                    mesh = PathfinderAssets.mainAssetBundle.LoadAsset<Mesh>(meshes[i])
                 });
             }
 

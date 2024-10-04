@@ -84,7 +84,7 @@ namespace Pathfinder.Components
             MasterSummon minionSummon = new MasterSummon();
             minionSummon.masterPrefab = summonPrefab;
             minionSummon.ignoreTeamMemberLimit = false;
-            minionSummon.teamIndexOverride = TeamIndex.Player;
+            minionSummon.teamIndexOverride = characterBody.teamComponent.teamIndex;
             minionSummon.summonerBodyObject = characterBody.gameObject;
             minionSummon.inventoryToCopy = characterBody.inventory;
             minionSummon.position = characterBody.corePosition + verticalOffset;

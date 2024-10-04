@@ -33,7 +33,7 @@ namespace Pathfinder.Modules.Survivors
             bodyNameToken = PathfinderPlugin.DEVELOPER_PREFIX + "_PATHFINDER_BODY_NAME",
             subtitleNameToken = PathfinderPlugin.DEVELOPER_PREFIX + "_PATHFINDER_BODY_SUBTITLE",
 
-            characterPortrait = Assets.mainAssetBundle.LoadAsset<Texture>("texPathfinderIcon"),
+            characterPortrait = PathfinderAssets.mainAssetBundle.LoadAsset<Texture>("texPathfinderIcon"),
             //bodyColor = new Color(62f / 255f, 162f / 255f, 82f / 255f),
             bodyColor = new Color32(62, 162, 82, 255),
 
@@ -157,7 +157,7 @@ namespace Pathfinder.Modules.Survivors
             holder.Find("AmmoArea").gameObject.SetActive(false);
             holder.Find("ReadyContainer").Find("Text").gameObject.SetActive(false);
             holder.Find("ReadyContainer").Find("Square, Outer").GetComponent<Image>().color = new Color(0.579f, 0f, 0f);
-            Assets.commandCrosshair = commandCrosshair;
+            PathfinderAssets.commandCrosshair = commandCrosshair;
         }
 
         public override void InitializeSkills()
@@ -172,7 +172,7 @@ namespace Pathfinder.Modules.Survivors
                 skillName = prefix + "_PATHFINDER_BODY_PRIMARY_THRUST_NAME",
                 skillNameToken = prefix + "_PATHFINDER_BODY_PRIMARY_THRUST_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_PRIMARY_THRUST_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texThrustIcon"),
+                skillIcon = Modules.PathfinderAssets.mainAssetBundle.LoadAsset<Sprite>("texThrustIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(Thrust)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -202,7 +202,7 @@ namespace Pathfinder.Modules.Survivors
                 skillName = prefix + "_PATHFINDER_BODY_SECONDARY_JAVELIN_NAME",
                 skillNameToken = prefix + "_PATHFINDER_BODY_SECONDARY_JAVELIN_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_SECONDARY_JAVELIN_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texJavelinIcon"),
+                skillIcon = Modules.PathfinderAssets.mainAssetBundle.LoadAsset<Sprite>("texJavelinIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(JavelinToss)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -226,7 +226,7 @@ namespace Pathfinder.Modules.Survivors
                 skillName = prefix + "_PATHFINDER_BODY_SECONDARY_STRONGTHRUST_NAME",
                 skillNameToken = prefix + "_PATHFINDER_BODY_SECONDARY_STRONGTHRUST_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_SECONDARY_STRONGTHRUST_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texAttackIcon"),
+                skillIcon = Modules.PathfinderAssets.mainAssetBundle.LoadAsset<Sprite>("texAttackIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(StrongThrust)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -255,7 +255,7 @@ namespace Pathfinder.Modules.Survivors
                 skillName = prefix + "_PATHFINDER_BODY_SECONDARY_DASH_NAME",
                 skillNameToken = prefix + "_PATHFINDER_BODY_SECONDARY_DASH_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_SECONDARY_DASH_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texEvadeIcon"),
+                skillIcon = Modules.PathfinderAssets.mainAssetBundle.LoadAsset<Sprite>("texEvadeIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(Evade)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 2,
@@ -307,7 +307,7 @@ namespace Pathfinder.Modules.Survivors
                 skillName = prefix + "_PATHFINDER_BODY_UTILITY_SPIN_NAME",
                 skillNameToken = prefix + "_PATHFINDER_BODY_UTILITY_SPIN_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_UTILITY_SPIN_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSpinIcon"),
+                skillIcon = Modules.PathfinderAssets.mainAssetBundle.LoadAsset<Sprite>("texSpinIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(RendingTalons)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -323,8 +323,7 @@ namespace Pathfinder.Modules.Survivors
                 cancelSprintingOnActivation = false,
                 rechargeStock = 1,
                 requiredStock = 1,
-                stockToConsume = 1,
-                keywordTokens = new string[] {"KEYWORD_UNPOLISHED"}
+                stockToConsume = 1
             });
 
             SkillDef bolaSkillDef = Modules.Skills.CreateSkillDef(new SkillDefInfo
@@ -332,7 +331,7 @@ namespace Pathfinder.Modules.Survivors
                 skillName = prefix + "_PATHFINDER_BODY_UTILITY_BOLAS_NAME",
                 skillNameToken = prefix + "_PATHFINDER_BODY_UTILITY_BOLAS_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_UTILITY_BOLAS_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texBolasIcon"),
+                skillIcon = Modules.PathfinderAssets.mainAssetBundle.LoadAsset<Sprite>("texBolasIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(AimBolas)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -361,7 +360,7 @@ namespace Pathfinder.Modules.Survivors
                 skillName = prefix + "_PATHFINDER_BODY_SPECIAL_COMMAND_NAME",
                 skillNameToken = prefix + "_PATHFINDER_BODY_SPECIAL_COMMAND_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_SPECIAL_COMMAND_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texCommandIcon"),
+                skillIcon = Modules.PathfinderAssets.mainAssetBundle.LoadAsset<Sprite>("texCommandIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(CommandMode)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -386,7 +385,7 @@ namespace Pathfinder.Modules.Survivors
                 skillName = prefix + "_PATHFINDER_BODY_SPECIAL_COMMAND2_NAME",
                 skillNameToken = prefix + "_PATHFINDER_BODY_SPECIAL_COMMAND2_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_SPECIAL_COMMAND2_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texCommandIcon"),
+                skillIcon = Modules.PathfinderAssets.mainAssetBundle.LoadAsset<Sprite>("texCommandIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(CommandMode)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -413,7 +412,7 @@ namespace Pathfinder.Modules.Survivors
                 skillName = prefix + "_PATHFINDER_BODY_SPECIAL_ATTACK_NAME",
                 skillNameToken = prefix + "_PATHFINDER_BODY_SPECIAL_ATTACK_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_SPECIAL_ATTACK_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texAttackIcon"),
+                skillIcon = Modules.PathfinderAssets.mainAssetBundle.LoadAsset<Sprite>("texAttackIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(AttackCommand)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -440,7 +439,7 @@ namespace Pathfinder.Modules.Survivors
                 skillName = prefix + "_PATHFINDER_BODY_SPECIAL_FOLLOW_NAME",
                 skillNameToken = prefix + "_PATHFINDER_BODY_SPECIAL_FOLLOW_NAME",
                 skillDescriptionToken = prefix + "_PATHFINDER_BODY_SPECIAL_FOLLOW_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texFollowIcon"),
+                skillIcon = Modules.PathfinderAssets.mainAssetBundle.LoadAsset<Sprite>("texFollowIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(FollowCommand)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -496,7 +495,7 @@ namespace Pathfinder.Modules.Survivors
                 skillName = prefix + "_SQUALL_SPECIAL_GOFORTHROAT_NAME",
                 skillNameToken = prefix + "_SQUALL_SPECIAL_GOFORTHROAT_NAME",
                 skillDescriptionToken = prefix + "_SQUALL_SPECIAL_GOFORTHROAT_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSquallEvisIcon"),
+                skillIcon = Modules.PathfinderAssets.mainAssetBundle.LoadAsset<Sprite>("texSquallEvisIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SpecialCommand)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -536,7 +535,7 @@ namespace Pathfinder.Modules.Survivors
 
             #region DefaultSkin
             SkinDef defaultSkin = Modules.Skins.CreateSkinDef(PathfinderPlugin.DEVELOPER_PREFIX + "_PATHFINDER_BODY_DEFAULT_SKIN_NAME",
-                Assets.mainAssetBundle.LoadAsset<Sprite>("texMainSkin"), 
+                PathfinderAssets.mainAssetBundle.LoadAsset<Sprite>("texMainSkin"), 
                 defaultRenderers,
                 mainRenderer,
                 model);
@@ -569,7 +568,7 @@ namespace Pathfinder.Modules.Survivors
             CharacterModel.RendererInfo[] masteryRendererInfos = Skins.getRendererMaterials(defaultRenderers, matArray);
 
             SkinDef masterySkin = Modules.Skins.CreateSkinDef(PathfinderPlugin.DEVELOPER_PREFIX + "_PATHFINDER_BODY_MASTERY_SKIN_NAME",
-                Assets.mainAssetBundle.LoadAsset<Sprite>("texMasterySkin"),
+                PathfinderAssets.mainAssetBundle.LoadAsset<Sprite>("texMasterySkin"),
                 masteryRendererInfos,
                 mainRenderer,
                 model,

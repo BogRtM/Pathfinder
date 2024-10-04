@@ -110,7 +110,7 @@ namespace Pathfinder.Components
             if (Util.HasEffectiveAuthority(owner))
             {
                 Util.PlaySound("BeepAttack", base.gameObject);
-                EffectManager.SimpleEffect(Modules.Assets.squallAttackFlash, base.transform.position, Quaternion.identity, false);
+                EffectManager.SimpleEffect(Modules.PathfinderAssets.squallAttackFlash, base.transform.position, Quaternion.identity, false);
             }
 
             if (attackMode) return;
@@ -137,7 +137,7 @@ namespace Pathfinder.Components
             if (Util.HasEffectiveAuthority(owner))
             {
                 Util.PlaySound("BeepFollow", base.gameObject);
-                EffectManager.SimpleEffect(Modules.Assets.squallFollowFlash, base.transform.position, Quaternion.identity, false);
+                EffectManager.SimpleEffect(Modules.PathfinderAssets.squallFollowFlash, base.transform.position, Quaternion.identity, false);
             }
 
             if (!attackMode) return;

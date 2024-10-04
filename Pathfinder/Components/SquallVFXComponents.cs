@@ -7,7 +7,7 @@ namespace Pathfinder.Components
 {
     internal class SquallVFXComponents : MonoBehaviour
     {
-        private GameObject dashEffect = Assets.squallDashEffect;
+        private GameObject dashEffect = PathfinderAssets.squallDashEffect;
 
         private ModelLocator modelLocator;
         private ChildLocator childLocator;

@@ -33,7 +33,7 @@ namespace Skillstates.Pathfinder.Command
 
             overlayController = HudOverlayManager.AddOverlay(base.gameObject, new OverlayCreationParams
             {
-                prefab = Assets.commandCrosshair,
+                prefab = PathfinderAssets.commandCrosshair,
                 childLocatorEntry = "ScopeContainer"
             });
 

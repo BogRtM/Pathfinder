@@ -76,7 +76,7 @@ namespace Pathfinder.Modules
             DestroyOnTimer destroyOnTimer = bolasZone.AddComponent<DestroyOnTimer>();
             destroyOnTimer.duration = 10f;
 
-            GameObject bolasZoneEffect = Assets.lightningRingEffect.InstantiateClone("BolasZoneEffect");
+            GameObject bolasZoneEffect = PathfinderAssets.lightningRingEffect.InstantiateClone("BolasZoneEffect");
 
             foreach(var PSR in bolasZoneEffect.GetComponentsInChildren<ParticleSystemRenderer>())
             {
@@ -117,7 +117,7 @@ namespace Pathfinder.Modules
             impactExplosion.falloffModel = BlastAttack.FalloffModel.SweetSpot;
 
             //impactExplosion.impactEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mage/OmniImpactVFXLightningMage.prefab").WaitForCompletion();
-            impactExplosion.impactEffect = Assets.javEffect;
+            impactExplosion.impactEffect = PathfinderAssets.javEffect;
         }
         /*
         private static void CreateJavelin()
@@ -188,7 +188,7 @@ namespace Pathfinder.Modules
 
         private static GameObject CreateGhostPrefab(string ghostName)
         {
-            GameObject ghostPrefab = Modules.Assets.mainAssetBundle.LoadAsset<GameObject>(ghostName);
+            GameObject ghostPrefab = Modules.PathfinderAssets.mainAssetBundle.LoadAsset<GameObject>(ghostName);
             if (!ghostPrefab.GetComponent<NetworkIdentity>()) ghostPrefab.AddComponent<NetworkIdentity>();
             if (!ghostPrefab.GetComponent<ProjectileGhostController>()) ghostPrefab.AddComponent<ProjectileGhostController>();
 

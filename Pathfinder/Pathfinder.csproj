@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -13,17 +13,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="libs SotS\**" />
     <Compile Remove="Soundbanks\**" />
+    <EmbeddedResource Remove="libs SotS\**" />
     <EmbeddedResource Remove="Soundbanks\**" />
+    <None Remove="libs SotS\**" />
     <None Remove="Soundbanks\**" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="HenryBank.bnk" />
     <None Remove="Modules\Characters\Henry.cs~RF6221a098.TMP" />
+    <None Remove="myassetbundle" />
+    <None Remove="Pathfinder" />
     <None Remove="Pathfinder.bnk" />
+    <None Remove="Pathfinder.manifest" />
+    <None Remove="Pathfinder.txt" />
     <None Remove="pathfinderassets" />
+    <None Remove="pathfinderassets.manifest" />
     <None Remove="PathfinderBank.bnk" />
+    <None Remove="PathfinderBank.txt" />
     <None Remove="pathfinderbundle" />
   </ItemGroup>
 
@@ -32,23 +41,35 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="BepInEx.Core" Version="5.4.19" />
-		<PackageReference Include="RiskOfRain2.GameLibs" Version="1.2.1-r.1" />
-		<PackageReference Include="UnityEngine.Modules" Version="2019.4.26" />
+    <PackageReference Include="BepInEx.Core" Version="5.*" />
+    <PackageReference Include="RiskOfRain2.GameLibs" Version="1.3.2-r.1" />
+    <PackageReference Include="UnityEngine.Modules" Version="2021.3.33" />
+    <PackageReference Include="MMHOOK.RoR2" Version="2024.9.5">
+      <NoWarn>NU1701</NoWarn>
+    </PackageReference>
 	</ItemGroup>
-	
-  <ItemGroup>
-    <EmbeddedResource Include="HenryBank.bnk" />
-    <EmbeddedResource Include="pathfinderassets" />
-    <EmbeddedResource Include="PathfinderBank.bnk" />
-  </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="R2API">
-      <HintPath>..\libs\R2API.dll</HintPath>
-    </Reference>
     <Reference Include="MMHOOK_RoR2">
       <HintPath>..\libs\MMHOOK_RoR2.dll</HintPath>
+    </Reference>
+    <Reference Include="R2API.Core">
+      <HintPath>..\libs SotS\RiskofThunder-R2API_Core\R2API.Core\R2API.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="R2API.DamageType">
+      <HintPath>..\libs SotS\RiskofThunder-R2API_DamageType\R2API.DamageType\R2API.DamageType.dll</HintPath>
+    </Reference>
+    <Reference Include="R2API.Dot">
+      <HintPath>..\libs SotS\RiskofThunder-R2API_Dot\R2API.Dot\R2API.Dot.dll</HintPath>
+    </Reference>
+    <Reference Include="R2API.Language">
+      <HintPath>..\libs SotS\RiskofThunder-R2API_Language\R2API.Language\R2API.Language.dll</HintPath>
+    </Reference>
+    <Reference Include="R2API.Prefab">
+      <HintPath>..\libs SotS\RiskofThunder-R2API_Prefab\R2API.Prefab\R2API.Prefab.dll</HintPath>
+    </Reference>
+    <Reference Include="R2API.Unlockable">
+      <HintPath>..\libs SotS\RiskofThunder-R2API_Unlockable\R2API.Unlockable\R2API.Unlockable.dll</HintPath>
     </Reference>
     <Reference Include="UNetWeaverPatcher">
       <HintPath>..\..\..\..\..\AppData\Roaming\r2modmanPlus-local\RiskOfRain2\profiles\Modding\BepInEx\patchers\UNetWeaver\UNetWeaverPatcher.dll</HintPath>
@@ -68,7 +89,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="if &quot;$(Username)&quot; == &quot;rtmbo&quot; copy &quot;$(TargetPath)&quot; &quot;C:\Users\rtmbo\AppData\Roaming\r2modmanPlus-local\RiskOfRain2\profiles\Modding\BepInEx\plugins\Test&quot;" />
+    <Exec Command="if &quot;$(Username)&quot; == &quot;rtmbo&quot; copy &quot;$(TargetPath)&quot; &quot;C:\Users\rtmbo\AppData\Roaming\r2modmanPlus-local\RiskOfRain2\profiles\Modding SotS patch\BepInEx\plugins&quot;" />
   </Target>
 
 </Project>

@@ -72,7 +72,7 @@ namespace Skillstates.Pathfinder
 
             if (base.fixedAge >= fireTime && !hasFired && base.isAuthority)
             {
-                EffectManager.SimpleMuzzleFlash(Assets.thrustEffect, base.gameObject, "SpearTip", true);
+                EffectManager.SimpleMuzzleFlash(PathfinderAssets.thrustEffect, base.gameObject, "SpearTip", true);
 
                 Util.PlaySound("PF_Thrust", base.gameObject);
 

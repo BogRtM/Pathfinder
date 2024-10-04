@@ -3,6 +3,8 @@ using System;
 using Pathfinder.Components;
 using Skillstates.Pathfinder;
 using Skillstates.Squall;
+using Pathfinder.Modules.NPC;
+using UnityEngine;
 
 namespace Pathfinder.Modules
 {
@@ -16,12 +18,11 @@ namespace Pathfinder.Modules
             string squallPrefix = devPrefix + "_SQUALL_BODY_";
 
             string modderNote = "<style=cShrine>Modder's Note:</style> <style=cUserSetting>Thank you so much for showing interest in <color=#3ea252>The Pathfinder</color>! " +
-                "This survivor is still in active development, thus many things are liable to change, and your feedback is highly requested. " +
-                "Please feel free to DM <style=cIsUtility>Bog#4770</style> on Discord, or find me on the official Risk of Rain 2 Modding server.</style>";
+                "For feedback and bug reports, please contact <style=cIsUtility>bog_rtm</style> on Discord, or post an issue on the github repo.";
 
             string desc = "The Pathfinder is a crafty, evasive skirmisher who fights alongside his trusty falcon, Squall.<color=#CCD3E0>" + Environment.NewLine + Environment.NewLine;
             desc += "< ! > You are quite fragile compared to other melee survivors; use your quick feet, long reach, and Squall's distractions to stay alive." + Environment.NewLine + Environment.NewLine;
-            desc += "< ! > Alternate between Fleetfoot and your javelin toss to get as many javelins as possible, but make sure to reserve a skill charge to dodge when necessary." + Environment.NewLine + Environment.NewLine;
+            desc += "< ! > Alternate between Fleetfoot and your javelin toss to throw as many javelins as possible, but make sure to reserve a skill charge to dodge when necessary." + Environment.NewLine + Environment.NewLine;
             desc += "< ! > Shock Bolas are a great way to lock down large groups of enemies at once, while Rending Talons can deal brutal damage when combined with items that increase your air time." + Environment.NewLine + Environment.NewLine;
             desc += "< ! > Squall is a highly capable fighter; command him liberally and prioritize attack speed and critical chance items to help speed up the battery meter." + Environment.NewLine + Environment.NewLine + Environment.NewLine;
 
@@ -32,7 +33,7 @@ namespace Pathfinder.Modules
 
                 "\"So what? It's got red fur and a stubby tail, I say we just take it and finish the job.\"\n\n" +
 
-                "\"We've been over this, snubtails mimic quillbacks to deter predators; you have to check their fur for tiny spines. Also, quillbacks are strict insectivores; " +
+                "\"We've been over this; snubtails mimic quillbacks to deter predators, so you have to check their fur for tiny spines. Also, quillbacks are strict insectivores; " +
                 "that's why I told you not to use the live insect bait, so you wouldn't accidentally attract one. Did you even read the bestiary entries that I showed you?\"\n\n" +
 
                 "\"So it's got some puny needles on its arse, big deal. We've been chasing after a damn rat for three days now. Besides, our " +
@@ -44,14 +45,14 @@ namespace Pathfinder.Modules
                 
                 "\"They're poisonous?\"\n\n" +
 
-                "\"... Where are your gloves?\"\n\n" +
+                "\"................... Where are your gloves?\"\n\n" +
 
                 "\"...\"\n\n" +
 
                 "\"I'm finding a new partner.\"\n\n"; 
 
 
-            string outro = "..and so they left, another food chain conquered.";
+            string outro = "..and so they left, as the new kings of the food chain.";
             string outroFailure = "..and so they vanished, forever lost to the uncaring wilderness.";
 
             #region Squall
@@ -78,12 +79,21 @@ namespace Pathfinder.Modules
             #endregion
 
             #region Keywords
-            LanguageAPI.Add("KEYWORD_BATTERY", "<style=cKeywordName>Battery</style><style=cSub>" +
+            /* OLD BATTERY
+             * 
+             * LanguageAPI.Add("KEYWORD_BATTERY", "<style=cKeywordName>Battery</style><style=cSub>" +
                 "Squall has two modes: <color=#FF0000>Attack</color>, and <color=#00FF00>Follow</color>. " +
                 $"In <color=#FF0000>Attack Mode</color>, Squall <style=cIsDamage>drains {Config.batteryDrainRate.Value}%</style> battery per second. " +
                 $"In <color=#00FF00>Follow Mode</color>, Squall <style=cIsHealing>regenerates {Config.batteryRechargeRate.Value}%</style> battery per second, " +
                 $"scaling with <style=cIsUtility>his attack speed</style>. " +
                 $"If the meter hits 0, Squall is forced into <color=#00FF00>Follow Mode</color>.</style>");
+            */
+
+            LanguageAPI.Add("KEYWORD_BATTERY", "<style=cKeywordName>Battery</style><style=cSub>" +
+                "Squall has two modes: <color=#FF0000>Attack</color>, and <color=#00FF00>Follow</color>. " +
+                $"In <color=#FF0000>Attack Mode</color>, Squall rapidly <style=cIsDamage>drains</style> battery. " +
+                $"In <color=#00FF00>Follow Mode</color>, Squall <style=cIsHealing>regenerates</style> battery at a rate " +
+                $"proportional with <style=cIsUtility>his attack speed.</style>");
 
             LanguageAPI.Add("KEYWORD_PIERCE", $"<style=cKeywordName>Piercing</style><style=cSub>Striking with the <style=cIsUtility>tip</style> " +
                 $"deals <style=cIsDamage>{100f * Config.ThrustDamage.Value * 1.3f}% damage</style> and <style=cIsDamage>bypasses armor</style> instead.</style>");
@@ -99,14 +109,17 @@ namespace Pathfinder.Modules
             LanguageAPI.Add("KEYWORD_FOLLOW", "<style=cKeywordName><color=#00FF00>Follow</color></style>" +
                 $"<style=cSub>Return Squall to yourself, and activate <color=#00FF00>Follow Mode</color>, causing him to stay close to you.</style>");
 
+            /*
             LanguageAPI.Add("KEYWORD_SQUALL_UTILITY", "<style=cKeywordName><color=#87b9cf>Utility</color></style>" +
                 "<style=cSub>Order Squall to use his <style=cIsUtility>Utility</style> skill.</style>");
+            */
 
             LanguageAPI.Add("KEYWORD_SQUALL_SPECIAL", "<style=cKeywordName><color=#efeb1c>Special - Go for the Throat!</color></style>" +
-                $"<style=cSub>Order Squall to repeatedly strike the targeted enemy for <style=cIsDamage>{100f * Config.specialDamageCoefficient.Value}% damage</style>. " +
-                $"Each strike briefly shreds <style=cIsDamage>armor</style> by <style=cIsDamage>{Config.specialArmorShred.Value}</style>, " +
+                $"<style=cSub>Order Squall to repeatedly strike the targeted enemy for " +
+                $"<style=cIsDamage>{100f * Config.specialDamageCoefficient.Value}% damage</style>. " +
+                $"Each strike briefly shreds <style=cIsDamage>armor</style>, " +
                 $"and <style=cIsUtility>regenerates {Config.specialRechargeAmount.Value}%</style> battery, doubled on Critical Strikes. " +
-                $"This skill can overcharge the battery up to <style=cIsUtility>120%</style>.</style>");
+                $"This skill can briefly <style=cIsUtility>overcharge</style> the battery.</style>");
 
             LanguageAPI.Add("KEYWORD_UNPOLISHED", "<style=cKeywordName>Unpolished</style> " +
                 "<style=cSub>This skill is missing VFX and SFX, and is also probably buggier than the others.");
@@ -130,7 +143,7 @@ namespace Pathfinder.Modules
 
             #region Utility
             LanguageAPI.Add(prefix + "UTILITY_SPIN_NAME", "Rending Talons");
-            LanguageAPI.Add(prefix + "UTILITY_SPIN_DESCRIPTION", $"<style=cWorldEvent>UNPOLISHED</style>. Rise into the air, spinning rapidly for <style=cIsDamage>{100f * Config.AirSpinDamage.Value}% damage</style>. " +
+            LanguageAPI.Add(prefix + "UTILITY_SPIN_DESCRIPTION", $"Rise into the air, spinning rapidly for <style=cIsDamage>{100f * Config.AirSpinDamage.Value}% damage</style>. " +
                 $"Upon landing, perform a horizontal sweep for <style=cIsDamage>{100f * Config.GroundSpinDamage.Value}% damage</style>.");
 
             LanguageAPI.Add(prefix + "UTILITY_BOLAS_NAME", "Shock Bolas");
@@ -142,9 +155,7 @@ namespace Pathfinder.Modules
             LanguageAPI.Add(prefix + "SPECIAL_COMMAND_NAME", "Issue Command");
             LanguageAPI.Add(prefix + "SPECIAL_COMMAND2_NAME", "Issue Command - Utility Override");
             LanguageAPI.Add(prefix + "SPECIAL_COMMAND_DESCRIPTION", "Prepare a command for Squall. You can issue an <color=#FF0000>Attack</color>, <color=#00FF00>Follow</color>, " +
-                "or <color=#efeb1c>Special</color> command.");
-            LanguageAPI.Add(prefix + "SPECIAL_COMMAND2_DESCRIPTION", "This is the same skill as <color=#3ea252>Issue Command</color>. However, Squall's <color=#efeb1c>Special</color> " +
-                "command now overrides your <style=cIsUtility>Utility</style> skill instead.");
+                "or <color=#efeb1c>Special</color> command by pressing the Primary, Secondary, or Special skill keys, respectively.");
 
             LanguageAPI.Add(prefix + "SPECIAL_ATTACK_NAME", "Attack Command");
             LanguageAPI.Add(prefix + "SPECIAL_ATTACK_DESCRIPTION", "Direct Squall's attention to the targeted enemy, and activate <color=#FF0000>Attack Mode</color>, " +
@@ -158,12 +169,12 @@ namespace Pathfinder.Modules
             LanguageAPI.Add(prefix + "SPECIAL_CANCEL_NAME", "Cancel Command Mode");
             LanguageAPI.Add(prefix + "SPECIAL_CANCEL_DESCRIPTION", "Cancel Command Mode.");
 
-            LanguageAPI.Add(devPrefix + "_SQUALL_SPECIAL_GOFORTHROAT_NAME", "Go for the Throat!");
-            LanguageAPI.Add(devPrefix + "_SQUALL_SPECIAL_GOFORTHROAT_DESCRIPTION", "Order Squall to repeatedly strike the targeted enemy for " +
+            LanguageAPI.Add(devPrefix + "SQUALL_SPECIAL_GOFORTHROAT_NAME", "Go for the Throat!");
+            LanguageAPI.Add(devPrefix + "SQUALL_SPECIAL_GOFORTHROAT_DESCRIPTION", "Order Squall to repeatedly strike the targeted enemy for " +
                 $"<style=cIsDamage>{100f * Config.specialDamageCoefficient.Value}% damage</style>. " +
-                $"Each strike briefly shreds <style=cIsDamage>armor</style> by <style=cIsDamage>{Config.specialArmorShred.Value}</style>, " +
+                $"Each strike briefly shreds <style=cIsDamage>armor</style>, " +
                 $"and <style=cIsUtility>regenerates {Config.specialRechargeAmount.Value}%</style> battery, doubled on Critical Strikes. " +
-                $"This skill can overcharge the battery up to <style=cIsUtility>120%</style>.");
+                $"This skill can briefly <style=cIsUtility>overcharge</style> the battery.");
             #endregion
             #endregion
 
@@ -181,9 +192,9 @@ namespace Pathfinder.Modules
             LanguageAPI.Add(devPrefix + "_SQUALL_SPECIAL_GOFORTHROAT_NAME", "Go for the Throat!");
             LanguageAPI.Add(devPrefix + "_SQUALL_SPECIAL_GOFORTHROAT_DESCRIPTION", "Order Squall to repeatedly strike the targeted enemy for " +
                 $"<style=cIsDamage>{100f * Config.specialDamageCoefficient.Value}% damage</style>. " +
-                $"Each strike briefly shreds <style=cIsDamage>armor</style> by <style=cIsDamage>{Config.specialArmorShred.Value}</style>, " +
+                $"Each strike briefly shreds <style=cIsDamage>armor</style>, " +
                 $"and <style=cIsUtility>regenerates {Config.specialRechargeAmount.Value}%</style> battery, doubled on Critical Strikes. " +
-                $"This skill can overcharge the battery up to <style=cIsUtility>120%</style>.");
+                $"This skill can briefly <style=cIsUtility>overcharge</style> the battery.");
             #endregion
 
             #region Achievements

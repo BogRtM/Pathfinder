@@ -23,15 +23,6 @@ namespace Pathfinder
     [BepInDependency("com.bepis.r2api", BepInDependency.DependencyFlags.HardDependency)]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     [BepInPlugin(MODUID, MODNAME, MODVERSION)]
-    [R2APISubmoduleDependency(new string[]
-    {
-        "PrefabAPI",
-        "LanguageAPI",
-        "SoundAPI",
-        "UnlockableAPI",
-        "DamageAPI",
-        "DotAPI"
-    })]
 
     public class PathfinderPlugin : BaseUnityPlugin
     {
@@ -41,12 +32,13 @@ namespace Pathfinder
         public const string MODUID = "com.Bog.Pathfinder";
         public const string MODNAME = "Pathfinder";
 
-        public const string MODVERSION = "0.5.2";
+        public const string MODVERSION = "0.5.3";
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
         public const string DEVELOPER_PREFIX = "BOG";
 
         public static PathfinderPlugin instance;
+        public static PluginInfo PInfo;
 
         public static GameObject pathfinderBodyPrefab;
         public static GameObject squallBodyPrefab;
@@ -64,9 +56,10 @@ namespace Pathfinder
         private void Awake()
         {
             instance = this;
+            PInfo = Info;
 
             Log.Init(Logger);
-            Modules.Assets.Initialize(); // load assets and read config
+            Modules.PathfinderAssets.Initialize(); // load assets and read config
             Modules.Config.ReadConfig(this);
             Modules.States.RegisterStates(); // register states for networking
             Modules.Buffs.RegisterBuffs(); // add and register custom buffs/debuffs
@@ -220,7 +213,7 @@ namespace Pathfinder
                         if (self.body.armor > 0f)
                             damageInfo.damageType = DamageType.BypassArmor;
 
-                        EffectManager.SimpleImpactEffect(Modules.Assets.thrustTipImpact, damageInfo.position, Vector3.zero, true);
+                        EffectManager.SimpleImpactEffect(Modules.PathfinderAssets.thrustTipImpact, damageInfo.position, Vector3.zero, true);
                     }
                     else
                     {

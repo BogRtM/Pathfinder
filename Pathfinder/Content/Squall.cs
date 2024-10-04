@@ -31,7 +31,7 @@ namespace Pathfinder.Modules.NPC
             armor = 0f,
             moveSpeed = 24f,
             acceleration = 150f,
-            characterPortrait = Assets.mainAssetBundle.LoadAsset<Texture>("texBirdIcon")
+            characterPortrait = PathfinderAssets.mainAssetBundle.LoadAsset<Texture>("texBirdIcon")
         };
 
         public override CustomRendererInfo[] customRendererInfos { get; set; } = new CustomRendererInfo[]
@@ -382,7 +382,7 @@ namespace Pathfinder.Modules.NPC
                 skillName = prefix + "_SQUALL_PRIMARY_GUNS_NAME",
                 skillNameToken = prefix + "_SQUALL_PRIMARY_GUNS_NAME",
                 skillDescriptionToken = prefix + "_SQUALL_PRIMARY_GUNS_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
+                skillIcon = Modules.PathfinderAssets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(MountedGuns)),
                 activationStateMachineName = "Weapon",
                 baseMaxStock = 1,
@@ -410,7 +410,7 @@ namespace Pathfinder.Modules.NPC
                 skillName = prefix + "_SQUALL_SECONDARY_MISSILE_NAME",
                 skillNameToken = prefix + "_SQUALL_SECONDARY_MISSILE_NAME",
                 skillDescriptionToken = prefix + "_SQUALL_SECONDARY_MISSILE_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
+                skillIcon = Modules.PathfinderAssets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(ProjectileMissiles)),
                 activationStateMachineName = "Missiles",
                 baseMaxStock = 1,
@@ -436,7 +436,7 @@ namespace Pathfinder.Modules.NPC
                 skillName = prefix + "_SQUALL_UTILITY_DONOTHING_NAME",
                 skillNameToken = prefix + "_SQUALL_UTILITY_DONOTHING_NAME",
                 skillDescriptionToken = prefix + "_SQUALL_UTILITY_DONOTHING_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
+                skillIcon = Modules.PathfinderAssets.mainAssetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SquallMainState)),
                 activationStateMachineName = "Missiles",
                 baseMaxStock = 1,
@@ -462,7 +462,7 @@ namespace Pathfinder.Modules.NPC
                 skillName = prefix + "_SQUALL_SPECIAL_GOFORTHROAT_NAME",
                 skillNameToken = prefix + "_SQUALL_SPECIAL_GOFORTHROAT_NAME",
                 skillDescriptionToken = prefix + "_SQUALL_SPECIAL_GOFORTHROAT_DESCRIPTION",
-                skillIcon = Modules.Assets.mainAssetBundle.LoadAsset<Sprite>("texSquallEvisIcon"),
+                skillIcon = Modules.PathfinderAssets.mainAssetBundle.LoadAsset<Sprite>("texSquallEvisIcon"),
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SquallMainState)),
                 activationStateMachineName = "Body",
                 baseMaxStock = 1,
@@ -500,7 +500,7 @@ namespace Pathfinder.Modules.NPC
 
             #region DefaultSkin
             SkinDef defaultSkin = Modules.Skins.CreateSkinDef(PathfinderPlugin.DEVELOPER_PREFIX + "_SQUALL_BODY_DEFAULT_SKIN_NAME",
-                Assets.mainAssetBundle.LoadAsset<Sprite>("texMainSkin"),
+                PathfinderAssets.mainAssetBundle.LoadAsset<Sprite>("texMainSkin"),
                 defaultRenderers,
                 mainRenderer,
                 model);
@@ -526,7 +526,7 @@ namespace Pathfinder.Modules.NPC
             CharacterModel.RendererInfo[] masteryRendererInfos = Skins.getRendererMaterials(defaultRenderers, matArray);
 
             SkinDef masterySkin = Modules.Skins.CreateSkinDef(PathfinderPlugin.DEVELOPER_PREFIX + "_SQUALL_BODY_MASTERY_SKIN_NAME",
-                Assets.mainAssetBundle.LoadAsset<Sprite>("texMasteryAchievement"),
+                PathfinderAssets.mainAssetBundle.LoadAsset<Sprite>("texMasteryAchievement"),
                 masteryRendererInfos,
                 mainRenderer,
                 model,

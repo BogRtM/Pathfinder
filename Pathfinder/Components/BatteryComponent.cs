@@ -127,7 +127,7 @@ namespace Pathfinder.Components
         {
             OverlayCreationParams overlayCreationParams = new OverlayCreationParams
             {
-                prefab = Modules.Assets.BatteryMeter,
+                prefab = Modules.PathfinderAssets.BatteryMeter,
                 childLocatorEntry = "CrosshairExtras"
             };
 

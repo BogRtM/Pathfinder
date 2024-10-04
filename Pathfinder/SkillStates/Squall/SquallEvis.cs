@@ -138,7 +138,7 @@ namespace Skillstates.Squall
             batteryComponent.Recharge(chargeAmount, true);
 
             //GroundLight.comboHitEffectPrefab
-            EffectManager.SimpleImpactEffect(Assets.squallEvisEffect, enemyPosition, enemyPosition, true);
+            EffectManager.SimpleImpactEffect(PathfinderAssets.squallEvisEffect, enemyPosition, enemyPosition, true);
             EffectManager.SimpleImpactEffect(Assaulter.hitEffectPrefab, enemyPosition, enemyPosition, true);
 
             hitCount++;

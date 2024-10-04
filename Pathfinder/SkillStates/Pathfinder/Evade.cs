@@ -44,7 +44,7 @@ namespace Skillstates.Pathfinder
                 rotation = Util.QuaternionSafeLookRotation(dashVector)
             };
 
-            EffectManager.SpawnEffect(Assets.dashEffect, effectData, false);
+            EffectManager.SpawnEffect(PathfinderAssets.dashEffect, effectData, false);
 
             if (!controller.javelinReady)
             {
