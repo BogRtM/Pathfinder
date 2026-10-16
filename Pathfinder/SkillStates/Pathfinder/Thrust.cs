@@ -1,4 +1,4 @@
-﻿using RoR2;
+using RoR2;
 using R2API;
 using EntityStates;
 using EntityStates.Merc;
@@ -53,7 +53,7 @@ namespace Skillstates.Pathfinder
             this.attack = new OverlapAttack();
             attack.attacker = base.gameObject;
             attack.inflictor = base.gameObject;
-            attack.damageType = DamageType.Generic;
+            attack.damageType = new DamageTypeCombo(DamageType.Generic, DamageTypeExtended.Generic, DamageSource.Primary);
             attack.procCoefficient = 1f;
             attack.teamIndex = base.GetTeam();
             attack.isCrit = base.RollCrit();

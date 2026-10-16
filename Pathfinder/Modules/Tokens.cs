@@ -57,6 +57,11 @@ namespace Pathfinder.Modules
 
             #region Squall
             LanguageAPI.Add(squallPrefix + "NAME", "Squall");
+            LanguageAPI.Add(squallPrefix + "PICKUP", "The Pathfinder's loyal robotic falcon.");
+            LanguageAPI.Add(squallPrefix + "DESCRIPTION", "A robotic falcon that accompanies the Pathfinder. Squall inherits most of the Pathfinder's items, " +
+                "and <style=cIsUtility>cannot be destroyed</style>.");
+            LanguageAPI.Add(squallPrefix + "SKILL_DESCRIPTION", "Fires mounted guns and missiles at enemies while in <color=#FF0000>Attack Mode</color>, " +
+                "and repeatedly strikes targets when ordered to <style=cIsDamage>Go for the Throat</style>.");
             #endregion
 
             #region Pathfinder

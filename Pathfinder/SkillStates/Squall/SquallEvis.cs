@@ -1,4 +1,4 @@
-﻿using EntityStates;
+using EntityStates;
 using EntityStates.Merc;
 using RoR2;
 using R2API;
@@ -121,6 +121,7 @@ namespace Skillstates.Squall
                 info.crit = isCrit;
                 info.position = enemyPosition;
                 info.damage = base.damageStat * damageCoefficient;
+                info.damageType = new DamageTypeCombo(DamageType.Generic, DamageTypeExtended.Generic, DamageSource.Special);
                 //info.AddModdedDamageType(PathfinderPlugin.goForThroat);
 
                 target.healthComponent.TakeDamage(info);
@@ -139,7 +140,7 @@ namespace Skillstates.Squall
 
             //GroundLight.comboHitEffectPrefab
             EffectManager.SimpleImpactEffect(PathfinderAssets.squallEvisEffect, enemyPosition, enemyPosition, true);
-            EffectManager.SimpleImpactEffect(Assaulter.hitEffectPrefab, enemyPosition, enemyPosition, true);
+            EffectManager.SimpleImpactEffect(PathfinderAssets.assaulterImpact, enemyPosition, enemyPosition, true);
 
             hitCount++;
         }

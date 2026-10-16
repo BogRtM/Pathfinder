@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using RoR2;
 using RoR2.CharacterAI;
 using System;
@@ -117,7 +117,7 @@ namespace Pathfinder.Components
 
             attackMode = true;
 
-            foreach (AISkillDriver driver in aISkillDrivers)
+            foreach (AISkillDriver driver in GetSkillDrivers())
             {
                 if (driver.enabled) continue;
                 if (Squall.attackDrivers.Contains(driver.customName))
@@ -146,7 +146,7 @@ namespace Pathfinder.Components
 
             if (targetHighlight) UnityEngine.Object.Destroy(targetHighlight);
 
-            foreach (AISkillDriver driver in aISkillDrivers)
+            foreach (AISkillDriver driver in GetSkillDrivers())
             {
                 if (!driver.enabled) continue;
                 if (Squall.attackDrivers.Contains(driver.customName))
@@ -166,6 +166,14 @@ namespace Pathfinder.Components
                 batteryComponent.stopwatch = 0f;
                 batteryComponent.UpdateColor();
             }
+        }
+
+        private AISkillDriver[] GetSkillDrivers()
+        {
+            // the master's skill drivers can get replaced after Start, which leaves destroyed ones in the cached array
+            if (masterObject && (aISkillDrivers == null || Array.Exists(aISkillDrivers, driver => !driver)))
+                aISkillDrivers = masterObject.GetComponents<AISkillDriver>();
+            return aISkillDrivers ?? new AISkillDriver[0];
         }
 
         internal void DiveToPoint(Vector3 position, float minDistance, EntityStates.InterruptPriority priority)

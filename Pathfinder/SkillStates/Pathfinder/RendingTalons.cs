@@ -1,4 +1,4 @@
-﻿using EntityStates;
+using EntityStates;
 using EntityStates.Merc;
 using EntityStates.Croco;
 using Pathfinder.Modules;
@@ -84,7 +84,7 @@ namespace Skillstates.Pathfinder
             this.airSpinAttack = new OverlapAttack();
             airSpinAttack.attacker = base.gameObject;
             airSpinAttack.inflictor = base.gameObject;
-            airSpinAttack.damageType = DamageType.Generic;
+            airSpinAttack.damageType = new DamageTypeCombo(DamageType.Generic, DamageTypeExtended.Generic, DamageSource.Utility);
             airSpinAttack.procCoefficient = 1f;
             airSpinAttack.teamIndex = base.GetTeam();
             airSpinAttack.isCrit = isCrit;
@@ -92,12 +92,12 @@ namespace Skillstates.Pathfinder
             airSpinAttack.pushAwayForce = 1f;
             airSpinAttack.damage = 3.5f * base.damageStat;
             airSpinAttack.hitBoxGroup = hitBoxGroup;
-            airSpinAttack.hitEffectPrefab = GroundLight.comboHitEffectPrefab;
+            airSpinAttack.hitEffectPrefab = PathfinderAssets.mercSlashImpact;
 
             this.groundSpinAttack = new OverlapAttack();
             groundSpinAttack.attacker = base.gameObject;
             groundSpinAttack.inflictor = base.gameObject;
-            groundSpinAttack.damageType = DamageType.Stun1s;
+            groundSpinAttack.damageType = new DamageTypeCombo(DamageType.Stun1s, DamageTypeExtended.Generic, DamageSource.Utility);
             groundSpinAttack.procCoefficient = 1f;
             groundSpinAttack.teamIndex = base.GetTeam();
             groundSpinAttack.isCrit = isCrit;
@@ -105,7 +105,7 @@ namespace Skillstates.Pathfinder
             groundSpinAttack.pushAwayForce = 500f;
             groundSpinAttack.damage = 8f * base.damageStat;
             groundSpinAttack.hitBoxGroup = hitBoxGroup;
-            groundSpinAttack.hitEffectPrefab = GroundLight.finisherHitEffectPrefab;
+            groundSpinAttack.hitEffectPrefab = PathfinderAssets.mercFinisherImpact;
         }
 
         public override void FixedUpdate()

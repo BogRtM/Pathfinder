@@ -105,6 +105,50 @@ namespace Pathfinder.Modules.NPC
             squallBody.bodyFlags |= CharacterBody.BodyFlags.Mechanical;
 
             CreateSquallMaster();
+            CreateDroneDef();
+        }
+
+        private void CreateDroneDef()
+        {
+            DroneDef template = Addressables.LoadAssetAsync<DroneDef>("RoR2/Base/Drones/Drone1.asset").WaitForCompletion();
+            DroneDef droneDef = UnityEngine.Object.Instantiate(template);
+            droneDef.name = "SquallDrone";
+            droneDef.bodyPrefab = bodyPrefab;
+            droneDef._masterPrefab = FalconerComponent.summonPrefab;
+            droneDef.displayPrefab = CreateDisplayPrefab();
+            droneDef.remoteOpBody = null;
+            droneDef.remoteOpCost = 0;
+            droneDef.droneBrokenSpawnCard = null;
+            droneDef.canDrop = false;
+            droneDef.canScrap = false;
+            droneDef.canCombine = false;
+            droneDef.requiredExpansion = null;
+
+            Texture icon = bodyInfo.characterPortrait;
+#pragma warning disable CS0618 // the direct sprite reference is still the way to go for content that isn't in the addressables catalog
+            droneDef.iconSprite = Sprite.Create((Texture2D)icon, new Rect(0f, 0f, icon.width, icon.height), new Vector2(0.5f, 0.5f));
+#pragma warning restore CS0618
+            // the template points at the gunner drone's icon, which would take priority over the direct sprite
+            droneDef.iconSpriteReference = null;
+
+            string tokenPrefix = PathfinderPlugin.DEVELOPER_PREFIX + "_SQUALL_BODY_";
+            droneDef.nameToken = tokenPrefix + "NAME";
+            droneDef.pickupToken = tokenPrefix + "PICKUP";
+            droneDef.descriptionToken = tokenPrefix + "DESCRIPTION";
+            droneDef.skillDescriptionToken = tokenPrefix + "SKILL_DESCRIPTION";
+            // Squall only ever exists alongside Pathfinder, so Operator has nothing to command
+            droneDef.droneTechCommandToken = string.Empty;
+            droneDef.desiredSortPosition = template.desiredSortPosition + 0.5f;
+
+            if (!ContentAddition.AddDroneDef(droneDef)) Log.Warning("Failed to add Squall's DroneDef.");
+        }
+
+        private GameObject CreateDisplayPrefab()
+        {
+            GameObject model = bodyPrefab.GetComponent<ModelLocator>().modelTransform.gameObject;
+            GameObject display = PrefabAPI.InstantiateClone(model, "SquallDisplay", false);
+            foreach (Collider collider in display.GetComponentsInChildren<Collider>(true)) UnityEngine.Object.DestroyImmediate(collider);
+            return display;
         }
 
         public override void InitializeHitboxes()
