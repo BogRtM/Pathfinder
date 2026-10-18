@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Pathfinder.Modules
 {
@@ -32,6 +33,11 @@ namespace Pathfinder.Modules
                 for (int j = 0; j < rules.Length; j++)
                 {
                     GameObject followerPrefab = rules[j].followerPrefab;
+                    //vanilla rules now only store an addressable reference, so followerPrefab is null until loaded
+                    if (!followerPrefab && rules[j].followerPrefabAddress != null && rules[j].followerPrefabAddress.RuntimeKeyIsValid())
+                    {
+                        followerPrefab = Addressables.LoadAssetAsync<GameObject>(rules[j].followerPrefabAddress.RuntimeKey).WaitForCompletion();
+                    }
                     if (followerPrefab)
                     {
                         string key = followerPrefab.name?.ToLowerInvariant();
@@ -53,7 +59,13 @@ namespace Pathfinder.Modules
             //capacitor is hardcoded to track your "UpperArmR", "LowerArmR", and "HandR" bones.
             //this is for having the lightning on custom bones in your childlocator
 
-            GameObject display = R2API.PrefabAPI.InstantiateClone(itemDisplayPrefabs["displaylightningarmright"], "DisplayLightningCustom", false);
+            if (!itemDisplayPrefabs.TryGetValue("displaylightningarmright", out GameObject original) || !original)
+            {
+                Log.Warning("Couldn't find DisplayLightningArmRight, skipping custom capacitor display");
+                return;
+            }
+
+            GameObject display = R2API.PrefabAPI.InstantiateClone(original, "DisplayLightningCustom", false);
 
             LimbMatcher limbMatcher = display.GetComponent<LimbMatcher>();
 
