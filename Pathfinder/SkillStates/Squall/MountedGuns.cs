@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using EntityStates;
 using EntityStates.Commando.CommandoWeapon;
 using EntityStates.VoidSurvivor.Weapon;
@@ -46,7 +46,7 @@ namespace Skillstates.Squall
                     stopperMask = LayerIndex.entityPrecise.mask,
                     isCrit = base.RollCrit(),
                     radius = 1f,
-                    damageType = DamageType.Generic,
+                    damageType = new DamageTypeCombo(DamageType.Generic, DamageTypeExtended.Generic, DamageSource.Primary),
                     falloffModel = BulletAttack.FalloffModel.DefaultBullet,
                     procCoefficient = Config.SquallGunProc.Value,
                     maxDistance = 200f,
@@ -69,7 +69,7 @@ namespace Skillstates.Squall
                     stopperMask = LayerIndex.entityPrecise.mask,
                     isCrit = base.RollCrit(),
                     radius = 1f,
-                    damageType = DamageType.Generic,
+                    damageType = new DamageTypeCombo(DamageType.Generic, DamageTypeExtended.Generic, DamageSource.Primary),
                     falloffModel = BulletAttack.FalloffModel.DefaultBullet,
                     procCoefficient = Config.SquallGunProc.Value,
                     maxDistance = 200f,

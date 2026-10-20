@@ -1,4 +1,4 @@
-﻿using BepInEx;
+using BepInEx;
 using Pathfinder.Modules.Survivors;
 using R2API.Utils;
 using R2API;
@@ -32,7 +32,7 @@ namespace Pathfinder
         public const string MODUID = "com.Bog.Pathfinder";
         public const string MODNAME = "Pathfinder";
 
-        public const string MODVERSION = "0.5.3";
+        public const string MODVERSION = "0.5.4";
 
         // a prefix for name tokens to prevent conflicts- please capitalize all name tokens for convention
         public const string DEVELOPER_PREFIX = "BOG";
@@ -211,13 +211,13 @@ namespace Pathfinder
                         damageInfo.damage *= 1.3f;
                         damageInfo.damageColorIndex = DamageColorIndex.WeakPoint;
                         if (self.body.armor > 0f)
-                            damageInfo.damageType = DamageType.BypassArmor;
+                            damageInfo.damageType = new DamageTypeCombo(DamageType.BypassArmor, DamageTypeExtended.Generic, damageInfo.damageType.damageSource);
 
                         EffectManager.SimpleImpactEffect(Modules.PathfinderAssets.thrustTipImpact, damageInfo.position, Vector3.zero, true);
                     }
                     else
                     {
-                        EffectManager.SimpleImpactEffect(GroundLight.comboHitEffectPrefab, damageInfo.position, Vector3.zero, true);
+                        EffectManager.SimpleImpactEffect(Modules.PathfinderAssets.mercSlashImpact, damageInfo.position, Vector3.zero, true);
                     }
                 }
             }

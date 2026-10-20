@@ -1,4 +1,4 @@
-﻿using R2API;
+using R2API;
 using RoR2;
 using RoR2.Projectile;
 using Pathfinder.Components;
@@ -16,15 +16,25 @@ namespace Pathfinder.Modules
         internal static GameObject HeadHunterJavelinGhost;
         internal static GameObject shockBolas;
         internal static GameObject bolasZone;
+        internal static GameObject squallMissile;
 
         internal static void RegisterProjectiles()
         {
             CreateExplodingJavelin();
             CreateBolasZone();
             CreateBolas();
+            CreateSquallMissile();
             AddProjectile(explodingJavelin);
             AddProjectile(shockBolas);
             AddProjectile(bolasZone);
+            AddProjectile(squallMissile);
+        }
+
+        private static void CreateSquallMissile()
+        {
+            // own copy of the vanilla missile so its damage can be tagged as Squall's secondary without touching the shared prefab
+            squallMissile = CloneProjectilePrefab("MissileProjectile", "SquallMissile");
+            squallMissile.GetComponent<ProjectileDamage>().damageType = new DamageTypeCombo(DamageType.Generic, DamageTypeExtended.Generic, DamageSource.Secondary);
         }
 
         private static void CreateBolas()
@@ -36,13 +46,15 @@ namespace Pathfinder.Modules
             shockBolas.transform.localScale = new Vector3(2f, 1f, 1f);
 
             ProjectileController bolasController = shockBolas.GetComponent<ProjectileController>();
+            // the cloned grenade still points at its own ghost by address, which takes priority over ghostPrefab
+            bolasController.ghostPrefabAddress = new AssetReferenceT<GameObject>(string.Empty);
             bolasController.ghostPrefab = CreateGhostPrefab("BolasGhost");
 
             ProjectileSimple simple = bolasController.GetComponent<ProjectileSimple>();
             simple.desiredForwardSpeed = 150f;
 
             ProjectileDamage projectileDamage = shockBolas.GetComponent<ProjectileDamage>();
-            projectileDamage.damageType = DamageType.Shock5s;
+            projectileDamage.damageType = new DamageTypeCombo(DamageType.Shock5s, DamageTypeExtended.Generic, DamageSource.Utility);
             projectileDamage.force = 0f;
 
             ApplyTorqueOnStart torque = shockBolas.GetComponent<ApplyTorqueOnStart>();
@@ -106,6 +118,8 @@ namespace Pathfinder.Modules
             explodingJavelin.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
 
             ProjectileController javelinController = explodingJavelin.GetComponent<ProjectileController>();
+            // the cloned grenade still points at its own ghost by address, which takes priority over ghostPrefab
+            javelinController.ghostPrefabAddress = new AssetReferenceT<GameObject>(string.Empty);
             javelinController.ghostPrefab = CreateGhostPrefab("JavelinGhost");
             HeadHunterJavelinGhost = CreateGhostPrefab("HHJavelinGhost");
 
@@ -113,6 +127,8 @@ namespace Pathfinder.Modules
             simple.desiredForwardSpeed = 200f;
 
             ProjectileImpactExplosion impactExplosion = explodingJavelin.GetComponent<ProjectileImpactExplosion>();
+            explodingJavelin.GetComponent<ProjectileDamage>().damageType = new DamageTypeCombo(DamageType.Generic, DamageTypeExtended.Generic, DamageSource.Secondary);
+
             impactExplosion.blastRadius = 8f;
             impactExplosion.falloffModel = BlastAttack.FalloffModel.SweetSpot;
 

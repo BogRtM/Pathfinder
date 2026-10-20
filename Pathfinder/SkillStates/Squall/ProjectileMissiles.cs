@@ -22,7 +22,7 @@ namespace Skillstates.Squall
             base.OnEnter();
             duration = baseDuration / base.attackSpeedStat;
             isCrit = base.RollCrit();
-            missilePrefab = GlobalEventManager.CommonAssets.missilePrefab;
+            missilePrefab = Projectiles.squallMissile;
             squallController = base.GetComponent<SquallController>();
 
             if (!base.characterBody.isPlayerControlled)

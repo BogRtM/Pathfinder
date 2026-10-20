@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using EntityStates;
 using EntityStates.Drone.DroneWeapon;
 using RoR2;
@@ -60,7 +60,7 @@ namespace Skillstates.Squall
                     orb.procChainMask = default(ProcChainMask);
                     orb.procCoefficient = 1f;
                     orb.damageColorIndex = DamageColorIndex.Default;
-                    orb.damageType = DamageType.Generic;
+                    orb.damageType = new DamageTypeCombo(DamageType.Generic, DamageTypeExtended.Generic, DamageSource.Secondary);
                     OrbManager.instance.AddOrb(orb);
                 }
             }

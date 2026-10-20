@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using R2API;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -29,6 +29,9 @@ namespace Pathfinder.Modules
 
         internal static GameObject thrustEffect;
         internal static GameObject thrustTipImpact;
+        internal static GameObject assaulterImpact;
+        internal static GameObject mercSlashImpact;
+        internal static GameObject mercFinisherImpact;
 
         internal static GameObject dashEffect;
         internal static GameObject javEffect;
@@ -141,6 +144,9 @@ namespace Pathfinder.Modules
             //Thrust effect
             thrustEffect = PathfinderAssets.LoadEffect("SpearThrust", false);
             thrustTipImpact = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Merc/ImpactMercFocusedAssault.prefab").WaitForCompletion();
+            assaulterImpact = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Merc/ImpactMercAssaulter.prefab").WaitForCompletion();
+            mercSlashImpact = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Merc/OmniImpactVFXSlashMerc.prefab").WaitForCompletion();
+            mercFinisherImpact = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Merc/OmniImpactVFXSlashMercEvis.prefab").WaitForCompletion();
 
             //Javelin effects
             dashEffect = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/SprintOutOfCombat/SprintActivate.prefab").WaitForCompletion();
@@ -155,7 +161,7 @@ namespace Pathfinder.Modules
             //Bolas Zone effect
             lightningRingEffect = mainAssetBundle.LoadAsset<GameObject>("LightningRing");
             Texture2D blots = mainAssetBundle.LoadAsset<Texture2D>("Blots");
-            Texture2D lightningCloud = Addressables.LoadAssetAsync<Texture2D>("RoR2/Base/Common/texCloudLightning1.png").WaitForCompletion();
+            Texture2D lightningCloud = Addressables.LoadAssetAsync<Texture2D>("RoR2/Base/Common/TiledTextures/texCloudLightning1.png").WaitForCompletion();
             Material zoneMaterial = Addressables.LoadAssetAsync<Material>("RoR2/Base/TPHealingNova/matGlowFlowerAreaIndicator.mat").WaitForCompletion();
 
             lightningRingEffect.AddComponent<NetworkIdentity>();

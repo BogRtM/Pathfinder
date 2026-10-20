@@ -35,7 +35,6 @@ namespace Skillstates.Pathfinder
             arcVisualizerPrefab = PathfinderAssets.lineVisualizer;
             endpointVisualizerPrefab = PathfinderAssets.explosionVisualizer;
             endpointVisualizerRadiusScale = 18f;
-            detonationRadius = 18f;
             damageCoefficient = 0f; //Config.bolasExplosionDamage.Value;
             setFuse = false;
             projectileBaseSpeed = 200f;
